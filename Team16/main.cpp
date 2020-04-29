@@ -3,6 +3,7 @@
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	//コミットテスト	このコメント消しといて
 	ChangeWindowMode(true);
 	SetMainWindowText("game16");
 	SetGraphMode(600, 800, 16);
