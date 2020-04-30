@@ -3,6 +3,7 @@
 #define _RENDERER_H_
 #include "Loader/TextureLoad.h"
 #include "../Math/Vector2.h"
+
 //描画機能libなのでlibの機能をラップするだけにする(2D)
 class Renderer
 {
@@ -43,7 +44,6 @@ public:
 private:
 	const int mNumTexture_Width = 24;     //数字画像の横幅
 	const int mNumTexture_Height = 40;    //数字画像の縦幅
-	const float pi;                       //円周率
 
 	//固定値
 	const int mFontTexture_Big_Width = 40;
