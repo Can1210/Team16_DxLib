@@ -1,24 +1,66 @@
-#include "DxLib.h"
+#include "GameBase/WindowInfo.h"
+#include "GameBase/GameManager.h"
+#include "GameBase/GameTime.h"
+#include "Support/CWindow.h"
+#include "Device/Input.h"
 
-// プログラムは WinMain から始まります
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+//関数プロトタイプ宣言
+bool initialize();  //初期化
+void gameUpdate();	//ループ処理
+void release();		//解放
+
+//グローバル変数
+Input* input;
+
+//初期化
+bool initialize()
 {
-	//コミットテスト	このコメント消しといて
+	//動作、デバッグに必要なものを初期化
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	ChangeWindowMode(true);
 	SetMainWindowText("game16");
-	SetGraphMode(600, 800, 16);
+	SetGraphMode(WindowInfo::WindowWidth, WindowInfo::WindowHeight, 16);
 	SetBackgroundColor(0, 50, 50);
+	if (DxLib_Init() == -1)	return false;
+	//各クラスの生成・初期化
+	CWindow::createInstance();
+	CWindow::getInstance().showConsole();
+	GameManager::createInstance();
+	GameManager::getInstance().initialize();
+	GameTime::createInstance();
+	input = new Input();
+	input->init();
+	return true;
+}
 
-	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
+//ループ処理
+void gameUpdate()
+{
+
+	while (ProcessMessage() == 0)
 	{
-		return -1;			// エラーが起きたら直ちに終了
+		if (input->isKeyDown(KEYCORD::ESCAPE))
+			return;
+		input->update();
+		//背景をクリアに
+		ClearDrawScreen();
+		GameTime::getInstance().update();
+		GameManager::getInstance().update();
+		ScreenFlip();
 	}
+}
+//解放
+void release()
+{
+	delete input;
+}
 
-	DrawPixel(320, 240, GetColor(255, 255, 255));	// 点を打つ
-
-	WaitKey();				// キー入力待ち
-
-	DxLib_End();				// ＤＸライブラリ使用の終了処理
-
-	return 0;				// ソフトの終了 
+//WinMain
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	if (!initialize()) return 0;
+	gameUpdate();
+	DxLib_End();
+	release();
+	return 0;
 }
