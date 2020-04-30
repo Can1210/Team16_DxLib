@@ -119,6 +119,11 @@ void CharactorManager::draw(Renderer * renderer)
 	}
 }
 
+std::vector<BaseObject*> CharactorManager::getUseList()
+{
+	return mObjectsList;
+}
+
 void CharactorManager::ChangeAfter()
 {
 	auto itr = mObjectsList.begin();

@@ -85,6 +85,12 @@
     <ClCompile Include="Actor\Bulletes\ChangeBullet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Device\Camera.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Renderer3D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Timer.h" />
@@ -115,5 +121,7 @@
     <ClInclude Include="Actor\Bulletes\BomBallet.h" />
     <ClInclude Include="Actor\Bulletes\Bullet.h" />
     <ClInclude Include="Actor\Bulletes\ChangeBullet.h" />
+    <ClInclude Include="Device\Camera.h" />
+    <ClInclude Include="Device\Renderer3D.h" />
   </ItemGroup>
 </Project>

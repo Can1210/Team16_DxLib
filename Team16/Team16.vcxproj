@@ -166,6 +166,8 @@
     <ClCompile Include="Actor\Bulletes\BomBallet.cpp" />
     <ClCompile Include="Actor\Bulletes\Bullet.cpp" />
     <ClCompile Include="Actor\Bulletes\ChangeBullet.cpp" />
+    <ClCompile Include="Device\Camera.cpp" />
+    <ClCompile Include="Device\Renderer3D.cpp" />
     <ClCompile Include="Scene\Ending.cpp" />
     <ClCompile Include="GameBase\GameManager.cpp" />
     <ClCompile Include="GameBase\GameTime.cpp" />
@@ -194,6 +196,8 @@
     <ClInclude Include="Actor\Bulletes\BomBallet.h" />
     <ClInclude Include="Actor\Bulletes\Bullet.h" />
     <ClInclude Include="Actor\Bulletes\ChangeBullet.h" />
+    <ClInclude Include="Device\Camera.h" />
+    <ClInclude Include="Device\Renderer3D.h" />
     <ClInclude Include="Scene\Ending.h" />
     <ClInclude Include="Scene\GamePlay.h" />
     <ClInclude Include="Scene\LoadScene.h" />

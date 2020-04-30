@@ -27,6 +27,8 @@ public:
 	//•`‰æ
 	void draw(Renderer* renderer);
 
+	std::vector<BaseObject*> getUseList();
+
 	//æ‚Áæ‚èŒãˆ—
 	void ChangeAfter();
 private:
