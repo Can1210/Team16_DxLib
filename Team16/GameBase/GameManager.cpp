@@ -14,11 +14,13 @@ GameManager::GameManager()
 GameManager::~GameManager()
 {
 	delete m_pRenderer;
+	delete m_pRenderer3D;
 }
 //初期化
 void GameManager::initialize()
 {
 	m_pRenderer = new Renderer();
+	m_pRenderer3D = new Renderer3D();
 	sceneInitialize();   //シーン関係を初期化
 }
 void GameManager::sceneInitialize()
@@ -37,5 +39,5 @@ void GameManager::update()
 {
 	//シーンマネージャーの更新処理
 	SceneManager::getInstance().update(GameTime::getInstance().getDeltaTime());  //とりあえず更新
-	SceneManager::getInstance().draw(m_pRenderer);
+	SceneManager::getInstance().draw(m_pRenderer,m_pRenderer3D);
 }

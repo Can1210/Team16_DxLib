@@ -25,7 +25,7 @@ public:
 	void removeList_update();
 #pragma endregion
 	//•`‰æ
-	void draw(Renderer* renderer);
+	void draw(Renderer* renderer, Renderer3D* renderer3D);
 
 	std::vector<BaseObject*> getUseList();
 

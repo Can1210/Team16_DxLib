@@ -30,7 +30,7 @@ void LoadScene::update(float deltaTime)
 {
 }
 
-void LoadScene::draw(Renderer* renderer)
+void LoadScene::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
 }
 

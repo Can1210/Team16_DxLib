@@ -2,8 +2,9 @@
 #ifndef _BASEOBJECT_H_
 #define _BASEOBJECT_H_
 #include "../../Device/Renderer.h"
+#include "../../Device/Renderer3D.h"
 #include "../../Math/Vector2.h"
-#include"../../Utility/Timer.h"
+#include "../../Utility/Timer.h"
 //物体のタイプ
 enum Type
 {
@@ -28,7 +29,7 @@ public:
 	//更新
 	virtual void update(float deltaTime) = 0;
 	//描画
-	virtual void draw(Renderer* renderer) = 0;
+	virtual void draw(Renderer* renderer, Renderer3D* renderer3D) = 0;
 	//当たりた時の処理
 	virtual void hit(BaseObject& other) = 0;
 	//乗っ取り

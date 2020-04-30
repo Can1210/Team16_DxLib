@@ -39,9 +39,9 @@ void GamePlay::update(float deltaTime)
 	SetBackgroundColor(0, 0, 0);
 }
 
-void GamePlay::draw(Renderer* renderer)
+void GamePlay::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
-	charaManager->draw(renderer);
+	charaManager->draw(renderer,renderer3D);
 	renderer->drawText("Font", "HP", Vector2(0, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 }
 

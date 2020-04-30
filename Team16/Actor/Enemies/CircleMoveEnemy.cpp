@@ -95,7 +95,7 @@ void CirecleMoveEnemy::update(float deltaTime)
 	b_mPosittion += b_mVelocity;
 }
 
-void CirecleMoveEnemy::draw(Renderer * renderer)
+void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	if (b_mType == Type::ENEMY)
 	{

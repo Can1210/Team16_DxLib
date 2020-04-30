@@ -30,7 +30,7 @@ void ChangeBullet::update(float deltaTime)
 	}
 }
 
-void ChangeBullet::draw(Renderer * renderer)
+void ChangeBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	//rend->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64));
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 32, b_mCircleSize, GetColor(0, 0, 255), TRUE);

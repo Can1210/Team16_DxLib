@@ -5,6 +5,7 @@
 #include "../Device/Input.h"
 #include "../Support/CWindow.h"
 #include "../Device/Renderer.h"
+#include "../Device/Renderer3D.h"
 //シーンの基底クラス
 class BaseScene
 {
@@ -18,7 +19,7 @@ public:
 	//更新
 	virtual void update(float deltaTime) = 0;
 	//描画
-	virtual void draw(Renderer* renderer) = 0;
+	virtual void draw(Renderer* renderer,Renderer3D* renderer3D) = 0;
 	//終了処理
 	virtual void shutdown() = 0;
 	//終了したかどうか

@@ -95,7 +95,7 @@ void Enemy::update(float deltaTime)
 
 }
 
-void Enemy::draw(Renderer * renderer)
+void Enemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 
 	if (b_mType == Type::ENEMY)

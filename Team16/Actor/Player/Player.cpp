@@ -67,7 +67,7 @@ void Player::update(float deltaTime)
 	}
 }
 
-void Player::draw(Renderer * renderer)
+void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 
 	if (b_mType == Type::PLAYER && !b_mEndFlag)

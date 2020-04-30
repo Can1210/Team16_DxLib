@@ -28,7 +28,7 @@ void Ending::update(float deltaTime)
 	}
 }
 
-void Ending::draw(Renderer* renderer)
+void Ending::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
 }
 

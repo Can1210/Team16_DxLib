@@ -29,7 +29,7 @@ public:
 
 	virtual void update(float deltaTime) override;
 
-	virtual void draw(Renderer * renderer) override;
+	virtual void draw(Renderer * renderer, Renderer3D* renderer3D) override;
 
 	virtual void hit(BaseObject & other) override;
 

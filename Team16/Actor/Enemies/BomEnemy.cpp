@@ -94,7 +94,7 @@ void BomEnemy::update(float deltaTime)
 
 }
 
-void BomEnemy::draw(Renderer * renderer)
+void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 
 	if (b_mType == Type::ENEMY)
