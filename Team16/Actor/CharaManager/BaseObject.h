@@ -63,6 +63,7 @@ protected:
 	Type b_mType;             //自分のタイプ
 	float b_mAngle;//角度
 	bool b_mEndFlag;//ゲームオーバー
+	
 };
 
 
