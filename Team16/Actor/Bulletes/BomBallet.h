@@ -21,7 +21,7 @@ public:
 	//XV
 	virtual void update(float deltaTime)override;
 	//•`‰æ
-	virtual void draw(Renderer* renderer)override;
+	virtual void draw(Renderer* renderer, Renderer3D* renderer3D)override;
 	//“–‚½‚è‚½‚Ìˆ—
 	virtual void hit(BaseObject& other) override;
 

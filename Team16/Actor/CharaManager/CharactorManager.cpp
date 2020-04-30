@@ -106,14 +106,14 @@ void CharactorManager::removeList_update()
 }
 #pragma endregion
 //描画
-void CharactorManager::draw(Renderer * renderer)
+void CharactorManager::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	for (auto object : mObjectsList)
 	{
 		if (object == nullptr) continue;  //オブジェクトがnullならスキップ
 		//オブジェクトが死んでなければ描画、死んでたらスキップ
 		if (!object->getIsDeath())
-			object->draw(renderer);
+			object->draw(renderer, renderer3D);
 		else
 			continue;
 	}

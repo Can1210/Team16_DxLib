@@ -1,7 +1,4 @@
 #include "Title.h"
-#include"DxLib.h"
-
-#include "../Device/Loader/TextureLoad.h"
 
 //コンストラクタ
 Title::Title()
@@ -32,7 +29,7 @@ void Title::update(float deltaTime)
 
 }
 //描画
-void Title::draw(Renderer* renderer)
+void Title::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
 	renderer->drawText("Font", "TITLE", Vector2(180, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 }

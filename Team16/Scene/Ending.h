@@ -10,7 +10,7 @@ public:
 	~Ending();
 	virtual void initialize() override;
 	virtual void update(float deltaTime) override;
-	virtual void draw(Renderer* renderer) override;
+	virtual void draw(Renderer* renderer, Renderer3D* renderer3D) override;
 	virtual void shutdown() override;
 	virtual bool isEnd() override;
 	virtual std::string nextScene() override;

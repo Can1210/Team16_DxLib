@@ -73,7 +73,7 @@ void BomBullet::update(float deltaTime)
 	}
 }
 
-void BomBullet::draw(Renderer * renderer)
+void BomBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 32, b_mCircleSize, GetColor(255, 100, 0), TRUE);
 }

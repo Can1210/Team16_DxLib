@@ -26,7 +26,7 @@ public:
 	//XV
 	void update(float deltaTime);
 	//•`‰æ
-	void draw(Renderer* renderer);
+	void draw(Renderer* renderer, Renderer3D* renderer3D);
 private:
 	std::unordered_map <std::string, BaseScene*> scenes;     //ƒV[ƒ“‚ğŠi”[
 	BaseScene* currentScene;                                //Œ»İ‚ÌƒV[ƒ“
