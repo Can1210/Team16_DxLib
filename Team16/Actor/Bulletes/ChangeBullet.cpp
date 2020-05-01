@@ -1,9 +1,11 @@
 #include "ChangeBullet.h"
 
+
 ChangeBullet::ChangeBullet(Vector2 pos, CharactorManager * c)
 {
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
+	charaManager = c;
 }
 
 ChangeBullet::~ChangeBullet()
@@ -32,7 +34,6 @@ void ChangeBullet::update(float deltaTime)
 
 void ChangeBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	//rend->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64));
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 32, b_mCircleSize, GetColor(0, 0, 255), TRUE);
 }
 
@@ -40,10 +41,12 @@ void ChangeBullet::hit(BaseObject & other)
 {
 	if (other.getType() == Type::ENEMY)
 	{
+		After();
 		b_mIsDeath = true;
 	}
-
+	
 }
+
 
 bool ChangeBullet::getIsDeath() const
 {
@@ -65,8 +68,25 @@ float ChangeBullet::getCircleSize() const
 	return b_mCircleSize;
 }
 
-Type ChangeBullet::ChangeType()
+void ChangeBullet::setIsDeath(bool isDeath) 
 {
-	return Type();
 }
+
+void ChangeBullet::After()
+{
+	
+	for (auto object : charaManager->getUseList())
+	{
+	
+		if (object->getType() == Type::PLAYER)
+		{
+			object->setIsDeath(true);
+		}
+		
+	}
+	
+}
+
+
+
 

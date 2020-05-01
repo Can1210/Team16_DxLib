@@ -7,11 +7,12 @@ Bullet::Bullet(Vector2 pos, CharactorManager* c, Type t)
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
+	
 }
 
 Bullet::~Bullet()
 {
-	delete rend;
+	
 }
 
 void Bullet::setBulletType()
@@ -61,7 +62,7 @@ void Bullet::update(float deltaTime)
 
 void Bullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	rend->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+	renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 	if (b_mType == Type::ENEMY_BULLET)
 	{
@@ -110,8 +111,8 @@ float Bullet::getCircleSize() const
 	return b_mCircleSize;
 }
 
-Type Bullet::ChangeType()
+void Bullet::setIsDeath(bool isDeath)
 {
-	return Type();
+	b_mIsDeath = isDeath;
 }
 
