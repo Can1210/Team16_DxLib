@@ -117,9 +117,8 @@ float TrakingBullet::getCircleSize() const
 	return b_mCircleSize;
 }
 
-Type TrakingBullet::ChangeType()
+void TrakingBullet::setIsDeath(bool isDeath)
 {
-	return Type();
 }
 
 Vector2 TrakingBullet::RotationZ(float ang)

@@ -30,7 +30,7 @@ public:
 
 	virtual float getCircleSize() const override;
 
-	virtual Type ChangeType()  override;
+	virtual void setIsDeath(bool isDeath) override;
 private:
 	float angle;
 	bool Death;

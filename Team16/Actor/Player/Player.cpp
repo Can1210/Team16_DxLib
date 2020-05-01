@@ -31,7 +31,7 @@ void Player::update(float deltaTime)
 
 	b_mVelocity = Vector2(0, 0);
 	input->update();
-	
+
 
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
@@ -61,9 +61,12 @@ void Player::update(float deltaTime)
 		{
 			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		
-	
-		b_mPosittion += b_mVelocity*deltaTime*b_mSpeed;
+		if (input->isKeyDown(KEYCORD::T))
+		{
+			TShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+
+		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 
 	}
 }
@@ -81,7 +84,7 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 16, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 	}
-     
+
 	if (b_mEndFlag)
 	{
 		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
@@ -96,6 +99,13 @@ void Player::Shot(Vector2 pos)
 void Player::CShot(Vector2 pos)
 {
 	charaManager->add(new ChangeBullet(pos, charaManager));
+}
+
+void Player::TShot(Vector2 pos)
+{
+	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 70.0f));
+	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90.0f));
+	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 110.0f));
 }
 
 
@@ -115,8 +125,8 @@ void Player::hit(BaseObject & other)
 	{
 		b_mEndFlag = true;
 	}
-	
-	
+
+
 }
 
 bool Player::getIsDeath() const
