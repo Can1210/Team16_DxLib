@@ -57,7 +57,7 @@ float Bom::getCircleSize() const
 	return b_mCircleSize;
 }
 
-Type Bom::ChangeType()
+void Bom::setIsDeath(bool isDeath)
 {
-	return Type();
+	b_mIsDeath = isDeath;
 }

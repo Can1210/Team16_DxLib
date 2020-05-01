@@ -8,6 +8,9 @@ GamePlay::GamePlay()
 GamePlay::~GamePlay()
 {
 	delete m_pInput;
+	delete enemySpawn;
+	delete charaManager;
+	
 }
 
 void GamePlay::initialize()

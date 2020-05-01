@@ -28,9 +28,6 @@ public:
 	void draw(Renderer* renderer, Renderer3D* renderer3D);
 
 	std::vector<BaseObject*> getUseList();
-
-	//乗っ取り後処理
-	void ChangeAfter();
 private:
 	std::vector<BaseObject*> mObjectsList;        //オブジェクトのリスト
 	std::vector<BaseObject*> mAddObjectsList;     //追加するオブジェクト
