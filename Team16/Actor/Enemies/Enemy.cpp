@@ -11,7 +11,6 @@ Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 Enemy::~Enemy()
 {
 	delete input;
-	delete rend;
 	delete mTimer;
 }
 
@@ -23,7 +22,6 @@ void Enemy::initialize()
 	MoveFlag = FALSE;
 	input = new Input;
 	input->init();
-	rend = new Renderer;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
@@ -44,7 +42,10 @@ void Enemy::update(float deltaTime)
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (b_mHp <= 0)
+		if (b_mPosittion.y > WindowInfo::WindowHeight
+			|| b_mPosittion.x>WindowInfo::WindowWidth
+			|| b_mPosittion.x < 0
+			|| b_mHp <= 0)
 		{
 			b_mIsDeath = true;
 		}
@@ -101,19 +102,19 @@ void Enemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mType == Type::ENEMY)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
-		rend->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	}
 	else if (!b_mEndFlag)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 0, 255), FALSE);
 		b_mAngle = 0.0f;
-		rend->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-		rend->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
 
 	if (b_mEndFlag)
 	{
-		rend->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
 
 }
@@ -135,8 +136,10 @@ void Enemy::hit(BaseObject & other)
 		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
-
-
+	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
+	{
+		b_mType = Type::PLAYER;
+	}
 
 }
 
@@ -177,8 +180,7 @@ float Enemy::getCircleSize() const
 	return b_mCircleSize;
 }
 
-Type Enemy::ChangeType()
+void Enemy::setIsDeath(bool isDeath)
 {
-	b_mType = Type::PLAYER;
-	return b_mType;
+	b_mIsDeath = isDeath;
 }

@@ -10,7 +10,6 @@ BomBullet::BomBullet(Vector2 pos, CharactorManager * c, Type t) :mTimer(new Time
 
 BomBullet::~BomBullet()
 {
-	delete rend;
 	delete mTimer;
 }
 
@@ -103,7 +102,8 @@ float BomBullet::getCircleSize() const
 	return b_mCircleSize;
 }
 
-Type BomBullet::ChangeType()
+void BomBullet::setIsDeath(bool isDeath)
 {
-	return Type();
+	b_mIsDeath = isDeath;
 }
+

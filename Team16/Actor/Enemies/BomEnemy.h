@@ -38,17 +38,13 @@ public:
 
 	virtual float getCircleSize() const override;
 
-	virtual Type ChangeType() override;
-
-
-
+	virtual void setIsDeath(bool isDeath) override;
 
 
 private:
 
 	bool MoveFlag;
 	Input* input;
-	Renderer* rend;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 

@@ -6,6 +6,7 @@
 #include"../CharaManager/BaseObject.h"
 #include"../../GameBase/WindowInfo.h"
 
+
 class ChangeBullet :public BaseObject
 {
 public:
@@ -28,14 +29,13 @@ public:
 
 	virtual float getCircleSize() const override;
 
-	virtual Type ChangeType()  override;
-
-
-
+	virtual void setIsDeath(bool isDeath) override;
+	//•ÏXŒãŒãˆ—
+	void After();
 private:
 
 	float angle;
-	bool Death;
-	Renderer* rend;
 	CharactorManager* charaManager;
+	
+	
 };

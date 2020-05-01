@@ -32,8 +32,10 @@ public:
 	virtual void draw(Renderer* renderer, Renderer3D* renderer3D) = 0;
 	//当たりた時の処理
 	virtual void hit(BaseObject& other) = 0;
-	//乗っ取り
-	virtual Type ChangeType() = 0;
+#pragma region Set
+	virtual void setIsDeath(bool isDeath) = 0;
+#pragma endregion
+
 
 
 #pragma region Get
@@ -64,6 +66,7 @@ protected:
 	Type b_mType;             //自分のタイプ
 	float b_mAngle;//角度
 	bool b_mEndFlag;//ゲームオーバー
+
 	
 };
 

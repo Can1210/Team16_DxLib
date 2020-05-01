@@ -11,7 +11,6 @@ Player::Player(Vector2 pos, CharactorManager *c)
 Player::~Player()
 {
 	delete input;
-	delete rend;
 }
 
 void Player::initialize()
@@ -20,10 +19,11 @@ void Player::initialize()
 	MoveFlag = FALSE;
 	input = new Input;
 	input->init();
-	rend = new Renderer;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
 	b_mHp = 100;
+	b_mSpeed = 40;
+
 }
 
 void Player::update(float deltaTime)
@@ -31,8 +31,7 @@ void Player::update(float deltaTime)
 
 	b_mVelocity = Vector2(0, 0);
 	input->update();
-
-
+	
 
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
@@ -62,7 +61,9 @@ void Player::update(float deltaTime)
 		{
 			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		b_mPosittion += b_mVelocity;
+		
+	
+		b_mPosittion += b_mVelocity*deltaTime*b_mSpeed;
 
 	}
 }
@@ -73,25 +74,23 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 16, b_mCircleSize, GetColor(0, 0, 255), FALSE);
-		rend->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-		rend->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
 	else
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 16, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 	}
-
-
+     
 	if (b_mEndFlag)
 	{
-		rend->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
 }
 
 void Player::Shot(Vector2 pos)
 {
 	charaManager->add(new Bullet(pos, charaManager, b_mType));
-
 }
 
 void Player::CShot(Vector2 pos)
@@ -106,7 +105,6 @@ void Player::hit(BaseObject & other)
 	{
 		b_mHp -= 10;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 16, b_mCircleSize, GetColor(255, 255, 0), TRUE);
-
 	}
 	if (other.getType() == Type::ENEMY)
 	{
@@ -117,7 +115,8 @@ void Player::hit(BaseObject & other)
 	{
 		b_mEndFlag = true;
 	}
-
+	
+	
 }
 
 bool Player::getIsDeath() const
@@ -132,7 +131,7 @@ Type Player::getType() const
 
 Vector2 Player::getPpstion() const
 {
-	return Vector2();
+	return b_mPosittion;
 }
 
 float Player::getCircleSize() const
@@ -140,9 +139,7 @@ float Player::getCircleSize() const
 	return b_mCircleSize;
 }
 
-Type Player::ChangeType()
+void Player::setIsDeath(bool isDeath)
 {
-	return b_mType;
+	b_mIsDeath = isDeath;
 }
-
-
