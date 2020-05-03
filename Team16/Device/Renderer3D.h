@@ -19,7 +19,8 @@ public:
 		Vector2 textureSize,
 		float scale,
 		float angle,
-		Vector2 centerPos = Vector2(0.5f,0.5f),
+		int alpha = 255,
+		Vector2 centerPos = Vector2(0.5f, 0.5f),
 		bool isTransparency = true);
 
 
