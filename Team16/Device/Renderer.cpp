@@ -37,8 +37,7 @@ void Renderer::draw2D(std::string textureName, Vector2 position, Vector2 drawPos
 		(double)deg,
 		cutTexture,
 		isTransparency, isTurn);
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);  //ブレンドモードをオフにする
-	DeleteGraph(cutTexture);  //テストで置いとくここに置いておいたら描画されないかもしれない
+	DeleteGraph(cutTexture);                      //作ったものを消去
 }
 
 
