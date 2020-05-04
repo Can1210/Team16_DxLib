@@ -26,8 +26,11 @@ public:
 #pragma endregion
 	//描画
 	void draw(Renderer* renderer, Renderer3D* renderer3D);
-
+	//現在使われているリストの取得
 	std::vector<BaseObject*> getUseList();
+	//プレイヤーの位置を取得する
+	Vector2 getPlayerPosition()const;
+
 private:
 	std::vector<BaseObject*> mObjectsList;        //オブジェクトのリスト
 	std::vector<BaseObject*> mAddObjectsList;     //追加するオブジェクト
