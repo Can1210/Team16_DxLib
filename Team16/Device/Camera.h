@@ -5,6 +5,7 @@
 #include "DxLib.h"
 #include "../Math/Vector3.h"
 #include "../Actor/CharaManager/CharactorManager.h"
+#include "../Device/Input.h"
 
 //カメラクラス
 class Camera
@@ -45,6 +46,7 @@ private:
 
 	CharactorManager* m_pCharactorManager;   //プレイヤーを探す用
 	const float lookAtDistance;   //とりあえず700
+	Input* input;
 };
 
 #endif // !_CAMERA_H_
