@@ -160,27 +160,3 @@ void Enemy::Jibaku(Vector2 pos)
 	charaManager->add(new Player(pos, charaManager));
 }
 
-bool Enemy::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type Enemy::getType() const
-{
-	return b_mType;
-}
-
-Vector2 Enemy::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float Enemy::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void Enemy::setIsDeath(bool isDeath)
-{
-	b_mIsDeath = isDeath;
-}

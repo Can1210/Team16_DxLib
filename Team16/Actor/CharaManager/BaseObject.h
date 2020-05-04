@@ -32,24 +32,18 @@ public:
 	virtual void draw(Renderer* renderer, Renderer3D* renderer3D) = 0;
 	//“–‚½‚è‚½‚Ìˆ—
 	virtual void hit(BaseObject& other) = 0;
-#pragma region Set
-	virtual void setIsDeath(bool isDeath) = 0;
-#pragma endregion
 
+#pragma region Get/Set
 
-
-#pragma region Get
 	//€–S‚µ‚Ä‚¢‚é‚©
-	virtual bool getIsDeath()const = 0;
+	virtual bool getIsDeath()const;
+	virtual void setIsDeath(bool isDeath);
 	//©•ª‚Ìí—Ş
-	virtual Type getType()const = 0;
+	virtual Type getType()const;
 	//©•ª‚ÌˆÊ’u
-	virtual Vector2 getPpstion()const = 0;
+	virtual Vector2 getPpstion()const;
 	//©•ª‚Ì”¼Œa
-	virtual float getCircleSize()const = 0;
-
-
-
+	virtual float getCircleSize()const;
 #pragma endregion
 
 	//‰~“¯m‚Ì“–‚½‚è”»’è

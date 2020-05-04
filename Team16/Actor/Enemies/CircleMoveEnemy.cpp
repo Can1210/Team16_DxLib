@@ -160,28 +160,3 @@ void CirecleMoveEnemy::Jibaku(Vector2 pos)
 	b_mIsDeath = true;
 	charaManager->add(new Player(pos, charaManager));
 }
-
-bool CirecleMoveEnemy::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type CirecleMoveEnemy::getType() const
-{
-	return b_mType;
-}
-
-Vector2 CirecleMoveEnemy::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float CirecleMoveEnemy::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void CirecleMoveEnemy::setIsDeath(bool isDeath) 
-{
-	b_mIsDeath = isDeath;
-}

@@ -36,28 +36,3 @@ void Bom::hit(BaseObject & other)
 {
 
 }
-
-bool Bom::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type Bom::getType() const
-{
-	return PLAYER_BULLET;
-}
-
-Vector2 Bom::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float Bom::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void Bom::setIsDeath(bool isDeath)
-{
-	b_mIsDeath = isDeath;
-}

@@ -108,29 +108,6 @@ void TrakingBullet::hit(BaseObject & other)
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
-bool TrakingBullet::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type TrakingBullet::getType() const
-{
-	return b_mType;
-}
-
-Vector2 TrakingBullet::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float TrakingBullet::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void TrakingBullet::setIsDeath(bool isDeath)
-{
-}
 
 void TrakingBullet::getOtherPos()//ターゲットを定める
 {

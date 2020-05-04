@@ -129,27 +129,3 @@ void Player::hit(BaseObject & other)
 
 }
 
-bool Player::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type Player::getType() const
-{
-	return b_mType;
-}
-
-Vector2 Player::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float Player::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void Player::setIsDeath(bool isDeath)
-{
-	b_mIsDeath = isDeath;
-}

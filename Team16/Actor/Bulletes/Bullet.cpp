@@ -90,29 +90,3 @@ void Bullet::hit(BaseObject & other)
 
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
-
-bool Bullet::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type Bullet::getType() const
-{
-	return b_mType;
-}
-
-Vector2 Bullet::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float Bullet::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void Bullet::setIsDeath(bool isDeath)
-{
-	b_mIsDeath = isDeath;
-}
-
