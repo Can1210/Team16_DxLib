@@ -94,6 +94,9 @@
     <ClCompile Include="Actor\Bulletes\TrakingBullet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+
+    <ClCompile Include="Actor\Bulletes\CurveBullet.cpp">
+
     <ClCompile Include="Device\CSVReader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -101,6 +104,7 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Actor\CharaManager\EnemyBox.cpp">
+
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,11 +140,15 @@
     <ClInclude Include="Device\Camera.h" />
     <ClInclude Include="Device\Renderer3D.h" />
     <ClInclude Include="Actor\Bulletes\TrakingBullet.h" />
+
+    <ClInclude Include="Actor\Bulletes\CurveBullet.h" />
+
     <ClInclude Include="Device\CSVReader.h" />
     <ClInclude Include="Actor\CharaManager\MapSpawn.h" />
     <ClInclude Include="Actor\CharaManager\EnemyBox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />
+
   </ItemGroup>
 </Project>
