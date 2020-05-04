@@ -8,6 +8,7 @@
 #include<list>
 #include"../Bulletes/Bullet.h"
 #include"../Bulletes/TrakingBullet.h"
+#include"../Bulletes/CurveBullet.h"
 #include"../../Actor/Enemies/Enemy.h"
 #include"../Bulletes/ChangeBullet.h"
 #include "../../Support/CWindow.h"
@@ -23,7 +24,7 @@ public:
 
 	void Shot(Vector2 pos);
 	void CShot(Vector2 pos);
-	void TShot(Vector2 pos);
+	void TShot(Vector2 pos,float deltaTime);
 
 	// BaseObject ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void initialize() override;

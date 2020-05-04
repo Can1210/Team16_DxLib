@@ -63,7 +63,7 @@ void Player::update(float deltaTime)
 		}
 		if (input->isKeyDown(KEYCORD::T))
 		{
-			TShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			TShot(Vector2(b_mPosittion.x, b_mPosittion.y), deltaTime);
 		}
 
 		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
@@ -101,11 +101,11 @@ void Player::CShot(Vector2 pos)
 	charaManager->add(new ChangeBullet(pos, charaManager));
 }
 
-void Player::TShot(Vector2 pos)
+void Player::TShot(Vector2 pos,float deltaTime)
 {
-	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 70.0f));
-	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90.0f));
-	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 110.0f));
+	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 70.0f));
+	charaManager->add(new CurveBullet(pos, charaManager, b_mType, 90.0f,deltaTime));
+	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 110.0f));
 }
 
 

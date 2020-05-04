@@ -11,6 +11,7 @@ TrakingBullet::TrakingBullet(Vector2 pos, CharactorManager * c, Type t, float an
 
 	bulletAngle = angle;
 	charaManager = c;
+	playerPos = pos;
 }
 
 TrakingBullet::~TrakingBullet()
@@ -35,23 +36,33 @@ void TrakingBullet::setBulletType()
 void TrakingBullet::initialize()
 {
 	setBulletType();
+	b_mVelocity = Vector2(0, 0);
+	isFound = false;//敵を見つけていない
+	getOtherPos();
 }
 
 void TrakingBullet::update(float deltaTime)
 {
-	b_mVelocity = Vector2(0, 0);
-
 	if (b_mType == Type::PLAYER_BULLET)
 	{
-		//objs = charaManager->getUseList();
-		//for (int i = 0; i < objs.size; i++)
-		//{
-		//	objs[i]->getPpstion;
-		//}
-		//b_mVelocity.y -= 12.0f;
-		b_mPosittion += RotationZ(bulletAngle) * 5.0f;
+		if (!isFound)//見つけてない
+		{
+			b_mVelocity = RotationZ(bulletAngle);
+		}
+		else if(isFound)
+		{
+			if (!obj->getIsDeath())
+			{
+				b_mVelocity = traking();
+			}
+			else if (obj->getIsDeath() && b_mVelocity.x == 0 && b_mVelocity.y == 0)
+			{//敵がいないのに自分が生成されている場合死ぬ
+				b_mIsDeath = true;
+			}
+		}
+		b_mPosittion += b_mVelocity * 5.0f;
 	}
-	if (b_mType == Type::ENEMY_BULLET)
+	else if (b_mType == Type::ENEMY_BULLET)
 	{
 		b_mVelocity.y += 6.0f;
 		b_mPosittion += b_mVelocity;
@@ -121,8 +132,40 @@ void TrakingBullet::setIsDeath(bool isDeath)
 {
 }
 
+void TrakingBullet::getOtherPos()//ターゲットを定める
+{
+	std::vector<BaseObject*> objs = charaManager->getUseList();
+	std::size_t size = objs.size();//リストの大きさ最大値
+	Vector2 otherPos;//ターゲットのポジション
+	Vector2 v;
+	float x = 5000.0f; float y = 5000.0f;
+	//float f = 50000.0f;playerPos.dot(otherPos) > abs(f)f = playerPos.dot(otherPos);
+	for (int i = 0; i < size; i++)
+	{
+		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET)//自分がプレイヤーの弾だったら
+		{
+			otherPos = objs[i]->getPpstion();
+			if (playerPos.x - otherPos.x < abs(x)&& playerPos.y - otherPos.y < abs(y))
+			{
+				x = playerPos.x - otherPos.x; y = playerPos.y - otherPos.y;
+				obj = objs[i];//その時近かったターゲットのオブジェを入れる
+				isFound = true;//敵を見つけた
+			}
+		}	
+	}
+}
+
+Vector2 TrakingBullet::traking()
+{
+	Vector2 v = Vector2(0, 0);
+	v = b_mPosittion - obj->getPpstion();
+	v = -v.normalize();
+	return v;
+}
+
 Vector2 TrakingBullet::RotationZ(float ang)
 {
+	Vector2 v;
 	ang = ang + 45.0f;
 	ang = ang * PI / 180.0;
 
@@ -131,6 +174,6 @@ Vector2 TrakingBullet::RotationZ(float ang)
 
 	float x = cos + sin;
 	float y = -(sin) + cos;
-
-	return Vector2(x, y);
+	v = Vector2(x, y);
+	return v;
 }
