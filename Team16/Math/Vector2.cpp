@@ -30,14 +30,25 @@ Vector2 & Vector2::normalize()
 //内積
 float Vector2::dot(const Vector2 & v) const
 {
-	float result = x * v.x + y * v.y;
-	return result;
+	return  x * v.x + y * v.y;
 }
 //外積
 float Vector2::cross(const Vector2 & v) const
 {
-	float result = x * v.y - y * v.x;
-	return result;
+	return x * v.y - y * v.x;
+}
+//線形補間
+Vector2 Vector2::lerp( const Vector2& end, const float time)
+{
+	x += (end.x - x)* time;
+	y += (end.x - y)* time;
+	return *this;
+
+}
+//始点と終点の線形補間
+float Vector2::lerp(const float start, const float end, const float time)
+{
+	return (1 - time) * start + time * end;
 }
 
 //単項演算子オーバーロード＋
