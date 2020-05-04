@@ -23,3 +23,29 @@ bool BaseObject::circle_circle_Collision(BaseObject& other)
 	}
 	return false;
 }
+
+bool BaseObject::getIsDeath() const
+{
+	return b_mIsDeath;
+}
+
+void BaseObject::setIsDeath(bool isDeath)
+{
+	b_mIsDeath = isDeath;
+}
+
+Type BaseObject::getType() const
+{
+	return b_mType;
+}
+
+Vector2 BaseObject::getPpstion() const
+{
+	return b_mPosittion;
+}
+
+float BaseObject::getCircleSize() const
+{
+	return b_mCircleSize;
+}
+

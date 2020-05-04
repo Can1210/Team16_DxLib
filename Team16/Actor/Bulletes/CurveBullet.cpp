@@ -136,29 +136,6 @@ void CurveBullet::hit(BaseObject & other)
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
-bool CurveBullet::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type CurveBullet::getType() const
-{
-	return b_mType;
-}
-
-Vector2 CurveBullet::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float CurveBullet::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void CurveBullet::setIsDeath(bool isDeath)
-{
-}
 
 void CurveBullet::getOtherPos()//ターゲットを定める
 {
