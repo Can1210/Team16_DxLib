@@ -181,6 +181,8 @@
     <ClCompile Include="Scene\GamePlay.cpp" />
     <ClCompile Include="Scene\LoadScene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Device\Sound.cpp" />
+    <ClCompile Include="Device\Loader\SoundLoad.cpp" />
     <ClCompile Include="Support\CWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Device\Loader\TextureLoad.cpp" />
@@ -218,6 +220,8 @@
     <ClInclude Include="GameBase\GameTime.h" />
     <ClInclude Include="Device\Input.h" />
     <ClInclude Include="Device\Renderer.h" />
+    <ClInclude Include="Device\Sound.h" />
+    <ClInclude Include="Device\Loader\SoundLoad.h" />
     <ClInclude Include="Support\CWindow.h" />
     <ClInclude Include="Support\Singleton.h" />
     <ClInclude Include="Device\Loader\TextureLoad.h" />
