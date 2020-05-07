@@ -34,6 +34,8 @@
     <ClCompile Include="Utility\Timer.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
+    <ClCompile Include="Actor\Enemies\ThreeWayEnemy.cpp" />
+    <ClCompile Include="Actor\Bulletes\AngleBullet.cpp" />
     <ClCompile Include="Device\Loader\SoundLoad.cpp" />
     <ClCompile Include="Device\Sound.cpp" />
   </ItemGroup>
@@ -73,6 +75,8 @@
     <ClInclude Include="Utility\Timer.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Actor\Enemies\ThreeWayEnemy.h" />
+    <ClInclude Include="Actor\Bulletes\AngleBullet.h" />
     <ClInclude Include="Device\Loader\SoundLoad.h" />
     <ClInclude Include="Device\Sound.h" />
   </ItemGroup>
