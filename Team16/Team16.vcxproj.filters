@@ -38,6 +38,7 @@
     <ClCompile Include="Actor\Bulletes\AngleBullet.cpp" />
     <ClCompile Include="Device\Loader\SoundLoad.cpp" />
     <ClCompile Include="Device\Sound.cpp" />
+    <ClCompile Include="Actor\Enemies\UFOEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Bulletes\CurveBullet.h" />
@@ -79,6 +80,7 @@
     <ClInclude Include="Actor\Bulletes\AngleBullet.h" />
     <ClInclude Include="Device\Loader\SoundLoad.h" />
     <ClInclude Include="Device\Sound.h" />
+    <ClInclude Include="Actor\Enemies\UFOEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

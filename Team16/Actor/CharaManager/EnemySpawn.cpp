@@ -4,7 +4,7 @@
 #include"../Enemies/CircleMoveEnemy.h"
 #include"../Enemies/BomEnemy.h"
 #include"../Enemies/ThreeWayEnemy.h"
-
+#include"../Enemies/UFOEnemy.h"
 
 EnemySpawn::EnemySpawn(CharactorManager& charactorManager) :
 	mCharactorManager(&charactorManager),
@@ -57,7 +57,7 @@ void EnemySpawn::spawn()
 
 		for (int i = 0; i < spawnNum4(mt); i++)
 		{
-			mCharactorManager->add(new ThreeWayEnemy(Vector2((i + 1) * 190, (i + 1) * -300), mCharactorManager, 260.0f, 270.0f, 280.0f,Vector2(0.0f,500.0f)));
+			mCharactorManager->add(new UFOEnemy(Vector2((i + 1) * 190, (i + 1) * -300), mCharactorManager, 260.0f, 270.0f, 280.0f,Vector2(0.0f,500.0f)));
 		}
 	}
 }
