@@ -25,8 +25,8 @@ void CirecleMoveEnemy::initialize()
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
 	m_pTimer->initialize();
-	rotateSpeed = 1;//1周にかかる時間
-	radius = 10;   //半径10
+	rotateSpeed = 0.5;//1周にかかる時間
+	radius = 2;   //半径10
 }
 //更新
 void CirecleMoveEnemy::update(float deltaTime)
@@ -109,7 +109,7 @@ void CirecleMoveEnemy::move(float deltaTime)
 {
 	//敵以外ならリターン
 	if (!b_mType == Type::ENEMY)return;
-	moveTime += deltaTime * 8;
+	moveTime += deltaTime * 4;
 	x = 2 * radius* cos(moveTime* rotateSpeed);
 	y = radius * sin(moveTime* rotateSpeed);
 	b_mPosittion +=  Vector2(x,y);
