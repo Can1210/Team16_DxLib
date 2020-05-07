@@ -36,6 +36,8 @@
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Actor\Enemies\ThreeWayEnemy.cpp" />
     <ClCompile Include="Actor\Bulletes\AngleBullet.cpp" />
+    <ClCompile Include="Device\Loader\SoundLoad.cpp" />
+    <ClCompile Include="Device\Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Bulletes\CurveBullet.h" />
@@ -75,6 +77,8 @@
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Actor\Enemies\ThreeWayEnemy.h" />
     <ClInclude Include="Actor\Bulletes\AngleBullet.h" />
+    <ClInclude Include="Device\Loader\SoundLoad.h" />
+    <ClInclude Include="Device\Sound.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

@@ -24,6 +24,8 @@ void TextureLoad::add(std::string callName, const TCHAR* textureName)
 	storageTexturesMap.emplace(textureName, callName);      //引数情報を追加
 	int gra = LoadGraph(textureName);                       //テクスチャをロードする
 	callTextureMap.emplace(callName, gra);                  //作った番号と呼び出し名を追加
+	//ここでエラー起きているかも？
+
 }
 //テクスチャを呼ぶ
 int TextureLoad::set(std::string callName)
