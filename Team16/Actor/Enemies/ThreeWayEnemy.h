@@ -1,32 +1,19 @@
 #pragma once
-#include"DxLib.h"
+#include "DxLib.h"
 #include "../../Math/Vector2.h"
 #include "../../Device/Input.h"
 #include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
 #include"../CharaManager/CharactorManager.h"
-#include<list>
-#include"../Bulletes/Bullet.h"
-#include"../Bulletes/TrakingBullet.h"
-#include"../Bulletes/CurveBullet.h"
-#include"../Bulletes/AngleBullet.h"
-#include"../../Actor/Enemies/Enemy.h"
+#include"../Player/Player.h"
+#include"../Bulletes/Bom.h"
 #include"../Bulletes/ChangeBullet.h"
-#include "../../Support/CWindow.h"
 
-
-class Player :public BaseObject
+class ThreeWayEnemy :public BaseObject
 {
-	//一番最初の操作キャラ、ボム使用時にこれに戻る
 public:
-	Player(Vector2 pos, CharactorManager *c);
-	~Player();
-
-
-	void Shot(Vector2 pos);
-	void CShot(Vector2 pos);
-	void TShot(Vector2 pos,float deltaTime);
-
+	ThreeWayEnemy(Vector2 pos, CharactorManager *c,float angle1,float angle2,float angle3,Vector2 end);
+	~ThreeWayEnemy();
 	// BaseObject を介して継承されました
 	virtual void initialize() override;
 
@@ -36,10 +23,21 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
+	void Shot(Vector2 pos, float angle);
+
+	void CShot(Vector2 pos);
+
+	void Jibaku(Vector2 pos);
 private:
 
 	bool MoveFlag;
 	Input* input;
 	CharactorManager* charaManager;
+	Timer *mTimer;
+	ChangeBullet *changeB;
 
+	float angle1, angle2, angle3;
+	Vector2 start, end;
+
+	Vector2 Traking();
 };

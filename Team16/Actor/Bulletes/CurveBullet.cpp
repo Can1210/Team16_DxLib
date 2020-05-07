@@ -49,17 +49,17 @@ void CurveBullet::initialize()
 	float l1, l2; l1 = 0.3f; l2 = 0.7f;
 	int f1, f2; f1 = GetRandom(0, 360, rndTime); f2 = GetRandom(0, 360);
 	Vector2 v1, v2; v1 = RotationZ(f1); v2 = RotationZ(f2);
-	v1 = v1.normalize();v2 = v2.normalize();
 	if (obj  && obj->getPpstion().y < playerPos.y)
 	{
-		target1 = Vector2(VecLerp(playerPos, obj->getPpstion(), l1).x, VecLerp(playerPos, obj->getPpstion(), l1).y);//‚Ü‚Î‚ç‚É‚·‚é‚Ì‚ª‚Þ‚¸‚¢
-		target2 = Vector2(VecLerp(playerPos, obj->getPpstion(), l2).x, VecLerp(playerPos, obj->getPpstion(), l2).y);
+		enemyPos = obj->getPpstion();
+		target1 = Vector2(VecLerp(playerPos, enemyPos, l1).x, VecLerp(playerPos, enemyPos, l1).y);//‚Ü‚Î‚ç‚É‚·‚é‚Ì‚ª‚Þ‚¸‚¢
+		target2 = Vector2(VecLerp(playerPos, enemyPos, l2).x, VecLerp(playerPos, enemyPos, l2).y);
 
-		v1 = Vector2(abs(target1.x + v1.x* 10.0f),abs( target1.y + v1.y * 10.0f));
-		v2 = Vector2(abs(target2.x + v2.x* 10.0f),abs( target2.y + v2.y * 10.0f));
+		//v1 = Vector2(abs(target1.x + v1.x* 10.0f),abs( target1.y + v1.y * 10.0f));
+		//v2 = Vector2(abs(target2.x + v2.x* 10.0f),abs( target2.y + v2.y * 10.0f));
 
-		target1 = Vector2(VecLerp(target1, v1, l1));
-		target2 = Vector2(VecLerp(target2, v2, l2));
+		//target1 = Vector2(VecLerp(target1, v1, l1));
+		//target2 = Vector2(VecLerp(target2, v2, l2));
 	}
 }
 
@@ -80,7 +80,7 @@ void CurveBullet::update(float deltaTime)
 		{
 			if (!obj->getIsDeath())
 			{
-				b_mVelocity = Curve(playerPos, target1, target2, obj->getPpstion(), t / 30.0f);
+				b_mVelocity = Curve(playerPos, target1, target2, enemyPos, t / 30.0f);
 				b_mPosittion = b_mVelocity;
 			}
 			else if (obj->getIsDeath())

@@ -104,7 +104,7 @@ void Player::CShot(Vector2 pos)
 void Player::TShot(Vector2 pos,float deltaTime)
 {
 	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 70.0f));
-	charaManager->add(new CurveBullet(pos, charaManager, b_mType, 90.0f,deltaTime));
+	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90.0f));
 	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 110.0f));
 }
 

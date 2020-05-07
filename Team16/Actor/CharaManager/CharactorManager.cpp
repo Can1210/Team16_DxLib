@@ -24,7 +24,6 @@ CharactorManager::~CharactorManager()
 			delete object;
 	}
 	mObjectsList.clear();
-
 }
 
 //リストのクリア
@@ -122,7 +121,7 @@ Vector2 CharactorManager::getPlayerPosition() const
 {
 	for (auto object : mObjectsList)
 	{
-		if (!object->getType == Type::PLAYER) continue;    //プレイヤーでなければスキップ
+		if (!object->getType() == Type::PLAYER) continue;    //プレイヤーでなければスキップ
 		return object->getPpstion();
 	}
 	//プレイヤーがいなければ0を返す
