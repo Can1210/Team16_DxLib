@@ -27,12 +27,28 @@ public:
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
+	//動き
+	void move(float deltaTime);
+	//プレイヤーの時の動き
+	void playerMove(float deltaTime);
+	//死亡エリア
+	void deathArea();
+	//プレイヤーの位置を調べる
+	void checkPlayerPos();
 
 private:
 
-	bool MoveFlag;
-	Input* input;
-	Timer *mTimer;
-	CharactorManager* charaManager;
+	bool mMoveFlag;
+	Input* m_pInput;
+	Timer *m_pTimer;
+	CharactorManager* m_pCharaManager;
+	Vector2 mPlayerPos;
+
+	//円運動
+	float x;
+	float y;
+	float radius;
+	float rotateSpeed;
+	float moveTime;
 
 };
