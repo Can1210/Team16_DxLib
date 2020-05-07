@@ -46,12 +46,13 @@ void UFOEnemy::update(float deltaTime)
 		/*b_mVelocity += Traking() * 2.0f;*/
 		//b_mVelocity = Vector2(sin(300.0f), -1.0f);
 		time ++;
+
 		float x = sin(time / 50.0f) * 3.0f;
-		if (down)
-		{
-			b_mVelocity += Vector2(0, 1.5f);
-		}
-		//b_mVelocity += Vector2(x, 1.5f);
+		//if (down)		//‘±‚«
+		//{
+		//	b_mVelocity += Vector2(0, 1.5f);
+		//}
+		b_mVelocity += Vector2(x, 1.5f);
 		if (mTimer->timerSet(1))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
