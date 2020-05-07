@@ -19,7 +19,7 @@ SoundLoad::~SoundLoad()
 void SoundLoad::addBGM(std::string callName, const TCHAR * soundName)
 {
 	//すでに読み込み済みならリターン
-	if (!(storageBGMMap.size == 0))
+	if (!(storageBGMMap.size() == 0))
 	{
 		auto result = storageBGMMap.find(soundName);
 		if (result != storageBGMMap.end()) return;
@@ -38,7 +38,7 @@ int SoundLoad::setBGM(std::string callName)
 void SoundLoad::addSE(std::string callName, const TCHAR * soundName)
 {
 	//すでに読み込み済みならリターン
-	if (!(storageSEMap.size == 0))
+	if (!(storageSEMap.size() == 0))
 	{
 		auto result = storageSEMap.find(soundName);
 		if (result != storageSEMap.end()) return;
