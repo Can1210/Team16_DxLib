@@ -14,8 +14,6 @@ public:
 	CirecleMoveEnemy(Vector2 pos, CharactorManager *c);
 	~CirecleMoveEnemy();
 
-	bool SubNull();
-	void SubChange();
 	// BaseObject を介して継承されました
 	virtual void initialize() override;
 
