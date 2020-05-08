@@ -4,7 +4,6 @@
 #include <Windows.h>
 #pragma comment(lib,"winmm.lib")
 
-#define KEY_MAX 256
 //キー入力
 class Input
 {
@@ -63,9 +62,9 @@ private:
 
 private:
 	// キー情報
-	BYTE mCurrentKey[KEY_MAX];
+	BYTE mCurrentKey[256];
 	// 前のキー情報
-	BYTE mPreviousKey[KEY_MAX];
+	BYTE mPreviousKey[256];
 	//この値との論理積で入力を取る
 	const int inputNum = 0x80;
 	//ゲームパッド最大4つ(複数持っていいないのでテスト不可)
