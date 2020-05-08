@@ -23,9 +23,10 @@ void GamePlay::initialize()
 
 	charaManager->add(new Player(Vector2(260, 500), charaManager));
 
+
 	enemySpawn = new EnemySpawn(*charaManager);
 	enemySpawn->initialize();
-
+	charaManager->add(new Boss(Vector2(260, -1500), charaManager));
 	//CWindow::getInstance().log("¡ƒQ[ƒ€ƒvƒŒƒC‚ÉØ‚è‘Ö‚í‚Á‚½");
 }
 

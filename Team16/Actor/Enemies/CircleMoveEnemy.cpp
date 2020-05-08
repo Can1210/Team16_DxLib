@@ -13,7 +13,7 @@ CirecleMoveEnemy::~CirecleMoveEnemy()
 	delete m_pInput;
 	delete m_pTimer;
 }
-//‰Šú‰»
+//åˆæœŸåŒ–
 void CirecleMoveEnemy::initialize()
 {
 	checkPlayerPos();
@@ -25,10 +25,10 @@ void CirecleMoveEnemy::initialize()
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
 	m_pTimer->initialize();
-	rotateSpeed = 0.5;//1ü‚É‚©‚©‚éŠÔ
-	radius = 2;   //”¼Œa10
+	rotateSpeed = 0.5;//1å‘¨ã«ã‹ã‹ã‚‹æ™‚é–“
+	radius = 2;   //åŠå¾„10
 }
-//XV
+//æ›´æ–°
 void CirecleMoveEnemy::update(float deltaTime)
 {
 	m_pInput->update();
@@ -50,41 +50,70 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	}
 	else if (!b_mEndFlag)
 	{
+
+		if (DamgeFlag)
+		{
+			b_mArpha = 155;
+		}
+		else
+		{
+			b_mArpha = 255;
+		}
+
+
+		DrawBox(0, 0, shotcnt, 100, GetColor(r, 0, b), TRUE);
+		if (shotcnt == 100)
+		{
+			r = 255;
+			b = 0;
+		}
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 0, 255), FALSE);
 		b_mAngle = 0.0f;
-		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-		renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
+		if (b_mType == Type::PLAYER)
+		{
+			renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		}
 	}
 	if (b_mEndFlag)
 	{
-	  renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
-
 }
 
 void CirecleMoveEnemy::hit(BaseObject & other)
 {
+	
 	if (other.getType() == Type::PLAYER_BULLET&&b_mType == Type::ENEMY)
 	{
-		b_mHp -= 20;
+		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
+
+
 	if (other.getType() == Type::ENEMY_BULLET&&b_mType == Type::PLAYER)
 	{
-		b_mHp -= 20;
+		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+		mTimer->initialize();
+		DamgeFlag = TRUE;
 	}
 	if (other.getType() == Type::ENEMY&&b_mType == Type::PLAYER)
 	{
 		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
-	}
-	
-	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
-	{
-		b_mType = Type::PLAYER;
+		mTimer->initialize();
+		DamgeFlag = TRUE;
 	}
 
+
+
+
+	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
+	{
+		//æœ€åˆã¯æ§ãˆã«
+		b_mType = Type::SUB_PLAYER;
+	}
 }
 
 void CirecleMoveEnemy::Shot(Vector2 pos)
@@ -107,20 +136,20 @@ void CirecleMoveEnemy::Jibaku(Vector2 pos)
 
 void CirecleMoveEnemy::move(float deltaTime)
 {
-	//“GˆÈŠO‚È‚çƒŠƒ^[ƒ“
+	//æ•µä»¥å¤–ãªã‚‰ãƒªã‚¿ãƒ¼ãƒ³
 	if (!b_mType == Type::ENEMY)return;
 	moveTime += deltaTime * 4;
 	x = 2 * radius* cos(moveTime* rotateSpeed);
 	y = radius * sin(moveTime* rotateSpeed);
 	b_mPosittion +=  Vector2(x,y);
 	//b_mVelocity.y += 2;
-	//‰æ–ÊŠO‚È‚ç€‚Ê
+	//ç”»é¢å¤–ãªã‚‰æ­»ã¬
 	deathArea();
 }
-//©•ª‚ªƒvƒŒƒCƒ„[‚Ì‚Ì“®‚«
+//è‡ªåˆ†ãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ™‚ã®å‹•ã
 void CirecleMoveEnemy::playerMove(float deltaTime)
 {
-	//æ‚Áæ‚èŒã    ƒvƒŒƒCƒ„[‚¶‚á‚È‚¯‚ê‚ÎƒŠƒ^[ƒ“
+	//ä¹—ã£å–ã‚Šå¾Œ    ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã˜ã‚ƒãªã‘ã‚Œã°ãƒªã‚¿ãƒ¼ãƒ³
 	if (!(b_mType == Type::PLAYER && !b_mEndFlag))return;
 	b_mVelocity = Vector2(0, 0);
 	if (m_pInput->isKeyState(KEYCORD::ARROW_UP))
@@ -156,7 +185,7 @@ void CirecleMoveEnemy::playerMove(float deltaTime)
 		b_mEndFlag = true;
 	}
 }
-//€–Sˆ—
+//æ­»äº¡å‡¦ç†
 void CirecleMoveEnemy::deathArea()
 {
 	if (b_mPosittion.y > WindowInfo::WindowHeight
@@ -167,12 +196,12 @@ void CirecleMoveEnemy::deathArea()
 		b_mIsDeath = true;
 	}
 }
-//ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğ’²‚×‚é
+//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’èª¿ã¹ã‚‹
 void CirecleMoveEnemy::checkPlayerPos()
 {
-	//ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğ“ü‚ê‚é
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’å…¥ã‚Œã‚‹
 	mPlayerPos = m_pCharaManager->getPlayerPosition();
-	Vector2 playerVec = mPlayerPos - b_mPosittion;  //ƒvƒŒƒCƒ„[‚Æ‚Ì·•ª
+	Vector2 playerVec = mPlayerPos - b_mPosittion;  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®å·®åˆ†
 	b_mVelocity = playerVec.normalize();
 
 }

@@ -17,7 +17,7 @@
 
 class Player :public BaseObject
 {
-	//ˆê”ÔÅ‰‚Ì‘€ìƒLƒƒƒ‰Aƒ{ƒ€g—p‚É‚±‚ê‚É–ß‚é
+	//ä¸€ç•ªæœ€åˆã®æ“ä½œã‚­ãƒ£ãƒ©ã€ãƒœãƒ ä½¿ç”¨æ™‚ã«ã“ã‚Œã«æˆ»ã‚‹
 public:
 	Player(Vector2 pos, CharactorManager *c);
 	~Player();
@@ -27,7 +27,7 @@ public:
 	void CShot(Vector2 pos);
 	void TShot(Vector2 pos,float deltaTime);
 
-	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
+	// BaseObject ã‚’ä»‹ã—ã¦ç¶™æ‰¿ã•ã‚Œã¾ã—ãŸ
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;
@@ -38,8 +38,12 @@ public:
 
 private:
 
-	bool MoveFlag;
+	bool DamgeFlag;
 	Input* input;
 	CharactorManager* charaManager;
+	Timer *mTimer;
 
+	int shotcnt;
+	int r, b;
+	
 };
