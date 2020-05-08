@@ -7,17 +7,16 @@
 #include"../CharaManager/CharactorManager.h"
 #include"../Player/Player.h"
 #include"../Bulletes/Bom.h"
-#include"../Bulletes/BomBallet.h"
+#include"../Bulletes/ChangeBullet.h"
+#include"../Enemies/Array.h"
 
 
-class BomEnemy :public BaseObject
+
+class SoldierEnemy :public BaseObject
 {
 public:
-	BomEnemy(Vector2 pos, CharactorManager *c);
-	~BomEnemy();
-
-	bool SubNull();
-	void SubChange();
+	SoldierEnemy(Vector2 pos, CharactorManager *c);
+	~SoldierEnemy();
 	// BaseObject ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void initialize() override;
 
@@ -27,19 +26,18 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
+	void SetParentPos(Vector2 v);
+
 	void Shot(Vector2 pos);
 
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-
 private:
 
-	bool DamgeFlag;
+	bool MoveFlag;
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	int shotcnt;
-	int r, b;
-
+	ChangeBullet *changeB;
 };

@@ -8,16 +8,18 @@
 #include"../Player/Player.h"
 #include"../Bulletes/Bom.h"
 #include"../Bulletes/ChangeBullet.h"
+#include"../Enemies/Array.h"
+#include"../Enemies/SoldierEnemy.h"
 
+enum MoveType {
+	Move1,
+};
 
-class Enemy :public BaseObject
+class PlatoonEnemy :public BaseObject
 {
 public:
-	Enemy(Vector2 pos, CharactorManager *c);
-	~Enemy();
-
-	bool SubNull();
-	void SubChange();
+	PlatoonEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
+	~PlatoonEnemy();
 	// BaseObject ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void initialize() override;
 
@@ -27,17 +29,30 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-	void Shot(Vector2 pos);
+	void Shot(Vector2 pos, float angle);
 
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
 private:
 
-	bool DamgeFlag;
+	bool MoveFlag;
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	int shotcnt;
-	int r, b;
+	ChangeBullet *changeB;
+
+	Vector2 start, end;
+	Array<Vector2> vec_Array;
+	SoldierEnemy* s1;	SoldierEnemy* s2;	SoldierEnemy* s3;	SoldierEnemy* s4;	SoldierEnemy* s5;
+	int arraySize;
+	int childCount;
+	float angle1, angle2, angle3;
+	int enemyTime;
+	bool childs;
+	float rnd;
+	MoveType mtype;
+
+	Vector2 Traking();
+	int GetRandom(int min, int max);
 };

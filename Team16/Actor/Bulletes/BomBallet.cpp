@@ -20,6 +20,9 @@ void BomBullet::setBulletType()
 	case PLAYER:
 		b_mType = Type::PLAYER_BULLET;
 		break;
+	case SUB_PLAYER:
+		b_mType = Type::PLAYER_BULLET;
+		break;
 	case ENEMY:
 		b_mType = Type::ENEMY_BULLET;
 		break;

@@ -13,7 +13,10 @@ class CirecleMoveEnemy :public BaseObject
 public:
 	CirecleMoveEnemy(Vector2 pos, CharactorManager *c);
 	~CirecleMoveEnemy();
-	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
+
+	bool SubNull();
+	void SubChange();
+	// BaseObject ã‚’ä»‹ã—ã¦ç¶™æ‰¿ã•ã‚Œã¾ã—ãŸ
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;
@@ -27,13 +30,13 @@ public:
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-	//“®‚«
+	//å‹•ã
 	void move(float deltaTime);
-	//ƒvƒŒƒCƒ„[‚Ì‚Ì“®‚«
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ™‚ã®å‹•ã
 	void playerMove(float deltaTime);
-	//€–SƒGƒŠƒA
+	//æ­»äº¡ã‚¨ãƒªã‚¢
 	void deathArea();
-	//ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğ’²‚×‚é
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’èª¿ã¹ã‚‹
 	void checkPlayerPos();
 
 private:
@@ -44,11 +47,10 @@ private:
 	CharactorManager* m_pCharaManager;
 	Vector2 mPlayerPos;
 
-	//‰~‰^“®
+	//å††é‹å‹•
 	float x;
 	float y;
 	float radius;
 	float rotateSpeed;
 	float moveTime;
-
 };

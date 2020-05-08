@@ -10,7 +10,7 @@
 class Bullet :public BaseObject
 {
 public:
-	Bullet(Vector2 pos, CharactorManager* c, Type t);
+	Bullet(Vector2 pos, CharactorManager* c, Type t,float angle);
 	~Bullet();
 	//’e‚Ìƒ^ƒCƒv•ª‚¯
 	void setBulletType();

@@ -10,14 +10,11 @@
 #include"../Bulletes/BomBallet.h"
 
 
-class BomEnemy :public BaseObject
+class Boss :public BaseObject
 {
 public:
-	BomEnemy(Vector2 pos, CharactorManager *c);
-	~BomEnemy();
-
-	bool SubNull();
-	void SubChange();
+	Boss(Vector2 pos, CharactorManager *c);
+	~Boss();
 	// BaseObject ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void initialize() override;
 
@@ -33,10 +30,28 @@ public:
 
 	void Jibaku(Vector2 pos);
 
+
+	virtual bool getIsDeath() const override;
+
+	virtual Type getType() const override;
+
+	virtual Vector2 getPpstion() const override;
+
+
+
+	virtual float getCircleSize() const override;
+
+	virtual void setIsDeath(bool isDeath) override;
+
+
+	bool SubNull();
+	void SubChange();
+
 private:
 
 	bool DamgeFlag;
 	Input* input;
+	Renderer* rend;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;
