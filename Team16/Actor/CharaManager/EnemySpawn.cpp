@@ -3,7 +3,8 @@
 #include "../Enemies/Enemy.h"
 #include"../Enemies/CircleMoveEnemy.h"
 #include"../Enemies/BomEnemy.h"
-
+#include"../Enemies/ThreeWayEnemy.h"
+#include"../Enemies/UFOEnemy.h"
 
 EnemySpawn::EnemySpawn(CharactorManager& charactorManager) :
 	mCharactorManager(&charactorManager),
@@ -38,6 +39,7 @@ void EnemySpawn::spawn()
 		std::uniform_int_distribution<int> spawnNum(1, 9);
 		std::uniform_int_distribution<int> spawnNum2(1, 9);
 		std::uniform_int_distribution<int> spawnNum3(1, 3);
+		std::uniform_int_distribution<int> spawnNum4(1, 3);
 		for (int i = 0; i < spawnNum(mt); i++)
 		{
 			mCharactorManager->add(new Enemy(Vector2((i + 1) * 100, (i + 1)* -100), mCharactorManager));
@@ -52,6 +54,10 @@ void EnemySpawn::spawn()
 		{
 			mCharactorManager->add(new BomEnemy(Vector2((i + 1) * 160, (i + 1) * -400), mCharactorManager));
 		}
-	}
 
+		for (int i = 0; i < spawnNum4(mt); i++)
+		{
+			mCharactorManager->add(new UFOEnemy(Vector2((i + 1) * 190, (i + 1) * -300), mCharactorManager, 260.0f, 270.0f, 280.0f,Vector2(0.0f,500.0f)));
+		}
+	}
 }

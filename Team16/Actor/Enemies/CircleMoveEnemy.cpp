@@ -2,161 +2,43 @@
 #include <random>
 
 
-CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :mTimer(new Timer())
+CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer())
 {
-	charaManager = c;
+	m_pCharaManager = c;
 	b_mPosittion = pos;
 }
 
 CirecleMoveEnemy::~CirecleMoveEnemy()
 {
-	delete input;
-	delete mTimer;
+	delete m_pInput;
+	delete m_pTimer;
 }
-
-bool CirecleMoveEnemy::SubNull()
-{
-	for (auto object : charaManager->getUseList())
-	{
-		if (object->getType() == Type::SUB_PLAYER)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void CirecleMoveEnemy::SubChange()
-{
-	switch (b_mType)
-	{
-	case PLAYER:
-		b_mType = Type::SUB_PLAYER;
-		break;
-	case SUB_PLAYER:
-		b_mType = Type::PLAYER;
-		b_mPosittion = charaManager->searchPlayer() + Vector2(-30, -30);
-		break;
-	default:
-		break;
-	}
-}
-
+//初期化
 void CirecleMoveEnemy::initialize()
 {
-	b_mHp = 3;
-
-	input = new Input;
-	input->init();
+	checkPlayerPos();
+	b_mHp = 100;
+	mMoveFlag = FALSE;
+	m_pInput = new Input;
+	m_pInput->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
-	mTimer->initialize();
-	b_mSpeed = 30.0f;
-	shotcnt = 0;
-	r = 0;
-	b = 255;
+	m_pTimer->initialize();
+	rotateSpeed = 0.5;//1周にかかる時間
+	radius = 2;   //半径10
 }
-
+//更新
 void CirecleMoveEnemy::update(float deltaTime)
 {
+	m_pInput->update();
+	m_pTimer->update(deltaTime);
+	
+	deathArea();
+	move(deltaTime);
+	playerMove(deltaTime);
 
-	input->update();
-	mTimer->update(deltaTime);
-	b_mVelocity = Vector2(0, 0);
-
-	//���G����
-	if (DamgeFlag&&mTimer->timerSet(2))
-	{
-		DamgeFlag = FALSE;
-	}
-
-
-	/*if (input->isKeyDown(KEYCORD::V))
-	{
-		SubChange();
-	}
-*/
-	if (b_mType == Type::SUB_PLAYER)
-	{
-		b_mPosittion = charaManager->searchPlayer();
-		if (input->isKeyDown(KEYCORD::SPACE))
-		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-		if (input->isKeyDown(KEYCORD::C))
-		{
-			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-	}
-
-	if (b_mType == Type::ENEMY)
-	{
-		b_mVelocity.y += 2;
-		if (mTimer->timerSet(2))
-		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-		if (b_mPosittion.y > WindowInfo::WindowHeight
-			|| b_mPosittion.x>WindowInfo::WindowWidth
-			|| b_mPosittion.x < 0
-			|| b_mHp <= 0)
-		{
-			b_mIsDeath = true;
-		}
-		b_mPosittion += b_mVelocity;
-
-	}
-
-
-
-
-	//�������
-	if (b_mType == Type::PLAYER && !b_mEndFlag)
-	{
-
-		if (input->isKeyState(KEYCORD::ARROW_UP))
-		{
-			b_mVelocity.y -= 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_DOWN))
-		{
-			b_mVelocity.y += 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_RIGHT))
-		{
-			b_mVelocity.x += 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_LEFT))
-		{
-			b_mVelocity.x -= 6;
-		}
-		if (input->isKeyDown(KEYCORD::SPACE))
-		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-		if (input->isKeyState(KEYCORD::V) )
-		{
-			shotcnt++;
-			if (shotcnt > 100)
-			{
-				shotcnt = 100;
-			}
-		}
-
-		if (shotcnt == 100 && input->isKeyUp(KEYCORD::V))
-		{
-			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-
-		if (b_mHp <= 0)
-		{
-			b_mEndFlag = true;
-		}
-
-
-		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
-	}
+	b_mPosittion += b_mVelocity;
 }
 
 void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -229,62 +111,97 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 
 	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
 	{
-		//�ŏ��͍T����
+		//最初は控えに
 		b_mType = Type::SUB_PLAYER;
 	}
 }
 
 void CirecleMoveEnemy::Shot(Vector2 pos)
 {
-
-	if (b_mType == Type::PLAYER||b_mType == Type::SUB_PLAYER)
-	{
-		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 20, b_mPosittion.y), charaManager, b_mType, -30.0f));
-		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 20, b_mPosittion.y), charaManager, b_mType, 30.0f));
-	}
-	else
-	{
-		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 20, b_mPosittion.y), charaManager, b_mType, 30.0f));
-		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 20, b_mPosittion.y), charaManager, b_mType, -30.0f));
-	}
+	m_pCharaManager->add(new Bullet(Vector2(b_mPosittion.x , b_mPosittion.y), m_pCharaManager, b_mType));
 }
 
 
 void CirecleMoveEnemy::CShot(Vector2 pos)
 {
-	charaManager->add(new ChangeBullet(pos, charaManager));
-	shotcnt = 0;
-	r = 0;
-	b = 255;
+	m_pCharaManager->add(new ChangeBullet(pos, m_pCharaManager));
 }
 
 void CirecleMoveEnemy::Jibaku(Vector2 pos)
 {
-	charaManager->add(new Bom(pos, charaManager));
+	m_pCharaManager->add(new Bom(pos, m_pCharaManager));
 	b_mIsDeath = true;
+	m_pCharaManager->add(new Player(pos, m_pCharaManager));
 }
 
-bool CirecleMoveEnemy::getIsDeath() const
+void CirecleMoveEnemy::move(float deltaTime)
 {
-	return b_mIsDeath;
+	//敵以外ならリターン
+	if (!b_mType == Type::ENEMY)return;
+	moveTime += deltaTime * 4;
+	x = 2 * radius* cos(moveTime* rotateSpeed);
+	y = radius * sin(moveTime* rotateSpeed);
+	b_mPosittion +=  Vector2(x,y);
+	//b_mVelocity.y += 2;
+	//画面外なら死ぬ
+	deathArea();
 }
-
-Type CirecleMoveEnemy::getType() const
+//自分がプレイヤーの時の動き
+void CirecleMoveEnemy::playerMove(float deltaTime)
 {
-	return b_mType;
+	//乗っ取り後    プレイヤーじゃなければリターン
+	if (!(b_mType == Type::PLAYER && !b_mEndFlag))return;
+	b_mVelocity = Vector2(0, 0);
+	if (m_pInput->isKeyState(KEYCORD::ARROW_UP))
+	{
+		b_mVelocity.y -= 3;
+	}
+	if (m_pInput->isKeyState(KEYCORD::ARROW_DOWN))
+	{
+		b_mVelocity.y += 3;
+	}
+	if (m_pInput->isKeyState(KEYCORD::ARROW_RIGHT))
+	{
+		b_mVelocity.x += 3;
+	}
+	if (m_pInput->isKeyState(KEYCORD::ARROW_LEFT))
+	{
+		b_mVelocity.x -= 3;
+	}
+	if (m_pInput->isKeyDown(KEYCORD::SPACE))
+	{
+		Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+	}
+	if (m_pInput->isKeyDown(KEYCORD::X))
+	{
+		CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+	}
+	if (m_pInput->isKeyDown(KEYCORD::C))
+	{
+		Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
+	}
+	if (b_mHp <= 0)
+	{
+		b_mEndFlag = true;
+	}
 }
-
-Vector2 CirecleMoveEnemy::getPpstion() const
+//死亡処理
+void CirecleMoveEnemy::deathArea()
 {
-	return b_mPosittion;
+	if (b_mPosittion.y > WindowInfo::WindowHeight
+		|| b_mPosittion.x > WindowInfo::WindowWidth
+		|| b_mPosittion.x < 0
+		|| b_mHp <= 0)
+	{
+		b_mIsDeath = true;
+	}
 }
-
-float CirecleMoveEnemy::getCircleSize() const
+//プレイヤーの位置を調べる
+void CirecleMoveEnemy::checkPlayerPos()
 {
-	return b_mCircleSize;
-}
+	//プレイヤーの位置を入れる
+	mPlayerPos = m_pCharaManager->getPlayerPosition();
+	Vector2 playerVec = mPlayerPos - b_mPosittion;  //プレイヤーとの差分
+	b_mVelocity = playerVec.normalize();
 
-void CirecleMoveEnemy::setIsDeath(bool isDeath) 
-{
-	b_mIsDeath = isDeath;
 }

@@ -7,17 +7,13 @@
 #include"../CharaManager/CharactorManager.h"
 #include"../Player/Player.h"
 #include"../Bulletes/Bom.h"
-#include"../Bulletes/BomBallet.h"
+#include"../Bulletes/ChangeBullet.h"
 
-
-class BomEnemy :public BaseObject
+class UFOEnemy :public BaseObject
 {
 public:
-	BomEnemy(Vector2 pos, CharactorManager *c);
-	~BomEnemy();
-
-	bool SubNull();
-	void SubChange();
+	UFOEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
+	~UFOEnemy();
 	// BaseObject ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void initialize() override;
 
@@ -27,19 +23,24 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-	void Shot(Vector2 pos);
+	void Shot(Vector2 pos, float angle);
+	void PlayerShot(Vector2 pos, float angle);
 
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-
 private:
 
-	bool DamgeFlag;
+	bool MoveFlag;
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	int shotcnt;
-	int r, b;
+	ChangeBullet *changeB;
 
+	float angle1, angle2, angle3;
+	Vector2 start, end;
+	float time;
+	bool down;
+
+	Vector2 Traking();
 };

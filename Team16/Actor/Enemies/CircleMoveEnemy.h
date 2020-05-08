@@ -16,7 +16,7 @@ public:
 
 	bool SubNull();
 	void SubChange();
-	// BaseObject ����Čp������܂���
+	// BaseObject を介して継承されました
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;
@@ -30,27 +30,27 @@ public:
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-
-	virtual bool getIsDeath() const override;
-
-	virtual Type getType() const override;
-
-	virtual Vector2 getPpstion() const override;
-
-	virtual float getCircleSize() const override;
-
-	virtual void setIsDeath(bool isDeath) override;
-
-
-
-
+	//動き
+	void move(float deltaTime);
+	//プレイヤーの時の動き
+	void playerMove(float deltaTime);
+	//死亡エリア
+	void deathArea();
+	//プレイヤーの位置を調べる
+	void checkPlayerPos();
 
 private:
 
-	bool DamgeFlag;
-	Input* input;
-	Timer *mTimer;
-	CharactorManager* charaManager;
-	int shotcnt;
-	int r, b;
+	bool mMoveFlag;
+	Input* m_pInput;
+	Timer *m_pTimer;
+	CharactorManager* m_pCharaManager;
+	Vector2 mPlayerPos;
+
+	//円運動
+	float x;
+	float y;
+	float radius;
+	float rotateSpeed;
+	float moveTime;
 };

@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+
 // ラインを描く範囲
 #define LINE_AREA_SIZE			10000.0f
 
@@ -12,29 +13,41 @@ Camera::Camera(CharactorManager& chractorManager) :
 	mPosition(0, 0, lookAtDistance),
 	mLookAtPosition(0, 0, 0),
 	m_pCharactorManager(&chractorManager),
-	lookAtDistance(700)
+	lookAtDistance(1000)
 {
 }
 
 //デスストクタ
 Camera::~Camera()
 {
+	delete input;
 }
 //初期化
 void Camera::initialize()
 {
 	mPosition = Vector3(0,0,lookAtDistance);
 	mLookAtPosition = Vector3(0, 0, 0);
+	input = new Input();
+	input->init();
 }
 //更新
 void Camera::update()
 {
+	input->update();
 	searchPlayer();
 	cameraUpdate();
 }
 void Camera::cameraUpdate()
 {
 	mLookAtPosition.y = mPosition.y;   //Y軸しか動かない
+	if (input->isKeyState(KEYCORD::ARROW_DOWN))
+	{
+		mPosition.z--;
+	}
+	if (input->isKeyState(KEYCORD::ARROW_UP))
+	{
+		mPosition.z++;
+	}
 
 	// カメラの設定に反映する
 	SetCameraPositionAndTarget_UpVecY(VGet(mPosition.x, mPosition.y, mPosition.z), VGet(mLookAtPosition.x, mLookAtPosition.y, mLookAtPosition.z));

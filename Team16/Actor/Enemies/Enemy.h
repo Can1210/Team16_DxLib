@@ -32,16 +32,6 @@ public:
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-
-	virtual bool getIsDeath() const override;
-
-	virtual Type getType() const override;
-
-	virtual Vector2 getPpstion() const override;
-
-	virtual float getCircleSize() const override;
-
-	virtual void setIsDeath(bool isDeath) override;
 private:
 
 	bool DamgeFlag;

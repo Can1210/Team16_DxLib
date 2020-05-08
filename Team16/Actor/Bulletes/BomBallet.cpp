@@ -85,28 +85,3 @@ void BomBullet::hit(BaseObject & other)
 
 }
 
-bool BomBullet::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type BomBullet::getType() const
-{
-	return b_mType;
-}
-
-Vector2 BomBullet::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float BomBullet::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void BomBullet::setIsDeath(bool isDeath)
-{
-	b_mIsDeath = isDeath;
-}
-

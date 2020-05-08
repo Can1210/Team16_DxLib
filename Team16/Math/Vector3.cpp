@@ -46,6 +46,15 @@ Vector3 Vector3::cross(const Vector3 & v) const
 	return Vector3((y * v.z - v.y* z), (-1)*(x*v.z - v.x * z), (x*v.y - v.x *y));
 }
 
+Vector3 Vector3::lerp(const Vector3 & end, const float time)
+{
+	x += (end.x - x)* time;
+	y += (end.y - y)* time;
+	z += (end.z - z)* time;
+
+	return *this;
+}
+
 Vector3 Vector3::operator+() const
 {
 	return *this;

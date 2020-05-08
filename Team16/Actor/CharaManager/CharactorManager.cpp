@@ -24,7 +24,6 @@ CharactorManager::~CharactorManager()
 			delete object;
 	}
 	mObjectsList.clear();
-
 }
 //プレイヤーの位置を獲得
 Vector2 CharactorManager::searchPlayer()
@@ -39,8 +38,6 @@ Vector2 CharactorManager::searchPlayer()
 	}
 	return Vector2(0, 0);
 }
-
-
 
 //リストのクリア
 void CharactorManager::clear()
@@ -127,8 +124,19 @@ void CharactorManager::draw(Renderer * renderer, Renderer3D* renderer3D)
 			continue;
 	}
 }
-
+//現在使われているオブジェクトのリスト取得
 std::vector<BaseObject*> CharactorManager::getUseList()
 {
 	return mObjectsList;
+}
+//プレイヤーの位置を取得する
+Vector2 CharactorManager::getPlayerPosition() const
+{
+	for (auto object : mObjectsList)
+	{
+		if (!object->getType() == Type::PLAYER) continue;    //プレイヤーでなければスキップ
+		return object->getPpstion();
+	}
+	//プレイヤーがいなければ0を返す
+	return Vector2(0,0);
 }

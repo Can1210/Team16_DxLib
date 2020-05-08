@@ -20,6 +20,7 @@ public:
 	Vector3& normalize();                //正規化する
 	float dot(const Vector3& v) const;   //内積
 	Vector3 cross(const Vector3& v) const; //外積
+	Vector3 lerp(const Vector3& end, const float time);
 
 	//単項演算子オーバーロード
 	Vector3 operator + ()const;

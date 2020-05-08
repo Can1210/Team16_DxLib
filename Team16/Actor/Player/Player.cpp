@@ -37,13 +37,13 @@ void Player::update(float deltaTime)
 	input->update();
 	mTimer->update(deltaTime);
 
-	//–³“GŽžŠÔ
+	//ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½ï¿½
 	if (DamgeFlag&&mTimer->timerSet(2))
 	{
 		DamgeFlag = FALSE;
 	}
 
-	////ƒTƒuˆ—
+	////ï¿½Tï¿½uï¿½ï¿½ï¿½ï¿½
 	if (SubNull())
 	{
 		b_mSpeed = 25.0f;
@@ -136,7 +136,6 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 		renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
 	}
 
-
 	if (b_mEndFlag)
 	{
 		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
@@ -158,7 +157,15 @@ void Player::CShot(Vector2 pos)
 	b = 255;
 }
 
-bool Player::SubNull()
+void Player::TShot(Vector2 pos,float deltaTime)
+{
+	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 70.0f));
+	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90.0f));
+	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 110.0f));
+}
+
+
+void Player::hit(BaseObject & other)
 {
 	for (auto object : charaManager->getUseList())
 	{
@@ -207,29 +214,7 @@ void Player::hit(BaseObject & other)
 			DamgeFlag = TRUE;
 		}
 	}
+
+
 }
 
-bool Player::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type Player::getType() const
-{
-	return b_mType;
-}
-
-Vector2 Player::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float Player::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void Player::setIsDeath(bool isDeath)
-{
-	b_mIsDeath = isDeath;
-}

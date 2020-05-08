@@ -48,30 +48,6 @@ void ChangeBullet::hit(BaseObject & other)
 }
 
 
-bool ChangeBullet::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type ChangeBullet::getType() const
-{
-	return CHANGE_BULLET;
-}
-
-Vector2 ChangeBullet::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float ChangeBullet::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void ChangeBullet::setIsDeath(bool isDeath) 
-{
-}
-
 void ChangeBullet::After()
 {
 	

@@ -25,15 +25,6 @@ public:
 	//“–‚½‚è‚½‚Ìˆ—
 	virtual void hit(BaseObject& other) override;
 
-	virtual bool getIsDeath() const override;
-
-	virtual Type getType() const override;
-
-	virtual Vector2 getPpstion() const override;
-
-	virtual float getCircleSize() const override;
-
-	virtual void setIsDeath(bool isDeath) override;
 private:
 
 	float angle;

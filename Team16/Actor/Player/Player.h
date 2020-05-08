@@ -7,6 +7,9 @@
 #include"../CharaManager/CharactorManager.h"
 #include<list>
 #include"../Bulletes/Bullet.h"
+#include"../Bulletes/TrakingBullet.h"
+#include"../Bulletes/CurveBullet.h"
+#include"../Bulletes/AngleBullet.h"
 #include"../../Actor/Enemies/Enemy.h"
 #include"../Bulletes/ChangeBullet.h"
 #include "../../Support/CWindow.h"
@@ -14,7 +17,7 @@
 
 class Player :public BaseObject
 {
-	//ˆê”ÔÅ‰‚Ì‘€ìƒLƒƒƒ‰Aƒ{ƒ€g—p‚É‚±‚ê‚É–ß‚é
+	//ä¸€ç•ªæœ€åˆã®æ“ä½œã‚­ãƒ£ãƒ©ã€ãƒœãƒ ä½¿ç”¨æ™‚ã«ã“ã‚Œã«æˆ»ã‚‹
 public:
 	Player(Vector2 pos, CharactorManager *c);
 	~Player();
@@ -22,12 +25,9 @@ public:
 
 	void Shot(Vector2 pos);
 	void CShot(Vector2 pos);
-	//ƒTƒuˆ—
-	bool SubNull();//ƒTƒu‚ª‚¢‚é‚©H
-	void SubChange();//T‚¦‚ÆŒğ‘ã
+	void TShot(Vector2 pos,float deltaTime);
 
-
-	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
+	// BaseObject ã‚’ä»‹ã—ã¦ç¶™æ‰¿ã•ã‚Œã¾ã—ãŸ
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;
@@ -36,15 +36,6 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-	virtual bool getIsDeath() const override;
-
-	virtual Type getType() const override;
-
-	virtual Vector2 getPpstion() const override;
-
-	virtual float getCircleSize() const override;
-
-	virtual void setIsDeath(bool isDeath) override;
 private:
 
 	bool DamgeFlag;

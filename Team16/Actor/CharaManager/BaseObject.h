@@ -5,7 +5,7 @@
 #include "../../Device/Renderer3D.h"
 #include "../../Math/Vector2.h"
 #include "../../Utility/Timer.h"
-//•¨‘Ì‚Ìƒ^ƒCƒv
+//ç‰©ä½“ã®ã‚¿ã‚¤ãƒ—
 enum Type
 {
 	PLAYER,
@@ -16,7 +16,7 @@ enum Type
 	SUB_PLAYER,
 };
 
-//•`‰æ‚·‚éƒIƒuƒWƒFƒNƒg‚ÌŠî’êƒNƒ‰ƒX
+//æç”»ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åŸºåº•ã‚¯ãƒ©ã‚¹
 class BaseObject
 {
 
@@ -25,49 +25,43 @@ public:
 	BaseObject();
 	virtual ~BaseObject();
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	virtual void initialize() = 0;
-	//XV
+	//æ›´æ–°
 	virtual void update(float deltaTime) = 0;
-	//•`‰æ
+	//æç”»
 	virtual void draw(Renderer* renderer, Renderer3D* renderer3D) = 0;
-	//“–‚½‚è‚½‚Ìˆ—
+	//å½“ãŸã‚ŠãŸæ™‚ã®å‡¦ç†
 	virtual void hit(BaseObject& other) = 0;
-#pragma region Set
-	virtual void setIsDeath(bool isDeath) = 0;
+
+#pragma region Get/Set
+
+	//æ­»äº¡ã—ã¦ã„ã‚‹ã‹
+	virtual bool getIsDeath()const;
+	virtual void setIsDeath(bool isDeath);
+	//è‡ªåˆ†ã®ç¨®é¡
+	virtual Type getType()const;
+	//è‡ªåˆ†ã®ä½ç½®
+	virtual Vector2 getPpstion()const;
+	//è‡ªåˆ†ã®åŠå¾„
+	virtual float getCircleSize()const;
 #pragma endregion
 
-
-
-#pragma region Get
-	//€–S‚µ‚Ä‚¢‚é‚©
-	virtual bool getIsDeath()const = 0;
-	//©•ª‚Ìí—Ş
-	virtual Type getType()const = 0;
-	//©•ª‚ÌˆÊ’u
-	virtual Vector2 getPpstion()const = 0;
-	//©•ª‚Ì”¼Œa
-	virtual float getCircleSize()const = 0;
-	
-
-
-#pragma endregion
-
-	//‰~“¯m‚Ì“–‚½‚è”»’è
+	//å††åŒå£«ã®å½“ãŸã‚Šåˆ¤å®š
 	bool circle_circle_Collision(BaseObject& other);
 
 protected:
-	int b_mHp;                //‘Ì—Í
-	float b_mSpeed;           //‘¬‚³
-	float b_mCircleSize;      //‰~‚Ì”»’è‚Ì”¼Œa
-	Vector2 b_mPosittion;     //ˆÊ’u
-	Vector2 b_mVelocity;      //ˆÚ“®•ûŒü
-	Vector2 b_mSize;          //‰æ‘œƒTƒCƒY
-	bool b_mIsDeath;          //€‚ñ‚¾‚©‚Ç‚¤‚©
-	Type b_mType;             //©•ª‚Ìƒ^ƒCƒv
-	float b_mAngle;//Šp“x
-	float b_mArpha; //‰æ‘œ‚ÌƒAƒ‹ƒtƒ@’l
-	bool b_mEndFlag;//ƒQ[ƒ€ƒI[ƒo[
+	int b_mHp;                //ä½“åŠ›
+	float b_mSpeed;           //é€Ÿã•
+	float b_mCircleSize;      //å††ã®åˆ¤å®šã®åŠå¾„
+	Vector2 b_mPosittion;     //ä½ç½®
+	Vector2 b_mVelocity;      //ç§»å‹•æ–¹å‘
+	Vector2 b_mSize;          //ç”»åƒã‚µã‚¤ã‚º
+	bool b_mIsDeath;          //æ­»ã‚“ã ã‹ã©ã†ã‹
+	Type b_mType;             //è‡ªåˆ†ã®ã‚¿ã‚¤ãƒ—
+	float b_mAngle;//è§’åº¦
+	float b_mArpha; //ç”»åƒã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤
+	bool b_mEndFlag;//ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
 
 	
 };

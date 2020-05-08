@@ -244,28 +244,3 @@ void BomEnemy::Jibaku(Vector2 pos)
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }
-
-bool BomEnemy::getIsDeath() const
-{
-	return b_mIsDeath;
-}
-
-Type BomEnemy::getType() const
-{
-	return b_mType;
-}
-
-Vector2 BomEnemy::getPpstion() const
-{
-	return b_mPosittion;
-}
-
-float BomEnemy::getCircleSize() const
-{
-	return b_mCircleSize;
-}
-
-void BomEnemy::setIsDeath(bool isDeath) 
-{
-	b_mIsDeath = isDeath;
-}
