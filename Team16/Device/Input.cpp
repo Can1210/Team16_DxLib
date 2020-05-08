@@ -100,6 +100,12 @@ void Input::update()
 
 void Input::init()
 {
+	//‰Šú‰»‚µ‚Ä‚İ‚é
+	for (int i = 0; i < 256; i++)
+	{
+		mCurrentKey[i] = 0;
+		mPreviousKey[i] = 0; 
+	}
 	//‰Šúİ’è
 	for (int i = 0; i < 4; i++)
 	{
