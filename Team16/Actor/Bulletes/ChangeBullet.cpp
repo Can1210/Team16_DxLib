@@ -15,13 +15,14 @@ ChangeBullet::~ChangeBullet()
 
 void ChangeBullet::initialize()
 {
-	b_mCircleSize = 16;
+	b_mCircleSize = 12;
+	b_mSpeed = 7;
 }
 
 void ChangeBullet::update(float deltaTime)
 {
 	b_mVelocity.y -= 2;
-	b_mPosittion += b_mVelocity;
+	b_mPosittion += b_mVelocity*deltaTime*b_mSpeed;
 
 	if (b_mPosittion.y > WindowInfo::WindowHeight
 		|| b_mPosittion.y<0
@@ -47,6 +48,11 @@ void ChangeBullet::hit(BaseObject & other)
 	
 }
 
+Type ChangeBullet::getType() const
+{
+	return CHANGE_BULLET;
+}
+
 
 void ChangeBullet::After()
 {
@@ -54,13 +60,25 @@ void ChangeBullet::After()
 	for (auto object : charaManager->getUseList())
 	{
 	
-		if (object->getType() == Type::SUB_PLAYER)
+		if (object->getType() == Type::PLAYER&&SubNull())
 		{
-			object->setIsDeath(true);
+		   object->setIsDeath(true);
 		}
 		
 	}
 	
+}
+//ƒTƒu‚ª‚¢‚é‚©H
+bool ChangeBullet::SubNull()
+{
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::SUB_PLAYER)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 

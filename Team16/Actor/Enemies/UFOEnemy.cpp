@@ -20,9 +20,27 @@ UFOEnemy::~UFOEnemy()
 	delete mTimer;
 }
 
+bool UFOEnemy::SubNull()
+{
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::PLAYER)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void UFOEnemy::SubChange()
+{
+	b_mPosittion = KakoPos;
+	b_mType = Type::PLAYER;
+}
+
 void UFOEnemy::initialize()
 {
-	b_mHp = 100;
+	b_mHp = 3;
 	MoveFlag = FALSE;
 	input = new Input;
 	input->init();
@@ -40,6 +58,24 @@ void UFOEnemy::update(float deltaTime)
 
 	input->update();
 	b_mVelocity = Vector2(0, 0);
+
+	if (b_mType == Type::SUB_PLAYER)
+	{
+		b_mPosittion = charaManager->searchPlayer();
+		if (input->isKeyDown(KEYCORD::SPACE))
+		{
+			Shot(Vector2(b_mPosittion.x, b_mPosittion.y),0.0f);
+		}
+		if (input->isKeyDown(KEYCORD::C))
+		{
+			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (!SubNull())
+		{
+			SubChange();
+		}
+		KakoPos = b_mPosittion;
+	}
 
 	if (b_mType == Type::ENEMY)
 	{
@@ -132,12 +168,12 @@ void UFOEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET&&b_mType == Type::ENEMY)
 	{
-		b_mHp -= 50;
+		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
 	if (other.getType() == Type::ENEMY_BULLET&&b_mType == Type::PLAYER)
 	{
-		b_mHp -= 20;
+		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
 	if (other.getType() == Type::ENEMY&&b_mType == Type::PLAYER)
@@ -147,7 +183,7 @@ void UFOEnemy::hit(BaseObject & other)
 	}
 	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
 	{
-		b_mType = Type::PLAYER;
+		b_mType = Type::SUB_PLAYER;
 	}
 }
 
@@ -175,7 +211,11 @@ void UFOEnemy::Jibaku(Vector2 pos)
 {
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
-	charaManager->add(new Player(pos, charaManager));
+}
+
+Vector2 UFOEnemy::getPpstion() const
+{
+	return b_mPosittion;
 }
 
 Vector2 UFOEnemy::Traking()

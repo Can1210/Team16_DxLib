@@ -24,6 +24,9 @@ void AngleBullet::setBulletType()
 	case PLAYER:
 		b_mType = Type::PLAYER_BULLET;
 		break;
+	case SUB_PLAYER:
+		b_mType = Type::PLAYER_BULLET;
+		break;
 	case ENEMY:
 		b_mType = Type::ENEMY_BULLET;
 		break;
@@ -68,6 +71,10 @@ void AngleBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 	{
 		b_mAngle = 180.0f;
 	}
+	else
+	{
+		b_mAngle = 0.0f;
+	}
 }
 
 void AngleBullet::hit(BaseObject & other)
@@ -88,7 +95,7 @@ void AngleBullet::hit(BaseObject & other)
 
 	}
 
-	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	//DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 Vector2 AngleBullet::RotationZ(float ang)

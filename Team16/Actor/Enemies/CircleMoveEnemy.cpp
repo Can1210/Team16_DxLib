@@ -4,7 +4,7 @@
 
 CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer())
 {
-	m_pCharaManager = c;
+	charaManager = c;
 	b_mPosittion = pos;
 }
 
@@ -13,11 +13,28 @@ CirecleMoveEnemy::~CirecleMoveEnemy()
 	delete m_pInput;
 	delete m_pTimer;
 }
+bool CirecleMoveEnemy::SubNull()
+{
+
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::PLAYER)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+void CirecleMoveEnemy::SubChange()
+{
+	b_mPosittion = KakoPos;
+	b_mType = Type::PLAYER;
+}
 //初期化
 void CirecleMoveEnemy::initialize()
 {
 	checkPlayerPos();
-	b_mHp = 100;
+	b_mHp = 3;
 	mMoveFlag = FALSE;
 	m_pInput = new Input;
 	m_pInput->init();
@@ -27,6 +44,7 @@ void CirecleMoveEnemy::initialize()
 	m_pTimer->initialize();
 	rotateSpeed = 0.5;//1周にかかる時間
 	radius = 2;   //半径10
+	b_mSpeed = 30.0f;
 }
 //更新
 void CirecleMoveEnemy::update(float deltaTime)
@@ -34,9 +52,14 @@ void CirecleMoveEnemy::update(float deltaTime)
 	m_pInput->update();
 	m_pTimer->update(deltaTime);
 	
-	deathArea();
 	move(deltaTime);
-	playerMove(deltaTime);
+
+	if (b_mType != Type::ENEMY)
+	{
+		playerMove(deltaTime);
+	}
+	
+	
 
 	b_mPosittion += b_mVelocity;
 }
@@ -95,19 +118,16 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 	{
 		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
-		mTimer->initialize();
+		m_pTimer->initialize();
 		DamgeFlag = TRUE;
 	}
 	if (other.getType() == Type::ENEMY&&b_mType == Type::PLAYER)
 	{
 		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
-		mTimer->initialize();
+		m_pTimer->initialize();
 		DamgeFlag = TRUE;
 	}
-
-
-
 
 	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
 	{
@@ -118,20 +138,33 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 
 void CirecleMoveEnemy::Shot(Vector2 pos)
 {
-	m_pCharaManager->add(new Bullet(Vector2(b_mPosittion.x , b_mPosittion.y), m_pCharaManager, b_mType));
+	charaManager->add(new Bullet(Vector2(b_mPosittion.x , b_mPosittion.y), charaManager, b_mType, -30.0f));
+}
+
+void CirecleMoveEnemy::SubShot(Vector2 pos)
+{
+	if (b_mType == Type::SUB_PLAYER||b_mType == Type::PLAYER)
+	{
+		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 20, b_mPosittion.y), charaManager, b_mType, -30.0f));
+		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 20, b_mPosittion.y), charaManager, b_mType, 30.0f));
+	}
+	else
+	{
+		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 20, b_mPosittion.y), charaManager, b_mType, 30.0f));
+		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 20, b_mPosittion.y), charaManager, b_mType, -30.0f));
+	}
 }
 
 
 void CirecleMoveEnemy::CShot(Vector2 pos)
 {
-	m_pCharaManager->add(new ChangeBullet(pos, m_pCharaManager));
+	charaManager->add(new ChangeBullet(pos, charaManager));
 }
 
 void CirecleMoveEnemy::Jibaku(Vector2 pos)
 {
-	m_pCharaManager->add(new Bom(pos, m_pCharaManager));
+	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
-	m_pCharaManager->add(new Player(pos, m_pCharaManager));
 }
 
 void CirecleMoveEnemy::move(float deltaTime)
@@ -142,48 +175,90 @@ void CirecleMoveEnemy::move(float deltaTime)
 	x = 2 * radius* cos(moveTime* rotateSpeed);
 	y = radius * sin(moveTime* rotateSpeed);
 	b_mPosittion +=  Vector2(x,y);
-	//b_mVelocity.y += 2;
+	
 	//画面外なら死ぬ
 	deathArea();
 }
 //自分がプレイヤーの時の動き
 void CirecleMoveEnemy::playerMove(float deltaTime)
 {
-	//乗っ取り後    プレイヤーじゃなければリターン
-	if (!(b_mType == Type::PLAYER && !b_mEndFlag))return;
 	b_mVelocity = Vector2(0, 0);
-	if (m_pInput->isKeyState(KEYCORD::ARROW_UP))
+	
+	if (b_mType == Type::SUB_PLAYER && !b_mEndFlag)
 	{
-		b_mVelocity.y -= 3;
+		b_mPosittion = charaManager->searchPlayer();
+		if (m_pInput->isKeyState(KEYCORD::SPACE))
+		{
+			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (m_pInput->isKeyDown(KEYCORD::X))
+		{
+			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+
+		if (b_mHp <= 0)
+		{
+			b_mEndFlag = true;
+		}
+		if (!SubNull())
+		{
+			SubChange();
+		}
+		KakoPos = b_mPosittion;
 	}
-	if (m_pInput->isKeyState(KEYCORD::ARROW_DOWN))
+	
+
+	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
-		b_mVelocity.y += 3;
+
+		if (m_pInput->isKeyState(KEYCORD::ARROW_UP))
+		{
+			b_mVelocity.y -= 6;
+		}
+		if (m_pInput->isKeyState(KEYCORD::ARROW_DOWN))
+		{
+			b_mVelocity.y += 6;
+		}
+		if (m_pInput->isKeyState(KEYCORD::ARROW_RIGHT))
+		{
+			b_mVelocity.x += 6;
+		}
+		if (m_pInput->isKeyState(KEYCORD::ARROW_LEFT))
+		{
+			b_mVelocity.x -= 6;
+		}
+		if (m_pInput->isKeyDown(KEYCORD::SPACE))
+		{
+			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (m_pInput->isKeyState(KEYCORD::SPACE))
+		{
+			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+
+		if (m_pInput->isKeyState(KEYCORD::V))
+		{
+			shotcnt++;
+			if (shotcnt > 100)
+			{
+				shotcnt = 100;
+			}
+		}
+
+		if (shotcnt == 100 && m_pInput->isKeyUp(KEYCORD::V))
+		{
+			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (b_mHp <= 0)
+		{
+			b_mEndFlag = true;
+		}
+
+		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 	}
-	if (m_pInput->isKeyState(KEYCORD::ARROW_RIGHT))
-	{
-		b_mVelocity.x += 3;
-	}
-	if (m_pInput->isKeyState(KEYCORD::ARROW_LEFT))
-	{
-		b_mVelocity.x -= 3;
-	}
-	if (m_pInput->isKeyDown(KEYCORD::SPACE))
-	{
-		Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-	}
-	if (m_pInput->isKeyDown(KEYCORD::X))
-	{
-		CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
-	}
-	if (m_pInput->isKeyDown(KEYCORD::C))
-	{
-		Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
-	}
-	if (b_mHp <= 0)
-	{
-		b_mEndFlag = true;
-	}
+
+	
+
 }
 //死亡処理
 void CirecleMoveEnemy::deathArea()
@@ -200,7 +275,7 @@ void CirecleMoveEnemy::deathArea()
 void CirecleMoveEnemy::checkPlayerPos()
 {
 	//プレイヤーの位置を入れる
-	mPlayerPos = m_pCharaManager->getPlayerPosition();
+	mPlayerPos = charaManager->getPlayerPosition();
 	Vector2 playerVec = mPlayerPos - b_mPosittion;  //プレイヤーとの差分
 	b_mVelocity = playerVec.normalize();
 

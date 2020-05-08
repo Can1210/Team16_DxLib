@@ -48,7 +48,7 @@ public:
 	void SubChange();
 
 private:
-
+	Vector2 KakoPos;//ˆÊ’u‚Ì•Û‘¶—p
 	bool DamgeFlag;
 	Input* input;
 	Renderer* rend;

@@ -21,7 +21,8 @@ class Player :public BaseObject
 public:
 	Player(Vector2 pos, CharactorManager *c);
 	~Player();
-
+	bool SubNull();
+	
 
 	void Shot(Vector2 pos);
 	void CShot(Vector2 pos);
@@ -35,6 +36,8 @@ public:
 	virtual void draw(Renderer * renderer, Renderer3D* renderer3D) override;
 
 	virtual void hit(BaseObject & other) override;
+
+	
 
 private:
 

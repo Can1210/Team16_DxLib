@@ -36,3 +36,8 @@ void Bom::hit(BaseObject & other)
 {
 
 }
+
+Type Bom::getType() const
+{
+	return PLAYER_BULLET;
+}

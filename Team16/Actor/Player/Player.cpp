@@ -6,13 +6,23 @@ Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
-	
-	
 }
 
 Player::~Player()
 {
 	delete input;
+}
+
+bool Player::SubNull()
+{
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::SUB_PLAYER)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Player::initialize()
@@ -37,26 +47,21 @@ void Player::update(float deltaTime)
 	input->update();
 	mTimer->update(deltaTime);
 
-	//���G����
+	//無敵時間
 	if (DamgeFlag&&mTimer->timerSet(2))
 	{
 		DamgeFlag = FALSE;
 	}
 
-	////�T�u����
-	if (SubNull())
+	if (input->isKeyState(KEYCORD::SPACE))
 	{
-		b_mSpeed = 25.0f;
+		b_mSpeed = 20.0f;
 	}
 	else
 	{
 		b_mSpeed = 40.0f;
 	}
-
-	//if (b_mType == Type::SUB_PLAYER)
-	//{
-	//	b_mPosittion = charaManager->searchPlayer() + Vector2(30, 30);
-	//}
+	
 
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
@@ -165,33 +170,8 @@ void Player::TShot(Vector2 pos,float deltaTime)
 }
 
 
-void Player::hit(BaseObject & other)
-{
-	for (auto object : charaManager->getUseList())
-	{
-		if (object->getType() == Type::SUB_PLAYER)
-		{
-			return true;
-		}
-	}
-	return false;
-}
 
-void Player::SubChange()
-{
-	switch (b_mType)
-	{
-	case PLAYER:
-		b_mType = Type::SUB_PLAYER;
-		break;
-	case SUB_PLAYER:
-		b_mType = Type::PLAYER;
-		b_mPosittion = charaManager->searchPlayer() + Vector2(-30, -30);
-		break;
-	default:
-		break;
-	}
-}
+
 
 
 void Player::hit(BaseObject & other)

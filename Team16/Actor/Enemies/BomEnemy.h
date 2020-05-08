@@ -29,12 +29,15 @@ public:
 
 	void Shot(Vector2 pos);
 
+	void SubShot(Vector2 pos);
+
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-
+	//Ž©•ª‚ÌˆÊ’u
+	virtual Vector2 getPpstion()const;
 private:
-
+	Vector2 KakoPos;//ˆÊ’u‚Ì•Û‘¶—p
 	bool DamgeFlag;
 	Input* input;
 	CharactorManager* charaManager;

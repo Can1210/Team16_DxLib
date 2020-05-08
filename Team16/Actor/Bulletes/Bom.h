@@ -21,6 +21,8 @@ public:
 	//“–‚½‚è‚½‚Ìˆ—
 	virtual void hit(BaseObject& other) override;
 
+
+	virtual Type getType() const override;
 private:
 
 	float angle;
