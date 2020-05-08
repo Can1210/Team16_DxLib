@@ -37,21 +37,19 @@ void Player::update(float deltaTime)
 	input->update();
 	mTimer->update(deltaTime);
 
-	//���G����
 	if (DamgeFlag&&mTimer->timerSet(2))
 	{
 		DamgeFlag = FALSE;
 	}
 
-	////�T�u����
-	if (SubNull())
-	{
-		b_mSpeed = 25.0f;
-	}
-	else
-	{
-		b_mSpeed = 40.0f;
-	}
+	//if (SubNull())
+	//{
+	//	b_mSpeed = 25.0f;
+	//}
+	//else
+	//{
+	//	b_mSpeed = 40.0f;
+	//}
 
 	//if (b_mType == Type::SUB_PLAYER)
 	//{
@@ -163,35 +161,35 @@ void Player::TShot(Vector2 pos,float deltaTime)
 	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90.0f));
 	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 110.0f));
 }
-
-
-void Player::hit(BaseObject & other)
-{
-	for (auto object : charaManager->getUseList())
-	{
-		if (object->getType() == Type::SUB_PLAYER)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void Player::SubChange()
-{
-	switch (b_mType)
-	{
-	case PLAYER:
-		b_mType = Type::SUB_PLAYER;
-		break;
-	case SUB_PLAYER:
-		b_mType = Type::PLAYER;
-		b_mPosittion = charaManager->searchPlayer() + Vector2(-30, -30);
-		break;
-	default:
-		break;
-	}
-}
+//
+//
+//void Player::hit(BaseObject & other)
+//{
+//	for (auto object : charaManager->getUseList())
+//	{
+//		if (object->getType() == Type::SUB_PLAYER)
+//		{
+//			return true;
+//		}
+//	}
+//	return false;
+//}
+//
+//void Player::SubChange()
+//{
+//	switch (b_mType)
+//	{
+//	case PLAYER:
+//		b_mType = Type::SUB_PLAYER;
+//		break;
+//	case SUB_PLAYER:
+//		b_mType = Type::PLAYER;
+//		b_mPosittion = charaManager->searchPlayer() + Vector2(-30, -30);
+//		break;
+//	default:
+//		break;
+//	}
+//}
 
 
 void Player::hit(BaseObject & other)
