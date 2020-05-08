@@ -91,6 +91,9 @@
     <ClCompile Include="Device\Renderer3D.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\Enemies\Boss.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Timer.h" />
@@ -123,5 +126,6 @@
     <ClInclude Include="Actor\Bulletes\ChangeBullet.h" />
     <ClInclude Include="Device\Camera.h" />
     <ClInclude Include="Device\Renderer3D.h" />
+    <ClInclude Include="Actor\Enemies\Boss.h" />
   </ItemGroup>
 </Project>

@@ -26,6 +26,19 @@ CharactorManager::~CharactorManager()
 	mObjectsList.clear();
 
 }
+//プレイヤーの位置を獲得
+Vector2 CharactorManager::searchPlayer()
+{
+	for (auto object : mObjectsList)
+	{
+		if (object->getType() == Type::PLAYER)
+		{
+			return object->getPpstion();
+		}
+
+	}
+	return Vector2(0, 0);
+}
 
 
 

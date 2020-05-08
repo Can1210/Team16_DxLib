@@ -13,6 +13,7 @@ enum Type
 	PLAYER_BULLET,
 	ENEMY_BULLET,
 	CHANGE_BULLET,
+	SUB_PLAYER,
 };
 
 //描画するオブジェクトの基底クラス
@@ -47,7 +48,7 @@ public:
 	virtual Vector2 getPpstion()const = 0;
 	//自分の半径
 	virtual float getCircleSize()const = 0;
-
+	
 
 
 #pragma endregion
@@ -65,6 +66,7 @@ protected:
 	bool b_mIsDeath;          //死んだかどうか
 	Type b_mType;             //自分のタイプ
 	float b_mAngle;//角度
+	float b_mArpha; //画像のアルファ値
 	bool b_mEndFlag;//ゲームオーバー
 
 	

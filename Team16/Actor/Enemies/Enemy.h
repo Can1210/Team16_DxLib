@@ -15,6 +15,9 @@ class Enemy :public BaseObject
 public:
 	Enemy(Vector2 pos, CharactorManager *c);
 	~Enemy();
+
+	bool SubNull();
+	void SubChange();
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	virtual void initialize() override;
 
@@ -41,10 +44,10 @@ public:
 	virtual void setIsDeath(bool isDeath) override;
 private:
 
-	bool MoveFlag;
+	bool DamgeFlag;
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	ChangeBullet *changeB;
-
+	int shotcnt;
+	int r, b;
 };

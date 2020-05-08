@@ -22,6 +22,9 @@ public:
 
 	void Shot(Vector2 pos);
 	void CShot(Vector2 pos);
+	//サブ処理
+	bool SubNull();//サブがいるか？
+	void SubChange();//控えと交代
 
 
 	// BaseObject を介して継承されました
@@ -44,8 +47,12 @@ public:
 	virtual void setIsDeath(bool isDeath) override;
 private:
 
-	bool MoveFlag;
+	bool DamgeFlag;
 	Input* input;
 	CharactorManager* charaManager;
+	Timer *mTimer;
 
+	int shotcnt;
+	int r, b;
+	
 };

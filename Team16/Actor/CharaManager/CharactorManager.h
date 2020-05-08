@@ -12,6 +12,9 @@ public:
 	CharactorManager();
 	~CharactorManager();
 
+	//プレイヤーを検索
+	Vector2 searchPlayer();
+
 	//リストのクリア
 	void clear();
 	//リストへの追加

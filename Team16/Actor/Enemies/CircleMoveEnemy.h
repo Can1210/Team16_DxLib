@@ -13,6 +13,9 @@ class CirecleMoveEnemy :public BaseObject
 public:
 	CirecleMoveEnemy(Vector2 pos, CharactorManager *c);
 	~CirecleMoveEnemy();
+
+	bool SubNull();
+	void SubChange();
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	virtual void initialize() override;
 
@@ -44,9 +47,10 @@ public:
 
 private:
 
-	bool MoveFlag;
+	bool DamgeFlag;
 	Input* input;
 	Timer *mTimer;
 	CharactorManager* charaManager;
-
+	int shotcnt;
+	int r, b;
 };
