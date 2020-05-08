@@ -39,6 +39,8 @@
     <ClCompile Include="Device\Loader\SoundLoad.cpp" />
     <ClCompile Include="Device\Sound.cpp" />
     <ClCompile Include="Actor\Enemies\UFOEnemy.cpp" />
+    <ClCompile Include="Actor\Enemies\PlatoonEnemy.cpp" />
+    <ClCompile Include="Actor\Enemies\SoldierEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -189,6 +191,9 @@
     <ClInclude Include="Device\Loader\SoundLoad.h" />
     <ClInclude Include="Device\Sound.h" />
     <ClInclude Include="Actor\Enemies\UFOEnemy.h" />
+    <ClInclude Include="Actor\Enemies\PlatoonEnemy.h" />
+    <ClInclude Include="Actor\Enemies\Array.h" />
+    <ClInclude Include="Actor\Enemies\SoldierEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

@@ -161,6 +161,8 @@
     <ClCompile Include="Actor\CharaManager\BaseObject.cpp" />
     <ClCompile Include="Actor\CharaManager\CharactorManager.cpp" />
     <ClCompile Include="Actor\CharaManager\EnemySpawn.cpp" />
+    <ClCompile Include="Actor\Enemies\PlatoonEnemy.cpp" />
+    <ClCompile Include="Actor\Enemies\SoldierEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\Boss.cpp" />
     <ClCompile Include="Actor\Enemies\ThreeWayEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\UFOEnemy.cpp" />
@@ -202,6 +204,9 @@
     <ClInclude Include="Actor\CharaManager\BaseObject.h" />
     <ClInclude Include="Actor\CharaManager\CharactorManager.h" />
     <ClInclude Include="Actor\CharaManager\EnemySpawn.h" />
+    <ClInclude Include="Actor\Enemies\Array.h" />
+    <ClInclude Include="Actor\Enemies\PlatoonEnemy.h" />
+    <ClInclude Include="Actor\Enemies\SoldierEnemy.h" />
     <ClInclude Include="Actor\Enemies\Boss.h" />
     <ClInclude Include="Actor\Enemies\ThreeWayEnemy.h" />
     <ClInclude Include="Actor\Enemies\UFOEnemy.h" />
