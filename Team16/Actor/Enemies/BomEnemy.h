@@ -29,17 +29,20 @@ public:
 
 	void Shot(Vector2 pos);
 
+	void SubShot(Vector2 pos);
+
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-
+	
 private:
-
+	Vector2 KakoPos;//位置の保存用
 	bool DamgeFlag;
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;
+	int subShotCnt;//合体射撃のレート
 	int r, b;
 
 };

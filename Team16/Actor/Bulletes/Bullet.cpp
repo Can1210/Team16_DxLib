@@ -95,8 +95,9 @@ void Bullet::hit(BaseObject & other)
 	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY_BULLET || b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mIsDeath = true;
-
 	}
-
+	
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	
+	
 }

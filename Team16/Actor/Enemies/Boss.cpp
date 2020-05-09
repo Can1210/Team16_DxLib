@@ -42,10 +42,7 @@ void Boss::update(float deltaTime)
 	}
 
 
-	/*if (input->isKeyDown(KEYCORD::V))
-	{
-		SubChange();
-	}*/
+	
 
 	if (b_mType == Type::SUB_PLAYER)
 	{
@@ -58,6 +55,11 @@ void Boss::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
+		if (!SubNull())
+		{
+			SubChange();
+		}
+		KakoPos = b_mPosittion;
 	}
 
 
@@ -264,10 +266,6 @@ Type Boss::getType() const
 	return b_mType;
 }
 
-Vector2 Boss::getPpstion() const
-{
-	return b_mPosittion;
-}
 
 float Boss::getCircleSize() const
 {
@@ -283,7 +281,7 @@ bool Boss::SubNull()
 {
 	for (auto object : charaManager->getUseList())
 	{
-		if (object->getType() == Type::SUB_PLAYER)
+		if (object->getType() == Type::PLAYER)
 		{
 			return true;
 		}
@@ -293,16 +291,6 @@ bool Boss::SubNull()
 
 void Boss::SubChange()
 {
-	switch (b_mType)
-	{
-	case PLAYER:
-		b_mType = Type::SUB_PLAYER;
-		break;
-	case SUB_PLAYER:
-		b_mType = Type::PLAYER;
-		b_mPosittion = charaManager->searchPlayer() + Vector2(-30, -30);
-		break;
-	default:
-		break;
-	}
+	b_mPosittion = KakoPos;
+	b_mType = Type::PLAYER;
 }

@@ -14,11 +14,11 @@ Enemy::~Enemy()
 	delete mTimer;
 }
 
-bool Enemy::SubNull()
+bool Enemy::SubNull()//プレイヤーがいるか？
 {
 	for (auto object : charaManager->getUseList())
 	{
-		if (object->getType() == Type::SUB_PLAYER)
+		if (object->getType() == Type::PLAYER)
 		{
 			return true;
 		}
@@ -27,26 +27,16 @@ bool Enemy::SubNull()
 }
 
 void Enemy::SubChange()
-{
-	switch (b_mType)
-	{
-	case PLAYER:
-		b_mType = Type::SUB_PLAYER;
-		break;
-	case SUB_PLAYER:
-		b_mType = Type::PLAYER;
-		b_mPosittion = charaManager->searchPlayer() + Vector2(-30, -30);
-		break;
-	default:
-		break;
-	}
+{	
+	b_mPosittion = KakoPos;
+	b_mType = Type::PLAYER;
 }
 
 
 
 void Enemy::initialize()
 {
-	b_mHp = 2;
+	b_mHp = 3;
 	input = new Input;
 	input->init();
 	b_mCircleSize = 16.0f;
@@ -54,7 +44,8 @@ void Enemy::initialize()
 	b_mAngle = 180.0f;
 	mTimer->initialize();
 	b_mSpeed = 70.0f;
-	int shotcnt =0;
+	 shotcnt =0;
+	 subShotCnt = 10;//最初から打てるように
 	r = 0;
 	b = 255;
 	
@@ -73,24 +64,37 @@ void Enemy::update(float deltaTime)
 		DamgeFlag = FALSE;
 	}
 
-	/*if (input->isKeyDown(KEYCORD::V))
-	{
-		SubChange();
-	}*/
+	
 
 	if (b_mType == Type::SUB_PLAYER)
 	{
 		b_mPosittion = charaManager->searchPlayer();
-		if (input->isKeyDown(KEYCORD::SPACE))
+		
+		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt++;
+			if(subShotCnt>10)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+		
+		}
+		else
+		{
+			subShotCnt = 0;
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
+		if (!SubNull())
+		{
+			SubChange();
+		}
+		KakoPos = b_mPosittion;
 	}
-
+	
 
 	if (b_mType == Type::ENEMY)
 	{
@@ -117,7 +121,7 @@ void Enemy::update(float deltaTime)
 	//乗っ取り後
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
-
+		
 		if (input->isKeyState(KEYCORD::ARROW_UP))
 		{
 			b_mVelocity.y -= 6;
@@ -137,6 +141,20 @@ void Enemy::update(float deltaTime)
 		if (input->isKeyDown(KEYCORD::SPACE))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (input->isKeyState(KEYCORD::SPACE))
+		{
+			subShotCnt++;
+			if (subShotCnt > 10)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			b_mSpeed = 35.0f;
+		}
+		else
+		{
+			b_mSpeed = 70.0f;
 		}
 		
 		if (input->isKeyState(KEYCORD::V))
@@ -257,4 +275,5 @@ void Enemy::Jibaku(Vector2 pos)
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }
+
 

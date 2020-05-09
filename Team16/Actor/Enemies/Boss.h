@@ -35,7 +35,7 @@ public:
 
 	virtual Type getType() const override;
 
-	virtual Vector2 getPpstion() const override;
+	
 
 
 
@@ -48,13 +48,14 @@ public:
 	void SubChange();
 
 private:
-
+	Vector2 KakoPos;//位置の保存用
 	bool DamgeFlag;
 	Input* input;
 	Renderer* rend;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;
+	int subShotCnt;//合体射撃のレート
 	int r, b;
 
 };

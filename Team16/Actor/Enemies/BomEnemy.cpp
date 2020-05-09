@@ -17,7 +17,7 @@ bool BomEnemy::SubNull()
 {
 	for (auto object : charaManager->getUseList())
 	{
-		if (object->getType() == Type::SUB_PLAYER)
+		if (object->getType() == Type::PLAYER)
 		{
 			return true;
 		}
@@ -27,6 +27,8 @@ bool BomEnemy::SubNull()
 
 void BomEnemy::SubChange()
 {
+	b_mPosittion = KakoPos;
+	b_mType = Type::PLAYER;
 }
 
 
@@ -43,6 +45,7 @@ void BomEnemy::initialize()
 	mTimer->initialize();
 	b_mSpeed = 20.0f;
 	shotcnt = 0;
+	subShotCnt = 20;
 	r = 0;
 	b = 255;
 }
@@ -61,22 +64,33 @@ void BomEnemy::update(float deltaTime)
 	}
 
 
-	/*if (input->isKeyDown(KEYCORD::V))
-	{
-		SubChange();
-	}*/
-
+	
 	if (b_mType == Type::SUB_PLAYER)
 	{
 		b_mPosittion = charaManager->searchPlayer();
-		if (input->isKeyDown(KEYCORD::SPACE))
+		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt++;
+			if (subShotCnt > 20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			
+		}
+		else
+		{
+			subShotCnt = 0;
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
+		if (!SubNull())
+		{
+			SubChange();
+		}
+		KakoPos = b_mPosittion;
 	}
 
 
@@ -85,9 +99,12 @@ void BomEnemy::update(float deltaTime)
 		b_mVelocity.y += 1;
 		if (mTimer->timerSet(6))
 		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-	
+		if (b_mHp <= 0)
+		{
+			b_mIsDeath = true;
+		}
 		if (b_mPosittion.y > WindowInfo::WindowHeight
 			|| b_mPosittion.x>WindowInfo::WindowWidth
 			|| b_mPosittion.x < 0
@@ -122,6 +139,21 @@ void BomEnemy::update(float deltaTime)
 		if (input->isKeyDown(KEYCORD::SPACE))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (input->isKeyState(KEYCORD::SPACE))
+		{
+			subShotCnt++;
+			if (subShotCnt>20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			b_mSpeed = 10.0f;
+			
+		}
+		else
+		{
+			b_mSpeed = 20.0f;
 		}
 
 		if (input->isKeyState(KEYCORD::V))
@@ -228,6 +260,11 @@ void BomEnemy::hit(BaseObject & other)
 
 void BomEnemy::Shot(Vector2 pos)
 {
+	charaManager->add(new Bullet(pos, charaManager, b_mType,0.0));
+}
+
+void BomEnemy::SubShot(Vector2 pos)
+{
 	charaManager->add(new BomBullet(pos, charaManager, b_mType));
 }
 
@@ -244,3 +281,4 @@ void BomEnemy::Jibaku(Vector2 pos)
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }
+

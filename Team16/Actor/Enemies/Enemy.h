@@ -32,12 +32,16 @@ public:
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-private:
 
-	bool DamgeFlag;
+	
+private:
+	Vector2 KakoPos;//ˆÊ’u‚Ì•Û‘¶—p
+	
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;
+	int subShotCnt;
 	int r, b;
+	bool DamgeFlag;
 };

@@ -43,6 +43,7 @@ public:
 	virtual Type getType()const;
 	//自分の位置
 	virtual Vector2 getPpstion()const;
+	
 	//自分の半径
 	virtual float getCircleSize()const;
 #pragma endregion

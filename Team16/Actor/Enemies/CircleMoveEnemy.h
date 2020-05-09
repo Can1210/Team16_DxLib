@@ -25,6 +25,8 @@ public:
 
 	void Shot(Vector2 pos);
 
+	void SubShot(Vector2 pos);
+
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
@@ -34,17 +36,23 @@ public:
 	void playerMove(float deltaTime);
 	//死亡エリア
 	void deathArea();
-	//プレイヤーの位置を調べる
+	////プレイヤーの位置を調べる
 	void checkPlayerPos();
+
+
 
 private:
 
 	bool mMoveFlag;
+	bool DamgeFlag;//無敵時間用
 	Input* m_pInput;
 	Timer *m_pTimer;
-	CharactorManager* m_pCharaManager;
+	CharactorManager* charaManager;
 	Vector2 mPlayerPos;
-
+	int shotcnt;
+	int subShotCnt;//合体射撃のレート
+	int r, b;
+	Vector2 KakoPos;//位置の保存用
 	//円運動
 	float x;
 	float y;
