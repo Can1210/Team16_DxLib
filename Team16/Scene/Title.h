@@ -7,7 +7,7 @@
 class Title : public BaseScene
 {
 public:
-	Title();
+	Title(Input* input);
 	~Title();
 	virtual void initialize() override;
 	virtual void update(float deltaTime) override;

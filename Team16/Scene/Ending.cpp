@@ -2,8 +2,9 @@
 
 
 
-Ending::Ending()
+Ending::Ending(Input* input)
 {
+	m_pInput = input;
 }
 
 
@@ -13,15 +14,12 @@ Ending::~Ending()
 
 void Ending::initialize()
 {
-	m_pInput = new Input;
-	m_pInput->init();            //input初期化
 	isSceneEnd = false;       //最初はfalse
-	CWindow::getInstance().log("今エンディングに切り替わった");
+	CWindow::getInstance().log("今エンディングに切り替わった\n");
 }
 
 void Ending::update(float deltaTime)
 {
-	m_pInput->update();         //input更新
 	if (m_pInput->isKeyDown(KEYCORD::Z))
 	{
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）

@@ -12,7 +12,7 @@
 class GamePlay : public BaseScene
 {
 public:
-	GamePlay();
+	GamePlay(Input* input);
 	~GamePlay();
 
 	virtual void initialize() override;
@@ -24,7 +24,6 @@ public:
 private:
 	CharactorManager *charaManager;
 	EnemySpawn *enemySpawn;
-	
 };
 
 

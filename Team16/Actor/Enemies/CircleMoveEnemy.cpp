@@ -78,22 +78,14 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	else if (!b_mEndFlag)
 	{
 
-		if (DamgeFlag)
-		{
-			b_mArpha = 155;
-		}
-		else
-		{
-			b_mArpha = 255;
-		}
 
 
-		DrawBox(0, 0, shotcnt, 100, GetColor(r, 0, b), TRUE);
-		if (shotcnt == 100)
+		//DrawBox(0, 0, shotcnt, 100, GetColor(r, 0, b), TRUE);
+	/*	if (shotcnt == 100)
 		{
 			r = 255;
 			b = 0;
-		}
+		}*/
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 0, 255), FALSE);
 		b_mAngle = 0.0f;
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);

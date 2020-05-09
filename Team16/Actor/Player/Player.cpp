@@ -53,7 +53,6 @@ void Player::update(float deltaTime)
 	{
 		DamgeFlag = FALSE;
 	}
-
 	if (input->isKeyState(KEYCORD::SPACE)&&SubNull())
 	{
 		subShotCnt++;
@@ -176,11 +175,6 @@ void Player::TShot(Vector2 pos,float deltaTime)
 	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90.0f));
 	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 110.0f));
 }
-
-
-
-
-
 
 void Player::hit(BaseObject & other)
 {
