@@ -1,27 +1,24 @@
 #include "Title.h"
 
 //コンストラクタ
-Title::Title()
+Title::Title(Input* input)
 {
+	m_pInput = input;     //メインで使っているものをもらう
 }
 
 //デスストラクタ
 Title::~Title()
 {
-	delete m_pInput;
 }
 //初期化
 void Title::initialize()
 {
-	m_pInput = new Input;
-	m_pInput->init();         //input初期化
 	isSceneEnd = false;       //最初はfalse
-	//CWindow::getInstance().log("今タイトルに切り替わった");
+	CWindow::getInstance().log("今タイトルに切り替わった\n");
 }
 //更新
 void Title::update(float deltaTime)
 {
-	m_pInput->update();         //input更新
 	if (m_pInput->isKeyDown(KEYCORD::Z))
 	{
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）

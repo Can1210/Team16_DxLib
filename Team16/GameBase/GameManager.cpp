@@ -17,21 +17,21 @@ GameManager::~GameManager()
 	delete m_pRenderer3D;
 }
 //初期化
-void GameManager::initialize()
+void GameManager::initialize(Input* input)
 {
 	m_pRenderer = new Renderer();
 	m_pRenderer3D = new Renderer3D();
-	sceneInitialize();   //シーン関係を初期化
+	sceneInitialize(input);   //シーン関係を初期化
 }
-void GameManager::sceneInitialize()
+void GameManager::sceneInitialize(Input* input)
 {
 	//シーンマネージャーの初期化
 	SceneManager::createInstance();  //シーンマネージャーの生成
 	//シーンの追加
-	SceneManager::getInstance().add("load", new LoadScene);
-	SceneManager::getInstance().add("title", new Title);
-	SceneManager::getInstance().add("gameplay", new GamePlay);
-	SceneManager::getInstance().add("ending", new Ending);
+	SceneManager::getInstance().add("load", new LoadScene());
+	SceneManager::getInstance().add("title", new Title(input));
+	SceneManager::getInstance().add("gameplay", new GamePlay(input));
+	SceneManager::getInstance().add("ending", new Ending(input));
 	SceneManager::getInstance().change("load");      //最初はタイトルに設定
 }
 //更新
