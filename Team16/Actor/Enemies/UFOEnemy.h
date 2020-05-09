@@ -32,8 +32,7 @@ public:
 
 	void Jibaku(Vector2 pos);
 
-	//Ž©•ª‚ÌˆÊ’u
-	virtual Vector2 getPpstion()const;
+	
 private:
 
 	bool MoveFlag;

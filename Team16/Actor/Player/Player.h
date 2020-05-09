@@ -47,6 +47,7 @@ private:
 	Timer *mTimer;
 
 	int shotcnt;
+	int subShotCnt;//合体射撃のレート
 	int r, b;
 	
 };

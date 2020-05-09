@@ -53,9 +53,11 @@ void ThreeWayEnemy::initialize()
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
 	mTimer->initialize();
-	int shotcnt = 0;
+	 shotcnt = 0;
 	r = 0;
 	b = 255;
+	subShotCnt = 20;
+	b_mSpeed = 70.0f;
 }
 
 void ThreeWayEnemy::update(float deltaTime)
@@ -70,7 +72,12 @@ void ThreeWayEnemy::update(float deltaTime)
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y),0.0f);
+			if (subShotCnt > 20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
+				subShotCnt = 0;
+			}
+			
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
@@ -125,7 +132,16 @@ void ThreeWayEnemy::update(float deltaTime)
 		}
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+			if (subShotCnt > 20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
+				subShotCnt = 0;
+			}
+			b_mSpeed = 35.0f;
+		}
+		else
+		{
+			b_mSpeed = 70.0f;
 		}
 
 		if (input->isKeyState(KEYCORD::V))
@@ -264,11 +280,6 @@ void ThreeWayEnemy::Jibaku(Vector2 pos)
 {
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
-}
-
-Vector2 ThreeWayEnemy::getPpstion() const
-{
-	return b_mPosittion;
 }
 
 Vector2 ThreeWayEnemy::Traking()

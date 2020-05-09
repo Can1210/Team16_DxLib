@@ -36,7 +36,7 @@ void Enemy::SubChange()
 
 void Enemy::initialize()
 {
-	b_mHp = 2;
+	b_mHp = 3;
 	input = new Input;
 	input->init();
 	b_mCircleSize = 16.0f;
@@ -44,7 +44,8 @@ void Enemy::initialize()
 	b_mAngle = 180.0f;
 	mTimer->initialize();
 	b_mSpeed = 70.0f;
-	int shotcnt =0;
+	 shotcnt =0;
+	 subShotCnt = 10;//Å‰‚©‚ç‘Å‚Ä‚é‚æ‚¤‚É
 	r = 0;
 	b = 255;
 	
@@ -71,12 +72,17 @@ void Enemy::update(float deltaTime)
 		
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-			b_mSpeed = 35.0f;
+			subShotCnt++;
+			if(subShotCnt>10)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+		
 		}
 		else
 		{
-			b_mSpeed = 70.0f;
+			subShotCnt = 0;
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
@@ -132,9 +138,23 @@ void Enemy::update(float deltaTime)
 		{
 			b_mVelocity.x -= 6;
 		}
-		if (input->isKeyDown(KEYCORD::SPACE)||input->isKeyState(KEYCORD::SPACE))
+		if (input->isKeyDown(KEYCORD::SPACE))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (input->isKeyState(KEYCORD::SPACE))
+		{
+			subShotCnt++;
+			if (subShotCnt > 10)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			b_mSpeed = 35.0f;
+		}
+		else
+		{
+			b_mSpeed = 70.0f;
 		}
 		
 		if (input->isKeyState(KEYCORD::V))
@@ -256,8 +276,4 @@ void Enemy::Jibaku(Vector2 pos)
 	b_mIsDeath = true;
 }
 
-Vector2 Enemy::getPpstion() const
-{
-	return b_mPosittion;
-}
 

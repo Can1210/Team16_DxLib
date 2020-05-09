@@ -65,9 +65,11 @@ void PlatoonEnemy::initialize()
 	}
 	childCount = 0;
 	childs = false;
-	int shotcnt = 0;
+	shotcnt = 0;
+	subShotCnt = 20;
 	r = 0;
 	b = 255;
+	b_mSpeed = 70.0f;
 }
 
 void PlatoonEnemy::update(float deltaTime)
@@ -82,7 +84,12 @@ void PlatoonEnemy::update(float deltaTime)
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y),180.0f);
+			if (subShotCnt > 20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+				subShotCnt = 0;
+			}
+			
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
@@ -216,7 +223,16 @@ void PlatoonEnemy::update(float deltaTime)
 		}
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+			if (subShotCnt > 20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+				subShotCnt = 0;
+			}
+			b_mSpeed = 35.0f;
+		}
+		else
+		{
+			b_mSpeed = 70.0f;
 		}
 		if (input->isKeyState(KEYCORD::V))
 		{
@@ -230,6 +246,7 @@ void PlatoonEnemy::update(float deltaTime)
 		if (shotcnt == 100 && input->isKeyUp(KEYCORD::V))
 		{
 			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
@@ -239,7 +256,7 @@ void PlatoonEnemy::update(float deltaTime)
 		{
 			b_mEndFlag = true;
 		}
-		b_mPosittion += b_mVelocity;
+		b_mPosittion += b_mVelocity*deltaTime *b_mSpeed;
 	}
 	b_mPosittion += b_mVelocity;
 }
@@ -355,10 +372,6 @@ void PlatoonEnemy::Jibaku(Vector2 pos)
 	b_mIsDeath = true;
 }
 
-Vector2 PlatoonEnemy::getPpstion() const
-{
-	return b_mPosittion;
-}
 
 Vector2 PlatoonEnemy::Traking()
 {

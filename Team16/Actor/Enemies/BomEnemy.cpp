@@ -45,6 +45,7 @@ void BomEnemy::initialize()
 	mTimer->initialize();
 	b_mSpeed = 20.0f;
 	shotcnt = 0;
+	subShotCnt = 20;
 	r = 0;
 	b = 255;
 }
@@ -69,7 +70,17 @@ void BomEnemy::update(float deltaTime)
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt++;
+			if (subShotCnt > 20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			
+		}
+		else
+		{
+			subShotCnt = 0;
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
@@ -90,7 +101,10 @@ void BomEnemy::update(float deltaTime)
 		{
 			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-	
+		if (b_mHp <= 0)
+		{
+			b_mIsDeath = true;
+		}
 		if (b_mPosittion.y > WindowInfo::WindowHeight
 			|| b_mPosittion.x>WindowInfo::WindowWidth
 			|| b_mPosittion.x < 0
@@ -128,7 +142,18 @@ void BomEnemy::update(float deltaTime)
 		}
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt++;
+			if (subShotCnt>20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			b_mSpeed = 10.0f;
+			
+		}
+		else
+		{
+			b_mSpeed = 20.0f;
 		}
 
 		if (input->isKeyState(KEYCORD::V))
@@ -257,7 +282,3 @@ void BomEnemy::Jibaku(Vector2 pos)
 	b_mIsDeath = true;
 }
 
-Vector2 BomEnemy::getPpstion() const
-{
-	return b_mPosittion;
-}

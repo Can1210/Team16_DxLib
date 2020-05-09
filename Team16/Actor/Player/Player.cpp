@@ -36,6 +36,7 @@ void Player::initialize()
 	b_mSpeed = 40.0f;
 	mTimer->initialize();
 	shotcnt = 0;
+	subShotCnt = 7;
 	r = 0;
 	b = 255;
 }
@@ -53,8 +54,15 @@ void Player::update(float deltaTime)
 		DamgeFlag = FALSE;
 	}
 
-	if (input->isKeyState(KEYCORD::SPACE))
+	if (input->isKeyState(KEYCORD::SPACE)&&SubNull())
 	{
+		subShotCnt++;
+		if (subShotCnt > 7)
+		{
+			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt = 0;
+		}
+		
 		b_mSpeed = 20.0f;
 	}
 	else

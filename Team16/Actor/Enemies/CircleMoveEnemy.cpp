@@ -45,6 +45,10 @@ void CirecleMoveEnemy::initialize()
 	rotateSpeed = 0.5;//1周にかかる時間
 	radius = 2;   //半径10
 	b_mSpeed = 30.0f;
+	shotcnt = 0;
+	subShotCnt = 10;
+	r = 0;
+	b = 255;
 }
 //更新
 void CirecleMoveEnemy::update(float deltaTime)
@@ -159,6 +163,9 @@ void CirecleMoveEnemy::SubShot(Vector2 pos)
 void CirecleMoveEnemy::CShot(Vector2 pos)
 {
 	charaManager->add(new ChangeBullet(pos, charaManager));
+	shotcnt = 0;
+	r = 0;
+	b = 255;
 }
 
 void CirecleMoveEnemy::Jibaku(Vector2 pos)
@@ -184,22 +191,28 @@ void CirecleMoveEnemy::playerMove(float deltaTime)
 {
 	b_mVelocity = Vector2(0, 0);
 	
-	if (b_mType == Type::SUB_PLAYER && !b_mEndFlag)
+	if (b_mType == Type::SUB_PLAYER)
 	{
 		b_mPosittion = charaManager->searchPlayer();
 		if (m_pInput->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt++;
+			if (subShotCnt > 10)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			
 		}
-		if (m_pInput->isKeyDown(KEYCORD::X))
+		else
 		{
-			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt = 0;
+		}
+		if (m_pInput->isKeyDown(KEYCORD::C))
+		{
+			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
 
-		if (b_mHp <= 0)
-		{
-			b_mEndFlag = true;
-		}
 		if (!SubNull())
 		{
 			SubChange();
@@ -233,7 +246,17 @@ void CirecleMoveEnemy::playerMove(float deltaTime)
 		}
 		if (m_pInput->isKeyState(KEYCORD::SPACE))
 		{
-			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			subShotCnt++;
+			if (subShotCnt > 10)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			b_mSpeed = 15.0f;
+		}
+		else
+		{
+			b_mSpeed = 30.0f;
 		}
 
 		if (m_pInput->isKeyState(KEYCORD::V))

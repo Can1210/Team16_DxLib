@@ -213,10 +213,6 @@ void UFOEnemy::Jibaku(Vector2 pos)
 	b_mIsDeath = true;
 }
 
-Vector2 UFOEnemy::getPpstion() const
-{
-	return b_mPosittion;
-}
 
 Vector2 UFOEnemy::Traking()
 {

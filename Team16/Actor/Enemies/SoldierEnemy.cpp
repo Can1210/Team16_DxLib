@@ -50,6 +50,9 @@ void SoldierEnemy::initialize()
 	b = 255;
 
 	b_mVelocity = Vector2(0, -2.0f);
+	shotcnt = 0;
+	subShotCnt = 10;
+	b_mSpeed = 70.0f;
 }
 
 void SoldierEnemy::update(float deltaTime)
@@ -63,7 +66,12 @@ void SoldierEnemy::update(float deltaTime)
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			if (subShotCnt > 10)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
@@ -112,9 +120,22 @@ void SoldierEnemy::update(float deltaTime)
 		{
 			b_mVelocity.x -= 4;
 		}
-		if (input->isKeyDown(KEYCORD::SPACE)||input->isKeyState(KEYCORD::SPACE))
+		if (input->isKeyDown(KEYCORD::SPACE))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		}
+		if (input->isKeyState(KEYCORD::SPACE))
+		{
+			if (subShotCnt > 10)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+			b_mSpeed = 35.0f;
+		}
+		else
+		{
+			b_mSpeed = 70.0f;
 		}
 		if (input->isKeyState(KEYCORD::V))
 		{
@@ -242,9 +263,4 @@ void SoldierEnemy::Jibaku(Vector2 pos)
 {
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
-}
-
-Vector2 SoldierEnemy::getPpstion() const
-{
-	return b_mPosittion;
 }

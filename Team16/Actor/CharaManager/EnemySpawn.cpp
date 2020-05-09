@@ -56,9 +56,9 @@ void EnemySpawn::spawn()
 			mCharactorManager->add(new BomEnemy(Vector2((i + 1) * 160, (i + 1) * -400), mCharactorManager));
 		}
 
-		for (int i = 0; i < spawnNum4(mt); i++)
+		/*for (int i = 0; i < spawnNum4(mt); i++)
 		{
 			mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f,Vector2(0.0f,500.0f)));
-		}
+		}*/
 	}
 }

@@ -35,7 +35,7 @@ public:
 
 	virtual Type getType() const override;
 
-	virtual Vector2 getPpstion() const override;
+	
 
 
 
@@ -55,6 +55,7 @@ private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;
+	int subShotCnt;//‡‘ÌËŒ‚‚ÌƒŒ[ƒg
 	int r, b;
 
 };

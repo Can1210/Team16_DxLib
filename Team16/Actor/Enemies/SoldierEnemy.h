@@ -32,14 +32,12 @@ public:
 
 	void Shot(Vector2 pos);
 
-	void SubShot(Vector2 pos);
+	//void SubShot(Vector2 pos);
 
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
 
-	//自分の位置
-	virtual Vector2 getPpstion()const;
 private:
 
 	bool MoveFlag;
@@ -49,6 +47,7 @@ private:
 	ChangeBullet *changeB;
 	Vector2 KakoPos;//位置の保存用
 	int shotcnt;
+	int subShotCnt;//合体射撃のレート
 	int r, b;
 	bool DamgeFlag;
 };

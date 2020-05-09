@@ -15,8 +15,8 @@ ChangeBullet::~ChangeBullet()
 
 void ChangeBullet::initialize()
 {
-	b_mCircleSize = 12;
-	b_mSpeed = 7;
+	b_mCircleSize = 10;
+	b_mSpeed = 30;
 }
 
 void ChangeBullet::update(float deltaTime)

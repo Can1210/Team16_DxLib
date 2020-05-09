@@ -33,8 +33,7 @@ public:
 
 	void Jibaku(Vector2 pos);
 
-	//Ž©•ª‚ÌˆÊ’u
-	virtual Vector2 getPpstion()const;
+	
 private:
 	Vector2 KakoPos;//ˆÊ’u‚Ì•Û‘¶—p
 	
@@ -42,6 +41,7 @@ private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;
+	int subShotCnt;
 	int r, b;
 	bool DamgeFlag;
 };

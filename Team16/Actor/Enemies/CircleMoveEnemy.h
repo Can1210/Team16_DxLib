@@ -52,6 +52,7 @@ private:
 	CharactorManager* charaManager;
 	Vector2 mPlayerPos;
 	int shotcnt;
+	int subShotCnt;//合体射撃のレート
 	int r, b;
 	Vector2 KakoPos;//位置の保存用
 	//円運動

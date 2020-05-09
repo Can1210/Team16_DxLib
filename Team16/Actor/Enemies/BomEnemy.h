@@ -34,8 +34,7 @@ public:
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
-	//自分の位置
-	virtual Vector2 getPpstion()const;
+	
 private:
 	Vector2 KakoPos;//位置の保存用
 	bool DamgeFlag;
@@ -43,6 +42,7 @@ private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;
+	int subShotCnt;//合体射撃のレート
 	int r, b;
 
 };

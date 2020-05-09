@@ -266,10 +266,6 @@ Type Boss::getType() const
 	return b_mType;
 }
 
-Vector2 Boss::getPpstion() const
-{
-	return b_mPosittion;
-}
 
 float Boss::getCircleSize() const
 {
