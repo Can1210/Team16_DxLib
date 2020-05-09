@@ -22,7 +22,7 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("enemy3", "Resouce/Texture/RedATK.png");
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("hpNumber", "Resouce/Texture/denColor.png");
-	CWindow::getInstance().log("読み込みが終わったので終了します");
+	CWindow::getInstance().log("読み込みが終わったので終了します\n");
 	isSceneEnd = true;       //ここまでエラーがなかったら終了状態にする
 }
 

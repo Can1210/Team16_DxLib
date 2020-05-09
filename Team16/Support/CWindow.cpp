@@ -14,7 +14,7 @@ CWindow::~CWindow()
 
 void CWindow::showConsole()
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	//コンソールの表示
 	AllocConsole();
 	//標準入出力に割り当てる
@@ -30,7 +30,7 @@ void CWindow::showConsole()
 
 void CWindow::log(const char * format, ...)
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	va_list va;
 	va_start(va, format);
 	vprintf(format, va);

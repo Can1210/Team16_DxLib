@@ -9,21 +9,7 @@ CharactorManager::CharactorManager()
 //デスストラクタ
 CharactorManager::~CharactorManager()
 {
-	//追加するオブジェクトが残っていたら、メモリを解放する
-	for (auto obj : mAddObjectsList)
-	{
-		if (obj != nullptr)
-			delete obj;
-	}
-	mAddObjectsList.clear();      //空にする
-
-	//オブジェクトがnullになったらそのメモリを解放
-	for (auto object : mObjectsList)
-	{
-		if (object != nullptr)
-			delete object;
-	}
-	mObjectsList.clear();
+	clear();
 }
 //プレイヤーの位置を獲得
 Vector2 CharactorManager::searchPlayer()
@@ -42,9 +28,21 @@ Vector2 CharactorManager::searchPlayer()
 //リストのクリア
 void CharactorManager::clear()
 {
-	//リストの中を空にする
+	//追加するオブジェクトが残っていたら、メモリを解放する
+	for (auto obj : mAddObjectsList)
+	{
+		if (obj != nullptr)
+			delete obj;
+	}
+	mAddObjectsList.clear();      //空にする
+
+	//オブジェクトがnullptrではなかったらそのメモリを解放
+	for (auto object : mObjectsList)
+	{
+		if (object != nullptr)
+			delete object;
+	}
 	mObjectsList.clear();
-	mAddObjectsList.clear();
 }
 //リストへの追加
 void CharactorManager::add(BaseObject * addObj)
@@ -102,10 +100,17 @@ void CharactorManager::removeList_update()
 	auto itr = mObjectsList.begin();
 	while (itr != mObjectsList.end())
 	{
-		//オブジェクトがnullか死んでいたら削除
-		if (*itr == nullptr || (*itr)->getIsDeath())
-		
+		//nullptrの場合
+		if ((*itr) == nullptr)
+		{
 			itr = mObjectsList.erase(itr);
+		}
+		else if ((*itr)->getIsDeath())  //オブジェクトがnullか死んでいたら削除
+		{
+			BaseObject* deleteObj = (*itr);  //消す予定の物を入れる：更新されてしまう
+			itr = mObjectsList.erase(itr);   //vecor内から削除
+			delete deleteObj;                //解放
+		}
 		else
 			itr++;        //次へ
 	}
