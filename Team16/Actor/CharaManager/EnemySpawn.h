@@ -19,6 +19,7 @@ public:
 private:
 	CharactorManager* mCharactorManager;   //キャラクターマネジャー
 	Timer* mTimer;                         //タイマー
+	int spawnTime;
 };
 
 #endif // !_ENEMYSPAWN_H_

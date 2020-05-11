@@ -118,41 +118,41 @@ void PlatoonEnemy::update(float deltaTime)
 		}
 		vec_Array(enemyTime) = b_mPosittion;
 
-		if (s1)
-		{
-			int index = enemyTime - frame20 % 600;
-			if (index < 0){index = 600 - index;}
-			Vector2 v2 = vec_Array(index);
-			s1->SetParentPos(v2);
-		}
-		if (s2)
-		{
-			int index = enemyTime - frame40 % 600;
-			if (index < 0) { index = 600 - index; }
-			Vector2 v2 = vec_Array(index);
-			s2->SetParentPos(v2);
-		}
-		if (s3)
-		{
-			int index = enemyTime - frame60 % 600;
-			if (index < 0) { index = 600 - index; }
-			Vector2 v2 = vec_Array(index);
-			s3->SetParentPos(v2);
-		}
-		if (s4)
-		{
-			int index = enemyTime - frame80 % 600;
-			if (index < 0) { index = 600 - index; }
-			Vector2 v2 = vec_Array(index);
-			s4->SetParentPos(v2);
-		}
-		if (s5)
-		{
-			int index = enemyTime - frame100 % 600;
-			if (index < 0) { index = 600 - index; }
-			Vector2 v2 = vec_Array(index);
-			s5->SetParentPos(v2);
-		}
+		//if (s1)
+		//{
+		//	int index = enemyTime - frame20 % 600;
+		//	if (index < 0){index = 600 - index;}
+		//	Vector2 v2 = vec_Array(index);
+		//	s1->SetParentPos(v2);
+		//}
+		//if (s2)
+		//{
+		//	int index = enemyTime - frame40 % 600;
+		//	if (index < 0) { index = 600 - index; }
+		//	Vector2 v2 = vec_Array(index);
+		//	s2->SetParentPos(v2);
+		//}
+		//if (s3)
+		//{
+		//	int index = enemyTime - frame60 % 600;
+		//	if (index < 0) { index = 600 - index; }
+		//	Vector2 v2 = vec_Array(index);
+		//	s3->SetParentPos(v2);
+		//}
+		//if (s4)
+		//{
+		//	int index = enemyTime - frame80 % 600;
+		//	if (index < 0) { index = 600 - index; }
+		//	Vector2 v2 = vec_Array(index);
+		//	s4->SetParentPos(v2);
+		//}
+		//if (s5)
+		//{
+		//	int index = enemyTime - frame100 % 600;
+		//	if (index < 0) { index = 600 - index; }
+		//	Vector2 v2 = vec_Array(index);
+		//	s5->SetParentPos(v2);
+		//}
 
 		b_mVelocity = Vector2(x,y);
 
@@ -170,32 +170,32 @@ void PlatoonEnemy::update(float deltaTime)
 	}
 	enemyTime++;
 
-	if (enemyTime % frame20 == 0 && !childs)
-	{
-		s1 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
-		charaManager->add(s1);
-	}
-	if (enemyTime % frame40 == 0 && !childs)
-	{
-		s2 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
-		charaManager->add(s2);
-	}
-	if (enemyTime % frame60 == 0 && !childs)
-	{
-		s3 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
-		charaManager->add(s3);
-	}
-	if (enemyTime % frame80 == 0 && !childs)
-	{
-		s4 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
-		charaManager->add(s4);
-	}
-	if (enemyTime % frame100 == 0 && !childs)
-	{
-		childs = true;
-		s5 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
-		charaManager->add(s5);
-	}
+	//if (enemyTime % frame20 == 0 && !childs)
+	//{
+	//	s1 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
+	//	charaManager->add(s1);
+	//}
+	//if (enemyTime % frame40 == 0 && !childs)
+	//{
+	//	s2 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
+	//	charaManager->add(s2);
+	//}
+	//if (enemyTime % frame60 == 0 && !childs)
+	//{
+	//	s3 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
+	//	charaManager->add(s3);
+	//}
+	//if (enemyTime % frame80 == 0 && !childs)
+	//{
+	//	s4 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
+	//	charaManager->add(s4);
+	//}
+	//if (enemyTime % frame100 == 0 && !childs)
+	//{
+	//	childs = true;
+	//	s5 = new SoldierEnemy(vec_Array(enemyTime), charaManager);
+	//	charaManager->add(s5);
+	//}
 	if (enemyTime > arraySize)
 		enemyTime = 0.0f;
 	//èÊÇ¡éÊÇËå„
