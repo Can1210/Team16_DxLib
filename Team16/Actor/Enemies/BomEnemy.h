@@ -16,7 +16,7 @@ public:
 	BomEnemy(Vector2 pos, CharactorManager *c);
 	~BomEnemy();
 
-	bool SubNull();
+	bool PlayerNull();
 	void SubChange();
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	virtual void initialize() override;

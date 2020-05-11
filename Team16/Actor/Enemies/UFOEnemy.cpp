@@ -20,7 +20,7 @@ UFOEnemy::~UFOEnemy()
 	delete mTimer;
 }
 
-bool UFOEnemy::SubNull()
+bool UFOEnemy::PlayerNull()
 {
 	for (auto object : charaManager->getUseList())
 	{
@@ -70,7 +70,7 @@ void UFOEnemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (!SubNull())
+		if (!PlayerNull())
 		{
 			SubChange();
 		}

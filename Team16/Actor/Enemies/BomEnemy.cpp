@@ -5,6 +5,7 @@ BomEnemy::BomEnemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
+	input = new Input;
 }
 
 BomEnemy::~BomEnemy()
@@ -13,7 +14,7 @@ BomEnemy::~BomEnemy()
 	delete mTimer;
 }
 
-bool BomEnemy::SubNull()
+bool BomEnemy::PlayerNull()
 {
 	for (auto object : charaManager->getUseList())
 	{
@@ -37,7 +38,7 @@ void BomEnemy::initialize()
 {
 	b_mHp = 4;
 
-	input = new Input;
+	
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
@@ -86,7 +87,7 @@ void BomEnemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (!SubNull())
+		if (!PlayerNull())
 		{
 			SubChange();
 		}

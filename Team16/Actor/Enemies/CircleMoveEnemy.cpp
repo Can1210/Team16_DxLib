@@ -6,6 +6,7 @@ CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(
 {
 	charaManager = c;
 	b_mPosittion = pos;
+	m_pInput = new Input;
 }
 
 CirecleMoveEnemy::~CirecleMoveEnemy()
@@ -13,7 +14,7 @@ CirecleMoveEnemy::~CirecleMoveEnemy()
 	delete m_pInput;
 	delete m_pTimer;
 }
-bool CirecleMoveEnemy::SubNull()
+bool CirecleMoveEnemy::PlayerNull()
 {
 
 	for (auto object : charaManager->getUseList())
@@ -36,7 +37,7 @@ void CirecleMoveEnemy::initialize()
 	checkPlayerPos();
 	b_mHp = 3;
 	mMoveFlag = FALSE;
-	m_pInput = new Input;
+
 	m_pInput->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
@@ -55,8 +56,11 @@ void CirecleMoveEnemy::update(float deltaTime)
 {
 	m_pInput->update();
 	m_pTimer->update(deltaTime);
-	
-	move(deltaTime);
+	if (b_mType == Type::ENEMY)
+	{
+		move(deltaTime);
+	}
+
 
 	if (b_mType != Type::ENEMY)
 	{
@@ -75,17 +79,23 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	}
-	else if (!b_mEndFlag)
+	else if(!b_mEndFlag)
 	{
+		if (DamgeFlag)
+		{
+			b_mArpha = 155;
+		}
+		else
+		{
+			b_mArpha = 255;
+		}
 
-
-
-		//DrawBox(0, 0, shotcnt, 100, GetColor(r, 0, b), TRUE);
-	/*	if (shotcnt == 100)
+		DrawBox(0, 0, shotcnt, 100, GetColor(r, 0, b), TRUE);
+		if (shotcnt == 100)
 		{
 			r = 255;
 			b = 0;
-		}*/
+		}
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 0, 255), FALSE);
 		b_mAngle = 0.0f;
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
@@ -134,7 +144,7 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 
 void CirecleMoveEnemy::Shot(Vector2 pos)
 {
-	charaManager->add(new Bullet(Vector2(b_mPosittion.x , b_mPosittion.y), charaManager, b_mType, -30.0f));
+	charaManager->add(new Bullet(Vector2(b_mPosittion.x , b_mPosittion.y), charaManager, b_mType, 0.0f));
 }
 
 void CirecleMoveEnemy::SubShot(Vector2 pos)
@@ -205,7 +215,7 @@ void CirecleMoveEnemy::playerMove(float deltaTime)
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
 
-		if (!SubNull())
+		if (!PlayerNull())
 		{
 			SubChange();
 		}

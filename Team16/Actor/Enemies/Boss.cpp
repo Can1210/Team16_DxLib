@@ -212,11 +212,11 @@ void Boss::hit(BaseObject & other)
 
 
 
-	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
-	{
-		//ç≈èâÇÕçTÇ¶Ç…
-		b_mType = Type::SUB_PLAYER;
-	}
+	//if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
+	//{
+	//	//ç≈èâÇÕçTÇ¶Ç…
+	//	b_mType = Type::SUB_PLAYER;
+	//}
 }
 
 void Boss::Shot(Vector2 pos)

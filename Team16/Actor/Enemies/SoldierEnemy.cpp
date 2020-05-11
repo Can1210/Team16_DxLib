@@ -17,7 +17,7 @@ SoldierEnemy::~SoldierEnemy()
 	delete mTimer;
 }
 
-bool SoldierEnemy::SubNull()
+bool SoldierEnemy::PlayerNull()
 {
 	for (auto object : charaManager->getUseList())
 	{
@@ -77,7 +77,7 @@ void SoldierEnemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (!SubNull())
+		if (!PlayerNull())
 		{
 			SubChange();
 		}

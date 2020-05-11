@@ -14,7 +14,7 @@ class ThreeWayEnemy :public BaseObject
 public:
 	ThreeWayEnemy(Vector2 pos, CharactorManager *c,float angle1,float angle2,float angle3,Vector2 end);
 	~ThreeWayEnemy();
-	bool SubNull();
+	bool PlayerNull();
 	void SubChange();
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	virtual void initialize() override;

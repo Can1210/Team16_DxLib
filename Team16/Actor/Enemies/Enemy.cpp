@@ -6,6 +6,7 @@ Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
+	input = new Input;
 }
 
 Enemy::~Enemy()
@@ -14,7 +15,7 @@ Enemy::~Enemy()
 	delete mTimer;
 }
 
-bool Enemy::SubNull()//プレイヤーがいるか？
+bool Enemy::PlayerNull()//プレイヤーがいるか？
 {
 	for (auto object : charaManager->getUseList())
 	{
@@ -37,7 +38,7 @@ void Enemy::SubChange()
 void Enemy::initialize()
 {
 	b_mHp = 3;
-	input = new Input;
+	
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
@@ -88,7 +89,7 @@ void Enemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (!SubNull())
+		if (!PlayerNull())
 		{
 			SubChange();
 		}

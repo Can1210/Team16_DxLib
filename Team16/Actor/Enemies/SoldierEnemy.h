@@ -17,7 +17,7 @@ class SoldierEnemy :public BaseObject
 public:
 	SoldierEnemy(Vector2 pos, CharactorManager *c);
 	~SoldierEnemy();
-	bool SubNull();
+	bool PlayerNull();
 	void SubChange();
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	virtual void initialize() override;
