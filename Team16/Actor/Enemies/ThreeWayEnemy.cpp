@@ -20,7 +20,7 @@ ThreeWayEnemy::~ThreeWayEnemy()
 	delete mTimer;
 }
 
-bool ThreeWayEnemy::SubNull()//自機の更新
+bool ThreeWayEnemy::PlayerNull()//自機の更新
 {
 	for (auto object : charaManager->getUseList())
 	{
@@ -83,7 +83,7 @@ void ThreeWayEnemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (SubNull())
+		if (!PlayerNull())
 		{
 			b_mType = Type::PLAYER;
 		}

@@ -6,11 +6,13 @@ Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
+	input = new Input;
 }
 
 Player::~Player()
 {
 	delete input;
+	delete mTimer;
 }
 
 bool Player::SubNull()
@@ -28,7 +30,7 @@ bool Player::SubNull()
 void Player::initialize()
 {
 
-	input = new Input;
+	
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;

@@ -13,7 +13,8 @@ class CirecleMoveEnemy :public BaseObject
 public:
 	CirecleMoveEnemy(Vector2 pos, CharactorManager *c);
 	~CirecleMoveEnemy();
-
+	bool PlayerNull();
+	void SubChange();
 	// BaseObject を介して継承されました
 	virtual void initialize() override;
 

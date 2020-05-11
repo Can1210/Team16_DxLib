@@ -22,7 +22,7 @@ PlatoonEnemy::~PlatoonEnemy()
 	delete mTimer;
 }
 
-bool PlatoonEnemy::SubNull()//プレイヤーがいるか？
+bool PlatoonEnemy::PlayerNull()//プレイヤーがいるか？
 {
 	for (auto object : charaManager->getUseList())
 	{
@@ -95,7 +95,7 @@ void PlatoonEnemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (!SubNull())
+		if (!PlayerNull())
 		{
 			SubChange();
 		}
