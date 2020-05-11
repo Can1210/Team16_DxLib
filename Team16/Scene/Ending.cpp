@@ -1,5 +1,5 @@
 #include "Ending.h"
-
+#include "../GameBase/Score.h"
 
 
 Ending::Ending(Input* input)
@@ -23,6 +23,7 @@ void Ending::update(float deltaTime)
 	if (m_pInput->isKeyDown(KEYCORD::Z))
 	{
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）
+		Score::getInstance().initialize();
 	}
 }
 
