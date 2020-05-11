@@ -35,6 +35,13 @@ public:
 	/*textureName :テクスチャの名前　position :座標　number：数字　digits：少数桁数　angleCenter：回転中心位置　scale：拡大縮小（Def 1.0＝等倍）　angle：角度（度数法　Def 0）　alpha：透明値（Def 255 min 0,max 255）*/
 	void drawNumber(std::string textureName, Vector2 position, double number, unsigned int digits,
 		Vector2 angleCenter = Vector2(0.0, 0.0), Vector2 scale = Vector2(1.0, 1.0), float angle = 0, int alpha = 255);
+	
+	
+	//スコア表示用
+	/*textureName :テクスチャの名前　position :座標　number：数字　digits：少数桁数　angleCenter：回転中心位置　scale：拡大縮小（Def 1.0＝等倍）　angle：角度（度数法　Def 0）　alpha：透明値（Def 255 min 0,max 255）*/
+	void drawScoreNumber(std::string textureName, Vector2 position, int number, unsigned int digits,
+		Vector2 angleCenter = Vector2(0.0, 0.0), Vector2 scale = Vector2(1.0, 1.0), float angle = 0, int alpha = 255);
+
 
 	//文字描画　大きさはまだやっていないし不格好である　誰か等間隔の文字を作ってほしい
 	/*textureName :テクスチャの名前　writeString：内容　position :座標　angleCenter：回転中心位置　scale：拡大縮小（Def 1.0＝等倍）　angle：角度（度数法　Def 0）　alpha：透明値（Def 255 min 0,max 255）*/

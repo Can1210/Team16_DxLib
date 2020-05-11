@@ -5,6 +5,8 @@
 #include "../Scene/GamePlay.h"
 #include "../Scene/Ending.h"
 #include "../Scene/LoadScene.h"
+#include "Score.h"
+
 //コンストラクタ
 GameManager::GameManager()
 {
@@ -21,7 +23,9 @@ void GameManager::initialize(Input* input)
 {
 	m_pRenderer = new Renderer();
 	m_pRenderer3D = new Renderer3D();
-	sceneInitialize(input);   //シーン関係を初期化
+	sceneInitialize(input);             //シーン関係を初期化
+	Score::createInstance();            //スコアの生成
+	Score::getInstance().initialize();  //スコアの初期化
 }
 void GameManager::sceneInitialize(Input* input)
 {
