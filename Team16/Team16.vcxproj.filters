@@ -41,6 +41,8 @@
     <ClCompile Include="Actor\Enemies\UFOEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\PlatoonEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\SoldierEnemy.cpp" />
+    <ClCompile Include="Actor\Enemies\Boss.cpp" />
+    <ClCompile Include="GameBase\Score.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -127,9 +129,6 @@
     <ClCompile Include="Device\Renderer3D.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\Enemies\Boss.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Timer.h" />
@@ -194,6 +193,7 @@
     <ClInclude Include="Actor\Enemies\PlatoonEnemy.h" />
     <ClInclude Include="Actor\Enemies\Array.h" />
     <ClInclude Include="Actor\Enemies\SoldierEnemy.h" />
+    <ClInclude Include="GameBase\Score.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

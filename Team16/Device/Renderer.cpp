@@ -1,6 +1,9 @@
 #include "Renderer.h"
 #include <string>
 #include <math.h>
+#include <sstream>
+#include <iomanip>
+
 //コンストラクタ
 Renderer::Renderer()
 {
@@ -41,36 +44,93 @@ void Renderer::draw2D(std::string textureName, Vector2 position, Vector2 drawPos
 }
 
 
-
-
 //数字描画
 void Renderer::drawNumber(std::string textureName, Vector2 position, double number, unsigned int digits, Vector2 scale, Vector2 angleCenter, float angle, int alpha)
 {
+#pragma region 取っておく
+
+	////数字を文字に変換
+	//std::string stringNum = std::to_string(number);
+	//int dot = stringNum.find('.');          //「.」を探す
+	////変換した文字とドットの長さを比べて少ない方を調べてる＋桁数
+	//int numberLength = std::fminf(stringNum.length(), dot) + digits;
+	//Vector2 basePos = position - Vector2((float)numberLength* mNumTexture_Width, 0);
+
+	//for (int i = 0; i <= numberLength; i++)
+	//{
+	//	//変換した数字を一つずつ調べる
+	//	auto character = stringNum[i];
+	//	//文字が「.」ではなかったら
+	//	if (character != '.')
+	//	{
+	//		//型変換
+	//		int num = character - '0';
+	//		draw2D(textureName, basePos + Vector2(i* mNumTexture_Width, 0), Vector2(num* mNumTexture_Width, 0), Vector2(mNumTexture_Width, mNumTexture_Height), scale, angleCenter, angle, alpha);
+	//	}
+	//	else
+	//	{
+	//		//一番最後にあるから11
+	//		draw2D(textureName, basePos + Vector2(i* mNumTexture_Width, 0), Vector2(10 * mNumTexture_Width, 0), Vector2(mNumTexture_Width, mNumTexture_Height), scale, angleCenter, angle, alpha);
+	//	}
+	//}
+
+#pragma endregion
+
+	//0埋め文字に変更
+	std::stringstream fillNum;
+	//桁
+	unsigned int digit = digits;
+	//         〇桁にの           0埋め番号に         数字を入れる
+	fillNum << std::setw(digit) << std::setfill('0') << number;
+
 	//数字を文字に変換
-	std::string stringNum = std::to_string(number);
-	int dot = stringNum.find('.');          //「.」を探す
+	std::string stringNum = fillNum.str();
+
 	//変換した文字とドットの長さを比べて少ない方を調べてる＋桁数
-	int numberLength = std::fminf(stringNum.length(), dot) + digits;
+	int numberLength = stringNum.length();
+
 	Vector2 basePos = position - Vector2((float)numberLength* mNumTexture_Width, 0);
 
 	for (int i = 0; i <= numberLength; i++)
 	{
 		//変換した数字を一つずつ調べる
 		auto character = stringNum[i];
-		//文字が「.」ではなかったら
-		if (character != '.')
-		{
-			//型変換
-			int num = character - '0';
-			draw2D(textureName, basePos + Vector2(i* mNumTexture_Width, 0), Vector2(num* mNumTexture_Width, 0), Vector2(mNumTexture_Width, mNumTexture_Height), scale, angleCenter, angle, alpha);
-		}
-		else
-		{
-			//一番最後にあるから11
-			draw2D(textureName, basePos + Vector2(i* mNumTexture_Width, 0), Vector2(10 * mNumTexture_Width, 0), Vector2(mNumTexture_Width, mNumTexture_Height), scale, angleCenter, angle, alpha);
-		}
+
+		//型変換
+		int num = character - '0';
+		draw2D(textureName, basePos + Vector2(i* mNumTexture_Width, 0), Vector2(num* mNumTexture_Width, 0), Vector2(mNumTexture_Width, mNumTexture_Height), scale, angleCenter, angle, alpha);
 	}
 }
+
+//スコア描画　　　使えない
+void Renderer::drawScoreNumber(std::string textureName, Vector2 position, int number, Vector2 angleCenter, Vector2 scale, float angle, int alpha)
+{
+	//0埋め文字に変更
+	std::stringstream fillNum;
+	//桁
+	unsigned int digit = 8;
+	//         〇桁にの           0埋め番号に         数字を入れる
+	fillNum << std::setw(digit) << std::setfill('0') << number;
+
+	//数字を文字に変換
+	std::string stringNum = fillNum.str();
+
+	//変換した文字とドットの長さを比べて少ない方を調べてる＋桁数
+	int numberLength = stringNum.length();
+
+	Vector2 basePos = position - Vector2((float)numberLength* mNumTexture_Width, 0);
+
+	for (int i = 0; i <= numberLength; i++)
+	{
+		//変換した数字を一つずつ調べる
+		auto character = stringNum[i];
+
+		//型変換
+		int num = character - '0';
+		draw2D(textureName, basePos + Vector2(i* mNumTexture_Width, 0), Vector2(num* mNumTexture_Width, 0), Vector2(mNumTexture_Width, mNumTexture_Height), scale, angleCenter, angle, alpha);
+	}
+}
+
 //文字描画（挑戦中...）
 void Renderer::drawText(std::string textureName, std::string writeString, Vector2 position, Vector2 angleCenter, Vector2 scale, float angle, int alpha)
 {
