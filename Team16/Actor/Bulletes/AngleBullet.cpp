@@ -65,7 +65,12 @@ void AngleBullet::update(float deltaTime)
 
 void AngleBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+	Vector2 a = RotationZ(bulletAngle);
+
+
+	float angle = atan2(a.y, a.x)* 180.0f / DX_PI_F;
+	
+	renderer->draw2D("bullet1", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(12, 16), Vector2(6, 8), Vector2(1.0f, 1.0f),angle - 90.0f, 255);
 
 	if (b_mType == Type::ENEMY_BULLET)
 	{

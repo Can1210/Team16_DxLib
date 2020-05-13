@@ -1,6 +1,10 @@
 #include "Boss.h"
+#include "../Bulletes/AngleBullet.h"
 
-Boss::Boss(Vector2 pos, CharactorManager * c) :mTimer(new Timer())
+Boss::Boss(Vector2 pos, CharactorManager * c) :
+	mTimer(new Timer()),
+	m_pCirecleTimer(new Timer()),
+	m_pCirecleEndTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -10,6 +14,8 @@ Boss::~Boss()
 {
 	delete input;
 	delete mTimer;
+	delete m_pCirecleTimer;
+	delete m_pCirecleEndTimer;
 }
 
 void Boss::initialize()
@@ -22,6 +28,9 @@ void Boss::initialize()
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
 	mTimer->initialize();
+    m_pCirecleTimer->initialize();
+    m_pCirecleEndTimer->initialize();
+
 	b_mSpeed = 20.0f;
 	shotcnt = 0;
 	r = 0;
@@ -32,6 +41,7 @@ void Boss::update(float deltaTime)
 {
 	input->update();
 	mTimer->update(deltaTime);
+	m_pCirecleTimer->update(deltaTime);
 	b_mVelocity = Vector2(0, 0);
 
 
@@ -77,6 +87,16 @@ void Boss::update(float deltaTime)
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
+
+		//‰~ó‚ÌUŒ‚
+		if (m_pCirecleTimer->timerSet_Self(10.0f))
+		{
+ 			circleShot(deltaTime);
+		}
+		else
+			shotAngle = 0.0f;
+
+
 		if (b_mHp <= 0)
 		{
 			b_mIsDeath = true;
@@ -254,6 +274,19 @@ void Boss::Jibaku(Vector2 pos)
 {
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
+}
+
+//‰~UŒ‚
+void Boss::circleShot(float deltaTime)
+{
+	
+	m_pCirecleEndTimer->update(deltaTime);
+	//‰~UŒ‚ŽžŠÔ‚ÌÝ’è
+	if (m_pCirecleEndTimer->timerSet(2.0f))
+		m_pCirecleTimer->initialize();
+
+	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 64), charaManager, b_mType, shotAngle));
+	shotAngle += 10.0f;
 }
 
 bool Boss::getIsDeath() const

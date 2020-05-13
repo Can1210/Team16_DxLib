@@ -1,6 +1,6 @@
 #include "CircleMoveEnemy.h"
 #include <random>
-
+#include "../Bulletes/AngleBullet.h"
 
 CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer())
 {
@@ -34,7 +34,7 @@ void CirecleMoveEnemy::SubChange()
 //初期化
 void CirecleMoveEnemy::initialize()
 {
-	checkPlayerPos();
+	b_mVelocity = checkPlayerPos(b_mVelocity);
 	b_mHp = 3;
 	mMoveFlag = FALSE;
 
@@ -144,7 +144,13 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 
 void CirecleMoveEnemy::Shot(Vector2 pos)
 {
-	charaManager->add(new Bullet(Vector2(b_mPosittion.x , b_mPosittion.y), charaManager, b_mType, 0.0f));
+
+	Vector2 angleVec = Vector2(0,0);
+	angleVec = checkPlayerPos(angleVec);  //角度を代入
+	//角度に変換
+	float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
+
+	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x , b_mPosittion.y) + Vector2(32, 32), charaManager, b_mType, angle));
 }
 
 void CirecleMoveEnemy::SubShot(Vector2 pos)
@@ -185,6 +191,11 @@ void CirecleMoveEnemy::move(float deltaTime)
 	y = radius * sin(moveTime* rotateSpeed);
 	b_mPosittion +=  Vector2(x,y);
 	
+	if (m_pTimer->timerSet(1.0f))
+	{
+		Shot(b_mPosittion);
+	}
+
 	//画面外なら死ぬ
 	deathArea();
 }
@@ -297,11 +308,11 @@ void CirecleMoveEnemy::deathArea()
 	}
 }
 //プレイヤーの位置を調べる
-void CirecleMoveEnemy::checkPlayerPos()
+Vector2 CirecleMoveEnemy::checkPlayerPos(Vector2 vec)
 {
 	//プレイヤーの位置を入れる
 	mPlayerPos = charaManager->getPlayerPosition();
 	Vector2 playerVec = mPlayerPos - b_mPosittion;  //プレイヤーとの差分
-	b_mVelocity = playerVec.normalize();
+	return playerVec.normalize();
 
 }

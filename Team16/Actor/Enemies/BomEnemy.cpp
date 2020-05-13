@@ -98,7 +98,7 @@ void BomEnemy::update(float deltaTime)
 	if (b_mType == Type::ENEMY)
 	{
 		b_mVelocity.y += 1;
-		if (mTimer->timerSet(6))
+		if (mTimer->timerSet(1.0f))
 		{
 			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
@@ -113,6 +113,9 @@ void BomEnemy::update(float deltaTime)
 		{
 			b_mIsDeath = true;
 		}
+
+
+
 		b_mPosittion += b_mVelocity;
 	}
 
@@ -266,8 +269,19 @@ void BomEnemy::Shot(Vector2 pos)
 
 void BomEnemy::SubShot(Vector2 pos)
 {
-	charaManager->add(new BomBullet(pos, charaManager, b_mType));
-}
+	//charaManager->add(new BomBullet(pos, charaManager, b_mType));
+	//射撃許可ラインよりより下にいたら撃たない
+	if (!isShot()) return;
+
+	Vector2 angleVec = Vector2(0, 0);
+	angleVec = checkPlayerPos(angleVec);  //角度を代入
+	//角度に変換
+	float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
+	//3Wayに変更する
+	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle - 30.0f));
+	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle));
+	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle + 30.0f));
+}												  
 
 void BomEnemy::CShot(Vector2 pos)
 {
@@ -281,5 +295,23 @@ void BomEnemy::Jibaku(Vector2 pos)
 {
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
+}
+
+Vector2 BomEnemy::checkPlayerPos(Vector2 vec)
+{
+	//プレイヤーの位置を入れる
+	mPlayerPos = charaManager->getPlayerPosition();
+	Vector2 playerVec = mPlayerPos - b_mPosittion;  //プレイヤーとの差分
+	return playerVec.normalize();
+}
+//射撃してほしいかどうか
+bool BomEnemy::isShot()
+{
+	if (b_mPosittion.y <= charaManager->getPlayerPosition().y - 64 * 2)
+	{
+		return true;
+	}
+
+	return false;
 }
 

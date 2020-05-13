@@ -38,7 +38,7 @@ public:
 	//死亡エリア
 	void deathArea();
 	////プレイヤーの位置を調べる
-	void checkPlayerPos();
+	Vector2 checkPlayerPos(Vector2 vec);
 
 
 
