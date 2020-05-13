@@ -30,12 +30,14 @@ public:
 
 	void Jibaku(Vector2 pos);
 
+	void circleShot(float deltaTime);
+
 
 	virtual bool getIsDeath() const override;
 
 	virtual Type getType() const override;
 
-	
+
 
 
 
@@ -57,5 +59,10 @@ private:
 	int shotcnt;
 	int subShotCnt;//‡‘ÌËŒ‚‚ÌƒŒ[ƒg
 	int r, b;
+
+	Timer* m_pCirecleTimer;
+	Timer* m_pCirecleEndTimer;
+
+	float shotAngle;
 
 };
