@@ -34,6 +34,10 @@ public:
 	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
+
+	Vector2 checkPlayerPos(Vector2 vec);
+
+	bool isShot();
 	
 private:
 	Vector2 KakoPos;//位置の保存用
@@ -44,5 +48,6 @@ private:
 	int shotcnt;
 	int subShotCnt;//合体射撃のレート
 	int r, b;
+	Vector2 mPlayerPos;   //プレイヤーの位置
 
 };

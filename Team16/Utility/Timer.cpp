@@ -31,3 +31,13 @@ bool Timer::timerSet(float setTime)
 	}
 	return false;
 }
+//©•ª‚ÅƒŠƒZƒbƒg‚·‚é
+bool Timer::timerSet_Self(float setTime)
+{
+	//Œ»İ‚ÌŠÔ‚ªÅ‘å‚É‚È‚Á‚½‚çtrue
+	if (mCurrentTime >= setTime)
+	{
+		return true;
+	}
+	return false;
+}

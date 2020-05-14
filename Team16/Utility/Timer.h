@@ -14,6 +14,10 @@ public:
 	void update(float deltaTime);
 	//タイマーセット：何秒待つか　経過するまでfalse
 	bool timerSet(float setTime);
+	//自分でリセットする
+	bool timerSet_Self(float setTime);
+
+	
 private:
 	float mCurrentTime;   //現在の時間
 };

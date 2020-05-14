@@ -1,7 +1,11 @@
 #include "Boss.h"
 #include"../../Scene/GamePlay.h"
+#include "../Bulletes/AngleBullet.h"
 
-Boss::Boss(Vector2 pos, CharactorManager * c) :mTimer(new Timer())
+Boss::Boss(Vector2 pos, CharactorManager * c) :
+	mTimer(new Timer()),
+	m_pCirecleTimer(new Timer()),
+	m_pCirecleEndTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -11,6 +15,8 @@ Boss::~Boss()
 {
 	delete input;
 	delete mTimer;
+	delete m_pCirecleTimer;
+	delete m_pCirecleEndTimer;
 }
 
 void Boss::initialize()
@@ -23,6 +29,9 @@ void Boss::initialize()
 	b_mType = Type::BOSS;
 	b_mAngle = 180.0f;
 	mTimer->initialize();
+    m_pCirecleTimer->initialize();
+    m_pCirecleEndTimer->initialize();
+
 	b_mSpeed = 20.0f;
 	shotcnt = 0;
 	r = 0;
@@ -33,10 +42,11 @@ void Boss::update(float deltaTime)
 {
 	input->update();
 	mTimer->update(deltaTime);
+	m_pCirecleTimer->update(deltaTime);
 	b_mVelocity = Vector2(0, 0);
 
 
-	//–³“GŽžŠÔ
+	//ç„¡æ•µæ™‚é–“
 	if (DamgeFlag&&mTimer->timerSet(2))
 	{
 		DamgeFlag = FALSE;
@@ -78,6 +88,16 @@ void Boss::update(float deltaTime)
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
+
+		//å††çŠ¶ã®æ”»æ’ƒ
+		if (m_pCirecleTimer->timerSet_Self(10.0f))
+		{
+ 			circleShot(deltaTime);
+		}
+		else
+			shotAngle = 0.0f;
+
+
 		if (b_mHp <= 0)
 		{
 			b_mIsDeath = true;
@@ -97,7 +117,7 @@ void Boss::update(float deltaTime)
 
 
 
-	//æ‚ÁŽæ‚èŒã
+	//ä¹—ã£å–ã‚Šå¾Œ
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
 
@@ -216,7 +236,7 @@ void Boss::hit(BaseObject & other)
 
 	//if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
 	//{
-	//	//Å‰‚ÍT‚¦‚É
+	//	//æœ€åˆã¯æŽ§ãˆã«
 	//	b_mType = Type::SUB_PLAYER;
 	//}
 }
@@ -256,6 +276,19 @@ void Boss::Jibaku(Vector2 pos)
 {
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
+}
+
+//å††æ”»æ’ƒ
+void Boss::circleShot(float deltaTime)
+{
+	
+	m_pCirecleEndTimer->update(deltaTime);
+	//å††æ”»æ’ƒæ™‚é–“ã®è¨­å®š
+	if (m_pCirecleEndTimer->timerSet(2.0f))
+		m_pCirecleTimer->initialize();
+
+	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 64), charaManager, b_mType, shotAngle));
+	shotAngle += 10.0f;
 }
 
 bool Boss::getIsDeath() const
