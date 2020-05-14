@@ -1,6 +1,6 @@
 #include "LoadScene.h"
 #include "../Device/Loader/TextureLoad.h"
-
+#include "../Device/Loader/SoundLoad.h"
 LoadScene::LoadScene()
 {
 }
@@ -31,6 +31,19 @@ void LoadScene::initialize()
 	//フォント関係
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("hpNumber", "Resouce/Texture/denColor.png");
+
+	//音関係
+	//BGM
+	SoundLoad::getInstance().addBGM("bgm", "bgm.mp3");
+
+	//SE
+	SoundLoad::getInstance().addSE("burst01", "burst01.mp3");
+	SoundLoad::getInstance().addSE("burst02", "burst02.mp3");
+	SoundLoad::getInstance().addSE("click01", "click01.mp3");
+	SoundLoad::getInstance().addSE("hit", "hit.mp3");
+	SoundLoad::getInstance().addSE("shot", "shot.mp3");
+
+
 	CWindow::getInstance().log("読み込みが終わったので終了します\n");
 	isSceneEnd = true;       //ここまでエラーがなかったら終了状態にする
 }
