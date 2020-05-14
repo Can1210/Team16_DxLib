@@ -16,8 +16,6 @@ public:
 	Enemy(Vector2 pos, CharactorManager *c);
 	~Enemy();
 
-	bool PlayerNull();
-	void SubChange();
 	// BaseObject ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void initialize() override;
 
@@ -29,7 +27,7 @@ public:
 
 	void Shot(Vector2 pos);
 
-	void CShot(Vector2 pos);
+	
 
 	void Jibaku(Vector2 pos);
 
@@ -40,8 +38,7 @@ private:
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	int shotcnt;
 	int subShotCnt;
-	int r, b;
-	bool DamgeFlag;
+	int itemCnt;
+	
 };

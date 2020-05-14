@@ -21,8 +21,7 @@ public:
 	PlatoonEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
 	~PlatoonEnemy();
 
-	bool PlayerNull();
-	void SubChange();
+	
 	// BaseObject を介して継承されました
 	virtual void initialize() override;
 
@@ -36,7 +35,7 @@ public:
 
 	void SubShot(Vector2 pos, float angle);
 
-	void CShot(Vector2 pos);
+	
 
 	void Jibaku(Vector2 pos);
 
@@ -61,9 +60,7 @@ private:
 
 	Vector2 Traking();
 	int GetRandom(int min, int max);
-	Vector2 KakoPos;//位置の保存用
-	int shotcnt;
+	
 	int subShotCnt;//合体射撃のレート
-	int r, b;
-	bool DamgeFlag;
+	int itemCnt;
 };

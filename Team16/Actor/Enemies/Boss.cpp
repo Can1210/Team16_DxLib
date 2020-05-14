@@ -21,7 +21,7 @@ Boss::~Boss()
 
 void Boss::initialize()
 {
-	b_mHp = 3;
+	b_mHp = 30;
 
 	input = new Input;
 	input->init();
@@ -89,7 +89,7 @@ void Boss::update(float deltaTime)
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
 
-		//円状の攻撃
+		////円状の攻撃
 		if (m_pCirecleTimer->timerSet_Self(10.0f))
 		{
  			circleShot(deltaTime);
@@ -117,51 +117,7 @@ void Boss::update(float deltaTime)
 
 
 
-	//乗っ取り後
-	if (b_mType == Type::PLAYER && !b_mEndFlag)
-	{
-
-		if (input->isKeyState(KEYCORD::ARROW_UP))
-		{
-			b_mVelocity.y -= 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_DOWN))
-		{
-			b_mVelocity.y += 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_RIGHT))
-		{
-			b_mVelocity.x += 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_LEFT))
-		{
-			b_mVelocity.x -= 6;
-		}
-		if (input->isKeyDown(KEYCORD::SPACE))
-		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-		if (input->isKeyState(KEYCORD::V))
-		{
-			shotcnt++;
-			if (shotcnt > 100)
-			{
-				shotcnt = 100;
-			}
-		}
-
-		if (shotcnt == 100 && input->isKeyUp(KEYCORD::V))
-		{
-			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-		if (b_mHp <= 0)
-		{
-			b_mEndFlag = true;
-		}
-
-
-		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
-	}
+	
 }
 
 void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
@@ -177,31 +133,13 @@ void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
 	else if (!b_mEndFlag)
 	{
 
-		if (DamgeFlag)
-		{
-			b_mArpha = 155;
-		}
-		else
-		{
-			b_mArpha = 255;
-		}
 
-
-		DrawBox(0, 0, shotcnt, 100, GetColor(r, 0, b), TRUE);
-		if (shotcnt == 100)
-		{
-			r = 255;
-			b = 0;
-		}
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 0, 255), FALSE);
 		b_mAngle = 0.0f;
 
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
 		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
-		if (b_mType == Type::PLAYER)
-		{
-			renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		}
+	
 	}
 	
 
@@ -287,7 +225,7 @@ void Boss::circleShot(float deltaTime)
 	if (m_pCirecleEndTimer->timerSet(2.0f))
 		m_pCirecleTimer->initialize();
 
-	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 64), charaManager, b_mType, shotAngle));
+	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x+32, b_mPosittion.y + 64), charaManager, b_mType, shotAngle));
 	shotAngle += 10.0f;
 }
 

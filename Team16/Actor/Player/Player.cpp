@@ -15,13 +15,13 @@ Player::~Player()
 	delete mTimer;
 }
 
-bool Player::SubNull()
+bool Player::SubNull()//サブがいるか
 {
 	for (auto object : charaManager->getUseList())
 	{
 		if (object->getType() == Type::SUB_PLAYER)
 		{
-			return true;
+			object->setIsDeath(true);
 		}
 	}
 	return false;
@@ -34,7 +34,7 @@ void Player::initialize()
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 3;
+	b_mHp = 300;
 	b_mSpeed = 40.0f;
 	mTimer->initialize();
 	shotcnt = 0;
@@ -55,7 +55,7 @@ void Player::update(float deltaTime)
 	{
 		DamgeFlag = FALSE;
 	}
-	if (input->isKeyState(KEYCORD::SPACE)&&SubNull())
+	if (input->isKeyState(KEYCORD::SPACE))
 	{
 		subShotCnt++;
 		if (subShotCnt > 7)
@@ -96,21 +96,6 @@ void Player::update(float deltaTime)
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
 
-		
-		
-		if (input->isKeyState(KEYCORD::V))
-		{
-			shotcnt++;
-			if (shotcnt > 100)
-			{
-				shotcnt = 100;
-			}
-		}
-
-		if (shotcnt == 100 && input->isKeyUp(KEYCORD::V))
-		{
-			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
 		if (b_mHp <= 0)
 		{
 			b_mEndFlag = true;
@@ -163,14 +148,6 @@ void Player::Shot(Vector2 pos)
 	charaManager->add(new Bullet(pos, charaManager, b_mType,0.0f));
 }
 
-void Player::CShot(Vector2 pos)
-{
-	charaManager->add(new ChangeBullet(pos, charaManager));
-	shotcnt = 0;
-	r = 0;
-	b = 255;
-}
-
 void Player::TShot(Vector2 pos,float deltaTime)
 {
 	//charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 70.0f));
@@ -197,6 +174,10 @@ void Player::hit(BaseObject & other)
 			mTimer->initialize();
 			DamgeFlag = TRUE;
 		}
+	}
+	if (other.getType() == ITEM)
+	{
+		SubNull();
 	}
 
 

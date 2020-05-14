@@ -14,23 +14,6 @@ BomEnemy::~BomEnemy()
 	delete mTimer;
 }
 
-bool BomEnemy::PlayerNull()
-{
-	for (auto object : charaManager->getUseList())
-	{
-		if (object->getType() == Type::PLAYER)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void BomEnemy::SubChange()
-{
-	b_mPosittion = KakoPos;
-	b_mType = Type::PLAYER;
-}
 
 
 
@@ -45,10 +28,9 @@ void BomEnemy::initialize()
 	b_mAngle = 180.0f;
 	mTimer->initialize();
 	b_mSpeed = 20.0f;
-	shotcnt = 0;
 	subShotCnt = 20;
-	r = 0;
-	b = 255;
+	b_mArpha = 255;
+	itemCnt = 0;
 }
 
 void BomEnemy::update(float deltaTime)
@@ -57,13 +39,6 @@ void BomEnemy::update(float deltaTime)
 
 	input->update();
 	b_mVelocity = Vector2(0, 0);
-
-	//–³“GŽžŠÔ
-	if (DamgeFlag&&mTimer->timerSet(2))
-	{
-		DamgeFlag = FALSE;
-	}
-
 
 	
 	if (b_mType == Type::SUB_PLAYER)
@@ -74,7 +49,7 @@ void BomEnemy::update(float deltaTime)
 			subShotCnt++;
 			if (subShotCnt > 20)
 			{
-				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+			    Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 				subShotCnt = 0;
 			}
 			
@@ -87,11 +62,7 @@ void BomEnemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (!PlayerNull())
-		{
-			SubChange();
-		}
-		KakoPos = b_mPosittion;
+		
 	}
 
 
@@ -104,13 +75,13 @@ void BomEnemy::update(float deltaTime)
 		}
 		if (b_mHp <= 0)
 		{
-			b_mIsDeath = true;
+			b_mType = Type::ITEM;
 			Score::getInstance().addScore(300);
 		}
 		if (b_mPosittion.y > WindowInfo::WindowHeight
 			|| b_mPosittion.x>WindowInfo::WindowWidth
 			|| b_mPosittion.x < 0
-			||b_mHp<=0)
+			)
 		{
 			b_mIsDeath = true;
 		}
@@ -121,67 +92,16 @@ void BomEnemy::update(float deltaTime)
 	}
 
 
-
-	//æ‚ÁŽæ‚èŒã
-	if (b_mType == Type::PLAYER && !b_mEndFlag)
+	//ƒhƒƒbƒvŒãˆ—
+	if (b_mType == Type::ITEM)
 	{
-		if (input->isKeyState(KEYCORD::ARROW_UP))
+		itemCnt++;
+		if (itemCnt > 150)
 		{
-			b_mVelocity.y -= 6;
+			b_mIsDeath = true;
 		}
-		if (input->isKeyState(KEYCORD::ARROW_DOWN))
-		{
-			b_mVelocity.y += 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_RIGHT))
-		{
-			b_mVelocity.x += 6;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_LEFT))
-		{
-			b_mVelocity.x -= 6;
-		}
-		if (input->isKeyDown(KEYCORD::SPACE))
-		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-		if (input->isKeyState(KEYCORD::SPACE))
-		{
-			subShotCnt++;
-			if (subShotCnt>20)
-			{
-				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
-				subShotCnt = 0;
-			}
-			b_mSpeed = 10.0f;
-			
-		}
-		else
-		{
-			b_mSpeed = 20.0f;
-		}
-
-		if (input->isKeyState(KEYCORD::V))
-		{
-			shotcnt++;
-			if (shotcnt > 100)
-			{
-				shotcnt = 100;
-			}
-		}
-
-		if (shotcnt == 100 && input->isKeyUp(KEYCORD::V))
-		{
-			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-
-		if (b_mHp <= 0)
-		{
-			b_mEndFlag = true;
-		}
-
-		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 	}
+	
 }
 
 void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -191,26 +111,9 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	}
-	else  if (!b_mEndFlag)
+   if(b_mType == Type::SUB_PLAYER)
 	{
-		if (DamgeFlag)
-		{
-			b_mArpha = 155;
-		}
-		else
-		{
-			b_mArpha = 255;
-		}
-
-
-		DrawBox(0, 0, shotcnt, 100, GetColor(r, 0, b), TRUE);
-		if (shotcnt == 100)
-		{
-			r = 255;
-			b = 0;
-		}
-
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 0, 255), FALSE);
+	
 		b_mAngle = 0.0f;
 		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 		if (b_mType == Type::PLAYER)
@@ -218,10 +121,10 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 			renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 		}
 	}
-
-	if (b_mEndFlag)
+	if (b_mType == Type::ITEM)
 	{
-		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 255, 0), FALSE);
+		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
 	}
 	
 }
@@ -255,7 +158,7 @@ void BomEnemy::hit(BaseObject & other)
 	}
 
 
-	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
+	if (other.getType() == Type::PLAYER&&b_mType == Type::ITEM)
 	{
 		//Å‰‚ÍT‚¦‚É
 		b_mType = Type::SUB_PLAYER;
@@ -265,7 +168,14 @@ void BomEnemy::hit(BaseObject & other)
 
 void BomEnemy::Shot(Vector2 pos)
 {
-	charaManager->add(new Bullet(pos, charaManager, b_mType,0.0));
+	Vector2 angleVec = Vector2(0, 0);
+	//angleVec = checkPlayerPos(angleVec);  //Šp“x‚ð‘ã“ü
+	//Šp“x‚É•ÏŠ·
+	//float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
+	//3Way‚É•ÏX‚·‚é
+	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f - 30.0f));
+	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f));
+	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f + 30.0f));
 }
 
 void BomEnemy::SubShot(Vector2 pos)
@@ -284,13 +194,6 @@ void BomEnemy::SubShot(Vector2 pos)
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle + 30.0f));
 }												  
 
-void BomEnemy::CShot(Vector2 pos)
-{
-	charaManager->add(new ChangeBullet(pos, charaManager));
-	shotcnt = 0;
-	r = 0;
-	b = 255;
-}
 
 void BomEnemy::Jibaku(Vector2 pos)
 {

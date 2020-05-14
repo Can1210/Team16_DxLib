@@ -14,8 +14,7 @@ class UFOEnemy :public BaseObject
 public:
 	UFOEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
 	~UFOEnemy();
-	bool PlayerNull();
-	void SubChange();
+	
 	// BaseObject ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void initialize() override;
 
@@ -29,7 +28,7 @@ public:
 	void SubShot(Vector2 pos, float angle);
 	void PlayerShot(Vector2 pos, float angle);
 
-	void CShot(Vector2 pos);
+	
 
 	void Jibaku(Vector2 pos);
 
@@ -48,7 +47,7 @@ private:
 	bool down;
 
 	Vector2 Traking();
-	Vector2 KakoPos;//à íuÇÃï€ë∂óp
 
 	int subShotcnt;
+	int itemCnt;
 };

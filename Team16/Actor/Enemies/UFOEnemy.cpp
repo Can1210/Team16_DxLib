@@ -20,23 +20,6 @@ UFOEnemy::~UFOEnemy()
 	delete mTimer;
 }
 
-bool UFOEnemy::PlayerNull()
-{
-	for (auto object : charaManager->getUseList())
-	{
-		if (object->getType() == Type::PLAYER)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void UFOEnemy::SubChange()
-{
-	b_mPosittion = KakoPos;
-	b_mType = Type::PLAYER;
-}
 
 void UFOEnemy::initialize()
 {
@@ -51,6 +34,8 @@ void UFOEnemy::initialize()
 	time = 0.0f;
 	down = false;
 	subShotcnt = 20;
+	b_mArpha = 255;
+	itemCnt = 0;
 }
 
 void UFOEnemy::update(float deltaTime)
@@ -59,6 +44,15 @@ void UFOEnemy::update(float deltaTime)
 
 	input->update();
 	b_mVelocity = Vector2(0, 0);
+	//ƒhƒƒbƒvŒãˆ—
+	if (b_mType == Type::ITEM)
+	{
+		itemCnt++;
+		if (itemCnt > 150)
+		{
+			b_mIsDeath = true;
+		}
+	}
 
 	if (b_mType == Type::SUB_PLAYER)
 	{
@@ -77,11 +71,7 @@ void UFOEnemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (!PlayerNull())
-		{
-			SubChange();
-		}
-		KakoPos = b_mPosittion;
+		
 	}
 
 	if (b_mType == Type::ENEMY)
@@ -107,57 +97,14 @@ void UFOEnemy::update(float deltaTime)
 			b_mIsDeath = true;
 		}
 
-		if (b_mHp == 0)
-		{
-			Score::getInstance().addScore(100);
-			b_mIsDeath = true;
-		}
-	}
-
-	//æ‚ÁŽæ‚èŒã
-	if (b_mType == Type::PLAYER && !b_mEndFlag)
-	{
-		if (input->isKeyState(KEYCORD::ARROW_UP))
-		{
-			b_mVelocity.y -= 4;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_DOWN))
-		{
-			b_mVelocity.y += 4;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_RIGHT))
-		{
-			b_mVelocity.x += 4;
-		}
-		if (input->isKeyState(KEYCORD::ARROW_LEFT))
-		{
-			b_mVelocity.x -= 4;
-		}
-		if (input->isKeyDown(KEYCORD::SPACE))
-		{
-			PlayerShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
-		}
-		if (input->isKeyState(KEYCORD::SPACE))
-		{
-			subShotcnt++;
-			if (subShotcnt > 20)
-			{
-				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
-				subShotcnt = 0;
-			}
-
-		}
-		if (input->isKeyDown(KEYCORD::X))
-		{
-			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
-		
 		if (b_mHp <= 0)
 		{
-			b_mEndFlag = true;
+			Score::getInstance().addScore(100);
+			b_mType = Type::ITEM;
 		}
-		b_mPosittion += b_mVelocity;
 	}
+
+	
 	b_mPosittion += b_mVelocity;
 }
 
@@ -169,18 +116,17 @@ void UFOEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	}
-	else if (!b_mEndFlag)
+	if(b_mType == Type::SUB_PLAYER)
 	{
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 0, 255), FALSE);
 		b_mAngle = 0.0f;
 		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-		renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	}
+	if (b_mType == Type::ITEM)
+	{
+		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 255, 0), FALSE);
+		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
 	}
 
-	if (b_mEndFlag)
-	{
-		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-	}
 }
 
 void UFOEnemy::hit(BaseObject & other)
@@ -195,12 +141,8 @@ void UFOEnemy::hit(BaseObject & other)
 		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
-	if (other.getType() == Type::ENEMY&&b_mType == Type::PLAYER)
-	{
-		b_mHp -= 1;
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
-	}
-	if (other.getType() == Type::CHANGE_BULLET&&b_mType == Type::ENEMY)
+
+	if (other.getType() == Type::PLAYER&&b_mType == Type::ITEM)
 	{
 		b_mType = Type::SUB_PLAYER;
 	}
@@ -230,10 +172,6 @@ void UFOEnemy::PlayerShot(Vector2 pos, float angle) {
 	charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle2 + angle));
 }
 
-void UFOEnemy::CShot(Vector2 pos)
-{
-	charaManager->add(new ChangeBullet(pos, charaManager));
-}
 
 void UFOEnemy::Jibaku(Vector2 pos)
 {
