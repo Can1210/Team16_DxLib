@@ -31,9 +31,9 @@ void Sound::playBGM(std::string soundName)
 	if (mCurrentBGM == soundName)return;
 
 	//BGM‚ÍÄ¶’†‚È‚ç’â~
-	if (checkPlayingBGM(mCurrentBGM))
+	if (checkPlayingBGM(soundName))
 	{
-		StopSoundMem(SoundLoad::getInstance().setBGM(mCurrentBGM));
+		StopSoundMem(SoundLoad::getInstance().setBGM(soundName));
 	}
 	//Œ»İ‚ÌBGM‚ğ•ÏX
 	mCurrentBGM = soundName;

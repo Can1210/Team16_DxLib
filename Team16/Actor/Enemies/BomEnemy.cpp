@@ -1,5 +1,6 @@
 #include <random>
 #include"BomEnemy.h"
+#include"../../Device/Sound.h"
 
 BomEnemy::BomEnemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
@@ -98,6 +99,7 @@ void BomEnemy::update(float deltaTime)
 		itemCnt++;
 		if (itemCnt > 150)
 		{
+			Sound::getInstance().playSE("burst02");
 			b_mIsDeath = true;
 		}
 	}
@@ -197,6 +199,7 @@ void BomEnemy::SubShot(Vector2 pos)
 
 void BomEnemy::Jibaku(Vector2 pos)
 {
+	Sound::getInstance().playSE("burst02");
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }

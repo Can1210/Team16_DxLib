@@ -2,6 +2,7 @@
 #include <random>
 #include <stdio.h>
 #include <stdarg.h>
+#include"../../Device/Sound.h"
 
 UFOEnemy::UFOEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end) : mTimer(new Timer())
 {
@@ -50,6 +51,7 @@ void UFOEnemy::update(float deltaTime)
 		itemCnt++;
 		if (itemCnt > 150)
 		{
+			Sound::getInstance().playSE("burst02");
 			b_mIsDeath = true;
 		}
 	}
@@ -62,7 +64,7 @@ void UFOEnemy::update(float deltaTime)
 			subShotcnt++;
 				if (subShotcnt > 20)
 				{
-					SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+					SubShot(Vector2(b_mPosittion.x+31.5f, b_mPosittion.y), 180.0f);
 					subShotcnt = 0;
 				}
 			
@@ -175,6 +177,7 @@ void UFOEnemy::PlayerShot(Vector2 pos, float angle) {
 
 void UFOEnemy::Jibaku(Vector2 pos)
 {
+	Sound::getInstance().playSE("burst02");
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }

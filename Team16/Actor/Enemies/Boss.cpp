@@ -1,6 +1,7 @@
 #include "Boss.h"
 #include"../../Scene/GamePlay.h"
 #include "../Bulletes/AngleBullet.h"
+#include"../../Device/Sound.h"
 
 Boss::Boss(Vector2 pos, CharactorManager * c) :
 	mTimer(new Timer()),
@@ -100,6 +101,7 @@ void Boss::update(float deltaTime)
 
 		if (b_mHp <= 0)
 		{
+			Sound::getInstance().playSE("burst01");
 			b_mIsDeath = true;
 			Score::getInstance().addScore(66666);
 			GamePlay::BossEnd = true;
@@ -212,6 +214,7 @@ void Boss::CShot(Vector2 pos)
 
 void Boss::Jibaku(Vector2 pos)
 {
+	
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }

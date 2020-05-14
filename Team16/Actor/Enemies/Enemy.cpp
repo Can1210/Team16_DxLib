@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include <random>
+#include"../../Device/Sound.h"
 
 
 Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
@@ -79,6 +80,7 @@ void Enemy::update(float deltaTime)
 		itemCnt++;
 		if (itemCnt > 150)
 		{
+			Sound::getInstance().playSE("burst02");
 			b_mIsDeath = true;
 		}
 	}
@@ -160,6 +162,7 @@ void Enemy::Shot(Vector2 pos)
 
 void Enemy::Jibaku(Vector2 pos)
 {
+	Sound::getInstance().playSE("burst02");
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }

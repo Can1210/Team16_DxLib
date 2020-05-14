@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <stdlib.h> // rand, srandŠÖ”
 #include <time.h>   // timeŠÖ”
+#include"../../Device/Sound.h"
 
 PlatoonEnemy::PlatoonEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end) : mTimer(new Timer())
 {
@@ -70,7 +71,7 @@ void PlatoonEnemy::update(float deltaTime)
 			subShotCnt++;
 			if (subShotCnt > 20)
 			{
-				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+				SubShot(Vector2(b_mPosittion.x+31.5f, b_mPosittion.y), 180.0f);
 				subShotCnt = 0;
 			}
 			
@@ -131,8 +132,10 @@ void PlatoonEnemy::update(float deltaTime)
 		itemCnt++;
 		if (itemCnt > 150)
 		{
+			Sound::getInstance().playSE("burst02");
 			b_mIsDeath = true;
 		}
+		
 	}
 }
 
@@ -172,7 +175,6 @@ void PlatoonEnemy::hit(BaseObject & other)
 	{
 		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
-		
 	}
 
 	if (other.getType() == Type::ENEMY&&b_mType == Type::PLAYER)
@@ -214,6 +216,7 @@ void PlatoonEnemy::SubShot(Vector2 pos, float angle)
 
 void PlatoonEnemy::Jibaku(Vector2 pos)
 {
+	Sound::getInstance().playSE("burst02");
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }
