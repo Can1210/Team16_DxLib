@@ -34,14 +34,14 @@ void LoadScene::initialize()
 
 	//âπä÷åW
 	//BGM
-	SoundLoad::getInstance().addBGM("bgm", "bgm.mp3");
+	SoundLoad::getInstance().addBGM("bgm", "Resouce/Sound/BGM/bgm.mp3");
 
 	//SE
-	SoundLoad::getInstance().addSE("burst01", "burst01.mp3");
-	SoundLoad::getInstance().addSE("burst02", "burst02.mp3");
-	SoundLoad::getInstance().addSE("click01", "click01.mp3");
-	SoundLoad::getInstance().addSE("hit", "hit.mp3");
-	SoundLoad::getInstance().addSE("shot", "shot.mp3");
+	SoundLoad::getInstance().addSE("burst01", "Resouce/Sound/SE/burst01.mp3");
+	SoundLoad::getInstance().addSE("burst02", "Resouce/Sound/SE/burst02.mp3");
+	SoundLoad::getInstance().addSE("click01", "Resouce/Sound/SE/click01.mp3");
+	SoundLoad::getInstance().addSE("hit", "Resouce/Sound/SE/hit.mp3");
+	SoundLoad::getInstance().addSE("shot", "Resouce/Sound/SE/shot.mp3");
 
 
 	CWindow::getInstance().log("ì«Ç›çûÇ›Ç™èIÇÌÇ¡ÇΩÇÃÇ≈èIóπÇµÇ‹Ç∑\n");

@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include"../../Device/Sound.h"
 
 
 Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
@@ -98,6 +98,7 @@ void Player::update(float deltaTime)
 
 		if (b_mHp <= 0)
 		{
+			Sound::getInstance().playSE("burst02");
 			b_mEndFlag = true;
 		}
 		
@@ -146,6 +147,7 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 void Player::Shot(Vector2 pos)
 {
 	charaManager->add(new Bullet(pos, charaManager, b_mType,0.0f));
+	Sound::getInstance().playSE("shot");
 }
 
 void Player::TShot(Vector2 pos,float deltaTime)
@@ -161,18 +163,22 @@ void Player::hit(BaseObject & other)
 	{
 		if (other.getType() == Type::ENEMY_BULLET)
 		{
+			Sound::getInstance().playSE("hit");
 			b_mHp -= 1;
 			DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 16, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 			mTimer->initialize();
 			DamgeFlag = TRUE;
+		
 		}
 
 		if (other.getType() == Type::ENEMY)
 		{
+			Sound::getInstance().playSE("hit");
 			b_mHp -= 1;
 			DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 16, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 			mTimer->initialize();
 			DamgeFlag = TRUE;
+			
 		}
 	}
 	if (other.getType() == ITEM)

@@ -1,6 +1,7 @@
 #include "CircleMoveEnemy.h"
 #include <random>
 #include "../Bulletes/AngleBullet.h"
+#include"../../Device/Sound.h"
 
 CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer())
 {
@@ -59,6 +60,7 @@ void CirecleMoveEnemy::update(float deltaTime)
 		itemCnt++;
 		if (itemCnt > 150)
 		{
+		  Sound::getInstance().playSE("burst02");
 		  b_mIsDeath = true;
 		}
 	}
@@ -146,6 +148,7 @@ void CirecleMoveEnemy::SubShot(Vector2 pos)
 
 void CirecleMoveEnemy::Jibaku(Vector2 pos)
 {
+	Sound::getInstance().playSE("burst02");
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }

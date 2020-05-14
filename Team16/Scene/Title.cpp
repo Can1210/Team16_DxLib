@@ -1,4 +1,5 @@
 #include "Title.h"
+#include"../Device/Sound.h"
 
 //コンストラクタ
 Title::Title(Input* input)
@@ -21,6 +22,7 @@ void Title::update(float deltaTime)
 {
 	if (m_pInput->isKeyDown(KEYCORD::Z))
 	{
+		Sound::getInstance().playSE("click01");
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）
 	}
 

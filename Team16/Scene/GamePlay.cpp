@@ -1,5 +1,6 @@
 #include "GamePlay.h"
 #include"../GameBase/Score.h"
+#include"../Device/Sound.h"
 bool GamePlay::BossEnd;
 GamePlay::GamePlay(Input* input)
 {
@@ -34,9 +35,15 @@ void GamePlay::initialize()
 
 void GamePlay::update(float deltaTime)
 {
+	Sound::getInstance().playBGM("bgm");
 	charaManager->update(deltaTime);
-	enemySpawn->spawn();
-	enemySpawn->update(deltaTime);
+	if (!BossEnd)
+	{
+		enemySpawn->spawn();
+		enemySpawn->update(deltaTime);
+	}
+	
+	
 	if (Score::getInstance().getScore() >= 1500&&bossFlag == FALSE)
 	{
 		bossFlag = TRUE;
@@ -49,6 +56,7 @@ void GamePlay::update(float deltaTime)
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）
 	}
 	SetBackgroundColor(0, 0, 0);
+	
 }
 
 void GamePlay::draw(Renderer* renderer, Renderer3D* renderer3D)
