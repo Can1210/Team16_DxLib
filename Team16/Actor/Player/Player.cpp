@@ -34,7 +34,7 @@ void Player::initialize()
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 300;
+	b_mHp = 500;
 	b_mSpeed = 40.0f;
 	mTimer->initialize();
 	shotcnt = 0;

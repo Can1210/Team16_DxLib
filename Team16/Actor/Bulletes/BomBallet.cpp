@@ -1,11 +1,12 @@
 #include "BomBallet.h"
 
-BomBullet::BomBullet(Vector2 pos, CharactorManager * c, Type t) :mTimer(new Timer())
+BomBullet::BomBullet(Vector2 pos, CharactorManager * c, Type t,float angle) :mTimer(new Timer())
 {
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
 	b_mCircleSize = 9.0f;
+	bulletAngle = angle;
 }
 
 BomBullet::~BomBullet()
@@ -64,8 +65,9 @@ void BomBullet::update(float deltaTime)
 	}
 	if (b_mType == Type::ENEMY_BULLET)
 	{
-		b_mVelocity.y += 6.0f;
-		b_mPosittion += b_mVelocity;
+		//b_mVelocity.y += 6.0f;
+		b_mVelocity = RotationZ(bulletAngle);
+		b_mPosittion += b_mVelocity*5.0f;
 	}
 
 
@@ -86,5 +88,20 @@ void BomBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 void BomBullet::hit(BaseObject & other)
 {
 
+}
+
+Vector2 BomBullet::RotationZ(float ang)
+{
+	Vector2 v;
+	ang = ang + 45.0f;
+	ang = ang * PI / 180.0;
+
+	float sin = sinf(ang);
+	float cos = cosf(ang);
+
+	float x = cos + sin;
+	float y = -(sin)+cos;
+	v = Vector2(x, y);
+	return v;
 }
 

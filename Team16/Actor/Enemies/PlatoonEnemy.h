@@ -63,4 +63,5 @@ private:
 	
 	int subShotCnt;//合体射撃のレート
 	int itemCnt;
+	float itemDesthCnt;//アイテムが消えるまでを視覚的にわかなりやすく
 };

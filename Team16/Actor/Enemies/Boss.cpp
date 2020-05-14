@@ -10,6 +10,7 @@ Boss::Boss(Vector2 pos, CharactorManager * c) :
 {
 	charaManager = c;
 	b_mPosittion = pos;
+
 }
 
 Boss::~Boss()
@@ -37,6 +38,7 @@ void Boss::initialize()
 	shotcnt = 0;
 	r = 0;
 	b = 255;
+	
 }
 
 void Boss::update(float deltaTime)
@@ -78,7 +80,8 @@ void Boss::update(float deltaTime)
 	if (b_mType == Type::BOSS)
 	{
 		b_mVelocity.y += 2;
-
+		
+	
 		if (b_mPosittion.y > 150)
 		{
 			b_mVelocity = Vector2(0, 0);
@@ -126,7 +129,6 @@ void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
 	if (b_mType == Type::BOSS)
 	{
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
 		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
@@ -190,7 +192,7 @@ void Boss::Shot(Vector2 pos)
 
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 40, b_mPosittion.y), charaManager, b_mType, -30.0f));
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 40, b_mPosittion.y), charaManager, b_mType, 30.0f));
-		charaManager->add(new BomBullet(pos, charaManager, b_mType));
+		//charaManager->add(new BomBullet(pos, charaManager, b_mType));
 	}
 	else
 	{
@@ -199,8 +201,11 @@ void Boss::Shot(Vector2 pos)
 
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 40, b_mPosittion.y), charaManager, b_mType, 30.0f));
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 40, b_mPosittion.y), charaManager, b_mType, -30.0f));
-
-		charaManager->add(new BomBullet(pos, charaManager, b_mType));
+		angleVec = Vector2(0, 0);
+		angleVec = checkPlayerPos(angleVec);  //角度を代入
+		//角度に変換
+	     bomshotAngle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
+		charaManager->add(new BomBullet(pos, charaManager, b_mType,bomshotAngle));
 	}
 }
 
@@ -269,4 +274,12 @@ void Boss::SubChange()
 {
 	b_mPosittion = KakoPos;
 	b_mType = Type::PLAYER;
+}
+
+Vector2 Boss::checkPlayerPos(Vector2 vec)
+{
+	//プレイヤーの位置を入れる
+	mPlayerPos = charaManager->getPlayerPosition();
+	Vector2 playerVec = mPlayerPos - b_mPosittion;  //プレイヤーとの差分
+	return playerVec.normalize();
 }

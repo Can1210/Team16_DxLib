@@ -19,7 +19,7 @@ void Bom::initialize()
 void Bom::update(float deltaTime)
 {
 	mTimer->update(deltaTime);
-	b_mCircleSize += 20;
+	b_mCircleSize += 10;
 	if (mTimer->timerSet(0.5f))
 	{
 		b_mIsDeath = true;

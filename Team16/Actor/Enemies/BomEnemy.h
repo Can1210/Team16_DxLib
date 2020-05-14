@@ -45,7 +45,7 @@ private:
 	Timer *mTimer;
 	int itemCnt;
 	int subShotCnt;//合体射撃のレート
-
+	float itemDesthCnt;//アイテムが消えるまでを視覚的にわかなりやすく
 	Vector2 mPlayerPos;   //プレイヤーの位置
 
 };
