@@ -5,6 +5,7 @@
 #include "../../Device/Renderer3D.h"
 #include "../../Math/Vector2.h"
 #include "../../Utility/Timer.h"
+#include "../../GameBase/Score.h"
 //物体のタイプ
 enum Type
 {
@@ -14,6 +15,7 @@ enum Type
 	ENEMY_BULLET,
 	CHANGE_BULLET,
 	SUB_PLAYER,
+	BOSS,
 };
 
 //描画するオブジェクトの基底クラス

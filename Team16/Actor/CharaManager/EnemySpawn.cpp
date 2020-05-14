@@ -6,6 +6,8 @@
 #include"../Enemies/ThreeWayEnemy.h"
 #include"../Enemies/UFOEnemy.h"
 #include"../Enemies/PlatoonEnemy.h"
+#include"../Enemies/Boss.h"
+#include"../../GameBase/Score.h"
 
 EnemySpawn::EnemySpawn(CharactorManager& charactorManager) :
 	mCharactorManager(&charactorManager),

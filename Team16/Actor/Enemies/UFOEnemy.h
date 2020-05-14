@@ -26,6 +26,7 @@ public:
 	virtual void hit(BaseObject & other) override;
 
 	void Shot(Vector2 pos, float angle);
+	void SubShot(Vector2 pos, float angle);
 	void PlayerShot(Vector2 pos, float angle);
 
 	void CShot(Vector2 pos);
@@ -48,4 +49,6 @@ private:
 
 	Vector2 Traking();
 	Vector2 KakoPos;//ˆÊ’u‚Ì•Û‘¶—p
+
+	int subShotcnt;
 };

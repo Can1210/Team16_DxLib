@@ -84,6 +84,7 @@ void PlatoonEnemy::update(float deltaTime)
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
+			subShotCnt++;
 			if (subShotCnt > 20)
 			{
 				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
@@ -162,9 +163,13 @@ void PlatoonEnemy::update(float deltaTime)
 		}
 		if (b_mPosittion.y > WindowInfo::WindowHeight
 			|| b_mPosittion.x > WindowInfo::WindowWidth
-			|| b_mPosittion.x < 0
-			|| b_mHp <= 0)
+			|| b_mPosittion.x < 0)
 		{
+			b_mIsDeath = true;
+		}
+		if (b_mHp == 0)
+		{
+			Score::getInstance().addScore(100);
 			b_mIsDeath = true;
 		}
 	}
@@ -223,6 +228,7 @@ void PlatoonEnemy::update(float deltaTime)
 		}
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
+			subShotCnt++;
 			if (subShotCnt > 20)
 			{
 				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
@@ -248,10 +254,7 @@ void PlatoonEnemy::update(float deltaTime)
 			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 			
 		}
-		if (input->isKeyDown(KEYCORD::C))
-		{
-			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
+	
 		if (b_mHp <= 0)
 		{
 			b_mEndFlag = true;

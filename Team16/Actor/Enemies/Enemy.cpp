@@ -7,6 +7,7 @@ Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 	charaManager = c;
 	b_mPosittion = pos;
 	input = new Input;
+	
 }
 
 Enemy::~Enemy()
@@ -106,6 +107,7 @@ void Enemy::update(float deltaTime)
 		}
 		if (b_mHp <= 0)
 		{
+			Score::getInstance().addScore(100);
 			b_mIsDeath = true;
 		}
 		if (b_mPosittion.y > WindowInfo::WindowHeight

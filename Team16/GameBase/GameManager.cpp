@@ -6,6 +6,7 @@
 #include "../Scene/Ending.h"
 #include "../Scene/LoadScene.h"
 #include "Score.h"
+#include"../Device/Sound.h"
 
 //コンストラクタ
 GameManager::GameManager()
@@ -26,6 +27,8 @@ void GameManager::initialize(Input* input)
 	sceneInitialize(input);             //シーン関係を初期化
 	Score::createInstance();            //スコアの生成
 	Score::getInstance().initialize();  //スコアの初期化
+	Sound::createInstance();
+	Sound::getInstance().volumeInitialize();
 }
 void GameManager::sceneInitialize(Input* input)
 {

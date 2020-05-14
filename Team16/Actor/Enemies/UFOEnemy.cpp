@@ -50,6 +50,7 @@ void UFOEnemy::initialize()
 	mTimer->initialize();
 	time = 0.0f;
 	down = false;
+	subShotcnt = 20;
 }
 
 void UFOEnemy::update(float deltaTime)
@@ -62,9 +63,15 @@ void UFOEnemy::update(float deltaTime)
 	if (b_mType == Type::SUB_PLAYER)
 	{
 		b_mPosittion = charaManager->searchPlayer();
-		if (input->isKeyDown(KEYCORD::SPACE))
+		if (input->isKeyState(KEYCORD::SPACE))
 		{
-			Shot(Vector2(b_mPosittion.x, b_mPosittion.y),0.0f);
+			subShotcnt++;
+				if (subShotcnt > 20)
+				{
+					SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+					subShotcnt = 0;
+				}
+			
 		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
@@ -95,9 +102,14 @@ void UFOEnemy::update(float deltaTime)
 		}
 		if (b_mPosittion.y > WindowInfo::WindowHeight
 			|| b_mPosittion.x > WindowInfo::WindowWidth
-			|| b_mPosittion.x < 0
-			|| b_mHp <= 0)
+			|| b_mPosittion.x < 0)
 		{
+			b_mIsDeath = true;
+		}
+
+		if (b_mHp == 0)
+		{
+			Score::getInstance().addScore(100);
 			b_mIsDeath = true;
 		}
 	}
@@ -125,14 +137,21 @@ void UFOEnemy::update(float deltaTime)
 		{
 			PlayerShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
 		}
+		if (input->isKeyState(KEYCORD::SPACE))
+		{
+			subShotcnt++;
+			if (subShotcnt > 20)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
+				subShotcnt = 0;
+			}
+
+		}
 		if (input->isKeyDown(KEYCORD::X))
 		{
 			CShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		if (input->isKeyDown(KEYCORD::C))
-		{
-			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
-		}
+		
 		if (b_mHp <= 0)
 		{
 			b_mEndFlag = true;
@@ -197,6 +216,15 @@ void UFOEnemy::Shot(Vector2 pos, float angle)
 	charaManager->add(new AngleBullet(v1, charaManager, b_mType, angle2 + angle));
 	//‰E
 	//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle3 + angle));
+}
+void UFOEnemy::SubShot(Vector2 pos, float angle)
+{
+	Vector2 v = Vector2(pos.x - 8.0f, pos.y); Vector2 v1 = Vector2(pos.x + 8.0f, pos.y);
+	charaManager->add(new AngleBullet(v, charaManager, b_mType, angle2 + angle));
+	charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle2 + angle));
+	charaManager->add(new AngleBullet(v1, charaManager, b_mType, angle2 + angle));
+
+	
 }
 void UFOEnemy::PlayerShot(Vector2 pos, float angle) {
 	charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle2 + angle));

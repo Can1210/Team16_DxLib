@@ -105,6 +105,7 @@ void BomEnemy::update(float deltaTime)
 		if (b_mHp <= 0)
 		{
 			b_mIsDeath = true;
+			Score::getInstance().addScore(300);
 		}
 		if (b_mPosittion.y > WindowInfo::WindowHeight
 			|| b_mPosittion.x>WindowInfo::WindowWidth
