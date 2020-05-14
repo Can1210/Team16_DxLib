@@ -44,9 +44,8 @@ void ChangeBullet::hit(BaseObject & other)
 	{
 		After();
 		b_mIsDeath = true;
-		
 	}
-	
+
 }
 
 Type ChangeBullet::getType() const

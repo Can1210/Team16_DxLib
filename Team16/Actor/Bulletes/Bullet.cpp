@@ -29,6 +29,9 @@ void Bullet::setBulletType()
 	case ENEMY:
 		b_mType = Type::ENEMY_BULLET;
 		break;
+	case BOSS:
+		b_mType = Type::ENEMY_BULLET;
+		break;
 	default:
 		break;
 	}
@@ -85,12 +88,14 @@ void Bullet::hit(BaseObject & other)
 	if (b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER)
 	{
 		b_mIsDeath = true;
-
 	}
 	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY)
 	{
 		b_mIsDeath = true;
-
+	}
+	if (b_mType == PLAYER_BULLET && other.getType() == Type::BOSS)
+	{
+		b_mIsDeath = true;
 	}
 	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY_BULLET || b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER_BULLET)
 	{

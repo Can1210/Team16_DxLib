@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include"../../Scene/GamePlay.h"
 
 Boss::Boss(Vector2 pos, CharactorManager * c) :mTimer(new Timer())
 {
@@ -14,12 +15,12 @@ Boss::~Boss()
 
 void Boss::initialize()
 {
-	b_mHp = 30;
+	b_mHp = 3;
 
 	input = new Input;
 	input->init();
 	b_mCircleSize = 64.0f;
-	b_mType = Type::ENEMY;
+	b_mType = Type::BOSS;
 	b_mAngle = 180.0f;
 	mTimer->initialize();
 	b_mSpeed = 20.0f;
@@ -63,7 +64,7 @@ void Boss::update(float deltaTime)
 	}
 
 
-	if (b_mType == Type::ENEMY)
+	if (b_mType == Type::BOSS)
 	{
 		b_mVelocity.y += 2;
 
@@ -80,7 +81,10 @@ void Boss::update(float deltaTime)
 		if (b_mHp <= 0)
 		{
 			b_mIsDeath = true;
+			Score::getInstance().addScore(66666);
+			GamePlay::BossEnd = true;
 		}
+		
 		if (b_mPosittion.y > WindowInfo::WindowHeight
 			|| b_mPosittion.x > WindowInfo::WindowWidth
 			|| b_mPosittion.x < 0)
@@ -142,12 +146,13 @@ void Boss::update(float deltaTime)
 
 void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	if (b_mType == Type::ENEMY)
+	if (b_mType == Type::BOSS)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
 		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
+		
 	}
 	else if (!b_mEndFlag)
 	{
@@ -178,16 +183,13 @@ void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
 			renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 		}
 	}
-	if (b_mEndFlag)
-	{
-		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-	}
+	
 
 }
 
 void Boss::hit(BaseObject & other)
 {
-	if (other.getType() == Type::PLAYER_BULLET&&b_mType == Type::ENEMY)
+	if (other.getType() == Type::PLAYER_BULLET&&b_mType == Type::BOSS)
 	{
 		b_mHp -= 1;
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);

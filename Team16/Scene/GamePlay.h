@@ -9,21 +9,25 @@
 #include"../Actor/Enemies/Boss.h"
 
 
+
 class GamePlay : public BaseScene
 {
 public:
 	GamePlay(Input* input);
 	~GamePlay();
-
+	void  boss();
 	virtual void initialize() override;
 	virtual void update(float deltaTime) override;
 	virtual void draw(Renderer* renderer, Renderer3D* renderer3D) override;
 	virtual void shutdown() override;
 	virtual bool isEnd() override;
 	virtual std::string nextScene() override;
+	static bool BossEnd;//å„ïœçX
 private:
 	CharactorManager *charaManager;
 	EnemySpawn *enemySpawn;
+	int bossFlag;
+	
 };
 
 

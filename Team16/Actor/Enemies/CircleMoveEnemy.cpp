@@ -184,6 +184,12 @@ void CirecleMoveEnemy::move(float deltaTime)
 	x = 2 * radius* cos(moveTime* rotateSpeed);
 	y = radius * sin(moveTime* rotateSpeed);
 	b_mPosittion +=  Vector2(x,y);
+
+	if (b_mHp == 0)
+	{
+		b_mIsDeath = true;
+		Score::getInstance().addScore(200);
+	}
 	
 	//画面外なら死ぬ
 	deathArea();

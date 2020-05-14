@@ -1,11 +1,11 @@
 #include "GamePlay.h"
-
+#include"../GameBase/Score.h"
+bool GamePlay::BossEnd;
 GamePlay::GamePlay(Input* input)
 {
 	charaManager = new CharactorManager();
 	m_pInput = input;
 	enemySpawn = new EnemySpawn(*charaManager);
-
 }
 
 
@@ -16,13 +16,19 @@ GamePlay::~GamePlay()
 	
 }
 
+void GamePlay::boss()
+{
+	charaManager->add(new Boss(Vector2(260, 0), charaManager));
+}
+
 void GamePlay::initialize()
 {
 	charaManager->clear();
 	isSceneEnd = false;   //Å‰‚Ífalse
 	charaManager->add(new Player(Vector2(260, 500), charaManager));
 	enemySpawn->initialize();
-	charaManager->add(new Boss(Vector2(260, -1500), charaManager));
+	bossFlag = FALSE;
+	
 	//CWindow::getInstance().log("¡ƒQ[ƒ€ƒvƒŒƒC‚ÉØ‚è‘Ö‚í‚Á‚½");
 }
 
@@ -31,6 +37,12 @@ void GamePlay::update(float deltaTime)
 	charaManager->update(deltaTime);
 	enemySpawn->spawn();
 	enemySpawn->update(deltaTime);
+	if (Score::getInstance().getScore() >= 100&&bossFlag == FALSE)
+	{
+		bossFlag = TRUE;
+		boss();
+	}
+	
 	if (m_pInput->isKeyDown(KEYCORD::Z))
 	{
 		//charaManager->clear();
@@ -42,7 +54,12 @@ void GamePlay::update(float deltaTime)
 void GamePlay::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
 	charaManager->draw(renderer,renderer3D);
+	renderer->drawNumber("hpNumber", Vector2(400, 10), Score::getInstance().getScore(), 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	renderer->drawText("Font", "HP", Vector2(0, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	if (BossEnd)
+	{
+		renderer->drawText("Font", "GAMECLEAR", Vector2(170, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	}
 }
 
 void GamePlay::shutdown()

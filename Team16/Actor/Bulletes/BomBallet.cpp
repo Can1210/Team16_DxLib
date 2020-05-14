@@ -5,7 +5,7 @@ BomBullet::BomBullet(Vector2 pos, CharactorManager * c, Type t) :mTimer(new Time
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
-	b_mCircleSize = 12.0f;
+	b_mCircleSize = 9.0f;
 }
 
 BomBullet::~BomBullet()
@@ -24,6 +24,9 @@ void BomBullet::setBulletType()
 		b_mType = Type::PLAYER_BULLET;
 		break;
 	case ENEMY:
+		b_mType = Type::ENEMY_BULLET;
+		break;
+	case BOSS:
 		b_mType = Type::ENEMY_BULLET;
 		break;
 	default:
@@ -48,7 +51,7 @@ void BomBullet::update(float deltaTime)
 	if (BomFlag)
 	{
 		b_mCircleSize += 10;
-		if (b_mCircleSize > 150)
+		if (b_mCircleSize > 100)
 		{
 			BomFlag = FALSE;
 			b_mIsDeath = true;

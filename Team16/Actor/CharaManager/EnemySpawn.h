@@ -16,6 +16,7 @@ public:
 	void update(float deltaTime);
 	//生成
 	void spawn();
+	
 private:
 	CharactorManager* mCharactorManager;   //キャラクターマネジャー
 	Timer* mTimer;                         //タイマー
