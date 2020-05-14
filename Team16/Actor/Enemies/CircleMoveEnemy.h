@@ -13,8 +13,6 @@ class CirecleMoveEnemy :public BaseObject
 public:
 	CirecleMoveEnemy(Vector2 pos, CharactorManager *c);
 	~CirecleMoveEnemy();
-	bool PlayerNull();
-	void SubChange();
 	// BaseObject を介して継承されました
 	virtual void initialize() override;
 
@@ -28,7 +26,6 @@ public:
 
 	void SubShot(Vector2 pos);
 
-	void CShot(Vector2 pos);
 
 	void Jibaku(Vector2 pos);
 	//動き
@@ -45,15 +42,15 @@ public:
 private:
 
 	bool mMoveFlag;
-	bool DamgeFlag;//無敵時間用
+
 	Input* m_pInput;
 	Timer *m_pTimer;
 	CharactorManager* charaManager;
 	Vector2 mPlayerPos;
-	int shotcnt;
+	
 	int subShotCnt;//合体射撃のレート
-	int r, b;
-	Vector2 KakoPos;//位置の保存用
+	int itemCnt;
+
 	//円運動
 	float x;
 	float y;

@@ -25,7 +25,7 @@ public:
 	
 
 	void Shot(Vector2 pos);
-	void CShot(Vector2 pos);
+	
 	void TShot(Vector2 pos,float deltaTime);
 
 	// BaseObject を介して継承されました

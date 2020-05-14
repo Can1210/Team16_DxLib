@@ -24,7 +24,7 @@ public:
 	virtual Type getType() const override;
 	//•ÏXŒãŒãˆ—
 	void After();
-	bool SubNull();//ƒTƒu‚ª‚ ‚é‚©‚Ç‚¤‚©
+
 private:
 
 	float angle;

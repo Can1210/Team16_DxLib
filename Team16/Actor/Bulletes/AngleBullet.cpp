@@ -30,6 +30,9 @@ void AngleBullet::setBulletType()
 	case ENEMY:
 		b_mType = Type::ENEMY_BULLET;
 		break;
+	case BOSS:
+		b_mType = Type::ENEMY_BULLET;
+		break;
 	default:
 		break;
 	}
@@ -89,18 +92,16 @@ void AngleBullet::hit(BaseObject & other)
 		b_mIsDeath = true;
 
 	}
-	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY)
+	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY||other.getType() == Type::BOSS)
 	{
 		b_mIsDeath = true;
-
 	}
 	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY_BULLET || b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mIsDeath = true;
-
 	}
 
-	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	DrawCircle(b_mPosittion.x + 12 / 2, b_mPosittion.y + 16 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 Vector2 AngleBullet::RotationZ(float ang)

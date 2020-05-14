@@ -16,6 +16,7 @@ enum Type
 	CHANGE_BULLET,
 	SUB_PLAYER,
 	BOSS,
+	ITEM,
 };
 
 //描画するオブジェクトの基底クラス

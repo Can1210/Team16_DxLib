@@ -28,7 +28,7 @@ void GamePlay::initialize()
 	charaManager->add(new Player(Vector2(260, 500), charaManager));
 	enemySpawn->initialize();
 	bossFlag = FALSE;
-	
+	BossEnd = false;
 	//CWindow::getInstance().log("¡ƒQ[ƒ€ƒvƒŒƒC‚ÉØ‚è‘Ö‚í‚Á‚½");
 }
 
@@ -37,7 +37,7 @@ void GamePlay::update(float deltaTime)
 	charaManager->update(deltaTime);
 	enemySpawn->spawn();
 	enemySpawn->update(deltaTime);
-	if (Score::getInstance().getScore() >= 100&&bossFlag == FALSE)
+	if (Score::getInstance().getScore() >= 1500&&bossFlag == FALSE)
 	{
 		bossFlag = TRUE;
 		boss();
@@ -58,7 +58,7 @@ void GamePlay::draw(Renderer* renderer, Renderer3D* renderer3D)
 	renderer->drawText("Font", "HP", Vector2(0, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	if (BossEnd)
 	{
-		renderer->drawText("Font", "GAMECLEAR", Vector2(170, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "GAMECLEAR", Vector2(120, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
 }
 

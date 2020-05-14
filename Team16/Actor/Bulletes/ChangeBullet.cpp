@@ -56,30 +56,17 @@ Type ChangeBullet::getType() const
 
 void ChangeBullet::After()
 {
-	
 	for (auto object : charaManager->getUseList())
 	{
-	
-		if (object->getType() == Type::PLAYER&&SubNull())
-		{
-		   object->setIsDeath(true);
-		}
-		
-	}
-	
-}
-//ƒTƒu‚ª‚¢‚é‚©H
-bool ChangeBullet::SubNull()
-{
-	for (auto object : charaManager->getUseList())
-	{
+
 		if (object->getType() == Type::SUB_PLAYER)
 		{
-			return true;
+			object->setIsDeath(true);
 		}
+
 	}
-	return false;
 }
+
 
 
 
