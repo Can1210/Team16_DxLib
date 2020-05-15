@@ -20,7 +20,7 @@ CirecleMoveEnemy::~CirecleMoveEnemy()
 void CirecleMoveEnemy::initialize()
 {
 	b_mVelocity = checkPlayerPos(b_mVelocity);
-	b_mHp = 3;
+	b_mHp = 2;
 	mMoveFlag = FALSE;
 
 	m_pInput->init();
@@ -169,7 +169,7 @@ void CirecleMoveEnemy::move(float deltaTime)
  		Score::getInstance().addScore(200);
 	}
 	
-	if (m_pTimer->timerSet(1.0f))
+	if (m_pTimer->timerSet(2.0f))
 	{
 		Shot(b_mPosittion);
 	}

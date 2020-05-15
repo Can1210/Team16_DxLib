@@ -1,5 +1,6 @@
 #include "Player.h"
 #include"../../Device/Sound.h"
+#include"../../Scene/GamePlay.h"
 
 
 Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
@@ -34,13 +35,14 @@ void Player::initialize()
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 500;
+	b_mHp = 5;
 	b_mSpeed = 40.0f;
 	mTimer->initialize();
 	shotcnt = 0;
-	subShotCnt = 7;
+	subShotCnt = 20;
 	r = 0;
 	b = 255;
+	b_mEndFlag = false;
 }
 
 void Player::update(float deltaTime)
@@ -58,7 +60,7 @@ void Player::update(float deltaTime)
 	if (input->isKeyState(KEYCORD::SPACE))
 	{
 		subShotCnt++;
-		if (subShotCnt > 7)
+		if (subShotCnt > 20)
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 			subShotCnt = 0;
@@ -100,6 +102,7 @@ void Player::update(float deltaTime)
 		{
 			Sound::getInstance().playSE("burst02");
 			b_mEndFlag = true;
+		
 		}
 		
 		b_mPosittion += b_mVelocity*deltaTime*b_mSpeed;
@@ -139,6 +142,11 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mEndFlag)
 	{
 		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 550), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		if (input->isKeyDown(KEYCORD::SPACE))
+		{
+			GamePlay::PlayerEnd = true;
+	    }
 	}
 
 

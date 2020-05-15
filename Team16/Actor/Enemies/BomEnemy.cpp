@@ -20,7 +20,7 @@ BomEnemy::~BomEnemy()
 
 void BomEnemy::initialize()
 {
-	b_mHp = 4;
+	b_mHp = 3;
 
 	
 	input->init();
@@ -71,7 +71,7 @@ void BomEnemy::update(float deltaTime)
 	if (b_mType == Type::ENEMY)
 	{
 		b_mVelocity.y += 1;
-		if (mTimer->timerSet(1.0f))
+		if (mTimer->timerSet(3.0f))
 		{
 			SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}

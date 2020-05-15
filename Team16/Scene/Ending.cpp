@@ -1,5 +1,6 @@
 #include "Ending.h"
 #include "../GameBase/Score.h"
+#include"../Device/Sound.h"
 
 
 Ending::Ending(Input* input)
@@ -14,6 +15,7 @@ Ending::~Ending()
 
 void Ending::initialize()
 {
+
 	isSceneEnd = false;       //最初はfalse
 	CWindow::getInstance().log("今エンディングに切り替わった\n");
 }

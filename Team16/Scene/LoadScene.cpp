@@ -31,6 +31,7 @@ void LoadScene::initialize()
 	//ƒtƒHƒ“ƒgŠÖŒW
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("hpNumber", "Resouce/Texture/denColor.png");
+	TextureLoad::getInstance().add("sousa", "Resouce/Texture/sousa.png");
 
 	//‰¹ŠÖŒW
 	//BGM

@@ -23,6 +23,7 @@ public:
 	virtual bool isEnd() override;
 	virtual std::string nextScene() override;
 	static bool BossEnd;//Œã•ÏX
+	static bool PlayerEnd;
 private:
 	CharactorManager *charaManager;
 	EnemySpawn *enemySpawn;

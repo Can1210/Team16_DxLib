@@ -38,7 +38,7 @@ void Boss::initialize()
 	shotcnt = 0;
 	r = 0;
 	b = 255;
-	
+	bomshotAngle = 180.0f;
 }
 
 void Boss::update(float deltaTime)

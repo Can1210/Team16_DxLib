@@ -28,7 +28,7 @@ void Sound::playBGM(std::string soundName)
 	
 
 	//“¯‚¶‹È‚È‚ç‰½‚à‚µ‚È‚¢
-	if (mCurrentBGM == soundName)return;
+	//if (mCurrentBGM == soundName)return;
 
 	//BGM‚ÍÄ¶’†‚È‚ç’â~
 	if (checkPlayingBGM(soundName))
