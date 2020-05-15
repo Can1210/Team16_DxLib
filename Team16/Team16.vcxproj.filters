@@ -43,6 +43,7 @@
     <ClCompile Include="Actor\Enemies\SoldierEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\Boss.cpp" />
     <ClCompile Include="GameBase\Score.cpp" />
+    <ClCompile Include="Actor\Enemies\HomingEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -194,6 +195,7 @@
     <ClInclude Include="Actor\Enemies\Array.h" />
     <ClInclude Include="Actor\Enemies\SoldierEnemy.h" />
     <ClInclude Include="GameBase\Score.h" />
+    <ClInclude Include="Actor\Enemies\HomingEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

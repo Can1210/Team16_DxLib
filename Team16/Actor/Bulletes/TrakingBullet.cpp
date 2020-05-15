@@ -43,7 +43,7 @@ void TrakingBullet::initialize()
 
 void TrakingBullet::update(float deltaTime)
 {
-	if (b_mType == Type::PLAYER_BULLET)
+	if (b_mType == Type::PLAYER)
 	{
 		if (!isFound)//見つけてない
 		{
@@ -51,6 +51,9 @@ void TrakingBullet::update(float deltaTime)
 		}
 		else if(isFound)
 		{
+			if (!obj)
+				b_mIsDeath = true;
+
 			if (!obj->getIsDeath())
 			{
 				b_mVelocity = traking();
@@ -64,8 +67,10 @@ void TrakingBullet::update(float deltaTime)
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
-		b_mVelocity.y += 6.0f;
-		b_mPosittion += b_mVelocity;
+		Vector2 v;
+		v = b_mPosittion - charaManager->getPlayerPosition();
+		b_mVelocity = -v.normalize();
+		b_mPosittion += b_mVelocity * 5.0f;
 	}
 
 	if (b_mPosittion.y > WindowInfo::WindowHeight
@@ -92,17 +97,14 @@ void TrakingBullet::hit(BaseObject & other)
 	if (b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER)
 	{
 		b_mIsDeath = true;
-
 	}
-	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY)
+	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY || other.getType() == Type::BOSS)
 	{
 		b_mIsDeath = true;
-
 	}
 	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY_BULLET || b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mIsDeath = true;
-
 	}
 
 	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
@@ -119,13 +121,13 @@ void TrakingBullet::getOtherPos()//ターゲットを定める
 	//float f = 50000.0f;playerPos.dot(otherPos) > abs(f)f = playerPos.dot(otherPos);
 	for (int i = 0; i < size; i++)
 	{
-		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET)//自分がプレイヤーの弾だったら
+		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER)//自分がプレイヤーの弾だったら
 		{
 			otherPos = objs[i]->getPpstion();
 			if (playerPos.x - otherPos.x < abs(x)&& playerPos.y - otherPos.y < abs(y))
 			{
 				x = playerPos.x - otherPos.x; y = playerPos.y - otherPos.y;
-				obj = objs[i];//その時近かったターゲットのオブジェを入れる
+        				obj = objs[i];//その時近かったターゲットのオブジェを入れる
 				isFound = true;//敵を見つけた
 			}
 		}	
