@@ -12,7 +12,7 @@
 class BomBullet :public BaseObject
 {
 public:
-	BomBullet(Vector2 pos, CharactorManager* c, Type t);
+	BomBullet(Vector2 pos, CharactorManager* c, Type t,float angle);
 	~BomBullet();
 	//’e‚Ìƒ^ƒCƒv•ª‚¯
 	void setBulletType();
@@ -33,4 +33,9 @@ private:
 	Type b_SetType;
 	Timer *mTimer;
 	int BomFlag;
+
+
+	float PI = 3.141592653589793;//‰~ü—¦
+	float bulletAngle;			  //bullet‚ÌŠp“x
+	Vector2 RotationZ(float ang);//z²‰ñ“]‚Ì¬•ª‚¾‚¯
 };

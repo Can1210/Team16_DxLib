@@ -42,6 +42,7 @@ void ThreeWayEnemy::initialize()
 	subShotCnt = 20;
 	b_mSpeed = 70.0f;
 	itemCnt = 0;
+	itemDesthCnt = 50.0f;
 }
 
 void ThreeWayEnemy::update(float deltaTime)
@@ -53,6 +54,7 @@ void ThreeWayEnemy::update(float deltaTime)
 	//ƒhƒƒbƒvŒãˆ—
 	if (b_mType == Type::ITEM)
 	{
+		itemDesthCnt -= 0.25f;
 		itemCnt++;
 		if (itemCnt > 150)
 		{
@@ -123,7 +125,7 @@ void ThreeWayEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 	if (b_mType == Type::ITEM)
 	{
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 255, 0), FALSE);
+		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, itemDesthCnt, GetColor(0, 255, 0), FALSE);
 		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	}
 
