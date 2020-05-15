@@ -34,7 +34,7 @@ void CirecleMoveEnemy::initialize()
 	subShotCnt = 10;
 	b_mArpha = 255;
 	itemCnt = 0;
-
+	itemDesthCnt = 50.0f;
 }
 //更新
 void CirecleMoveEnemy::update(float deltaTime)
@@ -58,6 +58,7 @@ void CirecleMoveEnemy::update(float deltaTime)
 	{
 		b_mVelocity=(Vector2(0, 0));
 		itemCnt++;
+		itemDesthCnt -= 0.25f;
 		if (itemCnt > 150)
 		{
 		  Sound::getInstance().playSE("burst02");
@@ -83,7 +84,7 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	}
 	if (b_mType == Type::ITEM)
 	{
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(0, 255, 0), FALSE);
+		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, itemDesthCnt, GetColor(0, 255, 0), FALSE);
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
 	}
 	

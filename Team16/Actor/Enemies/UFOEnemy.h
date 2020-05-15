@@ -50,4 +50,5 @@ private:
 
 	int subShotcnt;
 	int itemCnt;
+	float itemDesthCnt;//アイテムが消えるまでを視覚的にわかなりやすく
 };

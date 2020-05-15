@@ -36,9 +36,10 @@ void GamePlay::initialize()
 void GamePlay::update(float deltaTime)
 {
 	Sound::getInstance().playBGM("bgm");
-	charaManager->update(deltaTime);
-	if (!BossEnd)
+	
+	if (!BossEnd)//I—¹‚µ‚½‚ç‘S•”Ž~‚ß‚é
 	{
+		charaManager->update(deltaTime);
 		enemySpawn->spawn();
 		enemySpawn->update(deltaTime);
 	}
@@ -62,11 +63,13 @@ void GamePlay::update(float deltaTime)
 void GamePlay::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
 	charaManager->draw(renderer,renderer3D);
-	renderer->drawNumber("hpNumber", Vector2(400, 10), Score::getInstance().getScore(), 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	renderer->drawText("Font", "SCORE", Vector2(160, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	renderer->drawNumber("hpNumber", Vector2(500, 10), Score::getInstance().getScore(), 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	renderer->drawText("Font", "HP", Vector2(0, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	if (BossEnd)
 	{
-		renderer->drawText("Font", "GAMECLEAR", Vector2(120, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "PUSH Z", Vector2(150, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
 }
 

@@ -23,14 +23,13 @@ public:
 	virtual void hit(BaseObject& other) override;
 
 private:
-	float angle;
+
 	bool Death;
 	CharactorManager* charaManager;
 	Type b_SetType;
-
+	Vector2 playerPos;//プレイヤーのpos;
+	float angle;
 	float PI = 3.141592653589793;//円周率
 	float bulletAngle;			  //bulletの角度
-	Vector2 playerPos;//プレイヤーのpos;
-
 	Vector2 RotationZ(float ang);//z軸回転の成分だけ
 };

@@ -48,7 +48,7 @@ public:
 
 	bool SubNull();
 	void SubChange();
-
+	Vector2 checkPlayerPos(Vector2 vec);
 private:
 	Vector2 KakoPos;//位置の保存用
 	bool DamgeFlag;
@@ -64,5 +64,7 @@ private:
 	Timer* m_pCirecleEndTimer;
 
 	float shotAngle;
-
+	float bomshotAngle;
+	Vector2 mPlayerPos;   //プレイヤーの位置
+	Vector2 angleVec;
 };

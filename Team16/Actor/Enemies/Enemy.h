@@ -40,5 +40,6 @@ private:
 	Timer *mTimer;
 	int subShotCnt;
 	int itemCnt;
+	float itemDesthCnt;//アイテムが消えるまでを視覚的にわかなりやすく
 	
 };
