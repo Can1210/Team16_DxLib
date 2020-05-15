@@ -83,17 +83,29 @@ void EnemySpawn::spawn()
 		mCharactorManager->add(new Enemy(Vector2(600 - sizeX * 3, -sizeY * 2), mCharactorManager));
 		break;//3
 
+	//case 60 * 7:
+	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+	//	break;
+	//case 60 * 7 + 20:
+	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+	//	break;
+	//case 60 * 7 + 40:
+	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+	//	break;
+	//case 60 * 7 + 60://8
+	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+	//	break;//7`
 	case 60 * 7:
-		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
 		break;
 	case 60 * 7 + 20:
-		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
 		break;
 	case 60 * 7 + 40:
-		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
 		break;
 	case 60 * 7 + 60://8
-		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
+		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
 		break;//7`
 
 	case 60 * 11:
@@ -105,26 +117,41 @@ void EnemySpawn::spawn()
 		mCharactorManager->add(new UFOEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600 / 2 + 32, 500.0f)));
 		break;//16
 
+	//case 60 * 20:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 20:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 40:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 60:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 80:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;//20`
+
 	case 60 * 20:
 		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
 		break;
-	case 60 * 20 + 20:
+	case 60 * 20 + 25:
 		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
 		break;
-	case 60 * 20 + 40:
+	case 60 * 20 + 50:
 		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
 		break;
-	case 60 * 20 + 60:
+	case 60 * 20 + 75:
 		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
 		break;
-	case 60 * 20 + 80:
+	case 60 * 20 + 100:
 		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
 		break;//20`
 
 	case 60 * 25:
 		mCharactorManager->add(new ThreeWayEnemy(Vector2(600.0f, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000.0f)));
 		break;//25
-
 	case 60 * 25 + 20 * 1:
 		mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600.0f, 1000.0f)));
 		break;
@@ -138,9 +165,6 @@ void EnemySpawn::spawn()
 	case 60 * 30:
 		spawnTime = 0;//ŒJ‚è•Ô‚µ
 		break;
-
-	case 60:
-		mCharactorManager->add(new HomingEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, mCharactorManager->getPlayerPosition()));
 
 	default:
 		break;
