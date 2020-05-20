@@ -60,7 +60,7 @@ void TrakingBullet::update(float deltaTime)
 		}
 		else if(isFound)
 		{
-			if (obj == nullptr)
+			if (obj == nullptr || obj->getType() == Type::ITEM)
 			{
 				isFound = false;
 				b_mIsDeath = true;
@@ -76,14 +76,22 @@ void TrakingBullet::update(float deltaTime)
 				b_mIsDeath = true;
 			}
 		}
-		b_mPosittion += b_mVelocity * 10.0f;
+		b_mPosittion += b_mVelocity * 200.0f *deltaTime;
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
-		Vector2 v;
-		v = b_mPosittion - charaManager->getPlayerPosition();
-		b_mVelocity = -v.normalize();
-		b_mPosittion += b_mVelocity * 5.0f;
+		float length = Vector2((b_mPosittion - charaManager->getPlayerPosition())).length();
+		if (length > 64.0f * 2.0f && !isFound)
+		{
+			Vector2 v;
+			v = b_mPosittion - charaManager->getPlayerPosition();
+			b_mVelocity = -v.normalize();			
+		}
+		else
+		{
+			isFound = true;
+		}
+		b_mPosittion += b_mVelocity * 170.0f * deltaTime;
 	}
 
 	if (b_mPosittion.y > WindowInfo::WindowHeight
@@ -119,8 +127,7 @@ void TrakingBullet::hit(BaseObject & other)
 	{
 		b_mIsDeath = true;
 	}
-
-	DrawCircle(b_mPosittion.x, b_mPosittion.y, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	DrawCircle(b_mPosittion.x + 64.0f / 2, b_mPosittion.y + 64.0f / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 
@@ -130,9 +137,7 @@ void TrakingBullet::getOtherPos()//ターゲットを定める
 	std::size_t size = objs.size();//リストの大きさ最大値
 	Vector2 otherPos;//ターゲットのポジション
 	Vector2 v;
-	//float x = 5000.0f; float y = 5000.0f;
 	float l = 5000.0f;
-	//float f = 50000.0f;playerPos.dot(otherPos) > abs(f)f = playerPos.dot(otherPos);
 	for (int i = 0; i < size; i++)
 	{
 		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET)//自分がプレイヤーの弾だったら
