@@ -90,7 +90,7 @@ void BomEnemy::update(float deltaTime)
 
 
 
-		b_mPosittion += b_mVelocity;
+		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 	}
 
 

@@ -97,7 +97,7 @@ void HomingEnemy::update(float deltaTime)
 		}
 	}
 
-	b_mPosittion += b_mVelocity;
+	b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 }
 
 void HomingEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)

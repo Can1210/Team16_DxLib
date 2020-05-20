@@ -125,7 +125,7 @@ void PlatoonEnemy::update(float deltaTime)
 	if (enemyTime > arraySize)
 		enemyTime = 0.0f;
 	
-	b_mPosittion += b_mVelocity;
+	b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 
 	//ƒhƒƒbƒvŒãˆ—
 	if (b_mType == Type::ITEM)

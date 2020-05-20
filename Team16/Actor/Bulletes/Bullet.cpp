@@ -8,7 +8,7 @@ Bullet::Bullet(Vector2 pos, CharactorManager* c, Type t,float angle)
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
 	b_mAngle = angle;
-	b_mSpeed = 7;
+	b_mSpeed = 7.0f;
 }
 
 Bullet::~Bullet()
