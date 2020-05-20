@@ -105,7 +105,7 @@ void Enemy::update(float deltaTime)
 		{
 			b_mIsDeath = true;
 		}
-		b_mPosittion += b_mVelocity;
+		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 	}
 
 }

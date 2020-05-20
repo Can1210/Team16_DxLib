@@ -11,6 +11,7 @@ AngleBullet::AngleBullet(Vector2 pos, CharactorManager * c, Type t, float angle)
 
 	bulletAngle = angle;
 	playerPos = pos;
+	b_mSpeed = 160.0f;
 }
 
 AngleBullet::~AngleBullet()
@@ -49,12 +50,12 @@ void AngleBullet::update(float deltaTime)
 	if (b_mType == Type::PLAYER_BULLET)
 	{
 		b_mVelocity = RotationZ(bulletAngle);
-		b_mPosittion += b_mVelocity * 5.0f;
+		b_mPosittion += b_mVelocity *deltaTime* b_mSpeed;
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
 		b_mVelocity = RotationZ(bulletAngle);
-		b_mPosittion += b_mVelocity * 5.0f;
+		b_mPosittion += b_mVelocity *deltaTime  * b_mSpeed;
 	}
 
 	if (b_mPosittion.y > WindowInfo::WindowHeight

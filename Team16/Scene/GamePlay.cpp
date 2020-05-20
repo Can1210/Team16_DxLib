@@ -33,6 +33,7 @@ void GamePlay::initialize()
 	BossEnd = false;
 	PlayerEnd = false;
 	Sound::getInstance().playBGM("bgm");
+	Score::getInstance().initialize();
 	//CWindow::getInstance().log("今ゲームプレイに切り替わった");
 }
 
@@ -47,11 +48,16 @@ void GamePlay::update(float deltaTime)
 	if (!BossEnd)//終了したら全部止める
 	{
 		charaManager->update(deltaTime);
-		enemySpawn->spawn();
-		enemySpawn->update(deltaTime);
+		if (!bossFlag)
+		{
+			enemySpawn->spawn();
+			enemySpawn->update(deltaTime);
+		}
+		
 	}
 	else
 	{
+		
 		if (m_pInput->isKeyDown(KEYCORD::SPACE))
 		{
 			//charaManager->clear();
