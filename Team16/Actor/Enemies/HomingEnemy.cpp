@@ -161,16 +161,10 @@ void HomingEnemy::SubShot(Vector2 pos, float angle)
 {
 	if (b_mType == Type::ENEMY)
 	{
-		//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle1 + angle));
-		//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle2 + angle));
-		//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle3 + angle));
 		charaManager->add(new TrakingBullet(pos, charaManager, b_mType, angle2 + angle));
 	}
 	else
 	{
-		//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle1 + angle));
-		//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle2 + angle));
-		//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle3 + angle));
 		charaManager->add(new TrakingBullet(pos, charaManager, b_mType, angle2 + angle));
 	}
 }

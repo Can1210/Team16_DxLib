@@ -166,6 +166,10 @@ void EnemySpawn::spawn()
 		spawnTime = 0;//ŒJ‚è•Ô‚µ
 		break;
 
+	case 60:
+		mCharactorManager->add(new HomingEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, mCharactorManager->getPlayerPosition()));
+		break;
+
 	default:
 		break;
 	}
