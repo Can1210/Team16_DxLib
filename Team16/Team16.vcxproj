@@ -157,11 +157,13 @@
   <ItemGroup>
     <ClCompile Include="Actor\Bulletes\AngleBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\CurveBullet.cpp" />
+    <ClCompile Include="Actor\Bulletes\LaserBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\TrakingBullet.cpp" />
     <ClCompile Include="Actor\CharaManager\BaseObject.cpp" />
     <ClCompile Include="Actor\CharaManager\CharactorManager.cpp" />
     <ClCompile Include="Actor\CharaManager\EnemySpawn.cpp" />
     <ClCompile Include="Actor\Enemies\HomingEnemy.cpp" />
+    <ClCompile Include="Actor\Enemies\LaserEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\PlatoonEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\SoldierEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\Boss.cpp" />
@@ -202,12 +204,14 @@
   <ItemGroup>
     <ClInclude Include="Actor\Bulletes\AngleBullet.h" />
     <ClInclude Include="Actor\Bulletes\CurveBullet.h" />
+    <ClInclude Include="Actor\Bulletes\LaserBullet.h" />
     <ClInclude Include="Actor\Bulletes\TrakingBullet.h" />
     <ClInclude Include="Actor\CharaManager\BaseObject.h" />
     <ClInclude Include="Actor\CharaManager\CharactorManager.h" />
     <ClInclude Include="Actor\CharaManager\EnemySpawn.h" />
     <ClInclude Include="Actor\Enemies\Array.h" />
     <ClInclude Include="Actor\Enemies\HomingEnemy.h" />
+    <ClInclude Include="Actor\Enemies\LaserEnemy.h" />
     <ClInclude Include="Actor\Enemies\PlatoonEnemy.h" />
     <ClInclude Include="Actor\Enemies\SoldierEnemy.h" />
     <ClInclude Include="Actor\Enemies\Boss.h" />
