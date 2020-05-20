@@ -12,6 +12,8 @@ TrakingBullet::TrakingBullet(Vector2 pos, CharactorManager * c, Type t, float an
 	bulletAngle = angle;
 	charaManager = c;
 	playerPos = pos;
+
+	setBulletType();
 }
 
 TrakingBullet::~TrakingBullet()
@@ -25,7 +27,13 @@ void TrakingBullet::setBulletType()
 	case PLAYER:
 		b_mType = Type::PLAYER_BULLET;
 		break;
+	case SUB_PLAYER:
+		b_mType = Type::PLAYER_BULLET;
+		break;
 	case ENEMY:
+		b_mType = Type::ENEMY_BULLET;
+		break;
+	case BOSS:
 		b_mType = Type::ENEMY_BULLET;
 		break;
 	default:
@@ -38,32 +46,37 @@ void TrakingBullet::initialize()
 	setBulletType();
 	b_mVelocity = Vector2(0, 0);
 	isFound = false;//敵を見つけていない
-	getOtherPos();
+	//getOtherPos();
 }
 
 void TrakingBullet::update(float deltaTime)
 {
-	if (b_mType == Type::PLAYER)
+	if (b_mType == Type::PLAYER_BULLET)
 	{
 		if (!isFound)//見つけてない
 		{
 			b_mVelocity = RotationZ(bulletAngle);
+			getOtherPos();
 		}
 		else if(isFound)
 		{
-			if (!obj)
+			if (obj == nullptr)
+			{
+				isFound = false;
 				b_mIsDeath = true;
+				return;
+			}			
 
 			if (!obj->getIsDeath())
 			{
 				b_mVelocity = traking();
 			}
-			else if (obj->getIsDeath() && b_mVelocity.x == 0 && b_mVelocity.y == 0)
+			else if (obj->getIsDeath())
 			{//敵がいないのに自分が生成されている場合死ぬ
 				b_mIsDeath = true;
 			}
 		}
-		b_mPosittion += b_mVelocity * 5.0f;
+		b_mPosittion += b_mVelocity * 10.0f;
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
@@ -74,8 +87,8 @@ void TrakingBullet::update(float deltaTime)
 	}
 
 	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.y<0
-		|| b_mPosittion.x>WindowInfo::WindowWidth
+		|| b_mPosittion.y < 0
+		|| b_mPosittion.x > WindowInfo::WindowWidth
 		|| b_mPosittion.x < 0)
 	{
 		b_mIsDeath = true;
@@ -107,7 +120,7 @@ void TrakingBullet::hit(BaseObject & other)
 		b_mIsDeath = true;
 	}
 
-	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	DrawCircle(b_mPosittion.x, b_mPosittion.y, b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 
@@ -117,17 +130,19 @@ void TrakingBullet::getOtherPos()//ターゲットを定める
 	std::size_t size = objs.size();//リストの大きさ最大値
 	Vector2 otherPos;//ターゲットのポジション
 	Vector2 v;
-	float x = 5000.0f; float y = 5000.0f;
+	//float x = 5000.0f; float y = 5000.0f;
+	float l = 5000.0f;
 	//float f = 50000.0f;playerPos.dot(otherPos) > abs(f)f = playerPos.dot(otherPos);
 	for (int i = 0; i < size; i++)
 	{
-		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER)//自分がプレイヤーの弾だったら
+		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET)//自分がプレイヤーの弾だったら
 		{
 			otherPos = objs[i]->getPpstion();
-			if (playerPos.x - otherPos.x < abs(x)&& playerPos.y - otherPos.y < abs(y))
+			float length = Vector2((b_mPosittion - otherPos)).length();
+			if (length < abs(l))
 			{
-				x = playerPos.x - otherPos.x; y = playerPos.y - otherPos.y;
-        				obj = objs[i];//その時近かったターゲットのオブジェを入れる
+				l = length;
+				obj = objs[i];//その時近かったターゲットのオブジェを入れる
 				isFound = true;//敵を見つけた
 			}
 		}	
