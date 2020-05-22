@@ -46,6 +46,20 @@ public:
 	/*textureName :テクスチャの名前　writeString：内容　position :座標　angleCenter：回転中心位置　scale：拡大縮小（Def 1.0＝等倍）　angle：角度（度数法　Def 0）　alpha：透明値（Def 255 min 0,max 255）*/
 	void drawText(std::string textureName, std::string writeString, Vector2 position,
 		Vector2 angleCenter = Vector2(0, 0), Vector2 scale = Vector2(1.0, 1.0), float angle = 0, int alpha = 255);
+	
+	//軌跡描画
+	void lineDraw(std::string textureName,
+		Vector2 position,
+		Vector2 drawPos,
+		Vector2 textureSize,
+		Vector2 angleCenter,
+		Vector2 velocity,
+		int blurCount,
+		Vector2 scale = Vector2(1.0, 1.0),
+		float angle = 0,
+		bool isTransparency = true,
+		bool isTurn = false);
+
 
 private:
 	const int mNumTexture_Width = 24;     //数字画像の横幅
