@@ -10,6 +10,7 @@
 #include"../Bulletes/TrakingBullet.h"
 #include"../Bulletes/CurveBullet.h"
 #include"../Bulletes/AngleBullet.h"
+#include"../Bulletes/LaserBullet.h"
 #include"../../Actor/Enemies/Enemy.h"
 #include"../Bulletes/ChangeBullet.h"
 #include "../../Support/CWindow.h"
