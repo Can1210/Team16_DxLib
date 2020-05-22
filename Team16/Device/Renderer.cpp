@@ -409,3 +409,35 @@ void Renderer::drawText(std::string textureName, std::string writeString, Vector
 
 	}
 }
+//残像を追加（残像でしかなくて、軌跡ではない）
+void Renderer::lineDraw(std::string textureName, Vector2 position, Vector2 drawPos, Vector2 textureSize, Vector2 angleCenter, Vector2 velocity, int blurCount, Vector2 scale, float angle, bool isTransparency, bool isTurn)
+{
+	//指定した画像を切り取って新しい画像を作成（指定した画像は切り取られてはいない）
+	int cutTexture = DerivationGraph(
+		(int)drawPos.x, (int)drawPos.y,
+		(int)textureSize.x, (int)textureSize.y, TextureLoad::getInstance().set(textureName));
+
+	//アルファ値をどのくらい分けるか
+	int alpha = 256 / blurCount;
+
+	
+
+	//残像を用意
+	for (int i = 1; i < blurCount + 1; i++)
+	{
+		//ラジアンを度に変換
+		float deg = angle * (DX_PI_F / 180.0f);
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 256 - (alpha * i));  //ブレンドモードをαに設定
+		DrawRotaGraph3(
+			(int)position.x + ((int)textureSize.x / 2) - ((int)velocity.x *i), (int)position.y + ((int)textureSize.y / 2) - ((int)velocity.y * i),       //ここ注意！！バグる可能性大
+			(int)angleCenter.x, (int)angleCenter.y,
+			(double)scale.x, (double)scale.y,
+			(double)deg,
+			cutTexture,
+			isTransparency, isTurn);
+	}
+
+	DeleteGraph(cutTexture);                      //作ったものを消去
+
+
+}

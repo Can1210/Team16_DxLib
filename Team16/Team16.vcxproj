@@ -191,6 +191,8 @@
     <ClCompile Include="Device\Sound.cpp" />
     <ClCompile Include="Device\Loader\SoundLoad.cpp" />
     <ClCompile Include="GameBase\Score.cpp" />
+    <ClCompile Include="Actor\Bulletes\Shotgun.cpp" />
+    <ClCompile Include="Actor\Bulletes\ShotgunBullet.cpp" />
     <ClCompile Include="Support\CWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Device\Loader\TextureLoad.cpp" />
@@ -239,6 +241,8 @@
     <ClInclude Include="Device\Sound.h" />
     <ClInclude Include="Device\Loader\SoundLoad.h" />
     <ClInclude Include="GameBase\Score.h" />
+    <ClInclude Include="Actor\Bulletes\Shotgun.h" />
+    <ClInclude Include="Actor\Bulletes\ShotgunBullet.h" />
     <ClInclude Include="Support\CWindow.h" />
     <ClInclude Include="Support\Singleton.h" />
     <ClInclude Include="Device\Loader\TextureLoad.h" />
