@@ -49,9 +49,9 @@ void Enemy::update(float deltaTime)
 
 	
 
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1)
 	{
-		b_mPosittion = charaManager->searchPlayer();
+		b_mPosittion = charaManager->searchPlayer() +Vector2(-30,20);
 		
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
@@ -67,12 +67,34 @@ void Enemy::update(float deltaTime)
 		{
 			subShotCnt = 0;
 		}
+	
+	
+		
+	}
+
+	if (b_mType == Type::SUB_PLAYER2)
+	{
+		b_mPosittion = charaManager->searchPlayer() + Vector2(30, 20);
+
+		if (input->isKeyState(KEYCORD::SPACE))
+		{
+			subShotCnt++;
+			if (subShotCnt > 10)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+
+		}
+		else
+		{
+			subShotCnt = 0;
+		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
 	
-		
 	}
 	//ƒhƒƒbƒvŒãˆ—
 	if (b_mType == Type::ITEM)
@@ -84,6 +106,7 @@ void Enemy::update(float deltaTime)
 			Sound::getInstance().playSE("burst02");
 			b_mIsDeath = true;
 		}
+		b_mPosittion += b_mVelocity * 4.0f*deltaTime;
 	}
 	
 
@@ -116,18 +139,18 @@ void Enemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mType == Type::ENEMY)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
-		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
 	}
-	if(b_mType == Type::SUB_PLAYER)
+	if(b_mType == Type::SUB_PLAYER1||b_mType == Type::SUB_PLAYER2)
 	{
 		
 		b_mAngle = 0.0f;
-		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
+		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 	}
 	if (b_mType == Type::ITEM)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, itemDesthCnt, GetColor(0, 255, 0), FALSE);
-		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
+		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 	}
 	
 }
@@ -151,8 +174,17 @@ void Enemy::hit(BaseObject & other)
 
 	if (other.getType()==Type::PLAYER&&b_mType == Type::ITEM)
 	{
-		//Å‰‚ÍT‚¦‚É
-		b_mType = Type::SUB_PLAYER;
+		switch (subChack())
+		{
+		case true:
+			b_mType = Type::SUB_PLAYER2;
+			break;
+		case false:
+			b_mType = Type::SUB_PLAYER1;
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -166,6 +198,18 @@ void Enemy::Jibaku(Vector2 pos)
 	Sound::getInstance().playSE("burst02");
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
+}
+
+bool Enemy::subChack()
+{
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::SUB_PLAYER1)
+		{
+			return true;//‚¢‚½‚çtrue
+		}
+	}
+	return false;
 }
 
 

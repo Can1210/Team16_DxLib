@@ -20,9 +20,16 @@ bool Player::SubNull()//サブがいるか
 {
 	for (auto object : charaManager->getUseList())
 	{
-		if (object->getType() == Type::SUB_PLAYER)
+		if (object->getType() == Type::SUB_PLAYER1)
 		{
-			object->setIsDeath(true);
+			for (auto object2 : charaManager->getUseList())
+			{
+				if (object->getType() == Type::SUB_PLAYER2)
+				{
+					object->setIsDeath(true);
+				}
+			}
+			
 		}
 	}
 	return false;
@@ -35,8 +42,8 @@ void Player::initialize()
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 5;
-	b_mSpeed = 40.0f;
+	b_mHp = 3;
+	b_mSpeed = 60.0f;
 	mTimer->initialize();
 	shotcnt = 0;
 	subShotCnt = 20;
@@ -70,7 +77,7 @@ void Player::update(float deltaTime)
 	}
 	else
 	{
-		b_mSpeed = 40.0f;
+		b_mSpeed = 60.0f;
 	}
 	
 
@@ -131,13 +138,10 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 			b = 0;
 		}
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 16, b_mCircleSize, GetColor(0, 0, 255), FALSE);
-		renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
+		renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 		renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
-	if (b_mType == Type::SUB_PLAYER)
-	{
-		renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
-	}
+	
 
 	if (b_mEndFlag)
 	{

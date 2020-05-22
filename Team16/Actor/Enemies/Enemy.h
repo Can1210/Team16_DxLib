@@ -31,7 +31,7 @@ public:
 
 	void Jibaku(Vector2 pos);
 
-	
+	bool subChack();//既にサブがいるか？
 private:
 	Vector2 KakoPos;//位置の保存用
 	

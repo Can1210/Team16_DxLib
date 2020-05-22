@@ -34,6 +34,7 @@ void GamePlay::initialize()
 	PlayerEnd = false;
 	Sound::getInstance().playBGM("bgm");
 	Score::getInstance().initialize();
+	backPos = -3000.0f;
 	//CWindow::getInstance().log("¡ƒQ[ƒ€ƒvƒŒƒC‚ÉØ‚è‘Ö‚í‚Á‚½");
 }
 
@@ -73,13 +74,16 @@ void GamePlay::update(float deltaTime)
 		boss();
 	}
 	
-
+	backPos += 0.9f;
 	SetBackgroundColor(0, 0, 0);
 	
 }
 
 void GamePlay::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
+	
+	
+	renderer->draw2D("back", Vector2(0, backPos), Vector2(0, 0), Vector2(600, 4110));
 	charaManager->draw(renderer,renderer3D);
 	renderer->drawText("Font", "SCORE", Vector2(160, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	renderer->drawNumber("hpNumber", Vector2(500, 10), Score::getInstance().getScore(), 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);

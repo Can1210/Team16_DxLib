@@ -15,6 +15,8 @@ void LoadScene::initialize()
 	TextureLoad::createInstance();   //テクスチャロードを作成
 
 	//ゲームシーン
+	//背景
+	TextureLoad::getInstance().add("back", "Resouce/Texture/backgraund.png");
 	//弾関係
 	TextureLoad::getInstance().add("bullet", "Resouce/Texture/Bullet.png");
 	TextureLoad::getInstance().add("bullet1", "Resouce/Texture/Bullet01.png");
@@ -22,7 +24,8 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("bullet3", "Resouce/Texture/Bullet03.png");
 	TextureLoad::getInstance().add("bullet4", "Resouce/Texture/Bullet04.png");
 	TextureLoad::getInstance().add("bullet5", "Resouce/Texture/Bullet05.png");
-	TextureLoad::getInstance().add("bullet6", "Resouce/Texture/Bullet06.png");
+	TextureLoad::getInstance().add("bullet6", "Resouce/Texture/Bullet06.png"); 
+	TextureLoad::getInstance().add("bossBullet", "Resouce/Texture/Bullet_S05.png");
 	//実機関係
 	TextureLoad::getInstance().add("player", "Resouce/Texture/F4.png");
 	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
