@@ -1,6 +1,7 @@
 #include"AngleBullet.h"
 #include"../../GameBase/WindowInfo.h"
 #include<math.h>
+#include"../../Device/Sound.h"
 
 AngleBullet::AngleBullet(Vector2 pos, CharactorManager * c, Type t, float angle)
 {
@@ -11,7 +12,7 @@ AngleBullet::AngleBullet(Vector2 pos, CharactorManager * c, Type t, float angle)
 
 	bulletAngle = angle;
 	playerPos = pos;
-	b_mSpeed = 160.0f;
+	b_mSpeed = 250.0f;
 }
 
 AngleBullet::~AngleBullet()
@@ -25,7 +26,7 @@ void AngleBullet::setBulletType()
 	case PLAYER:
 		b_mType = Type::PLAYER_BULLET;
 		break;
-	case SUB_PLAYER:
+	case SUB_PLAYER1:
 		b_mType = Type::PLAYER_BULLET;
 		break;
 	case ENEMY:
@@ -74,7 +75,7 @@ void AngleBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 
 	float angle = atan2(a.y, a.x)* 180.0f / DX_PI_F;
 	
-	renderer->draw2D("bullet1", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(12, 16), Vector2(6, 8), Vector2(1.0f, 1.0f),angle - 90.0f, 255);
+	renderer->draw2D("bullet1", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(12, 16), Vector2(6, 8), Vector2(2.0f, 4.0f),angle - 90.0f, 255);
 
 	if (b_mType == Type::ENEMY_BULLET)
 	{
@@ -96,10 +97,12 @@ void AngleBullet::hit(BaseObject & other)
 	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY||other.getType() == Type::BOSS)
 	{
 		b_mIsDeath = true;
+		Sound::getInstance().playSE("burst02");
 	}
 	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY_BULLET || b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mIsDeath = true;
+		Sound::getInstance().playSE("burst02");
 	}
 
 	DrawCircle(b_mPosittion.x + 12 / 2, b_mPosittion.y + 16 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);

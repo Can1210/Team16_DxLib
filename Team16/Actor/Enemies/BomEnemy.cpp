@@ -43,7 +43,7 @@ void BomEnemy::update(float deltaTime)
 	b_mVelocity = Vector2(0, 0);
 
 	
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1)
 	{
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyState(KEYCORD::SPACE))
@@ -113,13 +113,13 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mType == Type::ENEMY)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
-		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
 	}
-   if(b_mType == Type::SUB_PLAYER)
+   if(b_mType == Type::SUB_PLAYER1)
 	{
 	
 		b_mAngle = 0.0f;
-		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
 		if (b_mType == Type::PLAYER)
 		{
 			renderer->drawNumber("hpNumber", Vector2(150, 10), b_mHp, 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
@@ -128,7 +128,7 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mType == Type::ITEM)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, itemDesthCnt, GetColor(0, 255, 0), FALSE);
-		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
+		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 	}
 	
 }
@@ -165,7 +165,7 @@ void BomEnemy::hit(BaseObject & other)
 	if (other.getType() == Type::PLAYER&&b_mType == Type::ITEM)
 	{
 		//Å‰‚ÍT‚¦‚É
-		b_mType = Type::SUB_PLAYER;
+		b_mType = Type::SUB_PLAYER1;
 	}
 
 }
@@ -177,9 +177,9 @@ void BomEnemy::Shot(Vector2 pos)
 	//Šp“x‚É•ÏŠ·
 	//float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
 	//3Way‚É•ÏX‚·‚é
-	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f - 30.0f));
+	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f - 20.0f));
 	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f));
-	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f + 30.0f));
+	charaManager->add(new AngleBullet(pos + Vector2(32, 32), charaManager, b_mType, 90.0f + 20.0f));
 }
 
 void BomEnemy::SubShot(Vector2 pos)
@@ -193,9 +193,9 @@ void BomEnemy::SubShot(Vector2 pos)
 	//Šp“x‚É•ÏŠ·
 	float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
 	//3Way‚É•ÏX‚·‚é
-	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle - 30.0f));
+	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle - 20.0f));
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle));
-	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle + 30.0f));
+	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle + 20.0f));
 }												  
 
 

@@ -47,10 +47,11 @@ void CirecleMoveEnemy::update(float deltaTime)
 	}
 
 
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1|| b_mType == Type::SUB_PLAYER2)
 	{
 		playerMove(deltaTime);
 	}
+	
 	
 	
 	//ドロップ後処理
@@ -73,19 +74,19 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mType == Type::ENEMY)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
-		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
 	}
-    if(b_mType == Type::SUB_PLAYER)
+    if(b_mType == Type::SUB_PLAYER1|| b_mType == Type::SUB_PLAYER2)
 	{
 	
 		b_mAngle = 0.0f;
-		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
+		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 		
 	}
 	if (b_mType == Type::ITEM)
 	{
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, itemDesthCnt, GetColor(0, 255, 0), FALSE);
-		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
+		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 	}
 	
 }
@@ -114,8 +115,17 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 	}
 	if (other.getType() == Type::PLAYER&&b_mType == Type::ITEM)
 	{
-		//最初は控えに
-		b_mType = Type::SUB_PLAYER;
+		switch (subChack())
+		{
+		case true:
+			b_mType = Type::SUB_PLAYER2;
+			break;
+		case false:
+			b_mType = Type::SUB_PLAYER1;
+			break;
+		default:
+			break;
+		}
 	}
 
 	
@@ -134,7 +144,7 @@ void CirecleMoveEnemy::Shot(Vector2 pos)
 
 void CirecleMoveEnemy::SubShot(Vector2 pos)
 {
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1|| b_mType == Type::SUB_PLAYER2)
 	{
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 20, b_mPosittion.y), charaManager, b_mType, -30.0f));
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 20, b_mPosittion.y), charaManager, b_mType, 30.0f));
@@ -182,9 +192,9 @@ void CirecleMoveEnemy::playerMove(float deltaTime)
 {
 	b_mVelocity = Vector2(0, 0);
 	
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1)
 	{
-		b_mPosittion = charaManager->searchPlayer();
+		b_mPosittion = charaManager->searchPlayer() + Vector2(-30,30);
 		if (m_pInput->isKeyState(KEYCORD::SPACE))
 		{
 			subShotCnt++;
@@ -199,14 +209,34 @@ void CirecleMoveEnemy::playerMove(float deltaTime)
 		{
 			subShotCnt = 0;
 		}
+	
+		
+	}
+
+	if (b_mType == Type::SUB_PLAYER2)
+	{
+		b_mPosittion = charaManager->searchPlayer() + Vector2(30, 30);
+		if (m_pInput->isKeyState(KEYCORD::SPACE))
+		{
+			subShotCnt++;
+			if (subShotCnt > 10)
+			{
+				SubShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+
+		}
+		else
+		{
+			subShotCnt = 0;
+		}
+
 		if (m_pInput->isKeyDown(KEYCORD::C))
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
 
-		
 	}
-	
 
 }
 //死亡処理
@@ -228,4 +258,16 @@ Vector2 CirecleMoveEnemy::checkPlayerPos(Vector2 vec)
 	Vector2 playerVec = mPlayerPos - b_mPosittion;  //プレイヤーとの差分
 	return playerVec.normalize();
 
+}
+
+bool CirecleMoveEnemy::subChack()
+{
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::SUB_PLAYER1)
+		{
+			return true;//いたらtrue
+		}
+	}
+	return false;
 }

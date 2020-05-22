@@ -58,7 +58,7 @@ void Boss::update(float deltaTime)
 
 	
 
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1)
 	{
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyDown(KEYCORD::SPACE))
@@ -185,7 +185,7 @@ void Boss::hit(BaseObject & other)
 
 void Boss::Shot(Vector2 pos)
 {
-	if (b_mType == Type::PLAYER|| b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::PLAYER|| b_mType == Type::SUB_PLAYER1)
 	{
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x + 20, b_mPosittion.y), charaManager, b_mType, -30.0f));
 		charaManager->add(new Bullet(Vector2(b_mPosittion.x - 20, b_mPosittion.y), charaManager, b_mType, 30.0f));

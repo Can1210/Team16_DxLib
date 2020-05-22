@@ -59,7 +59,7 @@ void ChangeBullet::After()
 	for (auto object : charaManager->getUseList())
 	{
 
-		if (object->getType() == Type::SUB_PLAYER)
+		if (object->getType() == Type::SUB_PLAYER1)
 		{
 			object->setIsDeath(true);
 		}

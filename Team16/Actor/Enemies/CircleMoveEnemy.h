@@ -37,7 +37,7 @@ public:
 	////プレイヤーの位置を調べる
 	Vector2 checkPlayerPos(Vector2 vec);
 
-
+	bool subChack();//既にサブがいるか？
 
 private:
 

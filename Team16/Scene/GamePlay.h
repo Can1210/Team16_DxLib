@@ -28,6 +28,7 @@ private:
 	CharactorManager *charaManager;
 	EnemySpawn *enemySpawn;
 	int bossFlag;
+	float backPos;
 	
 };
 

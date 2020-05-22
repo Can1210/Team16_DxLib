@@ -55,7 +55,7 @@ void HomingEnemy::update(float deltaTime)
 		}
 	}
 
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1)
 	{
 		b_mPosittion = charaManager->searchPlayer();
 		if (input->isKeyState(KEYCORD::SPACE))
@@ -107,7 +107,7 @@ void HomingEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	}
-	if (b_mType == Type::SUB_PLAYER)
+	if (b_mType == Type::SUB_PLAYER1)
 	{
 		b_mAngle = 0.0f;
 		renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, b_mArpha);
@@ -148,7 +148,7 @@ void HomingEnemy::hit(BaseObject & other)
 	if (other.getType() == Type::PLAYER&&b_mType == Type::ITEM)
 	{
 		//ç≈èâÇÕçTÇ¶Ç…
-		b_mType = Type::SUB_PLAYER;
+		b_mType = Type::SUB_PLAYER1;
 	}
 }
 
