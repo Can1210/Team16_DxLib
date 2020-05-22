@@ -177,6 +177,7 @@
     <ClCompile Include="Actor\Bulletes\BomBallet.cpp" />
     <ClCompile Include="Actor\Bulletes\Bullet.cpp" />
     <ClCompile Include="Actor\Bulletes\ChangeBullet.cpp" />
+    <ClCompile Include="Utility\Animation.cpp" />
     <ClCompile Include="Device\CSVReader.cpp" />
     <ClCompile Include="Device\Camera.cpp" />
     <ClCompile Include="Device\Renderer3D.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="Actor\Bulletes\BomBallet.h" />
     <ClInclude Include="Actor\Bulletes\Bullet.h" />
     <ClInclude Include="Actor\Bulletes\ChangeBullet.h" />
+    <ClInclude Include="Utility\Animation.h" />
     <ClInclude Include="Device\CSVReader.h" />
     <ClInclude Include="Device\Camera.h" />
     <ClInclude Include="Device\Renderer3D.h" />
