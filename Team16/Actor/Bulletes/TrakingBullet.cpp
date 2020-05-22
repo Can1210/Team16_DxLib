@@ -27,7 +27,7 @@ void TrakingBullet::setBulletType()
 	case PLAYER:
 		b_mType = Type::PLAYER_BULLET;
 		break;
-	case SUB_PLAYER:
+	case SUB_PLAYER1:
 		b_mType = Type::PLAYER_BULLET;
 		break;
 	case ENEMY:
