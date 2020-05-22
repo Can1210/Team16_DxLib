@@ -88,7 +88,6 @@ void CharactorManager::objectsManager_update(float deltaTime)
 			{
 				object1->hit(*object2);
 				object2->hit(*object1);
-
 			}
 		}
 	}

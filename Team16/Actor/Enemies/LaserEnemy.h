@@ -9,11 +9,11 @@
 #include"../Bulletes/Bom.h"
 #include"../Bulletes/ChangeBullet.h"
 
-class HomingEnemy :public BaseObject
+class LaserEnemy :public BaseObject
 {
 public:
-	HomingEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
-	~HomingEnemy();
+	LaserEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
+	~LaserEnemy();
 
 	// BaseObject を介して継承されました
 	virtual void initialize() override;
@@ -44,7 +44,8 @@ private:
 
 	Vector2 Traking();
 
-	int subShotCnt;//合体射撃のレート
 	int itemCnt;
 	float itemDesthCnt;//アイテムが消えるまでを視覚的にわかなりやすく
+
+	float laserY;
 };
