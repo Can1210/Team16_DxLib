@@ -35,7 +35,7 @@ private:
 	int BomFlag;
 
 
-	float PI = 3.141592653589793;//‰~ü—¦
+	float PI = 3.141592653589793f;//‰~ü—¦
 	float bulletAngle;			  //bullet‚ÌŠp“x
 	Vector2 RotationZ(float ang);//z²‰ñ“]‚Ì¬•ª‚¾‚¯
 };

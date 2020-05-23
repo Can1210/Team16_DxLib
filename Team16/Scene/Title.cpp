@@ -48,5 +48,5 @@ bool Title::isEnd()
 //Ÿ‚ÌƒV[ƒ“
 std::string Title::nextScene()
 {
-	return "gameplay";
+	return  "gameplay";  //"test";  //
 }

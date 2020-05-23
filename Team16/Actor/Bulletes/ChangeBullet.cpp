@@ -35,7 +35,7 @@ void ChangeBullet::update(float deltaTime)
 
 void ChangeBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 32, b_mCircleSize, GetColor(0, 0, 255), TRUE);
+	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 32), (int)b_mCircleSize, GetColor(0, 0, 255), TRUE);
 }
 
 void ChangeBullet::hit(BaseObject & other)

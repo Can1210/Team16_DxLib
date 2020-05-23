@@ -3,9 +3,14 @@
 #define _BASEOBJECT_H_
 #include "../../Device/Renderer.h"
 #include "../../Device/Renderer3D.h"
+#include "../../Device/Sound.h"
 #include "../../Math/Vector2.h"
 #include "../../Utility/Timer.h"
 #include "../../GameBase/Score.h"
+#include "../../GameBase/WindowInfo.h"
+
+#include "DxLib.h"
+
 //物体のタイプ
 enum Type
 {
@@ -65,7 +70,7 @@ protected:
 	bool b_mIsDeath;          //死んだかどうか
 	Type b_mType;             //自分のタイプ
 	float b_mAngle;//角度
-	float b_mArpha; //画像のアルファ値
+	int b_mArpha; //画像のアルファ値
 	bool b_mEndFlag;//ゲームオーバー
 
 	

@@ -16,6 +16,9 @@ public:
 	void clear();
 	//読み込んだデータを渡す
 	std::vector<std::vector<std::string>> getData();
+
+	float getSize_X();
+	float getSize_Y();
 private:
 	std::vector<std::vector<std::string>> fileData;   //SCVファイルデータ
 };
