@@ -105,14 +105,14 @@ void AngleBullet::hit(BaseObject & other)
 		Sound::getInstance().playSE("burst02");
 	}
 
-	DrawCircle(b_mPosittion.x + 12 / 2, b_mPosittion.y + 16 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	DrawCircle((int)(b_mPosittion.x + 12 / 2), (int)(b_mPosittion.y + 16 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 Vector2 AngleBullet::RotationZ(float ang)
 {
 	Vector2 v;
 	ang = ang + 45.0f;
-	ang = ang * PI / 180.0;
+	ang = ang * PI / 180.0f;
 
 	float sin = sinf(ang);
 	float cos = cosf(ang);

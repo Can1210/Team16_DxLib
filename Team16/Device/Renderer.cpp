@@ -87,7 +87,7 @@ void Renderer::drawNumber(std::string textureName, Vector2 position, double numb
 	std::string stringNum = fillNum.str();
 
 	//変換した文字とドットの長さを比べて少ない方を調べてる＋桁数
-	int numberLength = stringNum.length();
+	int numberLength = (int)stringNum.length();
 
 	Vector2 basePos = position - Vector2((float)numberLength* mNumTexture_Width, 0);
 
@@ -116,7 +116,7 @@ void Renderer::drawScoreNumber(std::string textureName, Vector2 position, int nu
 	std::string stringNum = fillNum.str();
 
 	//変換した文字とドットの長さを比べて少ない方を調べてる＋桁数
-	int numberLength = stringNum.length();
+	int numberLength = (int)stringNum.length();
 
 	Vector2 basePos = position - Vector2((float)numberLength* mNumTexture_Width, 0);
 
@@ -135,7 +135,7 @@ void Renderer::drawScoreNumber(std::string textureName, Vector2 position, int nu
 void Renderer::drawText(std::string textureName, std::string writeString, Vector2 position, Vector2 angleCenter, Vector2 scale, float angle, int alpha)
 {
 	//文字列の長さを取得
-	int s_Length = writeString.length();
+	int s_Length = (int)writeString.length();
 	Vector2 basePos = Vector2(0, 0);   //改行用文字位置
 	int charNum = 0;                   //改行用文字数保存
 	for (int i = 0; i <= s_Length; i++)

@@ -48,7 +48,7 @@ void CurveBullet::initialize()
 	//target2 = Vector2(playerPos.x + GetRandom(-100, 100), playerPos.y + GetRandom(-250, -350, rndTime));
 	float l1, l2; l1 = 0.3f; l2 = 0.7f;
 	int f1, f2; f1 = GetRandom(0, 360, rndTime); f2 = GetRandom(0, 360);
-	Vector2 v1, v2; v1 = RotationZ(f1); v2 = RotationZ(f2);
+	Vector2 v1, v2; v1 = RotationZ((float)f1); v2 = RotationZ((float)f2);
 	if (obj  && obj->getPpstion().y < playerPos.y)
 	{
 		enemyPos = obj->getPpstion();
@@ -108,8 +108,8 @@ void CurveBullet::update(float deltaTime)
 void CurveBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
 	renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	DrawCircle(target1.x + 32 / 2, target1.y + 16, b_mCircleSize / 2, GetColor(255, 0, 0), FALSE);//è¡Ç∑
-	DrawCircle(target2.x + 32 / 2, target2.y + 16, b_mCircleSize / 2, GetColor(255, 0, 0), FALSE);
+	DrawCircle((int)(target1.x + 32 / 2), (int)(target1.y + 16),(int) b_mCircleSize / 2, GetColor(255, 0, 0), FALSE);//è¡Ç∑
+	DrawCircle((int)(target2.x + 32 / 2), (int)(target2.y + 16),(int) b_mCircleSize / 2, GetColor(255, 0, 0), FALSE);
 	if (b_mType == Type::ENEMY_BULLET)
 	{
 		b_mAngle = 180.0f;
@@ -133,7 +133,7 @@ void CurveBullet::hit(BaseObject & other)
 		b_mIsDeath = true;
 	}
 
-	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 
@@ -169,7 +169,7 @@ int CurveBullet::GetRandom(int min, int max)
 }
 int CurveBullet::GetRandom(int min, int max, float t)
 {
-	unsigned int now = (unsigned int)time(0) / t;
+	unsigned int now = (unsigned int)(time(0) / t);
 	srand(now);
 	rand(); rand(); rand();  rand(); rand();
 	return min + (int)(rand()*(max - min + 1.0) / (1.0 + RAND_MAX));
@@ -209,7 +209,7 @@ Vector2 CurveBullet::RotationZ(float ang)
 {
 	Vector2 v;
 	ang = ang + 45.0f;
-	ang = ang * PI / 180.0;
+	ang = ang * PI / 180.0f;
 
 	float sin = sinf(ang);
 	float cos = cosf(ang);

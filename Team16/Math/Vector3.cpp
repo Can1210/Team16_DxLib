@@ -67,12 +67,12 @@ Vector3 Vector3::operator-() const
 
 bool Vector3::operator==(Vector3 v) const
 {
-	return v == *this;
+	return &v == this;
 }
 
 bool Vector3::operator!=(Vector3 v) const
 {
-	return v != *this;
+	return &v != this;
 }
 
 Vector3 & Vector3::operator+=(const Vector3 & v)

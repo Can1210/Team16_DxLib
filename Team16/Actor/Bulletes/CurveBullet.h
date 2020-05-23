@@ -28,7 +28,7 @@ private:
 	CharactorManager* charaManager;
 	Type b_SetType;
 
-	float PI = 3.141592653589793;//‰~Žü—¦
+	float PI = 3.141592653589793f;//‰~Žü—¦
 	float bulletAngle;			  //bullet‚ÌŠp“x
 	bool isFound;//Œ©‚Â‚¯‚½‚©‚Ç‚¤‚©
 	float t;

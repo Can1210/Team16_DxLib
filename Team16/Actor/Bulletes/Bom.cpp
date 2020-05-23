@@ -29,7 +29,7 @@ void Bom::update(float deltaTime)
 
 void Bom::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 32, b_mCircleSize, GetColor(255, 150, 0), TRUE);
+	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 32), (int)b_mCircleSize, GetColor(255, 150, 0), TRUE);
 }
 
 void Bom::hit(BaseObject & other)

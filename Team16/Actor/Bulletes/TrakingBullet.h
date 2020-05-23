@@ -28,7 +28,7 @@ private:
 	CharactorManager* charaManager;
 	Type b_SetType;
 
-	float PI = 3.141592653589793;//円周率
+	float PI = 3.141592653589793f;//円周率
 	float bulletAngle;			  //bulletの角度
 	bool isFound;//見つけたかどうか
 	BaseObject* obj;//ターゲットのオブジェ
