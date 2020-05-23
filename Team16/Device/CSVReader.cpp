@@ -12,6 +12,7 @@ CSVReader::CSVReader():
 
 CSVReader::~CSVReader()
 {
+	clear();
 }
 //読み込み
 bool CSVReader::read(std::string& fileName)
@@ -36,11 +37,9 @@ bool CSVReader::read(std::string& fileName)
 		while (std::getline(streamBuffer,token,delimiter))
 		{
 			//1セル分の文字列をリストに追加する
-			//record.push_back(token);
 			record.insert(record.begin(), token);
 		}
 		//1行分の文字列を出力引数のリストに追加する
-		//fileData.push_back(record);
 		fileData.insert(fileData.begin(), record);
 	}
 	return true;
@@ -55,4 +54,14 @@ void CSVReader::clear()
 std::vector<std::vector<std::string>> CSVReader::getData()
 {
 	return fileData;
+}
+
+float CSVReader::getSize_X()
+{
+	return fileData[0].size();
+}
+
+float CSVReader::getSize_Y()
+{
+	return fileData.size();
 }

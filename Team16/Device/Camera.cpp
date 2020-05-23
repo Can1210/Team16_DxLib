@@ -9,11 +9,12 @@
 
 
 //コンストラクタ
-Camera::Camera(CharactorManager& chractorManager) :
-	mPosition(0, 0, lookAtDistance),
+Camera::Camera(CharactorManager& chractorManager,Vector2 pos) :
+	mPosition(pos.x, pos.y, lookAtDistance),
 	mLookAtPosition(0, 0, 0),
 	m_pCharactorManager(&chractorManager),
-	lookAtDistance(1000)
+	lookAtDistance(1000),
+	mSpeed(20.0f)
 {
 }
 
@@ -31,27 +32,15 @@ void Camera::initialize()
 	input->init();
 }
 //更新
-void Camera::update()
+void Camera::update(float deltaTime)
 {
 	input->update();
-	searchPlayer();
+	cameraMove(deltaTime);
 	cameraUpdate();
 }
 void Camera::cameraUpdate()
 {
-	mLookAtPosition.y = mPosition.y;   //Y軸しか動かない
-	if (input->isKeyState(KEYCORD::ARROW_DOWN))
-	{
-		mPosition.z--;
-	}
-	if (input->isKeyState(KEYCORD::ARROW_UP))
-	{
-		mPosition.z++;
-	}
-
-	// カメラの設定に反映する
-	SetCameraPositionAndTarget_UpVecY(VGet(mPosition.x, mPosition.y, mPosition.z), VGet(mLookAtPosition.x, mLookAtPosition.y, mLookAtPosition.z));
-
+	
 
 	// 位置関係が分かるように地面にラインを描画する
 	{
@@ -83,20 +72,20 @@ void Camera::cameraUpdate()
 	}
 
 }
-//プレイヤーを探して位置をプレイーにする
-void Camera::searchPlayer()
-{
-	for (auto object : m_pCharactorManager->getUseList())
-	{
-		//オブジェクトがプレイヤーじゃなかったらリターン
-		if (!object->getType() == Type::PLAYER) continue;
 
-		mPosition.y = object->getPpstion().y;  //y軸しか動かない
-	}
+
+void Camera::cameraMove(float deltaTime)
+{
+	mVelocity.y = 1.0f;
+	mPosition.y += mVelocity.y * mSpeed * deltaTime;
+	mLookAtPosition.y = mPosition.y;   //Y軸しか動かない
+	// カメラの設定に反映する
+	SetCameraPositionAndTarget_UpVecY(VGet(mPosition.x, mPosition.y, mPosition.z), VGet(mLookAtPosition.x, mLookAtPosition.y, mLookAtPosition.z));
 }
 
+
 //位置を返す
-Vector3 Camera::getPosition()
+Vector3 Camera::getPosition() const
 {
 	return mPosition;
 }
@@ -106,7 +95,7 @@ void Camera::setPosition(Vector3 position)
 	mPosition = position;
 }
 //向いている位置を返す
-Vector3 Camera::getLookAtPosition()
+Vector3 Camera::getLookAtPosition() const
 {
 	return mLookAtPosition;
 }

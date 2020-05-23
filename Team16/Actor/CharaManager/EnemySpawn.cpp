@@ -26,7 +26,7 @@ EnemySpawn::~EnemySpawn()
 void EnemySpawn::initialize()
 {
 	mTimer->initialize();  //タイマーを初期化
-	spawnTime = 0.0f;
+	spawnTime = 0;
 }
 
 void EnemySpawn::update(float deltaTime)

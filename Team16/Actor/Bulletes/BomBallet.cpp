@@ -82,7 +82,7 @@ void BomBullet::update(float deltaTime)
 
 void BomBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 32, b_mCircleSize, GetColor(255, 100, 0), TRUE);
+	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 32), (int)b_mCircleSize, GetColor(255, 100, 0), TRUE);
 }
 
 void BomBullet::hit(BaseObject & other)
@@ -94,7 +94,7 @@ Vector2 BomBullet::RotationZ(float ang)
 {
 	Vector2 v;
 	ang = ang + 45.0f;
-	ang = ang * PI / 180.0;
+	ang = ang * PI / 180.0f;
 
 	float sin = sinf(ang);
 	float cos = cosf(ang);

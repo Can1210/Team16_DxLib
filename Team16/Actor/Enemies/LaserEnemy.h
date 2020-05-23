@@ -1,13 +1,6 @@
 #pragma once
-#include "DxLib.h"
-#include "../../Math/Vector2.h"
-#include "../../Device/Input.h"
-#include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
 #include"../CharaManager/CharactorManager.h"
-#include"../Player/Player.h"
-#include"../Bulletes/Bom.h"
-#include"../Bulletes/ChangeBullet.h"
 
 class LaserEnemy :public BaseObject
 {
@@ -24,28 +17,15 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-	void Shot(Vector2 pos, float angle);
-
-	void SubShot(Vector2 pos, float angle);
-
-	void Jibaku(Vector2 pos);
-
+	void shot(Vector2 pos, float angle);
 
 private:
-
-	bool MoveFlag;
-	Input* input;
-	CharactorManager* charaManager;
-	Timer *mTimer;
-	ChangeBullet *changeB;
-
-	float angle1, angle2, angle3;
-	Vector2 start, end;
-
 	Vector2 Traking();
 
-	int itemCnt;
-	float itemDesthCnt;//アイテムが消えるまでを視覚的にわかなりやすく
-
+private:
+	CharactorManager* charaManager;
+	Timer *mTimer;
+	float angle1, angle2, angle3;
+	Vector2 start, end;
 	float laserY;
 };

@@ -5,6 +5,7 @@
 #include "../Scene/GamePlay.h"
 #include "../Scene/Ending.h"
 #include "../Scene/LoadScene.h"
+#include "../Scene/TestScene3D.h"
 #include "Score.h"
 #include"../Device/Sound.h"
 
@@ -39,6 +40,7 @@ void GameManager::sceneInitialize(Input* input)
 	SceneManager::getInstance().add("title", new Title(input));
 	SceneManager::getInstance().add("gameplay", new GamePlay(input));
 	SceneManager::getInstance().add("ending", new Ending(input));
+	SceneManager::getInstance().add("test", new TestScene3D(input));
 	SceneManager::getInstance().change("load");      //最初はタイトルに設定
 }
 //更新

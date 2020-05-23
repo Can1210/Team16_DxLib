@@ -107,6 +107,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\DxLib\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -145,6 +146,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\DxLib\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -177,6 +179,8 @@
     <ClCompile Include="Actor\Bulletes\BomBallet.cpp" />
     <ClCompile Include="Actor\Bulletes\Bullet.cpp" />
     <ClCompile Include="Actor\Bulletes\ChangeBullet.cpp" />
+    <ClCompile Include="Actor\Item\Item.cpp" />
+    <ClCompile Include="Scene\TestScene3D.cpp" />
     <ClCompile Include="Utility\Animation.cpp" />
     <ClCompile Include="Device\CSVReader.cpp" />
     <ClCompile Include="Device\Camera.cpp" />
@@ -228,6 +232,8 @@
     <ClInclude Include="Actor\Bulletes\BomBallet.h" />
     <ClInclude Include="Actor\Bulletes\Bullet.h" />
     <ClInclude Include="Actor\Bulletes\ChangeBullet.h" />
+    <ClInclude Include="Actor\Item\Item.h" />
+    <ClInclude Include="Scene\TestScene3D.h" />
     <ClInclude Include="Utility\Animation.h" />
     <ClInclude Include="Device\CSVReader.h" />
     <ClInclude Include="Device\Camera.h" />

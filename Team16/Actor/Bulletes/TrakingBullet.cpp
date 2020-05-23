@@ -127,7 +127,7 @@ void TrakingBullet::hit(BaseObject & other)
 	{
 		b_mIsDeath = true;
 	}
-	DrawCircle(b_mPosittion.x + 64.0f / 2, b_mPosittion.y + 64.0f / 2, b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	DrawCircle((int)(b_mPosittion.x + 64.0f / 2), (int)(b_mPosittion.y + 64.0f / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 
@@ -166,7 +166,7 @@ Vector2 TrakingBullet::RotationZ(float ang)
 {
 	Vector2 v;
 	ang = ang + 45.0f;
-	ang = ang * PI / 180.0;
+	ang = ang * PI / 180.0f;
 
 	float sin = sinf(ang);
 	float cos = cosf(ang);

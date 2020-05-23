@@ -1,20 +1,9 @@
-#pragma once
-#include"DxLib.h"
-#include "../../Math/Vector2.h"
+#ifndef _PLAYER_H_
+#define _PLAYER_H_
 #include "../../Device/Input.h"
-#include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
 #include"../CharaManager/CharactorManager.h"
-#include<list>
-#include"../Bulletes/Bullet.h"
-#include"../Bulletes/TrakingBullet.h"
-#include"../Bulletes/CurveBullet.h"
-#include"../Bulletes/AngleBullet.h"
-#include"../Bulletes/LaserBullet.h"
-#include"../../Actor/Enemies/Enemy.h"
-#include"../Bulletes/ChangeBullet.h"
-#include "../../Support/CWindow.h"
-
+#include "../Item/Item.h"
 
 class Player :public BaseObject
 {
@@ -22,12 +11,6 @@ class Player :public BaseObject
 public:
 	Player(Vector2 pos, CharactorManager *c);
 	~Player();
-	bool SubNull();
-	
-
-	void Shot(Vector2 pos);
-	
-	void TShot(Vector2 pos,float deltaTime);
 
 	// BaseObject を介して継承されました
 	virtual void initialize() override;
@@ -37,18 +20,40 @@ public:
 	virtual void draw(Renderer * renderer, Renderer3D* renderer3D) override;
 
 	virtual void hit(BaseObject & other) override;
-
+	//移動
+	void move();
+	//射撃
+	void Shot(Vector2 pos);
 	
+#pragma region 弾関係
+	void bom1();
+	void bom2();
+	//サブの射撃
+	void SubShots(unsigned int num);
+	//ボムエネミーの射撃
+	void bomShot();
+	void circle();
+	void laser();
+	void platoon();
+	void homing();
+	void threeWay();
+	void ufo();
+
+#pragma endregion
 
 private:
-
 	bool DamgeFlag;
 	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
-
 	int shotcnt;
 	int subShotCnt;//合体射撃のレート
 	int r, b;
-	
+	//サブウェポン関係
+	std::vector<BulletType> mSubVec;
+	std::vector<std::string> mSubName;
+	std::vector<Vector2> mSubPos;
 };
+
+
+#endif // !_PLAYER_H_

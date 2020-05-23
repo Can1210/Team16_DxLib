@@ -1,13 +1,6 @@
 #pragma once
-#include "DxLib.h"
-#include "../../Math/Vector2.h"
-#include "../../Device/Input.h"
-#include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
 #include"../CharaManager/CharactorManager.h"
-#include"../Player/Player.h"
-#include"../Bulletes/Bom.h"
-#include"../Bulletes/ChangeBullet.h"
 #include"../Enemies/Array.h"
 #include"../Enemies/SoldierEnemy.h"
 
@@ -31,21 +24,14 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-	void Shot(Vector2 pos, float angle);
-
-	void SubShot(Vector2 pos, float angle);
-
-	
-
-	void Jibaku(Vector2 pos);
+	void shot(Vector2 pos, float angle);
 
 private:
-
-	bool MoveFlag;
-	Input* input;
+	Vector2 Traking();
+	int GetRandom(int min, int max);
+private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	ChangeBullet *changeB;
 
 	Vector2 start, end;
 	Array<Vector2> vec_Array;
@@ -57,11 +43,4 @@ private:
 	bool childs;
 	float rnd;
 	MoveType mtype;
-
-	Vector2 Traking();
-	int GetRandom(int min, int max);
-	
-	int subShotCnt;//合体射撃のレート
-	int itemCnt;
-	float itemDesthCnt;//アイテムが消えるまでを視覚的にわかなりやすく
 };
