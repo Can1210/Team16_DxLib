@@ -48,6 +48,8 @@
     <ClCompile Include="Actor\Bulletes\ShotgunBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\LaserBullet.cpp" />
     <ClCompile Include="Actor\Enemies\LaserEnemy.cpp" />
+    <ClCompile Include="Actor\Bulletes\WallReflectionBullet.cpp" />
+    <ClCompile Include="Actor\Enemies\WallReflectionEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -204,6 +206,8 @@
     <ClInclude Include="Actor\Bulletes\ShotgunBullet.h" />
     <ClInclude Include="Actor\Bulletes\LaserBullet.h" />
     <ClInclude Include="Actor\Enemies\LaserEnemy.h" />
+    <ClInclude Include="Actor\Bulletes\WallReflectionBullet.h" />
+    <ClInclude Include="Actor\Enemies\WallReflectionEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />
