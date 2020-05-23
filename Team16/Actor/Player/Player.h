@@ -21,7 +21,7 @@ class Player :public BaseObject
 public:
 	Player(Vector2 pos, CharactorManager *c);
 	~Player();
-	bool SubNull();
+
 	
 
 	void Shot(Vector2 pos);
@@ -38,7 +38,7 @@ public:
 	virtual void hit(BaseObject & other) override;
 
 	
-
+	
 private:
 
 	bool DamgeFlag;
@@ -49,5 +49,5 @@ private:
 	int shotcnt;
 	int subShotCnt;//合体射撃のレート
 	int r, b;
-	
+
 };

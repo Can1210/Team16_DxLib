@@ -113,9 +113,9 @@ void EnemySpawn::spawn()
 		mCharactorManager->add(new BomEnemy(Vector2(600 - sizeX * 2, -sizeY), mCharactorManager));
 		break;//11
 
-	case 60 * 16:
-		mCharactorManager->add(new UFOEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600 / 2 + 32, 500.0f)));
-		break;//16
+	//case 60 * 16:
+	//	mCharactorManager->add(new UFOEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600 / 2 + 32, 500.0f)));
+	//	break;//16
 
 	//case 60 * 20:
 	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
@@ -133,34 +133,34 @@ void EnemySpawn::spawn()
 	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
 	//	break;//20`
 
-	case 60 * 20:
-		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-		break;
-	case 60 * 20 + 25:
-		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-		break;
-	case 60 * 20 + 50:
-		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-		break;
-	case 60 * 20 + 75:
-		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-		break;
-	case 60 * 20 + 100:
-		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-		break;//20`
+	//case 60 * 20:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 25:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 50:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 75:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;
+	//case 60 * 20 + 100:
+	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	//	break;//20`
 
-	case 60 * 25:
-		mCharactorManager->add(new ThreeWayEnemy(Vector2(600.0f, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000.0f)));
-		break;//25
-	case 60 * 25 + 20 * 1:
-		mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600.0f, 1000.0f)));
-		break;
-	case 60 * 25 + 20 * 4:
-		mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(300.0f, 1000.0f)));
-		break;
-	case 60 * 25 + 20 * 7:
-		mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, mCharactorManager->getPlayerPosition()));
-		break;
+	//case 60 * 25:
+	//	mCharactorManager->add(new ThreeWayEnemy(Vector2(600.0f, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000.0f)));
+	//	break;//25
+	//case 60 * 25 + 20 * 1:
+	//	mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600.0f, 1000.0f)));
+	//	break;
+	//case 60 * 25 + 20 * 4:
+	//	mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(300.0f, 1000.0f)));
+	//	break;
+	//case 60 * 25 + 20 * 7:
+	//	mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, mCharactorManager->getPlayerPosition()));
+	//	break;
 
 	case 60 * 30:
 		spawnTime = 0;//ŒJ‚è•Ô‚µ

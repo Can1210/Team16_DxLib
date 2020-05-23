@@ -57,7 +57,7 @@ void CirecleMoveEnemy::update(float deltaTime)
 	//ドロップ後処理
 	if (b_mType == Type::ITEM)
 	{
-		b_mVelocity=(Vector2(0, 0));
+		
 		itemCnt++;
 		itemDesthCnt -= 0.25f;
 		if (itemCnt > 150)
@@ -65,8 +65,9 @@ void CirecleMoveEnemy::update(float deltaTime)
 		  Sound::getInstance().playSE("burst02");
 		  b_mIsDeath = true;
 		}
+		b_mPosittion += b_mVelocity *deltaTime * 200.0f;
 	}
-	b_mPosittion += b_mVelocity;
+	
 }
 
 void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -119,9 +120,11 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 		{
 		case true:
 			b_mType = Type::SUB_PLAYER2;
+			CWindow::getInstance().log("サブ２\n");
 			break;
 		case false:
 			b_mType = Type::SUB_PLAYER1;
+			CWindow::getInstance().log("サブ1\n");
 			break;
 		default:
 			break;
@@ -190,7 +193,7 @@ void CirecleMoveEnemy::move(float deltaTime)
 //自分がプレイヤーの時の動き
 void CirecleMoveEnemy::playerMove(float deltaTime)
 {
-	b_mVelocity = Vector2(0, 0);
+	//b_mVelocity = Vector2(0, 0);
 	
 	if (b_mType == Type::SUB_PLAYER1)
 	{
@@ -235,7 +238,10 @@ void CirecleMoveEnemy::playerMove(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-
+		if (subChack() == false)
+		{
+			b_mType = Type::SUB_PLAYER1;
+		}
 	}
 
 }

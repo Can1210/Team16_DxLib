@@ -36,7 +36,7 @@ public:
 	Vector2 checkPlayerPos(Vector2 vec);
 
 	bool isShot();
-	
+	bool subChack();//既にサブがいるか？
 private:
 	Vector2 KakoPos;//位置の保存用
 	bool DamgeFlag;

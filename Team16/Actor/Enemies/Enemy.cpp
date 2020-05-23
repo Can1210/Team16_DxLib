@@ -19,9 +19,6 @@ Enemy::~Enemy()
 
 
 
-
-
-
 void Enemy::initialize()
 {
 	b_mHp = 3;
@@ -41,16 +38,11 @@ void Enemy::initialize()
 void Enemy::update(float deltaTime)
 {
 	mTimer->update(deltaTime);
-
 	input->update();
-	b_mVelocity = Vector2(0, 0);
-
-	
-
-	
 
 	if (b_mType == Type::SUB_PLAYER1)
 	{
+
 		b_mPosittion = charaManager->searchPlayer() +Vector2(-30,20);
 		
 		if (input->isKeyState(KEYCORD::SPACE))
@@ -67,8 +59,6 @@ void Enemy::update(float deltaTime)
 		{
 			subShotCnt = 0;
 		}
-	
-	
 		
 	}
 
@@ -94,6 +84,7 @@ void Enemy::update(float deltaTime)
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
+		
 	
 	}
 	//ƒhƒƒbƒvŒãˆ—
@@ -106,12 +97,13 @@ void Enemy::update(float deltaTime)
 			Sound::getInstance().playSE("burst02");
 			b_mIsDeath = true;
 		}
-		b_mPosittion += b_mVelocity * 4.0f*deltaTime;
+		b_mPosittion += b_mVelocity * 50.0f*deltaTime;
 	}
 	
 
 	if (b_mType == Type::ENEMY)
 	{
+		b_mVelocity = Vector2(0, 0);
 		b_mVelocity.y += 2;
 		if (mTimer->timerSet(2))
 		{
@@ -172,20 +164,7 @@ void Enemy::hit(BaseObject & other)
 	}
 
 
-	if (other.getType()==Type::PLAYER&&b_mType == Type::ITEM)
-	{
-		switch (subChack())
-		{
-		case true:
-			b_mType = Type::SUB_PLAYER2;
-			break;
-		case false:
-			b_mType = Type::SUB_PLAYER1;
-			break;
-		default:
-			break;
-		}
-	}
+	
 }
 
 void Enemy::Shot(Vector2 pos)
@@ -198,18 +177,6 @@ void Enemy::Jibaku(Vector2 pos)
 	Sound::getInstance().playSE("burst02");
 	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
-}
-
-bool Enemy::subChack()
-{
-	for (auto object : charaManager->getUseList())
-	{
-		if (object->getType() == Type::SUB_PLAYER1)
-		{
-			return true;//‚¢‚½‚çtrue
-		}
-	}
-	return false;
 }
 
 

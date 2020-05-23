@@ -40,12 +40,12 @@ void BomEnemy::update(float deltaTime)
 	mTimer->update(deltaTime);
 
 	input->update();
-	b_mVelocity = Vector2(0, 0);
+	
 
 	
 	if (b_mType == Type::SUB_PLAYER1)
 	{
-		b_mPosittion = charaManager->searchPlayer();
+		b_mPosittion = charaManager->searchPlayer() +Vector2(-30,30);
 		if (input->isKeyState(KEYCORD::SPACE))
 		{
 			subShotCnt++;
@@ -60,16 +60,42 @@ void BomEnemy::update(float deltaTime)
 		{
 			subShotCnt = 0;
 		}
+		
+		
+	}
+
+
+	if (b_mType == Type::SUB_PLAYER2)
+	{
+		b_mPosittion = charaManager->searchPlayer() + Vector2(30, 30);
+		if (input->isKeyState(KEYCORD::SPACE))
+		{
+			subShotCnt++;
+			if (subShotCnt > 20)
+			{
+				Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+				subShotCnt = 0;
+			}
+
+		}
+		else
+		{
+			subShotCnt = 0;
+		}
 		if (input->isKeyDown(KEYCORD::C))
 		{
 			Jibaku(Vector2(b_mPosittion.x, b_mPosittion.y));
 		}
-		
+		if (subChack() == false)
+		{
+			b_mType = Type::SUB_PLAYER1;
+		}
 	}
 
 
 	if (b_mType == Type::ENEMY)
 	{
+		b_mVelocity = Vector2(0, 0);
 		b_mVelocity.y += 1;
 		if (mTimer->timerSet(3.0f))
 		{
@@ -88,8 +114,6 @@ void BomEnemy::update(float deltaTime)
 			b_mIsDeath = true;
 		}
 
-
-
 		b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
 	}
 
@@ -104,6 +128,7 @@ void BomEnemy::update(float deltaTime)
 			Sound::getInstance().playSE("burst02");
 			b_mIsDeath = true;
 		}
+		b_mPosittion += b_mVelocity * deltaTime*200.0f;
 	}
 	
 }
@@ -115,7 +140,7 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
 	}
-   if(b_mType == Type::SUB_PLAYER1)
+   if(b_mType == Type::SUB_PLAYER1||b_mType == Type::SUB_PLAYER2)
 	{
 	
 		b_mAngle = 0.0f;
@@ -164,8 +189,19 @@ void BomEnemy::hit(BaseObject & other)
 
 	if (other.getType() == Type::PLAYER&&b_mType == Type::ITEM)
 	{
-		//Å‰‚ÍT‚¦‚É
-		b_mType = Type::SUB_PLAYER1;
+		switch (subChack())
+		{
+		case true:
+			b_mType = Type::SUB_PLAYER2;
+			CWindow::getInstance().log("ƒTƒu‚Q\n");
+			break;
+		case false:
+			b_mType = Type::SUB_PLAYER1;
+			CWindow::getInstance().log("ƒTƒu1\n");
+			break;
+		default:
+			break;
+		}
 	}
 
 }
@@ -221,6 +257,18 @@ bool BomEnemy::isShot()
 		return true;
 	}
 
+	return false;
+}
+
+bool BomEnemy::subChack()
+{
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::SUB_PLAYER1)
+		{
+			return true;//‚¢‚½‚çtrue
+		}
+	}
 	return false;
 }
 

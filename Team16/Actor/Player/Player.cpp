@@ -1,8 +1,9 @@
 #include "Player.h"
 #include"../../Device/Sound.h"
 #include"../../Scene/GamePlay.h"
+#include"../Enemies/Array.h"
 
-
+Array<Type> subs;
 Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
@@ -16,33 +17,18 @@ Player::~Player()
 	delete mTimer;
 }
 
-bool Player::SubNull()//サブがいるか
-{
-	for (auto object : charaManager->getUseList())
-	{
-		if (object->getType() == Type::SUB_PLAYER1)
-		{
-			for (auto object2 : charaManager->getUseList())
-			{
-				if (object->getType() == Type::SUB_PLAYER2)
-				{
-					object->setIsDeath(true);
-				}
-			}
-			
-		}
-	}
-	return false;
-}
+
 
 void Player::initialize()
 {
 
-	
+	subs.setSize(2);
+	subs(0) = Type::SUB_PLAYER1;
+	subs(1) = Type::SUB_PLAYER2;
 	input->init();
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 3;
+	b_mHp = 300;
 	b_mSpeed = 60.0f;
 	mTimer->initialize();
 	shotcnt = 0;
@@ -195,9 +181,10 @@ void Player::hit(BaseObject & other)
 	}
 	if (other.getType() == ITEM)
 	{
-		SubNull();
+	  
 	}
 
 
 }
+
 

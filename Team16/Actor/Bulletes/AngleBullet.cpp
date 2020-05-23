@@ -29,6 +29,9 @@ void AngleBullet::setBulletType()
 	case SUB_PLAYER1:
 		b_mType = Type::PLAYER_BULLET;
 		break;
+	case SUB_PLAYER2:
+		b_mType = Type::PLAYER_BULLET;
+		break;
 	case ENEMY:
 		b_mType = Type::ENEMY_BULLET;
 		break;
