@@ -10,8 +10,7 @@
 #include "../Bulletes/Bom.h"
 #include <typeinfo.h>
 
-
-
+Array<Type> subs;
 Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
@@ -25,12 +24,13 @@ Player::~Player()
 	delete mTimer;
 }
 
+
 void Player::initialize()
 {
 	b_mEndFlag = false;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 3;
+	b_mHp = 300;
 	b_mSpeed = 60.0f;
 	mTimer->initialize();
 	input->init();
@@ -68,7 +68,7 @@ void Player::update(float deltaTime)
 			SubShots(1);
 			subShotCnt = 0;
 		}
-		
+
 		b_mSpeed = 20.0f;
 	}
 	else
@@ -85,7 +85,7 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 	{
 		if (DamgeFlag) b_mArpha = 155;
 		else b_mArpha = 255;
-		
+
 		DrawBox(0,0,shotcnt,100, GetColor(r, 0, b), TRUE);
 		if (shotcnt == 100)
 		{

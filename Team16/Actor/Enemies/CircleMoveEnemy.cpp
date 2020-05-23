@@ -43,7 +43,7 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 }
 
 void CirecleMoveEnemy::hit(BaseObject & other)
-{	
+{
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mHp -= 1;
