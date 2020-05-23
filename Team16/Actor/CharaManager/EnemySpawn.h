@@ -21,6 +21,11 @@ private:
 	CharactorManager* mCharactorManager;   //キャラクターマネジャー
 	Timer* mTimer;                         //タイマー
 	int spawnTime;
+
+	float sizeX = 64.0f;
+	float sizeY = 64.0f;
+
+	float middleX = 600.0f / 2.0f - 32.0f;
 };
 
 #endif // !_ENEMYSPAWN_H_

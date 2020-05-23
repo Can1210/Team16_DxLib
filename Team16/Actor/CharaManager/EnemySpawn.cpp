@@ -8,6 +8,7 @@
 #include"../Enemies/PlatoonEnemy.h"
 #include"../Enemies/HomingEnemy.h"
 #include"../Enemies/LaserEnemy.h"
+#include"../Enemies/WallReflectionEnemy.h"
 #include"../Enemies/Boss.h"
 #include"../../GameBase/Score.h"
 
@@ -67,9 +68,8 @@ void EnemySpawn::spawn()
 	//	}*/
 	//}
 
-	float sizeX = 64.0f;
-	float sizeY = 64.0f;
-
+	//#if‚Ì1‚É‚µ‚Äelif‚ð0‚É‚·‚ê‚Î¶¬‚ªØ‚è‘Ö‚í‚é
+#if 0
 	switch (spawnTime)
 	{
 	case 60 * 3:
@@ -84,18 +84,6 @@ void EnemySpawn::spawn()
 		mCharactorManager->add(new Enemy(Vector2(600 - sizeX * 3, -sizeY * 2), mCharactorManager));
 		break;//3
 
-	//case 60 * 7:
-	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
-	//	break;
-	//case 60 * 7 + 20:
-	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
-	//	break;
-	//case 60 * 7 + 40:
-	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
-	//	break;
-	//case 60 * 7 + 60://8
-	//	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX, -sizeY), mCharactorManager));
-	//	break;//7`
 	case 60 * 7:
 		mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
 		break;
@@ -117,22 +105,6 @@ void EnemySpawn::spawn()
 	case 60 * 16:
 		mCharactorManager->add(new UFOEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600 / 2 + 32, 500.0f)));
 		break;//16
-
-	//case 60 * 20:
-	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-	//	break;
-	//case 60 * 20 + 20:
-	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-	//	break;
-	//case 60 * 20 + 40:
-	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-	//	break;
-	//case 60 * 20 + 60:
-	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-	//	break;
-	//case 60 * 20 + 80:
-	//	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
-	//	break;//20`
 
 	case 60 * 20:
 		mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
@@ -164,7 +136,7 @@ void EnemySpawn::spawn()
 		break;
 
 	case 60 * 30:
-		mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600,1000)));
+		mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
 		break;
 
 	case 60 * 34:
@@ -175,14 +147,92 @@ void EnemySpawn::spawn()
 		spawnTime = 0;//ŒJ‚è•Ô‚µ
 		break;
 
-	//case 60 :
-	//	mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
-	//	break;
+	case 60:
+		mCharactorManager->add(new WallReflectionEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
+		break;
 
 	default:
 		break;
 	}
+#elif 1
+switch (spawnTime)
+{
+case 60 * 3:
+	mCharactorManager->add(new Enemy(Vector2(middleX, -sizeY), mCharactorManager));//^‚ñ’†
 
+	mCharactorManager->add(new Enemy(Vector2(middleX - sizeX * 2, -sizeY * 2), mCharactorManager));//¶
+	mCharactorManager->add(new Enemy(Vector2(middleX + sizeX * 2, -sizeY * 2), mCharactorManager));//‰E
 
+	mCharactorManager->add(new Enemy(Vector2(middleX - sizeX * 3 - 32.0f, -sizeY * 3), mCharactorManager));//¶
+	mCharactorManager->add(new Enemy(Vector2(middleX + sizeX * 3 + 32.0f, -sizeY * 3), mCharactorManager));//‰E
+	break;//3
+
+case 60 * 7:
+	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
+	break;
+case 60 * 7 + 20:
+	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
+	break;
+case 60 * 7 + 40:
+	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
+	break;
+case 60 * 7 + 60://8
+	mCharactorManager->add(new CirecleMoveEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager));
+	break;//7`
+
+case 60 * 11:
+	mCharactorManager->add(new BomEnemy(Vector2(sizeX * 1, -sizeY), mCharactorManager));
+	mCharactorManager->add(new BomEnemy(Vector2(600 - sizeX * 2, -sizeY), mCharactorManager));
+	break;//11
+
+case 60 * 16:
+	mCharactorManager->add(new UFOEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600 / 2 + 32, 500.0f)));
+	break;//16
+
+case 60 * 20:
+	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	break;
+case 60 * 20 + 25:
+	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	break;
+case 60 * 20 + 50:
+	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	break;
+case 60 * 20 + 75:
+	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	break;
+case 60 * 20 + 100:
+	mCharactorManager->add(new PlatoonEnemy(Vector2(600.0f, -10.0f), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+	break;//20`
+
+case 60 * 25:
+	mCharactorManager->add(new ThreeWayEnemy(Vector2(600.0f, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000.0f)));
+	break;//25
+case 60 * 25 + 20 * 1:
+	mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600.0f, 1000.0f)));
+	break;
+case 60 * 25 + 20 * 4:
+	mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX * 2, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(300.0f, 1000.0f)));
+	break;
+case 60 * 25 + 20 * 7:
+	mCharactorManager->add(new ThreeWayEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, mCharactorManager->getPlayerPosition()));
+	break;
+
+case 60 * 30:
+	mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+	break;
+
+case 60 * 34:
+	mCharactorManager->add(new LaserEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(sizeX, 1000)));
+	break;
+
+case 60 * 40:
+	spawnTime = 0;//ŒJ‚è•Ô‚µ
+	break;
+
+default:
+	break;
+}
+#endif // 0
 	spawnTime++;
 }

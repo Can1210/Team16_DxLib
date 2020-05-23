@@ -48,6 +48,8 @@
     <ClCompile Include="Actor\Bulletes\ShotgunBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\LaserBullet.cpp" />
     <ClCompile Include="Actor\Enemies\LaserEnemy.cpp" />
+    <ClCompile Include="Actor\Bulletes\WallReflectionBullet.cpp" />
+    <ClCompile Include="Actor\Enemies\WallReflectionEnemy.cpp" />
     <ClCompile Include="Utility\Animation.cpp" />
     <ClCompile Include="Scene\TestScene3D.cpp" />
     <ClCompile Include="Actor\Item\Item.cpp" />
@@ -207,6 +209,8 @@
     <ClInclude Include="Actor\Bulletes\ShotgunBullet.h" />
     <ClInclude Include="Actor\Bulletes\LaserBullet.h" />
     <ClInclude Include="Actor\Enemies\LaserEnemy.h" />
+    <ClInclude Include="Actor\Bulletes\WallReflectionBullet.h" />
+    <ClInclude Include="Actor\Enemies\WallReflectionEnemy.h" />
     <ClInclude Include="Utility\Animation.h" />
     <ClInclude Include="Scene\TestScene3D.h" />
     <ClInclude Include="Actor\Item\Item.h" />

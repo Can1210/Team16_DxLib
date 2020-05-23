@@ -1,7 +1,7 @@
-#ifndef INCLUDED_ARRAY_2D_H
-#define INCLUDED_ARRAY_2D_H
+#ifndef INCLUDED_ARRAY_1D_H
+#define INCLUDED_ARRAY_1D_H
 
-//二次元配列クラス
+//1次元配列クラス
 template< class T > class Array {
 public:
 	Array() : mArray(0) {}

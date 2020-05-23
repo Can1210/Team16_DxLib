@@ -161,6 +161,7 @@
     <ClCompile Include="Actor\Bulletes\CurveBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\LaserBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\TrakingBullet.cpp" />
+    <ClCompile Include="Actor\Bulletes\WallReflectionBullet.cpp" />
     <ClCompile Include="Actor\CharaManager\BaseObject.cpp" />
     <ClCompile Include="Actor\CharaManager\CharactorManager.cpp" />
     <ClCompile Include="Actor\CharaManager\EnemySpawn.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Actor\Enemies\Boss.cpp" />
     <ClCompile Include="Actor\Enemies\ThreeWayEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\UFOEnemy.cpp" />
+    <ClCompile Include="Actor\Enemies\WallReflectionEnemy.cpp" />
     <ClCompile Include="Actor\Player\Player.cpp" />
     <ClCompile Include="Actor\Enemies\BomEnemy.cpp" />
     <ClCompile Include="Actor\Enemies\CircleMoveEnemy.cpp" />
@@ -213,6 +215,7 @@
     <ClInclude Include="Actor\Bulletes\CurveBullet.h" />
     <ClInclude Include="Actor\Bulletes\LaserBullet.h" />
     <ClInclude Include="Actor\Bulletes\TrakingBullet.h" />
+    <ClInclude Include="Actor\Bulletes\WallReflectionBullet.h" />
     <ClInclude Include="Actor\CharaManager\BaseObject.h" />
     <ClInclude Include="Actor\CharaManager\CharactorManager.h" />
     <ClInclude Include="Actor\CharaManager\EnemySpawn.h" />
@@ -224,6 +227,7 @@
     <ClInclude Include="Actor\Enemies\Boss.h" />
     <ClInclude Include="Actor\Enemies\ThreeWayEnemy.h" />
     <ClInclude Include="Actor\Enemies\UFOEnemy.h" />
+    <ClInclude Include="Actor\Enemies\WallReflectionEnemy.h" />
     <ClInclude Include="Actor\Player\Player.h" />
     <ClInclude Include="Actor\Enemies\BomEnemy.h" />
     <ClInclude Include="Actor\Enemies\CircleMoveEnemy.h" />
