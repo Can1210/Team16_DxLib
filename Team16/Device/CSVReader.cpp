@@ -58,10 +58,10 @@ std::vector<std::vector<std::string>> CSVReader::getData()
 
 float CSVReader::getSize_X()
 {
-	return fileData[0].size();
+	return (float)fileData[0].size();
 }
 
 float CSVReader::getSize_Y()
 {
-	return fileData.size();
+	return (float)fileData.size();
 }

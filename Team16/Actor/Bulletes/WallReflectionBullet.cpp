@@ -3,7 +3,7 @@
 #include<math.h>
 #include"../../Device/Sound.h"
 
-WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Type t, float angle)
+WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Type t, int angle)
 {
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
@@ -178,14 +178,13 @@ void WallReflectionBullet::hit(BaseObject & other)
 	DrawCircle((int)b_mPosittion.x + 12 / 2, (int)b_mPosittion.y + 16 / 2, (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
-Vector2 WallReflectionBullet::RotationZ(float ang)
+Vector2 WallReflectionBullet::RotationZ(int ang)
 {
 	Vector2 v;
-	ang = ang + 45.0f;
-	ang = ang * PI / 180.0f;
-
-	float sin = sinf(ang);
-	float cos = cosf(ang);
+	ang = ang + 45;
+	ang = (int)(ang * PI / 180);
+	float sin = (float)(sinf((float)ang));
+	float cos = (float)(cosf((float)ang));
 
 	float x = cos + sin;
 	float y = -(sin)+cos;
