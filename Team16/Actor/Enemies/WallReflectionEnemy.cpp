@@ -91,19 +91,19 @@ void WallReflectionEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	if (b_mType == Type::ENEMY)
 	{
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, b_mCircleSize, GetColor(255, 0, 0), FALSE);
+		DrawCircle(b_mPosittion.x + 64.0f/ 2.0f, b_mPosittion.y + 64.0f / 2.0f, b_mCircleSize, GetColor(255, 0, 0), FALSE);
 		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
 	}
 	if (b_mType == Type::SUB_PLAYER1 || b_mType == Type::SUB_PLAYER2)
 	{
 		b_mAngle = 0.0f;
-		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
+		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 
 	}
 	if (b_mType == Type::ITEM)
 	{
-		DrawCircle(b_mPosittion.x + 64 / 2, b_mPosittion.y + 64 / 2, itemDesthCnt, GetColor(0, 255, 0), FALSE);
-		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
+		DrawCircle(b_mPosittion.x + 64.0f / 2.0f, b_mPosittion.y + 64.0f / 2.0f, itemDesthCnt, GetColor(0, 255, 0), FALSE);
+		renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 	}
 
 }
@@ -222,7 +222,6 @@ void WallReflectionEnemy::SubShot(Vector2 pos)
 void WallReflectionEnemy::Jibaku(Vector2 pos)
 {
 	Sound::getInstance().playSE("burst02");
-	charaManager->add(new Bom(pos, charaManager));
 	b_mIsDeath = true;
 }
 
