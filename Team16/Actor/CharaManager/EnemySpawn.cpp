@@ -230,6 +230,10 @@ case 60 * 40:
 	spawnTime = 0;//ŒJ‚è•Ô‚µ
 	break;
 
+case 60:
+	mCharactorManager->add(new LaserEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(sizeX, 1000)));
+	break;
+
 default:
 	break;
 }
