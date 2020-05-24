@@ -38,7 +38,7 @@ void ShotgunBullet::setBulletType()
 	default:
 		break;
 	}
-
+	//test
 }
 //‰Šú‰»
 void ShotgunBullet::initialize()
