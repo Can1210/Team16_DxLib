@@ -20,7 +20,7 @@ Vector2 CharactorManager::searchPlayer()
 		{
 			return object->getPpstion();
 		}
-
+		//test
 	}
 	return Vector2(0, 0);
 }

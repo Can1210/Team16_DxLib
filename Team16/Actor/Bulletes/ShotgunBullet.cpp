@@ -20,6 +20,7 @@ ShotgunBullet::~ShotgunBullet()
 //タイプ付与
 void ShotgunBullet::setBulletType()
 {
+
 	switch (m_SetType)
 	{
 	case PLAYER:
@@ -37,6 +38,7 @@ void ShotgunBullet::setBulletType()
 	default:
 		break;
 	}
+
 }
 //初期化
 void ShotgunBullet::initialize()
