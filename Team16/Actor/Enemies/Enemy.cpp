@@ -37,7 +37,7 @@ void Enemy::update(float deltaTime)
 	if (b_mHp <= 0)
 	{
 		Score::getInstance().addScore(100);
-		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //ƒAƒCƒeƒ€¶¬
+		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		b_mIsDeath = true;
 	}
 	if (b_mPosittion.y > WindowInfo::WindowHeight
@@ -68,5 +68,3 @@ void Enemy::Shot(Vector2 pos)
 {
 	charaManager->add(new Bullet(pos, charaManager, b_mType,0.0f));
 }
-
-

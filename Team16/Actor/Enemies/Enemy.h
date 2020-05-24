@@ -9,7 +9,7 @@ public:
 	Enemy(Vector2 pos, CharactorManager *c);
 	~Enemy();
 
-	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
+	// BaseObject ï¿½ï¿½ï¿½î‚µï¿½ÄŒpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;

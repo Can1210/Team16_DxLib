@@ -35,7 +35,7 @@ void BomEnemy::update(float deltaTime)
 	}
 	if (b_mHp <= 0)
 	{
-		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //ƒAƒCƒeƒ€¶¬
+		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Score::getInstance().addScore(300);
 		b_mIsDeath = true;
 	}
@@ -69,29 +69,40 @@ void BomEnemy::hit(BaseObject & other)
 }
 void BomEnemy::shot(Vector2 pos)
 {
-	//ËŒ‚‹–‰Âƒ‰ƒCƒ“‚æ‚è‚æ‚è‰º‚É‚¢‚½‚çŒ‚‚½‚È‚¢
+	//ï¿½ËŒï¿½ï¿½ï¿½ï¿½Âƒï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è‰ºï¿½É‚ï¿½ï¿½ï¿½ï¿½çŒ‚ï¿½ï¿½ï¿½È‚ï¿½
 	if (!isShot()) return;
 	Vector2 angleVec = Vector2(0, 0);
-	angleVec = checkPlayerPos(angleVec);  //Šp“x‚ğ‘ã“ü
-	//Šp“x‚É•ÏŠ·
+	angleVec = checkPlayerPos(angleVec);  //ï¿½pï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½pï¿½xï¿½É•ÏŠï¿½
 	float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
-	//3Way‚É•ÏX‚·‚é
+	//3Wayï¿½É•ÏXï¿½ï¿½ï¿½ï¿½
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle - 20.0f));
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle));
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle + 20.0f));
-}												  
+}
 
 Vector2 BomEnemy::checkPlayerPos(Vector2 vec)
 {
-	//ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğ“ü‚ê‚é
+	//ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌˆÊ’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	mPlayerPos = charaManager->getPlayerPosition();
-	Vector2 playerVec = mPlayerPos - b_mPosittion;  //ƒvƒŒƒCƒ„[‚Æ‚Ì·•ª
+	Vector2 playerVec = mPlayerPos - b_mPosittion;  //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Æ‚Ìï¿½ï¿½ï¿½
 	return playerVec.normalize();
 }
-//ËŒ‚‚µ‚Ä‚Ù‚µ‚¢‚©‚Ç‚¤‚©
+//ï¿½ËŒï¿½ï¿½ï¿½ï¿½Ä‚Ù‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
 bool BomEnemy::isShot()
 {
 	if (b_mPosittion.y <= charaManager->getPlayerPosition().y - 64 * 2)  return true;
 	return false;
 }
 
+bool BomEnemy::subChack()
+{
+	for (auto object : charaManager->getUseList())
+	{
+		if (object->getType() == Type::SUB_PLAYER1)
+		{
+			return true;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½true
+		}
+	}
+	return false;
+}
