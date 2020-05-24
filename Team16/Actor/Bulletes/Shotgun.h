@@ -22,7 +22,6 @@ public:
 private:
 	//w’è”ÍˆÍ‚Ì—”‚ğo‚·
 	int getRandom(int min, int max);
-	void createBullet();
 	void deathTime(float deltaTime);
 
 private:

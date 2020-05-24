@@ -58,7 +58,6 @@ void GamePlay::update(float deltaTime)
 	}
 	else
 	{
-		
 		if (m_pInput->isKeyDown(KEYCORD::SPACE))
 		{
 			//charaManager->clear();
@@ -68,7 +67,7 @@ void GamePlay::update(float deltaTime)
 	}
 	
 	
-	if (Score::getInstance().getScore() >= 1500&&bossFlag == FALSE)
+	if (Score::getInstance().getScore() >= 15000&&bossFlag == FALSE)
 	{
 		bossFlag = TRUE;
 		boss();

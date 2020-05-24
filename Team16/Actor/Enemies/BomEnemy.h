@@ -22,7 +22,7 @@ public:
 	Vector2 checkPlayerPos(Vector2 vec);
 
 	bool isShot();
-	
+	bool subChack();//Šù‚ÉƒTƒu‚ª‚¢‚é‚©H
 private:
 	bool DamgeFlag;
 	CharactorManager* charaManager;

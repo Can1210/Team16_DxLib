@@ -23,12 +23,6 @@ Shotgun::Shotgun(Vector2 pos, CharactorManager& c, Type t, float angle)
 Shotgun::~Shotgun()
 {
 }
-//íeÇÃê∂ê¨
-void Shotgun::createBullet()
-{
-	
-
-}
 
 void Shotgun::deathTime(float deltaTime)
 {
