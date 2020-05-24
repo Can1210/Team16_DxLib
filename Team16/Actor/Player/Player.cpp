@@ -10,7 +10,6 @@
 #include "../Bulletes/Bom.h"
 #include <typeinfo.h>
 
-Array<Type> subs;
 Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
