@@ -1,4 +1,5 @@
 #include "TestScene3D.h"
+#include "../Actor/CharaManager/DeathPoint.h"
 
 //コンストラクタ
 TestScene3D::TestScene3D(Input * input)
@@ -17,14 +18,16 @@ TestScene3D::~TestScene3D()
 //初期化
 void TestScene3D::initialize()
 {
+	DeathPoint::getInstance().initialize();
 	charaManager->clear();
 	isSceneEnd = false;   //最初はfalse
-	charaManager->add(new Player(Vector2(250.0f, 600.0f), charaManager));  //プレイヤー
-
-	camera = new Camera(*charaManager, Vector2(250.0f,600.0f));
+	charaManager->add(new Player(Vector2(0.0f, -600.0f), charaManager));  //プレイヤー
+	camera = new Camera();
 	camera->initialize();
+	camera->setPosition(Vector2(0.0f, -600.0f));
 	mapSpawn = new MapSpawn(*charaManager,*camera);
 	mapSpawn->loadMap("Resouce/Map/test01.csv");
+
 }
 //更新
 void TestScene3D::update(float deltaTime)
@@ -36,6 +39,13 @@ void TestScene3D::update(float deltaTime)
 void TestScene3D::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
 	charaManager->draw(renderer, renderer3D);
+
+	renderer3D->draw3DTexture("enemy", Vector3(camera->getPosition().x, camera->getPosition().y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, 0.0f);
+	
+	renderer3D->draw3DTexture("enemy", Vector3(camera->getPosition().x, DeathPoint::getInstance().getUp(), 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, 0.0f);
+	renderer3D->draw3DTexture("enemy", Vector3(camera->getPosition().x, DeathPoint::getInstance().getDown(), 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, 0.0f);
+	renderer3D->draw3DTexture("enemy", Vector3(DeathPoint::getInstance().getLeft(), camera->getPosition().y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, 0.0f);
+	renderer3D->draw3DTexture("enemy", Vector3(DeathPoint::getInstance().getRight(), camera->getPosition().y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, 0.0f);
 }
 
 //終了処理

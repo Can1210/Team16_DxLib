@@ -2,16 +2,13 @@
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
-#include "DxLib.h"
 #include "../Math/Vector3.h"
 #include "../Actor/CharaManager/CharactorManager.h"
-#include "../Device/Input.h"
-
 //カメラクラス
 class Camera
 {
 public:
-	Camera(CharactorManager& chractorManager, Vector2 pos);
+	Camera();
 	~Camera();
 	//初期化
 	void initialize();
@@ -25,18 +22,20 @@ public:
 	//位置を返す
 	Vector3 getPosition() const;
 	//位置を変更する
-	void setPosition(Vector3 position);
+	void setPosition(Vector2 position);
+	//速さを変える
+	void setSpeed(float speed);
 	//向いている位置を返す
 	Vector3 getLookAtPosition() const;
 	//向きの変更
 	void setLookAtPosition(Vector3 lookAtPos);
+#pragma endregion
 
 private:
 	//カメラの移動
 	void cameraMove(float deltaTime);
 
 
-#pragma endregion
 
 private:
 
@@ -46,9 +45,7 @@ private:
 	Vector3 mAngle;           //回転
 	Vector3 mVelocity;        //移動量
 
-	CharactorManager* m_pCharactorManager;   //プレイヤーを探す用
-	const float lookAtDistance;   //とりあえず700
-	Input* input;
+	float lookAtDistance;
 };
 
 #endif // !_CAMERA_H_

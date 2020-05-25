@@ -1,5 +1,5 @@
 #include "BaseObject.h"
-
+#include "../CharaManager/DeathPoint.h"
 
 //コンストラクタ
 BaseObject::BaseObject()
@@ -47,5 +47,19 @@ Vector2 BaseObject::getPpstion() const
 float BaseObject::getCircleSize() const
 {
 	return b_mCircleSize;
+}
+//死亡エリア
+void BaseObject::outArea()
+{
+	if (b_mNoDeathArea) return;
+
+	//Y
+	if (b_mPosittion.y >= DeathPoint::getInstance().getUp()
+		|| b_mPosittion.y <= DeathPoint::getInstance().getDown())
+		b_mIsDeath = true;
+	//X
+	if (b_mPosittion.x >= DeathPoint::getInstance().getRight()
+		|| b_mPosittion.x <= DeathPoint::getInstance().getLeft())
+		b_mIsDeath = true;
 }
 
