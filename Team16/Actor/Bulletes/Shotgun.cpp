@@ -1,7 +1,7 @@
 #include "Shotgun.h"
 #include <stdio.h>
 #include <time.h>
-//#include "../Bulletes/ShotgunBullet.h"
+#include "../Bulletes/ShotgunBullet_sin.h"
 #include "../Bulletes/AngleBullet.h"
 
 Shotgun::Shotgun(Vector2 pos, CharactorManager& c, Type t, float angle)
@@ -36,7 +36,7 @@ void Shotgun::deathTime(float deltaTime)
 
 		mRange = (float)getRandom(-20, 20);       //ƒ‰ƒ“ƒ_ƒ€‚È’e‚Ì”ÍˆÍ
 		//’e‚ð’Ç‰Á‚·‚é
-		//m_pCharactorManager->add(new ShotgunBullet(b_mPosittion, m_pCharactorManager, b_SetType, 90.0f + mRange));
+		m_pCharactorManager->add(new ShotgunBullet_sin(b_mPosittion, m_pCharactorManager, b_SetType, 90.0f + mRange));
 	}
 
 }

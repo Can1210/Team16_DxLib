@@ -7,7 +7,7 @@
 
 
 
-class ShotgunBullet_sin :BaseObject
+class ShotgunBullet_sin :public BaseObject
 {
 public:
 	ShotgunBullet_sin(Vector2 pos, CharactorManager* c, Type t, float angle);

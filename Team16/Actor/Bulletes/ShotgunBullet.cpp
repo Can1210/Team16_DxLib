@@ -1,4 +1,4 @@
-//#include "ShotgunBullet.h"
+//#include "ShotgunBullet_sin.h"
 //#include"../../GameBase/WindowInfo.h"
 ////コンストラクタ
 //ShotgunBullet::ShotgunBullet(Vector2 pos, CharactorManager* c, Type t, float angle)
