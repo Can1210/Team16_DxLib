@@ -47,7 +47,7 @@ public:
 #pragma region パワーショット
 public:
 	//パワーショット
-	void PowerShot(Vector2 pos);
+	void PowerShot();
 	//武装ランクをチェック
 	void ArmedRankCheck();
 private:

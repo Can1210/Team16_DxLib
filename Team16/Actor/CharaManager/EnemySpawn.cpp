@@ -154,6 +154,7 @@ void EnemySpawn::spawn()
 	default:
 		break;
 	}
+
 #elif 1
 switch (spawnTime)
 {
@@ -241,5 +242,15 @@ default:
 	break;
 }
 #endif // 0
+
+//switch (spawnTime)
+//{
+//case 60 * 3:
+//	mCharactorManager->add(new HomingEnemy(Vector2(300, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+//	mCharactorManager->add(new Enemy(Vector2(middleX, -sizeY), mCharactorManager));//^‚ñ’†
+//
+//	spawnTime = 0;
+//}
+
 	spawnTime++;
 }
