@@ -53,6 +53,7 @@
     <ClCompile Include="Utility\Animation.cpp" />
     <ClCompile Include="Scene\TestScene3D.cpp" />
     <ClCompile Include="Actor\Item\Item.cpp" />
+    <ClCompile Include="Actor\Bulletes\ShotgunBullet_sin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -214,6 +215,7 @@
     <ClInclude Include="Utility\Animation.h" />
     <ClInclude Include="Scene\TestScene3D.h" />
     <ClInclude Include="Actor\Item\Item.h" />
+    <ClInclude Include="Actor\Bulletes\ShotgunBullet_sin.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

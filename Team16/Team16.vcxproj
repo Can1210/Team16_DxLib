@@ -183,6 +183,7 @@
     <ClCompile Include="Actor\Bulletes\ChangeBullet.cpp" />
     <ClCompile Include="Actor\Item\Item.cpp" />
     <ClCompile Include="Scene\TestScene3D.cpp" />
+    <ClCompile Include="Actor\Bulletes\ShotgunBullet_sin.cpp" />
     <ClCompile Include="Utility\Animation.cpp" />
     <ClCompile Include="Device\CSVReader.cpp" />
     <ClCompile Include="Device\Camera.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="Actor\Bulletes\ChangeBullet.h" />
     <ClInclude Include="Actor\Item\Item.h" />
     <ClInclude Include="Scene\TestScene3D.h" />
+    <ClInclude Include="Actor\Bulletes\ShotgunBullet_sin.h" />
     <ClInclude Include="Utility\Animation.h" />
     <ClInclude Include="Device\CSVReader.h" />
     <ClInclude Include="Device\Camera.h" />
