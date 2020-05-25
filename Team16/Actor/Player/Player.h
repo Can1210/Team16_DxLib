@@ -55,8 +55,6 @@ private:
 	Armed amd;
 	//武装ランクCheck
 	PlayerArneds* playerAmds;
-	//ショットレート
-	int shotRate;
 #pragma endregion
 
 private:

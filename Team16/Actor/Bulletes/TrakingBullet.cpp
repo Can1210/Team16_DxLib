@@ -60,14 +60,14 @@ void TrakingBullet::update(float deltaTime)
 		}
 		else if(isFound)
 		{
-			if (obj == nullptr || obj->getType() == Type::ITEM)
+			if (obj == nullptr )
 			{
 				isFound = false;
 				b_mIsDeath = true;
 				return;
-			}			
+			}
 
-			if (!obj->getIsDeath())
+			if (!obj->getIsDeath() || obj->getType() == Type::ITEM)
 			{
 				b_mVelocity = traking();
 			}
