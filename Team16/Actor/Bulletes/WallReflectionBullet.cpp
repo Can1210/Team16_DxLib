@@ -10,7 +10,7 @@ WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Ty
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
 
-	bulletAngle = angle;
+	bulletAngle = (float)angle;
 	playerPos = pos;
 	b_mSpeed = 250.0f;
 }
@@ -69,13 +69,13 @@ void WallReflectionBullet::update(float deltaTime)
 	{
 		if (b_mPosittion.x < 0.0f)
 		{
-			bulletAngle = 90 - (bulletAngle - 90);
+			bulletAngle = 90.0f - (bulletAngle - 90.0f);
 			b_mVelocity = RotationZ(bulletAngle);
 			type = R;
 		}
 		else if (b_mPosittion.x >= WindowInfo::WindowWidth)
 		{
-			bulletAngle = 90 + (90 - bulletAngle);
+			bulletAngle = 90.0f + (90.0f - bulletAngle);
 			b_mVelocity = RotationZ(bulletAngle);
 			type = L;
 		}
@@ -99,13 +99,13 @@ void WallReflectionBullet::update(float deltaTime)
 	{
 		if (b_mPosittion.x < 0.0f)
 		{
-			bulletAngle = 270 + (270 - bulletAngle);
+			bulletAngle = 270.0f + (270.0f - bulletAngle);
 			b_mVelocity = RotationZ(bulletAngle);
 			type = R;
 		}
 		else if (b_mPosittion.x >= WindowInfo::WindowWidth)
 		{
-			bulletAngle = 270 - (bulletAngle - 270);
+			bulletAngle = 270.0f - (bulletAngle - 270.0f);
 			b_mVelocity = RotationZ(bulletAngle);
 			type = L;
 		}
@@ -130,9 +130,9 @@ void WallReflectionBullet::update(float deltaTime)
 		b_mIsDeath = true;
 
 	if (b_mPosittion.y > WindowInfo::WindowHeight + 64.0f
-		|| b_mPosittion.y<0 - 64.0f
+		|| b_mPosittion.y<0.0f - 64.0f
 		|| b_mPosittion.x>WindowInfo::WindowWidth + 64.0f
-		|| b_mPosittion.x < 0 - 64.0f)
+		|| b_mPosittion.x < 0.0f - 64.0f)
 	{
 		b_mIsDeath = true;
 	}
@@ -140,11 +140,6 @@ void WallReflectionBullet::update(float deltaTime)
 
 void WallReflectionBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	Vector2 a = RotationZ(bulletAngle);
-
-
-	float angle = atan2(a.y, a.x)* 180.0f / DX_PI_F;
-
 	renderer->draw2D("WallReflectionBullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(10, 12), Vector2(5, 5), Vector2(3.0f, 3.0f), b_mAngle, 255);
 
 	if (b_mType == Type::ENEMY_BULLET)
@@ -178,13 +173,14 @@ void WallReflectionBullet::hit(BaseObject & other)
 	DrawCircle((int)b_mPosittion.x + 12 / 2, (int)b_mPosittion.y + 16 / 2, (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
-Vector2 WallReflectionBullet::RotationZ(int ang)
+Vector2 WallReflectionBullet::RotationZ(float ang)
 {
 	Vector2 v;
-	ang = ang + 45;
-	ang = (int)(ang * PI / 180);
-	float sin = (float)(sinf((float)ang));
-	float cos = (float)(cosf((float)ang));
+	ang = ang + 45.0f;
+	ang = ang * PI / 180.0f;
+
+	float sin = sinf(ang);
+	float cos = cosf(ang);
 
 	float x = cos + sin;
 	float y = -(sin)+cos;

@@ -48,8 +48,8 @@ public:
 	{BulletType::T_Bullet,BulletType::T_TrakingBullet,ArmedRank::SM_Rank},
 	{BulletType::T_TrakingBullet,BulletType::T_Bullet,ArmedRank::SM_Rank},//ロックオンマシンガン
 
-	{BulletType::T_Bullet,BulletType::T_CurveBullet,ArmedRank::SB_Rank},
-	{BulletType::T_CurveBullet,BulletType::T_Bullet,ArmedRank::SB_Rank},//反射ビーム
+	{BulletType::T_Bullet,BulletType::T_LaserBullet,ArmedRank::SB_Rank},
+	{BulletType::T_LaserBullet,BulletType::T_Bullet,ArmedRank::SB_Rank},//反射ビーム
 
 	{BulletType::T_TrakingBullet,BulletType::T_LaserBullet,ArmedRank::MB_Rank},
 	{BulletType::T_LaserBullet,BulletType::T_TrakingBullet,ArmedRank::MB_Rank},// 16個
@@ -61,8 +61,8 @@ public:
 	{BulletType::T_AngleBullet,BulletType::T_TrakingBullet,ArmedRank::SM_Rank},
 	{BulletType::T_TrakingBullet,BulletType::T_AngleBullet,ArmedRank::SM_Rank},//21
 
-	{BulletType::T_AngleBullet,BulletType::T_CurveBullet,ArmedRank::SB_Rank},
-	{BulletType::T_CurveBullet,BulletType::T_AngleBullet,ArmedRank::SB_Rank},//23
+	{BulletType::T_AngleBullet,BulletType::T_LaserBullet,ArmedRank::SB_Rank},
+	{BulletType::T_LaserBullet,BulletType::T_AngleBullet,ArmedRank::SB_Rank},//23
 	};
 
 private:
