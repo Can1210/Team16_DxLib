@@ -49,7 +49,7 @@ public:
 	//パワーショット
 	void PowerShot(Vector2 pos);
 	//武装ランクをチェック
-	void ArmedRankCheck(Armed amd);
+	void ArmedRankCheck();
 private:
 	//武装
 	Armed amd;
