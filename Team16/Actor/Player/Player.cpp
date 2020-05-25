@@ -373,6 +373,7 @@ void Player::PowerShot(Vector2 pos)
 		if (subShotCnt > 5)
 		{
 			charaManager->add(new Bullet(b_mPosittion, charaManager, b_mType, 0.0f));
+			//charaManager->add(new AngleBullet(b_mPosittion, charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}

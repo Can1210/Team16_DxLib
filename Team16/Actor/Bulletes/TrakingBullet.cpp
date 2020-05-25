@@ -46,7 +46,7 @@ void TrakingBullet::initialize()
 	setBulletType();
 	b_mVelocity = RotationZ(bulletAngle);
 	isFound = false;//敵を見つけていない
-	//getOtherPos();
+	getOtherPos();
 }
 
 void TrakingBullet::update(float deltaTime)
@@ -55,25 +55,30 @@ void TrakingBullet::update(float deltaTime)
 	{
 		if (!isFound)//見つけてない
 		{
-			b_mVelocity = RotationZ(bulletAngle);
-			getOtherPos();
+			//b_mVelocity = RotationZ(bulletAngle);
+			//getOtherPos();
 		}
-		else if(isFound)
+		else if (isFound)
 		{
-			if (obj == nullptr )
+			if (!obj)
 			{
 				isFound = false;
 				b_mIsDeath = true;
 				return;
 			}
 
-			if (!obj->getIsDeath() || obj->getType() == Type::ITEM)
+			if (obj->getType() == Type::ITEM)
+			{
+				b_mVelocity = RotationZ(bulletAngle);
+			}
+
+			if (!obj->getIsDeath())
 			{
 				b_mVelocity = traking();
 			}
 			else if (obj->getIsDeath())
 			{//敵がいないのに自分が生成されている場合死ぬ
-				b_mIsDeath = true;
+				isFound = false;
 			}
 		}
 		b_mPosittion += b_mVelocity * 200.0f *deltaTime;
@@ -85,7 +90,7 @@ void TrakingBullet::update(float deltaTime)
 		{
 			Vector2 v;
 			v = b_mPosittion - charaManager->getPlayerPosition();
-			b_mVelocity = -v.normalize();			
+			b_mVelocity = -v.normalize();
 		}
 		else
 		{
@@ -150,7 +155,7 @@ void TrakingBullet::getOtherPos()//ターゲットを定める
 				obj = objs[i];//その時近かったターゲットのオブジェを入れる
 				isFound = true;//敵を見つけた
 			}
-		}	
+		}
 	}
 }
 
@@ -172,7 +177,7 @@ Vector2 TrakingBullet::RotationZ(float ang)
 	float cos = cosf(ang);
 
 	float x = cos + sin;
-	float y = -(sin) + cos;
+	float y = -(sin)+cos;
 	v = Vector2(x, y);
 	return v;
 }
