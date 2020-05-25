@@ -8,6 +8,7 @@ TrakingBullet::TrakingBullet(Vector2 pos, CharactorManager * c, Type t, float an
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
+	b_mAngle = angle;
 
 	bulletAngle = angle;
 	charaManager = c;
@@ -110,12 +111,10 @@ void TrakingBullet::update(float deltaTime)
 
 void TrakingBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+	Vector2 a = b_mVelocity;
+	float angle = atan2(a.y, a.x)* 180.0f / DX_PI_F;
 
-	if (b_mType == Type::ENEMY_BULLET)
-	{
-		b_mAngle = 180.0f;
-	}
+	renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.5f, 1.5f), angle + 90, 255);
 }
 
 void TrakingBullet::hit(BaseObject & other)

@@ -86,7 +86,7 @@ void Player::update(float deltaTime)
 	if (input->isKeyState(KEYCORD::SPACE))
 	{
 		subShotCnt++;
-		PowerShot(Vector2(b_mPosittion.x, b_mPosittion.y));
+		PowerShot();
 
 		b_mSpeed = 20.0f;
 	}
@@ -279,7 +279,7 @@ void Player::move()
 //普通の射撃
 void Player::Shot(Vector2 pos)
 {
-	charaManager->add(new Bullet(pos, charaManager, b_mType, 0.0f));
+	charaManager->add(new Bullet(Vector2(pos.x,pos.y - 35), charaManager, b_mType, 0.0f));
 	Sound::getInstance().playSE("shot");
 }
 
@@ -357,14 +357,14 @@ void Player::bom2()
 #pragma endregion
 
 //各バレット処理
-void Player::PowerShot(Vector2 pos)
+void Player::PowerShot()
 {
 	switch (amd.rank)
 	{
 	case ArmedRank::NoneRank:
 		if (subShotCnt > 20)
 		{
-			charaManager->add(new Bullet(b_mPosittion, charaManager, b_mType, 0.0f));
+			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
@@ -372,7 +372,7 @@ void Player::PowerShot(Vector2 pos)
 	case ArmedRank::S_Rank://レートが上がるだけ
 		if (subShotCnt > 5)
 		{
-			charaManager->add(new Bullet(b_mPosittion, charaManager, b_mType, 0.0f));
+			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 0.0f));
 			//charaManager->add(new AngleBullet(b_mPosittion, charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
@@ -381,7 +381,7 @@ void Player::PowerShot(Vector2 pos)
 	case ArmedRank::M_Rank://レートが上がるだけ
 		if (subShotCnt > 5)
 		{
-			charaManager->add(new Bullet(b_mPosittion, charaManager, b_mType, 0.0f));
+			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
@@ -389,7 +389,7 @@ void Player::PowerShot(Vector2 pos)
 	case ArmedRank::B_Rank://レートが上がるだけ
 		if (subShotCnt > 5)
 		{
-			charaManager->add(new Bullet(b_mPosittion, charaManager, b_mType, 0.0f));
+			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
@@ -397,7 +397,7 @@ void Player::PowerShot(Vector2 pos)
 	case ArmedRank::SS_Rank://ショットガン
 		if (subShotCnt > 5)
 		{
-			charaManager->add(new Shotgun(b_mPosittion, *charaManager, b_mType, 0.0f));
+			charaManager->add(new Shotgun(Vector2(b_mPosittion.x, b_mPosittion.y - 35), *charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
@@ -405,32 +405,32 @@ void Player::PowerShot(Vector2 pos)
 	case ArmedRank::MM_Rank://ホーミングミサイル
 		if (subShotCnt > 20)
 		{
-			charaManager->add(new TrakingBullet(b_mPosittion,charaManager,b_mType,90.0f));
+			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
 		break;
 	case ArmedRank::BB_Rank://レーザー
-		charaManager->add(new LaserBullet(b_mPosittion, charaManager, b_mType,90.0f, &b_mPosittion));
+		charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 90.0f, &b_mPosittion));
 		break;
 	case ArmedRank::SM_Rank://ロックオンマシンガン
 		if (subShotCnt > 5)
 		{
-			charaManager->add(new TrakingBullet(b_mPosittion, charaManager, b_mType, 90.0f));
+			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
 		break;
 	case ArmedRank::SB_Rank://反射ビーム
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y) + Vector2(32.0f, 32.0f), charaManager, b_mType, 30));
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y) + Vector2(32.0f, 32.0f), charaManager, b_mType, 150));
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35) + Vector2(32.0f, 32.0f), charaManager, b_mType, 30));
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35) + Vector2(32.0f, 32.0f), charaManager, b_mType, 150));
 		break;
 	case ArmedRank::MB_Rank:
 		if (subShotCnt > 5)
 		{
-			charaManager->add(new Bullet(Vector2(b_mPosittion.x - 5, b_mPosittion.y), charaManager, b_mType, 0.0f));
-			charaManager->add(new Bullet(b_mPosittion, charaManager, b_mType, 0.0f));
-			charaManager->add(new Bullet(Vector2(b_mPosittion.x + 5, b_mPosittion.y), charaManager, b_mType, 0.0f));
+			charaManager->add(new Bullet(Vector2(b_mPosittion.x - 5, b_mPosittion.y - 35), charaManager, b_mType, 0.0f));
+			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 0.0f));
+			charaManager->add(new Bullet(Vector2(b_mPosittion.x + 5, b_mPosittion.y - 35), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
