@@ -47,6 +47,12 @@ void WallReflectionEnemy::update(float deltaTime)
 		}
 		v = v.normalize();
 		b_mPosittion += -v * deltaTime * 120.0f;
+		if (b_mHp <= 0)
+		{
+			Score::getInstance().addScore(200);
+			charaManager->add(new Item(b_mPosittion, BulletType::T_LaserBullet, "enemy2"));   //アイテム生成 enumでバレットタイプを追加
+			b_mIsDeath = true;
+		}
 		return;
 	}
 	move(deltaTime);
@@ -76,7 +82,6 @@ void WallReflectionEnemy::Shot(Vector2 pos)
 	//angleVec = checkPlayerPos(angleVec);  //角度を代入
 	////角度に変換
 	//float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
-	int angle = 270;
 
 #if 0
 
@@ -136,7 +141,7 @@ void WallReflectionEnemy::move(float deltaTime)
 	{
 		//b_mType = Type::ITEM;
 		Score::getInstance().addScore(200);
-		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy2"));   //アイテム生成 enumでバレットタイプを追加
+		charaManager->add(new Item(b_mPosittion, BulletType::T_LaserBullet, "enemy2"));   //アイテム生成 enumでバレットタイプを追加
 		b_mIsDeath = true;
 	}
 

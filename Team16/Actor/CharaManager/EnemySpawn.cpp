@@ -227,15 +227,16 @@ case 60 * 34:
 	mCharactorManager->add(new LaserEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(sizeX, 1000)));
 	break;
 
+case 60 * 37:
+	mCharactorManager->add(new WallReflectionEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager));
+	break;
+
 case 60 * 40:
 	spawnTime = 0;//ŒJ‚è•Ô‚µ
 	break;
 
 case 60:
-	mCharactorManager->add(new LaserEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(sizeX, 1000)));
-	mCharactorManager->add(new LaserEnemy(Vector2(sizeX, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(sizeX * 8, 1000)));
-
-	mCharactorManager->add(new HomingEnemy(Vector2(300, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+	mCharactorManager->add(new WallReflectionEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager));
 	break;
 
 default:
