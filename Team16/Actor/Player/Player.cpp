@@ -248,8 +248,9 @@ void Player::hit(BaseObject & other)
 			amd.second = tAmd;
 		}
 
-		ArmedRankCheck(amd);//どんな球が打てるかチェック
+		ArmedRankCheck();//どんな球が打てるかチェック
 	}
+	
 }
 
 void Player::move()
@@ -403,14 +404,16 @@ void Player::PowerShot(Vector2 pos)
 	}
 }
 
-void Player::ArmedRankCheck(Armed amd)
+void Player::ArmedRankCheck()
 {
+	Armed tAmd = amd;
 	for (int i = 0; i < playerAmds->sizeMax; i++)
 	{
-		if (amd.first == playerAmds->gArmeds[i].first && amd.second == playerAmds->gArmeds[i].second)
+		BulletType f = playerAmds->gArmeds[i].first;
+		BulletType s = playerAmds->gArmeds[i].second;
+		if (tAmd.first == f && tAmd.second == s)
 		{
 			amd.rank = playerAmds->gArmeds[i].rank;
-			this->amd.rank = amd.rank;
 		}
 	}
 }

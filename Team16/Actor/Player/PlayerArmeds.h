@@ -36,10 +36,10 @@ public:
 	{BulletType::None,BulletType::T_Bullet,ArmedRank::S_Rank},
 
 	{BulletType::T_TrakingBullet,BulletType::None,ArmedRank::M_Rank},
-	{BulletType::None,BulletType::T_AngleBullet,ArmedRank::M_Rank},
+	{BulletType::None,BulletType::T_TrakingBullet,ArmedRank::M_Rank},
 
 	{BulletType::T_LaserBullet,BulletType::None,ArmedRank::B_Rank},
-	{BulletType::None,BulletType::T_TrakingBullet,ArmedRank::B_Rank},
+	{BulletType::None,BulletType::T_LaserBullet,ArmedRank::B_Rank},
 
 	{BulletType::T_Bullet,BulletType::T_Bullet,ArmedRank::SS_Rank},//ショットガン
 	{BulletType::T_TrakingBullet,BulletType::T_TrakingBullet,ArmedRank::MM_Rank},//ホーミング
