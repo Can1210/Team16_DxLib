@@ -1,6 +1,7 @@
 #include "WallReflectionEnemy.h"
 #include <random>
 #include "../Bulletes/WallReflectionBullet.h"
+#include"../Item/Item.h"
 
 WallReflectionEnemy::WallReflectionEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer())
 {
@@ -135,6 +136,8 @@ void WallReflectionEnemy::move(float deltaTime)
 	{
 		//b_mType = Type::ITEM;
 		Score::getInstance().addScore(200);
+		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy2"));   //アイテム生成 enumでバレットタイプを追加
+		b_mIsDeath = true;
 	}
 
 	Shot(b_mPosittion);
