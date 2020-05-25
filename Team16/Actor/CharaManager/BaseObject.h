@@ -57,6 +57,8 @@ public:
 	virtual float getCircleSize()const;
 #pragma endregion
 
+	void outArea();
+
 	//円同士の当たり判定
 	bool circle_circle_Collision(BaseObject& other);
 
@@ -72,6 +74,7 @@ protected:
 	float b_mAngle;//角度
 	int b_mArpha; //画像のアルファ値
 	bool b_mEndFlag;//ゲームオーバー
+	bool b_mNoDeathArea = false;
 
 	
 };

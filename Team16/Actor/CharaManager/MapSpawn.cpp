@@ -28,19 +28,15 @@ void MapSpawn::addObject(int lineCnt, std::vector<std::string> record)
 			continue;
 		}
 		int strInt = std::stoi(string);
-		switch (strInt)
+		//0ˆÈ‰º‚È‚ç
+		if (strInt < 0)
 		{
-		case(0):
-			break;
-		case(1):
-		{
-			m_pCharaManager->add(new EnemyBox(*m_pCharaManager, *m_pCamera, 1, Vector2(((float)((colCount - 1) * 96) - 500.0f), (float)((lineCnt - 1) * 96))));
-			colCount++;
+			colCount++;  //—ñƒJƒEƒ“ƒ^‚ð‘‚â‚·
+			continue;
 		}
-		break;
-		default:
-			break;
-		}
+
+		m_pCharaManager->add(new EnemyBox(*m_pCharaManager, *m_pCamera, strInt, Vector2(((float)((colCount - 1) * 96) - 500.0f), (float)((lineCnt - 1) * 96))));
+		colCount++;
 	}
 }
 

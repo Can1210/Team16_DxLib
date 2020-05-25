@@ -76,6 +76,7 @@ void CharactorManager::objectsManager_update(float deltaTime)
 		//オブジェクト1がnullか死んでいたらスキップ
 		if (object1 == nullptr || object1->getIsDeath()) continue;
 		object1->update(deltaTime);   //オブジェクト1を更新
+		object1->outArea();           //苦し紛れの処理
 		for (auto object2 : mObjectsList)
 		{
 			//オブジェクト2が「null,死んでいる,オブジェクト1,2」が同じならスキップ

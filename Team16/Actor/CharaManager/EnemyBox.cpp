@@ -1,7 +1,17 @@
 #include "EnemyBox.h"
 #include "../../GameBase/WindowInfo.h"
-#include "../Enemies/Enemy.h"
 #include "../../Support/CWindow.h"
+//敵
+#include "../Enemies/Enemy.h"
+#include "../Enemies/BomEnemy.h"
+#include "../Enemies/CircleMoveEnemy.h"
+#include "../Enemies/HomingEnemy.h"
+#include "../Enemies/LaserEnemy.h"
+#include "../Enemies/PlatoonEnemy.h"
+#include "../Enemies/SoldierEnemy.h"
+#include "../Enemies/ThreeWayEnemy.h"
+#include "../Enemies/UFOEnemy.h"
+#include "../Enemies/WallReflectionEnemy.h"
 
 //コンストラクタ
 EnemyBox::EnemyBox(CharactorManager & charactorMnager, Camera & camera, unsigned int enemyNumber, Vector2 position):
@@ -18,6 +28,7 @@ EnemyBox::~EnemyBox()
 void EnemyBox::initialize()
 {
 	b_mIsDeath = false;
+	b_mNoDeathArea = true;
 }
 //更新
 void EnemyBox::update(float deltaTime)
@@ -37,6 +48,8 @@ void EnemyBox::hit(BaseObject & other)
 //生成
 void EnemyBox::spawn()
 {
+
+	//とりあえず置いといた
 	//敵番号を調べて何を生成するかを決める
 	switch (mEnemyNum)
 	{
@@ -45,6 +58,33 @@ void EnemyBox::spawn()
 	case 1:     //1番は普通の敵
 		m_pCharactorManager->add(new Enemy(b_mPosittion, m_pCharactorManager));
 		break;
+	case 2:     
+		m_pCharactorManager->add(new BomEnemy(b_mPosittion, m_pCharactorManager));
+		break;
+	case 3:     
+		m_pCharactorManager->add(new CirecleMoveEnemy(b_mPosittion, m_pCharactorManager));
+		break;
+	case 4:   
+		m_pCharactorManager->add(new HomingEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+		break;
+	case 5:     
+		m_pCharactorManager->add(new LaserEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000)));
+		break;
+	case 6:     
+		m_pCharactorManager->add(new PlatoonEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+		break;
+	case 7:     
+		m_pCharactorManager->add(new SoldierEnemy(b_mPosittion, m_pCharactorManager));
+		break;
+	case 8:     
+		m_pCharactorManager->add(new ThreeWayEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000.0f)));
+		break;
+	case 9:     
+		m_pCharactorManager->add(new UFOEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600 / 2 + 32, 500.0f)));
+		break;
+	case 10:     
+		m_pCharactorManager->add(new WallReflectionEnemy(b_mPosittion, m_pCharactorManager));
+		break;
 	default:
 		break;
 	}
@@ -52,13 +92,14 @@ void EnemyBox::spawn()
 //カメラとの距離を調べる Yの距離だけ
 void EnemyBox::checkDistance()
 {
-	float distance = 100.0f;// = Vector2((mPosition - Vector2(m_pCamera->getPosition().x, m_pCamera->getPosition().y))).length();// = a.y - mPosition.y;
+	//絶対値にする
+	float distance = std::abs(Vector2((Vector2(0.0f, b_mPosittion.y) - Vector2(0, m_pCamera->getPosition().y))).length());
 
 	//カメラとの距離が描画範囲（縦）より小さくなったら生成する
-	if (distance <= WindowInfo::WindowHeight)
+	if (distance <= 500.0f)
 	{
-		//spawn();
-		//b_mIsDeath = true;      //生成したら自分を消す
+		spawn();
+		b_mIsDeath = true;      //生成したら自分を消す
 	}
 }
 

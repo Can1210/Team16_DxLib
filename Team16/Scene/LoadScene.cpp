@@ -26,6 +26,13 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("bullet5", "Resouce/Texture/Bullet05.png");
 	TextureLoad::getInstance().add("bullet6", "Resouce/Texture/Bullet06.png"); 
 	TextureLoad::getInstance().add("bossBullet", "Resouce/Texture/Bullet_S05.png");
+
+	TextureLoad::getInstance().add("bullet_en2", "Resouce/Texture/Bullet_S02.png");
+	TextureLoad::getInstance().add("bullet_en3", "Resouce/Texture/Bullet_S03.png");
+	TextureLoad::getInstance().add("bullet_en4", "Resouce/Texture/Bullet_S04.png");
+	TextureLoad::getInstance().add("bullet_en6", "Resouce/Texture/Bullet_S06.png");
+	TextureLoad::getInstance().add("Beme", "Resouce/Texture/Bemepng.png");
+
 	TextureLoad::getInstance().add("WallReflectionBullet", "Resouce/Texture/Bullet_S01.png");
 	//ŽÀ‹@ŠÖŒW
 	TextureLoad::getInstance().add("player", "Resouce/Texture/F4.png");

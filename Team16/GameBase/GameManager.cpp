@@ -8,6 +8,7 @@
 #include "../Scene/TestScene3D.h"
 #include "Score.h"
 #include"../Device/Sound.h"
+#include "../Actor/CharaManager/DeathPoint.h"
 
 //コンストラクタ
 GameManager::GameManager()
@@ -30,6 +31,8 @@ void GameManager::initialize(Input* input)
 	Score::getInstance().initialize();  //スコアの初期化
 	Sound::createInstance();
 	Sound::getInstance().volumeInitialize();
+	DeathPoint::createInstance();
+	DeathPoint::getInstance().initialize();
 }
 void GameManager::sceneInitialize(Input* input)
 {

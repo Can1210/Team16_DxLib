@@ -183,6 +183,7 @@
     <ClCompile Include="Actor\Bulletes\ChangeBullet.cpp" />
     <ClCompile Include="Actor\Item\Item.cpp" />
     <ClCompile Include="Actor\Player\PlayerArmeds.cpp" />
+    <ClCompile Include="Actor\CharaManager\DeathPoint.cpp" />
     <ClCompile Include="Scene\TestScene3D.cpp" />
     <ClCompile Include="Actor\Bulletes\ShotgunBullet_sin.cpp" />
     <ClCompile Include="Utility\Animation.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="Actor\Bulletes\ChangeBullet.h" />
     <ClInclude Include="Actor\Item\Item.h" />
     <ClInclude Include="Actor\Player\PlayerArmeds.h" />
+    <ClInclude Include="Actor\CharaManager\DeathPoint.h" />
     <ClInclude Include="Scene\TestScene3D.h" />
     <ClInclude Include="Actor\Bulletes\ShotgunBullet_sin.h" />
     <ClInclude Include="Utility\Animation.h" />

@@ -55,6 +55,7 @@
     <ClCompile Include="Actor\Item\Item.cpp" />
     <ClCompile Include="Actor\Bulletes\ShotgunBullet_sin.cpp" />
     <ClCompile Include="Actor\Player\PlayerArmeds.cpp" />
+    <ClCompile Include="Actor\CharaManager\DeathPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -218,6 +219,7 @@
     <ClInclude Include="Actor\Item\Item.h" />
     <ClInclude Include="Actor\Bulletes\ShotgunBullet_sin.h" />
     <ClInclude Include="Actor\Player\PlayerArmeds.h" />
+    <ClInclude Include="Actor\CharaManager\DeathPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />
