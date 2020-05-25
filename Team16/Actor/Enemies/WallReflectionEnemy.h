@@ -31,7 +31,7 @@ private:
 	Vector2 startPos;
 	bool startEnd;
 	int shottime;
-
+	const int angle = 270;
 	//‰~‰^“®
 	float x;
 	float y;

@@ -35,8 +35,8 @@ private:
 	Vector2 playerPos;//プレイヤーのpos;
 	int angle;
 	float PI = 3.141592653589793f;//円周率
-	int bulletAngle;			  //bulletの角度
-	Vector2 RotationZ(int ang);//z軸回転の成分だけ
+	float bulletAngle;			  //bulletの角度
+	Vector2 RotationZ(float ang);//z軸回転の成分だけ
 
 	WallType type;
 };

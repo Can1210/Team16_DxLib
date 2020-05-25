@@ -422,8 +422,8 @@ void Player::PowerShot()
 		}
 		break;
 	case ArmedRank::SB_Rank://反射ビーム
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35) + Vector2(32.0f, 32.0f), charaManager, b_mType, 30));
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35) + Vector2(32.0f, 32.0f), charaManager, b_mType, 150));
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
 		break;
 	case ArmedRank::MB_Rank:
 		if (subShotCnt > 5)

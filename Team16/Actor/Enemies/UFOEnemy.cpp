@@ -27,6 +27,7 @@ void UFOEnemy::initialize()
 	b_mType = Type::ENEMY;
 	b_mArpha = 255;
 	b_mAngle = 180.0f;
+	b_mSpeed = 100.0f;
 	mTimer->initialize();
 	time = 0.0f;
 	down = false;
@@ -41,12 +42,8 @@ void UFOEnemy::update(float deltaTime)
 		//b_mVelocity = Vector2(sin(300.0f), -1.0f);
 	time++;
 
-	float x = sin(time / 40.0f) * 3.0f;
-	//if (down)		//‘±‚«
-	//{
-	//	b_mVelocity += Vector2(0, 1.5f);
-	//}
-	b_mVelocity += Vector2(x, 1.5f);
+	float x = sin(time / 40.0f) * 2.0f;
+	b_mVelocity = Vector2(x, 0.7f);
 	if (mTimer->timerSet(1))
 	{
 		Shot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
@@ -69,7 +66,7 @@ void UFOEnemy::update(float deltaTime)
 void UFOEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	DrawCircle((int)(b_mPosittion.x + 64 / 2),(int)( b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 0, 0), FALSE);
-	renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+	renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(2.0f, 2.0f), b_mAngle, 255);
 }
 
 void UFOEnemy::hit(BaseObject & other)
@@ -85,9 +82,10 @@ void UFOEnemy::Shot(Vector2 pos, float angle)
 {	//¶
 	//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle1 + angle));
 	//^‚ñ’†
-	Vector2 v = Vector2(pos.x - 8.0f, pos.y); Vector2 v1 = Vector2(pos.x + 8.0f, pos.y);
+	Vector2 vv = Vector2(pos.x + 25.0f,pos.y + 55.0f);
+	Vector2 v = Vector2(pos.x + 25.0f - 20.0f, pos.y + 55.0f); Vector2 v1 = Vector2(pos.x + 25.0f + 20.0f, pos.y + 55.0f);
 	charaManager->add(new AngleBullet(v, charaManager, b_mType, angle2 + angle));
-	charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle2 + angle));
+	charaManager->add(new AngleBullet(vv, charaManager, b_mType, angle2 + angle));
 	charaManager->add(new AngleBullet(v1, charaManager, b_mType, angle2 + angle));
 	//‰E
 	//charaManager->add(new AngleBullet(pos, charaManager, b_mType, angle3 + angle));
