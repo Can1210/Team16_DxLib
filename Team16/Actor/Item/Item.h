@@ -14,6 +14,7 @@ enum BulletType
 	T_LaserBullet,
 	T_Shotgun,
 	T_TrakingBullet,
+	T_WallRefllectionBullet,
 };
 
 //アイテム化オブジェクト

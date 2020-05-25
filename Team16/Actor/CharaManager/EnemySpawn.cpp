@@ -231,7 +231,7 @@ case 60 * 40:
 	break;
 
 case 60:
-	mCharactorManager->add(new LaserEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(sizeX, 1000)));
+	mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
 	break;
 
 default:

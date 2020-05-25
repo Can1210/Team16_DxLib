@@ -44,7 +44,7 @@ void TrakingBullet::setBulletType()
 void TrakingBullet::initialize()
 {
 	setBulletType();
-	b_mVelocity = Vector2(0, 0);
+	b_mVelocity = RotationZ(bulletAngle);
 	isFound = false;//“G‚ðŒ©‚Â‚¯‚Ä‚¢‚È‚¢
 	//getOtherPos();
 }
@@ -81,7 +81,7 @@ void TrakingBullet::update(float deltaTime)
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
 		float length = Vector2((b_mPosittion - charaManager->getPlayerPosition())).length();
-		if (length > 64.0f * 2.0f && !isFound)
+		if (length > 64.0f * 1.0f && !isFound)
 		{
 			Vector2 v;
 			v = b_mPosittion - charaManager->getPlayerPosition();
