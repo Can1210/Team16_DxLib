@@ -21,9 +21,6 @@ public:
 	void Shot(Vector2 pos);
 	//“®‚«
 	void move(float deltaTime);
-
-	//€–SƒGƒŠƒA
-	void deathArea();
 private:
 	Timer *m_pTimer;
 	CharactorManager* charaManager;

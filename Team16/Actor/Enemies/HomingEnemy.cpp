@@ -6,13 +6,10 @@
 #include "../Item/Item.h"
 
 
-HomingEnemy::HomingEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end) : mTimer(new Timer())
+HomingEnemy::HomingEnemy(Vector2 pos, CharactorManager *c, Vector2 end) : mTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
-	this->angle1 = angle1;
-	this->angle2 = angle2;
-	this->angle3 = angle3;
 	this->start = pos;
 	this->end = end;
 }
@@ -40,26 +37,20 @@ void HomingEnemy::update(float deltaTime)
 	b_mVelocity += Traking() * 2.0f;
 	if (mTimer->timerSet(2)) shot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
 
-	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.x > WindowInfo::WindowWidth
-		|| b_mPosittion.x < 0
-		)
-	{
-		b_mIsDeath = true;
-	}
 	if (b_mHp <= 0)
 	{
 		Score::getInstance().addScore(100);
 		charaManager->add(new Item(b_mPosittion, BulletType::T_TrakingBullet, "enemy"));   //ƒAƒCƒeƒ€¶¬
 		b_mIsDeath = true;
 	}
-	b_mPosittion += b_mVelocity * b_mSpeed * deltaTime;
+	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
 }
 
 void HomingEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 0, 0), FALSE);
-	renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+	//renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 }
 
 void HomingEnemy::hit(BaseObject & other)
@@ -73,7 +64,7 @@ void HomingEnemy::hit(BaseObject & other)
 
 void HomingEnemy::shot(Vector2 pos, float angle)
 {
-	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, angle2 + angle));
+	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90 + angle));
 }
 
 Vector2 HomingEnemy::Traking()

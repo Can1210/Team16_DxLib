@@ -39,7 +39,8 @@ void CirecleMoveEnemy::update(float deltaTime)
 void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 0, 0), false);
-	renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
+	//renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
+	renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 }
 
 void CirecleMoveEnemy::hit(BaseObject & other)
@@ -74,19 +75,7 @@ void CirecleMoveEnemy::move(float deltaTime)
 		b_mIsDeath = true;
 	}
 	if (m_pTimer->timerSet(2.0f)) Shot(b_mPosittion);
-	//画面外なら死ぬ
-	deathArea();
-}
-//死亡処理
-void CirecleMoveEnemy::deathArea()
-{
-	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.x > WindowInfo::WindowWidth
-		|| b_mPosittion.x < 0
-		)
-	{
-		b_mIsDeath = true;
-	}
+
 }
 //プレイヤーの位置を調べる
 Vector2 CirecleMoveEnemy::checkPlayerPos(Vector2 vec)

@@ -155,7 +155,7 @@ void EnemySpawn::spawn()
 		break;
 	}
 
-#elif 1
+#elif 0
 switch (spawnTime)
 {
 case 60 * 3:
@@ -184,7 +184,7 @@ case 60 * 7 + 60://8
 case 60 * 11:
 	mCharactorManager->add(new BomEnemy(Vector2(sizeX * 1, -sizeY), mCharactorManager));
 	mCharactorManager->add(new BomEnemy(Vector2(600 - sizeX * 2, -sizeY), mCharactorManager));
-	mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+	//mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
 
 	break;//11
 
@@ -222,12 +222,12 @@ case 60 * 25 + 20 * 7:
 	break;
 
 case 60 * 30:
-	mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+	//mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
 	break;
 
 case 60 * 34:
 	mCharactorManager->add(new LaserEnemy(Vector2(sizeX * 8, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(sizeX, 1000)));
-	mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+	//mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
 	break;
 
 case 60 * 37:
@@ -239,7 +239,7 @@ case 60 * 40:
 	break;
 
 case 60:
-	mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+	//mCharactorManager->add(new HomingEnemy(Vector2(0, -sizeY), mCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
 	break;
 
 default:
