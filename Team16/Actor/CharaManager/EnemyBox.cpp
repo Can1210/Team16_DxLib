@@ -40,8 +40,6 @@ void EnemyBox::update(float deltaTime)
 //本番は無し
 void EnemyBox::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	//テスト描画
-	renderer3D->draw3DTexture("player", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, 0.0f);
 }
 //無し
 void EnemyBox::hit(BaseObject & other)
@@ -100,7 +98,7 @@ void EnemyBox::checkDistance()
 	float distance = std::abs(Vector2((Vector2(0.0f, b_mPosittion.y) - Vector2(0, m_pCamera->getPosition().y))).length());
 
 	//カメラとの距離が描画範囲（縦）より小さくなったら生成する
-	if (distance <= 500.0f)
+	if (distance <= 600.0f)
 	{
 		spawn();
 		b_mIsDeath = true;      //生成したら自分を消す

@@ -40,7 +40,7 @@ void Title::update(float deltaTime)
 {
 	stageSelect(deltaTime);
 	if (mIsStageSelect) return;
-	if (m_pInput->isKeyDown(KEYCORD::SPACE) || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
+	if (m_pInput->isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
 		Sound::getInstance().playSE("click01");
 		mIsStageSelect = true;
