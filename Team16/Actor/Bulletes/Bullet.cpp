@@ -43,12 +43,12 @@ void Bullet::update(float deltaTime)
 	if (b_mType == Type::PLAYER_BULLET)
 	{
 		b_mVelocity.y -= 12.0f;
-		b_mPosittion += b_mVelocity;
+		b_mPosittion -= b_mVelocity;
 	}
 	if (b_mType == Type::ENEMY_BULLET)
 	{
 		b_mVelocity.y += 6.0f;
-		b_mPosittion += b_mVelocity;
+		b_mPosittion -= b_mVelocity;
 	}
 
 	//’e‚Ì‰ñ“]
@@ -60,7 +60,7 @@ void Bullet::update(float deltaTime)
 
 	MoveAngle.x = b_mVelocity.x*Cos - b_mVelocity.y*Sin;
 	MoveAngle.y = b_mVelocity.x*Sin + b_mVelocity.y*Cos;
-	b_mPosittion -=  MoveAngle * (deltaTime*b_mSpeed);
+	b_mPosittion +=  MoveAngle * (deltaTime*b_mSpeed);
 }
 
 void Bullet::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -74,7 +74,7 @@ void Bullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 	else
 	{
 		//renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.5f), b_mAngle, 255);
-		renderer3D->draw3DTexture("bullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, b_mAngle);
+		renderer3D->draw3DTexture("bullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 64.0f, b_mAngle);
 
 	}
 }
