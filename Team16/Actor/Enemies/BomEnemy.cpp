@@ -89,6 +89,6 @@ Vector2 BomEnemy::checkPlayerPos(Vector2 vec)
 }
 bool BomEnemy::isShot()
 {
-	if (b_mPosittion.y <= charaManager->getPlayerPosition().y - 64 * 2)  return true;
+	if (b_mPosittion.y >= charaManager->getPlayerPosition().y - 64 * 2)  return true;
 	return false;
 }
