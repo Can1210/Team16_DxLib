@@ -43,7 +43,6 @@ void Shotgun::deathTime(float deltaTime)
 
 void Shotgun::initialize()
 {
-	//createBullet();          //’e‚ğ¶¬
 }
 
 void Shotgun::update(float deltaTime)

@@ -45,7 +45,6 @@
     <ClCompile Include="GameBase\Score.cpp" />
     <ClCompile Include="Actor\Enemies\HomingEnemy.cpp" />
     <ClCompile Include="Actor\Bulletes\Shotgun.cpp" />
-    <ClCompile Include="Actor\Bulletes\ShotgunBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\LaserBullet.cpp" />
     <ClCompile Include="Actor\Enemies\LaserEnemy.cpp" />
     <ClCompile Include="Actor\Bulletes\WallReflectionBullet.cpp" />
