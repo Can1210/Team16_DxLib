@@ -42,7 +42,7 @@ void ChangeBullet::hit(BaseObject & other)
 {
 	if (other.getType() == Type::ENEMY)
 	{
-		After();
+		//After();
 		b_mIsDeath = true;
 	}
 
@@ -53,21 +53,21 @@ Type ChangeBullet::getType() const
 	return CHANGE_BULLET;
 }
 
-
-void ChangeBullet::After()
-{
-	for (auto object : charaManager->getUseList())
-	{
-
-		if (object->getType() == Type::SUB_PLAYER1)
-		{
-			object->setIsDeath(true);
-		}
-
-	}
-}
-
-
-
-
-
+//
+//void ChangeBullet::After()
+//{
+//	for (auto object : charaManager->getUseList())
+//	{
+//
+//		if (object->getType() == Type::SUB_PLAYER1)
+//		{
+//			object->setIsDeath(true);
+//		}
+//
+//	}
+//}
+//
+//
+//
+//
+//
