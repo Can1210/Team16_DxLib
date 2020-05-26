@@ -1,14 +1,16 @@
 #include "GameManager.h"
 #include "GameTime.h"
+#include "Score.h"
+#include "../Actor/CharaManager/DeathPoint.h"
+#include "../Device/Sound.h"
 #include "../Scene/SceneManager.h"
 #include "../Scene/Title.h"
 #include "../Scene/GamePlay.h"
 #include "../Scene/Ending.h"
 #include "../Scene/LoadScene.h"
 #include "../Scene/TestScene3D.h"
-#include "Score.h"
-#include"../Device/Sound.h"
-#include "../Actor/CharaManager/DeathPoint.h"
+#include "../Scene/Stage01.h"
+#include "../Scene/Stage02.h"
 
 //コンストラクタ
 GameManager::GameManager()
@@ -44,7 +46,10 @@ void GameManager::sceneInitialize(Input* input)
 	SceneManager::getInstance().add("gameplay", new GamePlay(input));
 	SceneManager::getInstance().add("ending", new Ending(input));
 	SceneManager::getInstance().add("test", new TestScene3D(input));
+	SceneManager::getInstance().add("stage1", new Stage01(input));
+	SceneManager::getInstance().add("stage2", new Stage02(input));
 	SceneManager::getInstance().change("load");      //最初はタイトルに設定
+
 }
 //更新
 void GameManager::update()

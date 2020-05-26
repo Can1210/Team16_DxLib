@@ -316,10 +316,14 @@ enum KEYCORD
 //ERECOMÇÃÇ‚Ç¬Å@Ç∆ÇËÇ†Ç¶Ç∏10êiêî
 enum GAMEPAD_KEYCORD
 {
-	BUTTON_X = 1,
+	/*BUTTON_X = 1,
 	BUTTON_Y = 2,
 	BUTTON_A = 4,
-	BUTTON_B = 8,
+	BUTTON_B = 8,*/
+	BUTTON_X = 4,
+	BUTTON_Y = 8,
+	BUTTON_A = 1,
+	BUTTON_B = 2,
 	BUTTON_LB = 16,
 	BUTTON_RB = 32,
 	BUTTON_LT = 64,

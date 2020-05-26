@@ -1,15 +1,17 @@
 #pragma once
+#ifndef _SCLECTENEMY_H_
+#define _SCLECTENEMY_H_
+
 #include"../CharaManager/BaseObject.h"
 #include"../CharaManager/CharactorManager.h"
 
-
-class Enemy :public BaseObject
+//ƒXƒe[ƒWƒZƒŒƒNƒg‚Ì‚Ì“G
+class SelectEnemy :public BaseObject
 {
 public:
-	Enemy(Vector2 pos, CharactorManager *c);
-	~Enemy();
+	SelectEnemy(Vector2 pos, CharactorManager *c,int num);
+	~SelectEnemy();
 
-	// BaseObject ï¿½ï¿½ï¿½î‚µï¿½ÄŒpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;
@@ -18,10 +20,10 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-	void Shot(Vector2 pos);
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’èª¿ã¹ã‚‹
-	Vector2 checkPlayerPos(Vector2 vec);
 private:
-	CharactorManager* charaManager;
-	Timer *mTimer;
+	CharactorManager* m_pCharaManager;
+	int mStageNum;
 };
+
+
+#endif // !_SCLECTENEMY_H_

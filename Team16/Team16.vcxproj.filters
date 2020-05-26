@@ -57,6 +57,7 @@
     <ClCompile Include="Actor\CharaManager\DeathPoint.cpp" />
     <ClCompile Include="Scene\Stage01.cpp" />
     <ClCompile Include="Scene\Stage02.cpp" />
+    <ClCompile Include="Actor\Enemies\SelectEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -223,6 +224,7 @@
     <ClInclude Include="Actor\CharaManager\DeathPoint.h" />
     <ClInclude Include="Scene\Stage01.h" />
     <ClInclude Include="Scene\Stage02.h" />
+    <ClInclude Include="Actor\Enemies\SelectEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

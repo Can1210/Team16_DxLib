@@ -1,5 +1,4 @@
 #include "Player.h"
-#include"../../Scene/GamePlay.h"
 #include "../../GameBase/Score.h"//Scoreが10000行けばhpが増える用
 
 //弾
@@ -33,7 +32,7 @@ void Player::initialize()
 	b_mEndFlag = false;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 300;                                       //Hpを設定
+	b_mHp = 5;                                       //Hpを設定
 	hpLimit = (int)b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
 	b_mSpeed = 60.0f;
 	mTimer->initialize();
@@ -69,25 +68,10 @@ void Player::update(float deltaTime)
 	bom2();                        //ここ処理順変えないように
 	//無敵時間
 	if (DamgeFlag&&mTimer->timerSet(2))DamgeFlag = FALSE;
-
-	//if (input->isKeyState(KEYCORD::SPACE))
-	//{
-	//	subShotCnt++;
-	//	if (subShotCnt > 20)
-	//	{
-	//		Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
-	//		SubShots(0);
-	//		SubShots(1);
-	//		subShotCnt = 0;
-	//	}
-
-	//	b_mSpeed = 20.0f;
-	//}
-	//else
-	//	b_mSpeed = 60.0f;
-
 //ここからパワーショット
-	if (input->isKeyState(KEYCORD::SPACE))
+
+	move();
+	if (input->isKeyState(KEYCORD::SPACE) || input->isGamePadBottonState(GAMEPAD_KEYCORD::BUTTON_A, 0))
 	{
 		subShotCnt++;
 		support1++; support2++;
@@ -103,7 +87,6 @@ void Player::update(float deltaTime)
 		b_mSpeed = 60.0f;
 	}
 
-	move();
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
 
@@ -121,22 +104,8 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 			r = 255;
 			b = 0;
 		}
-		//DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 16), (int)b_mCircleSize, GetColor(0, 0, 255), FALSE);
-		//renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 		renderer3D->draw3DTexture("player", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, 0.0f);
-
 		renderer->drawNumber("hpNumber", Vector2(150.0f, 10.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
-	}
-	//ここはプレイヤーの処理じゃない
-	if (b_mEndFlag)
-	{
-		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 550), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-
-		if (input->isKeyDown(KEYCORD::SPACE))
-		{
-			GamePlay::PlayerEnd = true;     //スタティックなので注意！！
-		}
 	}
 
 	//サブウェポン描画
@@ -293,12 +262,31 @@ void Player::move()
 {
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
+
+		//ゲームパッド入力
+		if (input->getGamePad_L_SticNum_X(0) >6)
+		{
+			b_mVelocity.x = 6;
+		}
+		else if(input->getGamePad_L_SticNum_X(0) < 4)
+		{
+			b_mVelocity.x = -6;
+		}
+		if (input->getGamePad_L_SticNum_Y(0) > 6)
+		{
+			b_mVelocity.y = 6;
+		}
+		else if (input->getGamePad_L_SticNum_Y(0) < 4)
+		{
+			b_mVelocity.y = -6;
+		}
+
 		//上下左右移動
-		if (input->isKeyState(KEYCORD::ARROW_UP))     b_mVelocity.y -= 6;
-		if (input->isKeyState(KEYCORD::ARROW_DOWN))   b_mVelocity.y += 6;
-		if (input->isKeyState(KEYCORD::ARROW_RIGHT))  b_mVelocity.x += 6;
-		if (input->isKeyState(KEYCORD::ARROW_LEFT))   b_mVelocity.x -= 6;
-		if (input->isKeyDown(KEYCORD::SPACE))
+		if (input->isKeyState(KEYCORD::ARROW_UP))     b_mVelocity.y = -6;
+		if (input->isKeyState(KEYCORD::ARROW_DOWN))   b_mVelocity.y =  6;
+		if (input->isKeyState(KEYCORD::ARROW_RIGHT))  b_mVelocity.x =  6;
+		if (input->isKeyState(KEYCORD::ARROW_LEFT))   b_mVelocity.x = -6;
+		if (input->isKeyDown(KEYCORD::SPACE) || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y+64.0f));
 		}
@@ -306,7 +294,8 @@ void Player::move()
 		if (b_mHp <= 0)
 		{
 			Sound::getInstance().playSE("burst02");
-			b_mEndFlag = true;
+			b_mIsDeath = true;
+			//b_mEndFlag = true;
 		}
 	}
 }
@@ -372,7 +361,7 @@ void Player::bom1()
 	//爆破するのは先頭から Noneならリターン
 	if (!mSubVec[0] == BulletType::None && mSubVec[1] == BulletType::None)
 	{
-		if (input->isKeyDown(KEYCORD::C))
+		if (input->isKeyDown(KEYCORD::C) || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 		{
 			//爆弾生成処理
 			charaManager->add(new Bom(mSubPos[0], charaManager));
@@ -387,7 +376,7 @@ void Player::bom2()
 {
 	//0番目がNoneなら通る
 	if (mSubVec[1] == BulletType::None) return;
-	if (input->isKeyDown(KEYCORD::C))
+	if (input->isKeyDown(KEYCORD::C) || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 	{
 		//爆弾生成処理
 		charaManager->add(new Bom(mSubPos[1], charaManager));
