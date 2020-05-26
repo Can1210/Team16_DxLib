@@ -62,8 +62,9 @@ void Player::update(float deltaTime)
 	b_mVelocity = Vector2(0, 0);   //毎回移動量を0にする
 	input->update();
 	mTimer->update(deltaTime);
-	bom2();                        //ここ処理順変えないように
+	
 	bom1();						   //ここ処理順変えないように
+	bom2();                        //ここ処理順変えないように
 	//無敵時間
 	if (DamgeFlag&&mTimer->timerSet(2))DamgeFlag = FALSE;
 
@@ -349,7 +350,7 @@ void Player::bom1()
 void Player::bom2()
 {
 	//0番目がNoneなら通る
-	if (!mSubVec[0] == BulletType::None) return;
+	if (mSubVec[1] == BulletType::None) return;
 	if (input->isKeyDown(KEYCORD::C))
 	{
 		//爆弾生成処理
