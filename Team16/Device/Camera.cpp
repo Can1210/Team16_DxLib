@@ -53,7 +53,7 @@ void Camera::cameraMove(float deltaTime)
 
 	
 
-	CWindow::getInstance().log("Çôç¿ïW %f\n", mPosition.y);
+	//CWindow::getInstance().log("Çôç¿ïW %f\n", mPosition.y);
 }
 
 #pragma region Get/Set
