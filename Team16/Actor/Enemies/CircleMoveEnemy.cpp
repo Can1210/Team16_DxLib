@@ -68,7 +68,7 @@ void CirecleMoveEnemy::move(float deltaTime)
 
 	if (b_mHp <= 0)
 	{
-		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy2"));   //アイテム生成
+		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy2"));   //アイテム生成
  		Score::getInstance().addScore(200);
 		b_mIsDeath = true;
 	}

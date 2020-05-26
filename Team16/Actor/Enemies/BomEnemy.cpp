@@ -35,7 +35,7 @@ void BomEnemy::update(float deltaTime)
 	}
 	if (b_mHp <= 0)
 	{
-		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //
+		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy3"));   //
 		Score::getInstance().addScore(300);
 		b_mIsDeath = true;
 	}

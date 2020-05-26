@@ -27,9 +27,9 @@ public:
 	PlayerArneds();
 	~PlayerArneds();
 
-	const int sizeMax = 23;
+	const int sizeMax = 25;
 	//武装パターンとそのランク	グローバル変数
-	const Armed gArmeds[23] = {
+	const Armed gArmeds[25] = {
 	{BulletType::None,BulletType::None,ArmedRank::NoneRank},
 
 	{BulletType::T_Bullet, BulletType::None,ArmedRank::S_Rank},
@@ -63,6 +63,9 @@ public:
 
 	{BulletType::T_AngleBullet,BulletType::T_LaserBullet,ArmedRank::SB_Rank},
 	{BulletType::T_LaserBullet,BulletType::T_AngleBullet,ArmedRank::SB_Rank},//23
+
+	{BulletType::T_AngleBullet,BulletType::T_Bullet,ArmedRank::SM_Rank},
+	{BulletType::T_Bullet,BulletType::T_AngleBullet,ArmedRank::SM_Rank},//25
 	};
 
 private:
