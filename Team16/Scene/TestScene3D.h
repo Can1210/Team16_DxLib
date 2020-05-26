@@ -22,7 +22,7 @@ private:
 	CharactorManager* charaManager;
 	MapSpawn* mapSpawn;
 	Camera* camera;
-	Player* player;
+	float backPos;
 
 };
 
