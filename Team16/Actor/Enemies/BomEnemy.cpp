@@ -35,19 +35,12 @@ void BomEnemy::update(float deltaTime)
 	}
 	if (b_mHp <= 0)
 	{
-		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //�A�C�e������
+		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //
 		Score::getInstance().addScore(300);
 		b_mIsDeath = true;
 	}
-	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.x > WindowInfo::WindowWidth
-		|| b_mPosittion.x < 0
-		)
-	{
-		b_mIsDeath = true;
-	}
 
-	b_mPosittion += b_mVelocity * b_mSpeed * deltaTime;
+	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
 }
 
 void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -55,7 +48,8 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	if (b_mType == Type::ENEMY)
 	{
 		DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 0, 0), FALSE);
-		renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
+		//renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
+		renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 	}
 }
 

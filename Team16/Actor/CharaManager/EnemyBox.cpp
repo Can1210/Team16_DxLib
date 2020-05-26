@@ -65,13 +65,13 @@ void EnemyBox::spawn()
 		m_pCharactorManager->add(new CirecleMoveEnemy(b_mPosittion, m_pCharactorManager));
 		break;
 	case 4:   
-		m_pCharactorManager->add(new HomingEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600, 1000)));
+		m_pCharactorManager->add(new HomingEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 1000.0f)));
 		break;
 	case 5:     
-		m_pCharactorManager->add(new LaserEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000)));
+		m_pCharactorManager->add(new LaserEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 1000.0f)));
 		break;
 	case 6:     
-		m_pCharactorManager->add(new PlatoonEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 500.0f)));
+		m_pCharactorManager->add(new PlatoonEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 500.0f)));
 		break;
 	case 7:     
 		m_pCharactorManager->add(new SoldierEnemy(b_mPosittion, m_pCharactorManager));
@@ -80,7 +80,7 @@ void EnemyBox::spawn()
 		m_pCharactorManager->add(new ThreeWayEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(0.0f, 1000.0f)));
 		break;
 	case 9:     
-		m_pCharactorManager->add(new UFOEnemy(b_mPosittion, m_pCharactorManager, 260.0f, 270.0f, 280.0f, Vector2(600 / 2 + 32, 500.0f)));
+		m_pCharactorManager->add(new UFOEnemy(b_mPosittion, m_pCharactorManager));
 		break;
 	case 10:     
 		m_pCharactorManager->add(new WallReflectionEnemy(b_mPosittion, m_pCharactorManager));

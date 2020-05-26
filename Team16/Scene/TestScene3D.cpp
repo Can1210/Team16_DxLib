@@ -1,6 +1,5 @@
 #include "TestScene3D.h"
 #include "../Actor/CharaManager/DeathPoint.h"
-
 //コンストラクタ
 TestScene3D::TestScene3D(Input * input)
 {

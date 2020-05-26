@@ -5,7 +5,7 @@
 class LaserEnemy :public BaseObject
 {
 public:
-	LaserEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
+	LaserEnemy(Vector2 pos, CharactorManager *c, Vector2 end);
 	~LaserEnemy();
 
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
@@ -25,7 +25,6 @@ private:
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	float angle1, angle2, angle3;
 	Vector2 start, end;
 	float laserY;
 };

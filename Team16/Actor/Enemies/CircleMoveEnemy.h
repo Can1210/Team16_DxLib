@@ -21,8 +21,6 @@ public:
 
 	//動き
 	void move(float deltaTime);
-	//死亡エリア
-	void deathArea();
 	////プレイヤーの位置を調べる
 	Vector2 checkPlayerPos(Vector2 vec);
 

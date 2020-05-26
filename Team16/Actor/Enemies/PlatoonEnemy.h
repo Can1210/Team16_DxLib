@@ -11,7 +11,7 @@ enum MoveType {
 class PlatoonEnemy :public BaseObject
 {
 public:
-	PlatoonEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3, Vector2 end);
+	PlatoonEnemy(Vector2 pos, CharactorManager *c, Vector2 end);
 	~PlatoonEnemy();
 
 	

@@ -94,7 +94,7 @@ void Player::update(float deltaTime)
 		b_mSpeed = 60.0f;
 
 	move();
-	b_mPosittion += b_mVelocity * deltaTime*b_mSpeed;
+	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
 
 void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -112,7 +112,9 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 			b = 0;
 		}
 		DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 16), (int)b_mCircleSize, GetColor(0, 0, 255), FALSE);
-		renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
+		//renderer->draw2D("player", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
+		renderer3D->draw3DTexture("player", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, 0.0f);
+
 		renderer->drawNumber("hpNumber", Vector2(150.0f, 10.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
 	}
 	//ここはプレイヤーの処理じゃない
