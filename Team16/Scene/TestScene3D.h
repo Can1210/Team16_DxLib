@@ -1,8 +1,10 @@
 #pragma once
+#ifndef _TESTSCENE3D_H_
+#define _TESTSCENE3D_H_
+
 #include "BaseScene.h"
 #include"../Actor/CharaManager/EnemySpawn.h"
 #include"../Actor/CharaManager/CharactorManager.h"
-#include"../Actor/Player/Player.h"
 #include "../Actor/CharaManager/MapSpawn.h"
 #include"../Device/Camera.h"
 
@@ -29,3 +31,4 @@ private:
 
 };
 
+#endif // !_TESTSCENE3D_H_

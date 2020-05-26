@@ -92,7 +92,7 @@ void CirecleMoveEnemy::move(float deltaTime)
 Vector2 CirecleMoveEnemy::checkPlayerPos(Vector2 vec)
 {
 	//プレイヤーの位置を入れる
-	mPlayerPos = charaManager->getPlayerPosition();
-	Vector2 playerVec = mPlayerPos - b_mPosittion;  //プレイヤーとの差分
+	Vector2 playerPos = charaManager->getPlayerPosition();
+	Vector2 playerVec = playerPos - b_mPosittion;  //プレイヤーとの差分
 	return playerVec.normalize();
 }

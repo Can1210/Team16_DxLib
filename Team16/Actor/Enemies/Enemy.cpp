@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include <random>
 #include "../Bulletes/Bullet.h"
+#include "../Bulletes/AngleBullet.h"
 #include "../Item/Item.h"
 
 Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
@@ -15,6 +16,7 @@ Enemy::~Enemy()
 }
 void Enemy::initialize()
 {
+	b_mVelocity = checkPlayerPos(b_mVelocity);
 	b_mHp = 3;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
@@ -35,6 +37,12 @@ void Enemy::update(float deltaTime)
 	if (mTimer->timerSet(2))
 	{
 		Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
+	}
+	if (b_mHp <= 0)
+	{
+		Score::getInstance().addScore(100);
+		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy")); 
+		b_mIsDeath = true;
 	}
 
 	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
@@ -68,5 +76,17 @@ void Enemy::hit(BaseObject & other)
 
 void Enemy::Shot(Vector2 pos)
 {
-	charaManager->add(new Bullet(pos, charaManager, b_mType,0.0f));
+	Vector2 angleVec = Vector2(0, 0);
+	angleVec = checkPlayerPos(angleVec);  //角度を代入
+	//角度に変換
+	float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
+	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x, b_mPosittion.y) + Vector2(32, 32), charaManager, b_mType, angle));
+}
+
+Vector2 Enemy::checkPlayerPos(Vector2 vec)
+{
+	//プレイヤーの位置を入れる
+	Vector2 playerPos = charaManager->getPlayerPosition();
+	Vector2 playerVec = playerPos - b_mPosittion;  //プレイヤーとの差分
+	return playerVec.normalize();
 }

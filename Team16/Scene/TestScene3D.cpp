@@ -1,5 +1,7 @@
 #include "TestScene3D.h"
 #include "../Actor/CharaManager/DeathPoint.h"
+#include "../Actor/Player/Player.h"
+
 //コンストラクタ
 TestScene3D::TestScene3D(Input * input)
 {
@@ -41,9 +43,6 @@ void TestScene3D::update(float deltaTime)
 
 	if (charaManager->getIsBossEed()) mGameClear =  true;
 	if (charaManager->getIsPlayerEed()) mGameOver = true;
-
-	CWindow::getInstance().log("%d\n",charaManager->getIsPlayerEed());
-
 	charaManager->update(deltaTime);
 	camera->update(deltaTime);
 }
@@ -52,8 +51,6 @@ void TestScene3D::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
 	renderer->draw2D("back", Vector2(0, backPos), Vector2(0, 0), Vector2(600, 4110));
 	charaManager->draw(renderer, renderer3D);
-
-
 	//renderer->drawText("Font", "SCORE", Vector2(0.0f, 0.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	renderer->drawNumber("hpNumber"   , Vector2(550.0f, 0.0f), Score::getInstance().getScore(), 8, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	if (mGameClear)

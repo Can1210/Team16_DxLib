@@ -27,7 +27,6 @@ public:
 private:
 	Timer *m_pTimer;
 	CharactorManager* charaManager;
-	Vector2 mPlayerPos;
 	//円運動
 	float x;
 	float y;
