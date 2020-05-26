@@ -22,8 +22,8 @@ public:
 	virtual void hit(BaseObject& other) override;
 
 	virtual Type getType() const override;
-	//•ÏXŒãŒãˆ—
-	void After();
+	////•ÏXŒãŒãˆ—
+	//void After();
 
 private:
 

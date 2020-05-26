@@ -413,7 +413,7 @@ void Player::PowerShot()
 		}
 		break;
 	case ArmedRank::BB_Rank://レーザー
-		charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 90.0f, &b_mPosittion));
+		charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y - 35), charaManager, b_mType, 90.0f));
 		break;
 	case ArmedRank::SM_Rank://ロックオンマシンガン
 		if (subShotCnt > 5)

@@ -62,7 +62,6 @@ void WallReflectionEnemy::update(float deltaTime)
 
 void WallReflectionEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	DrawCircle((int)(b_mPosittion.x + 64.0f / 2.0f), (int)(b_mPosittion.y + 64.0f / 2.0f), (int)b_mCircleSize, GetColor(255, 0, 0), FALSE);
 	//renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
 	renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 }
@@ -72,7 +71,6 @@ void WallReflectionEnemy::hit(BaseObject & other)
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mHp -= 1;
-		DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
 }
 

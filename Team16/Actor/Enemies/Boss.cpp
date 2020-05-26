@@ -68,7 +68,6 @@ void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
 	}
 	else if (!b_mEndFlag)
 	{
-		DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(0, 0, 255), FALSE);
 		b_mAngle = 0.0f;
 		//renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
 		//renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
@@ -82,7 +81,6 @@ void Boss::hit(BaseObject & other)
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mHp -= 1;
-		DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
 }
 void Boss::attack(float deltaTime)
