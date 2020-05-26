@@ -49,7 +49,7 @@ void AngleBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 	Vector2 a = RotationZ(bulletAngle);
 	float angle = atan2(a.y, a.x)* 180.0f / DX_PI_F;
 
-	renderer3D->draw3DTexture("bullet1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(12.0f, 16.0f), 32.0f, angle - 45.0f);
+	renderer3D->draw3DTexture("bullet1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(12.0f, 16.0f), 32.0f, -angle - 90);
 	//renderer->draw2D("bullet1", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(12, 16), Vector2(6, 8), Vector2(2.0f, 4.0f),angle - 90.0f, 255);
 }
 
