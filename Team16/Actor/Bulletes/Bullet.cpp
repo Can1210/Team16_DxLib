@@ -94,5 +94,4 @@ void Bullet::hit(BaseObject & other)
 	
 	//DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	
-	
 }

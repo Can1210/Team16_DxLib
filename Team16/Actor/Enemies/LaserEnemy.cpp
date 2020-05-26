@@ -54,7 +54,6 @@ void LaserEnemy::update(float deltaTime)
 
 void LaserEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 0, 0), FALSE);
 	//renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 }
@@ -64,13 +63,12 @@ void LaserEnemy::hit(BaseObject & other)
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
 		b_mHp -= 1;
-		DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	}
 
 }
 void LaserEnemy::shot(Vector2 pos, float angle)
 {
-	charaManager->add(new LaserBullet(b_mPosittion, charaManager, b_mType, 90.0f + angle,&b_mPosittion));
+	charaManager->add(new LaserBullet(b_mPosittion, charaManager, b_mType, 90.0f + angle));
 }
 Vector2 LaserEnemy::Traking()
 {
