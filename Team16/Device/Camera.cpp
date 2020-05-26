@@ -74,7 +74,7 @@ void Camera::cameraMove(float deltaTime)
 
 	if (mPosition.y >= 0)
 	{
-		mPosition.y = 0;
+		//mPosition.y = 0;
 	}
 
 
