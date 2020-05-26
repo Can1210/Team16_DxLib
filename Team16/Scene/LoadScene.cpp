@@ -15,6 +15,13 @@ void LoadScene::initialize()
 	TextureLoad::createInstance();   //テクスチャロードを作成
 
 	//ゲームシーン
+	//アイテム
+	TextureLoad::getInstance().add("sg", "Resouce/Texture/SGanB.png");
+	TextureLoad::getInstance().add("misaile", "Resouce/Texture/misaileR.png");
+	TextureLoad::getInstance().add("lazer", "Resouce/Texture/lezerG.png");
+	TextureLoad::getInstance().add("none", "Resouce/Texture/none.png");
+	//エフェクト
+	TextureLoad::getInstance().add("deathBurst", "Resouce/Texture/burst.png");
 	//背景
 	TextureLoad::getInstance().add("back", "Resouce/Texture/backgraund.png");
 	//弾関係
@@ -36,6 +43,7 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("WallReflectionBullet", "Resouce/Texture/Bullet_S01.png");
 	//実機関係
 	TextureLoad::getInstance().add("player", "Resouce/Texture/F4.png");
+	TextureLoad::getInstance().add("player2", "Resouce/Texture/BlueRob.png");
 	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
 	TextureLoad::getInstance().add("enemy2", "Resouce/Texture/RedBTM.png");
 	TextureLoad::getInstance().add("enemy3", "Resouce/Texture/RedATK.png");
