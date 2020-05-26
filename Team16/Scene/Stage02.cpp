@@ -38,7 +38,7 @@ void Stage02::update(float deltaTime)
 {
 	//”wŒiƒGƒ“ƒhƒŒƒX
 	if (mBackPos >= 0.0f)mBackPos = -3000.0f;
-	mBackPos += 0.9f;
+	mBackPos += 2.0f;
 
 	if (m_pCharaManager->getIsBossEed()) mGameClear = true;
 	if (m_pCharaManager->getIsPlayerEed()) mGameOver = true;

@@ -72,13 +72,10 @@ void BomEnemy::hit(BaseObject & other)
 }
 void BomEnemy::shot(Vector2 pos)
 {
-	//�ˌ������C���������艺�ɂ����猂���Ȃ�
 	if (!isShot()) return;
 	Vector2 angleVec = Vector2(0, 0);
-	angleVec = checkPlayerPos(angleVec);  //�p�x������
-	//�p�x�ɕϊ�
+	angleVec = checkPlayerPos(angleVec);
 	float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
-	//3Way�ɕύX����
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle - 20.0f));
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle));
 	charaManager->add(new AngleBullet(pos + Vector2(32,32), charaManager, b_mType, angle + 20.0f));
@@ -86,12 +83,10 @@ void BomEnemy::shot(Vector2 pos)
 
 Vector2 BomEnemy::checkPlayerPos(Vector2 vec)
 {
-	//�v���C���[�̈ʒu��������
 	mPlayerPos = charaManager->getPlayerPosition();
-	Vector2 playerVec = mPlayerPos - b_mPosittion;  //�v���C���[�Ƃ̍���
+	Vector2 playerVec = mPlayerPos - b_mPosittion;
 	return playerVec.normalize();
 }
-//�ˌ����Ăق������ǂ���
 bool BomEnemy::isShot()
 {
 	if (b_mPosittion.y <= charaManager->getPlayerPosition().y - 64 * 2)  return true;
