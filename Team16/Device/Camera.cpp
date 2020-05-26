@@ -22,7 +22,7 @@ void Camera::initialize()
 	lookAtDistance = 1000.0f;
 	mPosition = Vector3(0.0f,0.0f,lookAtDistance);
 	mLookAtPosition = Vector3(0.0f, 0.0f, 0.0f);
-	mSpeed = 20.0f;
+	mSpeed = 100.0f;
 }
 //çXêV
 void Camera::update(float deltaTime)
@@ -66,8 +66,19 @@ void Camera::cameraUpdate()
 
 void Camera::cameraMove(float deltaTime)
 {
+
+
+
 	mVelocity.y = 1.0f;
 	mPosition.y += mVelocity.y * mSpeed * deltaTime;
+
+	if (mPosition.y >= 0)
+	{
+		mPosition.y = 0;
+	}
+
+
+
 	mLookAtPosition.y = mPosition.y;   //Yé≤ÇµÇ©ìÆÇ©Ç»Ç¢
 	// ÉJÉÅÉâÇÃê›íËÇ…îΩâfÇ∑ÇÈ
 	SetCameraPositionAndTarget_UpVecY(VGet(mPosition.x, mPosition.y, mPosition.z), VGet(mLookAtPosition.x, mLookAtPosition.y, mLookAtPosition.z));
@@ -76,6 +87,10 @@ void Camera::cameraMove(float deltaTime)
 	DeathPoint::getInstance().setDown(mPosition.y - 500.0f);
 	DeathPoint::getInstance().setLeft(mPosition.x - 500.0f);
 	DeathPoint::getInstance().setRight(mPosition.x + 500.0f);
+
+	
+
+
 }
 
 #pragma region Get/Set

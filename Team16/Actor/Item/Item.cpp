@@ -26,7 +26,6 @@ void Item::initialize()
 //XV
 void Item::update(float deltaTime)
 {
-	deathArea();    //ƒGƒŠƒAŠOíœ
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
 //•`‰æ
@@ -70,16 +69,7 @@ void Item::hit(BaseObject & other)
 
 	b_mIsDeath = true;   //ƒvƒŒƒCƒ„[‚ÉG‚ê‚½‚çŽ€–S
 }
-//Ž€–SƒGƒŠƒA
-void Item::deathArea()
-{
-	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.x > WindowInfo::WindowWidth
-		|| b_mPosittion.x < 0)
-	{
-		b_mIsDeath = true;
-	}
-}
+
 //’e‚Ì”Ô†Žæ“¾
 BulletType Item::getBulletType() const
 {

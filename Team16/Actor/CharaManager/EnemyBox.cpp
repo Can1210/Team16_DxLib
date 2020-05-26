@@ -12,6 +12,7 @@
 #include "../Enemies/ThreeWayEnemy.h"
 #include "../Enemies/UFOEnemy.h"
 #include "../Enemies/WallReflectionEnemy.h"
+#include "../Enemies/Boss.h"
 
 //コンストラクタ
 EnemyBox::EnemyBox(CharactorManager & charactorMnager, Camera & camera, unsigned int enemyNumber, Vector2 position):
@@ -84,6 +85,8 @@ void EnemyBox::spawn()
 		break;
 	case 10:     
 		m_pCharactorManager->add(new WallReflectionEnemy(b_mPosittion, m_pCharactorManager));
+	case 11:
+		m_pCharactorManager->add(new Boss(b_mPosittion, m_pCharactorManager));
 		break;
 	default:
 		break;
