@@ -62,7 +62,7 @@ void LaserEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
-		b_mHp -= 1;
+		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 
 }

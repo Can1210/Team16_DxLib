@@ -54,6 +54,9 @@ public:
 	
 	//自分の半径
 	virtual float getCircleSize()const;
+
+	//自分の位置
+	virtual float getBulletDamage()const;
 #pragma endregion
 
 	void outArea();
@@ -62,7 +65,7 @@ public:
 	bool circle_circle_Collision(BaseObject& other);
 
 protected:
-	int b_mHp;                //体力
+	float b_mHp;                //体力
 	float b_mSpeed;           //速さ
 	float b_mCircleSize;      //円の判定の半径
 	Vector2 b_mPosittion;     //位置
@@ -74,7 +77,7 @@ protected:
 	int b_mArpha; //画像のアルファ値
 	bool b_mEndFlag;//ゲームオーバー
 	bool b_mNoDeathArea = false;
-
+	float b_mBulletDamage;//bulletダメージ
 	
 };
 
