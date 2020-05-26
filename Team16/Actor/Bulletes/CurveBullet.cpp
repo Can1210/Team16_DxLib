@@ -1,5 +1,4 @@
 #include "CurveBullet.h"
-#include"../../GameBase/WindowInfo.h"
 #include<math.h>
 #include<cmath>
 #include <stdlib.h> // rand, srandä÷êî
@@ -74,7 +73,7 @@ void CurveBullet::update(float deltaTime)
 		if (!isFound)//å©Ç¬ÇØÇƒÇ»Ç¢
 		{
 			b_mVelocity = RotationZ(bulletAngle) * 5.0f;
-			b_mPosittion += b_mVelocity;
+			b_mPosittion -= b_mVelocity * deltaTime * 70.0f;
 		}
 		else if (isFound)
 		{
@@ -93,21 +92,15 @@ void CurveBullet::update(float deltaTime)
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
 		b_mVelocity.y += 6.0f;
-		b_mPosittion += b_mVelocity;
-	}
-
-	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.y<0
-		|| b_mPosittion.x>WindowInfo::WindowWidth
-		|| b_mPosittion.x < 0)
-	{
-		b_mIsDeath = true;
+		b_mPosittion -= b_mVelocity * deltaTime * 70.0f;
 	}
 }
 
 void CurveBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
+
+	renderer3D->draw3DTexture("bullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, b_mAngle);
+	//renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	DrawCircle((int)(target1.x + 32 / 2), (int)(target1.y + 16),(int) b_mCircleSize / 2, GetColor(255, 0, 0), FALSE);//è¡Ç∑
 	DrawCircle((int)(target2.x + 32 / 2), (int)(target2.y + 16),(int) b_mCircleSize / 2, GetColor(255, 0, 0), FALSE);
 	if (b_mType == Type::ENEMY_BULLET)
@@ -118,22 +111,18 @@ void CurveBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 
 void CurveBullet::hit(BaseObject & other)
 {
-	if (b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER)
+	if (b_mType == PLAYER_BULLET && (other.getType() == Type::ENEMY || other.getType() == Type::BOSS))
 	{
 		b_mIsDeath = true;
-
+		Sound::getInstance().playSE("burst02");
 	}
-	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY)
+	if (b_mType == ENEMY_BULLET && (other.getType() == Type::PLAYER || other.getType() == Type::BOM))
 	{
 		b_mIsDeath = true;
-
-	}
-	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY_BULLET || b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER_BULLET)
-	{
-		b_mIsDeath = true;
+		Sound::getInstance().playSE("burst02");
 	}
 
-	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	//DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }
 
 

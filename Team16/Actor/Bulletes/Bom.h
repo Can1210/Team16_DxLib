@@ -1,11 +1,6 @@
 #pragma once
-#include"DxLib.h"
-#include "../../Math/Vector2.h"
 #include"../CharaManager/CharactorManager.h"
-#include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
-#include"../../GameBase/WindowInfo.h"
-
 
 class Bom :public BaseObject
 {
@@ -21,12 +16,8 @@ public:
 	//“–‚½‚è‚½‚Ìˆ—
 	virtual void hit(BaseObject& other) override;
 
-
 	virtual Type getType() const override;
 private:
-
-	float angle;
-	bool Death;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 };

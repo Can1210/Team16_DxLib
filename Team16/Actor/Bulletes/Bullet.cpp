@@ -1,6 +1,4 @@
 #include "Bullet.h"
-#include"../../GameBase/WindowInfo.h"
-#include"../../Device/Sound.h"
 
 Bullet::Bullet(Vector2 pos, CharactorManager* c, Type t,float angle)
 {
@@ -24,15 +22,7 @@ void Bullet::setBulletType()
 	case PLAYER:
 		b_mType = Type::PLAYER_BULLET;
 		break;
-	case SUB_PLAYER1:
-		b_mType = Type::PLAYER_BULLET;
-		break;
-	case SUB_PLAYER2:
-		b_mType = Type::PLAYER_BULLET;
-		break;
 	case ENEMY:
-		b_mType = Type::ENEMY_BULLET;
-		break;
 	case BOSS:
 		b_mType = Type::ENEMY_BULLET;
 		break;
@@ -61,15 +51,6 @@ void Bullet::update(float deltaTime)
 		b_mPosittion += b_mVelocity;
 	}
 
-
-	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.y<0
-		|| b_mPosittion.x>WindowInfo::WindowWidth
-		|| b_mPosittion.x < 0)
-	{
-		b_mIsDeath = true;
-	}
-
 	//’e‚Ì‰ñ“]
 
 	Vector2 MoveAngle;//i‚Þ•ûŒü
@@ -79,7 +60,7 @@ void Bullet::update(float deltaTime)
 
 	MoveAngle.x = b_mVelocity.x*Cos - b_mVelocity.y*Sin;
 	MoveAngle.y = b_mVelocity.x*Sin + b_mVelocity.y*Cos;
-	b_mPosittion = b_mPosittion + MoveAngle * (deltaTime*b_mSpeed);
+	b_mPosittion -=  MoveAngle * (deltaTime*b_mSpeed);
 }
 
 void Bullet::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -87,36 +68,31 @@ void Bullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 	
 	if (b_SetType == Type::BOSS)
 	{
-		renderer->draw2D("bossBullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(10, 12), Vector2(5, 5), Vector2(4.0f, 4.0f), b_mAngle, 255);
+		renderer3D->draw3DTexture("bossBullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), 96.0f, b_mAngle);
+		//renderer->draw2D("bossBullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(10, 12), Vector2(5, 5), Vector2(4.0f, 4.0f), b_mAngle, 255);
 	}
 	else
 	{
-		renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.5f), b_mAngle, 255);
+		//renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.5f), b_mAngle, 255);
+		renderer3D->draw3DTexture("bullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 32.0f, b_mAngle);
+
 	}
 }
 
 void Bullet::hit(BaseObject & other)
 {
-	if (b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER)
-	{
-		b_mIsDeath = true;
-	}
-	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY)
+	if (b_mType == PLAYER_BULLET && (other.getType() == Type::ENEMY || other.getType() == Type::BOSS))
 	{
 		b_mIsDeath = true;
 		Sound::getInstance().playSE("burst02");
 	}
-	if (b_mType == PLAYER_BULLET && other.getType() == Type::BOSS)
+	if (b_mType == ENEMY_BULLET && (other.getType() == Type::PLAYER || other.getType() == Type::BOM))
 	{
 		b_mIsDeath = true;
 		Sound::getInstance().playSE("burst02");
-	}
-	if (b_mType == PLAYER_BULLET && other.getType() == Type::ENEMY_BULLET || b_mType == ENEMY_BULLET && other.getType() == Type::PLAYER_BULLET)
-	{
-		b_mIsDeath = true;
 	}
 	
-	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
+	//DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 	
 	
 }

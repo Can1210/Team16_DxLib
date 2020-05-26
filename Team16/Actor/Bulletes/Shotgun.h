@@ -35,7 +35,4 @@ private:
 	float mCurrentTime;           //Œ»İ‚ÌŠÔ
 	float mMaxTime;               //¶‘¶ŠÔ
 	
-
-
-
 };

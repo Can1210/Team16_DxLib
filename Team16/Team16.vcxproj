@@ -204,7 +204,6 @@
     <ClCompile Include="Device\Loader\SoundLoad.cpp" />
     <ClCompile Include="GameBase\Score.cpp" />
     <ClCompile Include="Actor\Bulletes\Shotgun.cpp" />
-    <ClCompile Include="Actor\Bulletes\ShotgunBullet.cpp" />
     <ClCompile Include="Support\CWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Device\Loader\TextureLoad.cpp" />
