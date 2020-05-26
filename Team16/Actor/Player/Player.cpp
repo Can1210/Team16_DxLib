@@ -88,14 +88,17 @@ void Player::update(float deltaTime)
 //ここからパワーショット
 	if (input->isKeyState(KEYCORD::SPACE))
 	{
-		//ArmedRankCheck();//どんな球が打てるかチェック
 		subShotCnt++;
 		PowerShot();
 
+		b_mVelocity.y -= 1.655f * 3.0f;
 		b_mSpeed = 20.0f;
 	}
 	else
+	{
+		b_mVelocity.y -= 1.655f;
 		b_mSpeed = 60.0f;
+	}
 
 	move();
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
@@ -364,12 +367,16 @@ void Player::SubShots(unsigned int num)
 void Player::bom1()
 {
 	//爆破するのは先頭から Noneならリターン
-	if (mSubVec[0] == BulletType::None) return;
-	if (input->isKeyDown(KEYCORD::C))
+	if (!mSubVec[0] == BulletType::None && mSubVec[1] == BulletType::None)
 	{
-		//爆弾生成処理
-		charaManager->add(new Bom(mSubPos[0], charaManager));
-		mSubVec[0] = BulletType::None;   //無しに変更する
+		if (input->isKeyDown(KEYCORD::C))
+		{
+			//爆弾生成処理
+			charaManager->add(new Bom(mSubPos[0], charaManager));
+			mSubVec[0] = BulletType::None;   //無しに変更する
+			amd.first = BulletType::None;   //無しに変更する
+			ArmedRankCheck();
+		}
 	}
 }
 
@@ -382,6 +389,9 @@ void Player::bom2()
 		//爆弾生成処理
 		charaManager->add(new Bom(mSubPos[1], charaManager));
 		mSubVec[1] = BulletType::None;   //無しに変更する
+		amd.second = BulletType::None;   //無しに変更する
+		ArmedRankCheck();
+
 	}
 }
 #pragma endregion
@@ -460,9 +470,9 @@ void Player::PowerShot()
 		}
 		break;
 	case ArmedRank::SB_Rank://反射ビーム
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
-		b_mBulletDamage = 0.08f;
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+		b_mBulletDamage = 0.14f;
 		break;
 	case ArmedRank::MB_Rank:
 		if (subShotCnt > 5)
