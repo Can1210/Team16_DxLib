@@ -57,8 +57,8 @@ void Player::initialize()
 void Player::update(float deltaTime)
 {
 	//サブ機の位置
-	mSubPos[0] = b_mPosittion + Vector2(64.0f, -100.0f);
-	mSubPos[1] = b_mPosittion + Vector2(-64.0f, -100.0f);
+	mSubPos[0] = b_mPosittion + Vector2(42.0f, -50.0f);
+	mSubPos[1] = b_mPosittion + Vector2(-42.0f, -50.0f);
 
 	b_mVelocity = Vector2(0, 0);   //毎回移動量を0にする
 	input->update();
@@ -104,16 +104,73 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 			r = 255;
 			b = 0;
 		}
-		renderer3D->draw3DTexture("player", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, 0.0f);
-		renderer->drawNumber("hpNumber", Vector2(150.0f, 10.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
+		renderer3D->draw3DTexture("player2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 140.0f, 0.0f);
+		renderer->drawNumber("hpNumber", Vector2(70.0f, 850.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
 	}
 
 	//サブウェポン描画
 	if (!(mSubVec[0] == BulletType::None))
-		renderer3D->draw3DTexture(mSubName[0], Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	{
+		switch (mSubVec[0])
+		{
+		case BulletType::T_Bullet:
+				renderer3D->draw3DTexture("sgU", Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+				break;
+		case BulletType::T_AngleBullet:
+			renderer3D->draw3DTexture("misaileU", Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_CurveBullet:
+			renderer3D->draw3DTexture("misaileU", Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_LaserBullet:
+			renderer3D->draw3DTexture("lazerU", Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle,255,Vector2(0.5f,0.5f));
+			break;
+		case BulletType::T_Shotgun:
+			renderer3D->draw3DTexture("sgU", Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_TrakingBullet:
+			renderer3D->draw3DTexture("misaileU", Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_WallRefllectionBullet:
+			renderer3D->draw3DTexture("lazerU", Vector3(mSubPos[0].x, mSubPos[0].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle, 255, Vector2(0.5f, 0.5f));
+			break;
+		default:
+			break;
+		}
+	}
+		
 		//renderer->draw2D(mSubName[0], mSubPos[0], Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.3f, 1.3f), b_mAngle, b_mArpha);
 	if (!(mSubVec[1] == BulletType::None))
-		renderer3D->draw3DTexture(mSubName[1], Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	{
+		switch (mSubVec[1])
+		{
+		case BulletType::T_Bullet:
+			renderer3D->draw3DTexture("sgU", Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_AngleBullet:
+			renderer3D->draw3DTexture("misaileU", Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_CurveBullet:
+			renderer3D->draw3DTexture("misaileU", Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_LaserBullet:
+			renderer3D->draw3DTexture("lazerU", Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_Shotgun:
+			renderer3D->draw3DTexture("sgU", Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_TrakingBullet:
+			renderer3D->draw3DTexture("misaileU", Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		case BulletType::T_WallRefllectionBullet:
+			renderer3D->draw3DTexture("lazerU", Vector3(mSubPos[1].x, mSubPos[1].y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+			break;
+		default:
+			break;
+		}
+	}
+	
+		
 	//HP回復処理
 	PlusHp();
 
@@ -541,3 +598,5 @@ void Player::SupportShot()
 		}
 	}
 }
+
+
