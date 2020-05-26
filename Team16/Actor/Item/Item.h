@@ -33,8 +33,6 @@ public:
 	//“–‚½‚è‚½‚Ìˆ—
 	virtual void hit(BaseObject& other) override;
 
-	void deathArea();
-
 	//’e‚Ì”Ô†æ“¾
 	BulletType getBulletType() const;
 	//
