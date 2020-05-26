@@ -87,6 +87,7 @@ void Player::update(float deltaTime)
 //ここからパワーショット
 	if (input->isKeyState(KEYCORD::SPACE))
 	{
+		ArmedRankCheck();//どんな球が打てるかチェック
 		subShotCnt++;
 		PowerShot();
 
@@ -142,51 +143,70 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 #pragma region パワーショット何使っているか(色)
 	//パワーショット今何持ってるか表示仮　ここに書かなくてよい
-	switch (amd.rank)
-	{
-	case ArmedRank::NoneRank:
+	//switch (amd.rank)
+	//{
+	//case ArmedRank::NoneRank:
+	//	DrawCircle(30, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	break;
+	//case ArmedRank::S_Rank:
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	break;
+	//case ArmedRank::M_Rank:
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	break;
+	//case ArmedRank::B_Rank:
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//case ArmedRank::SS_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	break;
+	//case ArmedRank::MM_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	break;
+	//case ArmedRank::BB_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//case ArmedRank::SM_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	break;
+	//case ArmedRank::SB_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//case ArmedRank::MB_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//default:
+	//	break;
+	//}
+
+	if(amd.first == BulletType::None)
 		DrawCircle(30, 780, 16, GetColor(255, 255, 255), TRUE);
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
-		break;
-	case ArmedRank::S_Rank:
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	else if(amd.first == BulletType::T_Bullet || mSubVec[0] == BulletType::T_AngleBullet)
 		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
-		break;
-	case ArmedRank::M_Rank:
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
-		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
-		break;
-	case ArmedRank::B_Rank:
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	else if(amd.first == BulletType::T_LaserBullet)
 		DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	case ArmedRank::SS_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	else if(amd.first == BulletType::T_TrakingBullet)
+		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE); 
+
+	if (amd.second == BulletType::None)
+		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	else if (amd.second == BulletType::T_Bullet || mSubVec[1] == BulletType::T_AngleBullet)
 		DrawCircle(70, 780, 16, GetColor(0, 0, 255), TRUE);
-		break;
-	case ArmedRank::MM_Rank:
-		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
-		DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
-		break;
-	case ArmedRank::BB_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
+	else if (amd.second == BulletType::T_LaserBullet)
 		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	case ArmedRank::SM_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
-		DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
-		break;
-	case ArmedRank::SB_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
-		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	case ArmedRank::MB_Rank:
-		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
-		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	default:
-		break;
-	}
+	else if (amd.second == BulletType::T_TrakingBullet)
+		 DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
+
 #pragma endregion
 }
 
@@ -244,6 +264,12 @@ void Player::hit(BaseObject & other)
 			BulletType tAmd = amd.first;
 			amd.first = item->getBulletType();
 			amd.second = tAmd;
+		}
+		else if(amd.first == BulletType::None && amd.second != BulletType::None)
+		{
+			BulletType tAmd = amd.second;
+			amd.second = item->getBulletType();
+			amd.first = tAmd;
 		}
 		else if (amd.first != BulletType::None && amd.second != BulletType::None) {
 			BulletType tAmd = amd.first;
@@ -453,6 +479,7 @@ void Player::ArmedRankCheck()
 		BulletType s = playerAmds->gArmeds[i].second;
 		if (tAmd.first == f && tAmd.second == s)
 		{
+			amd.first = f; amd.second = s;
 			amd.rank = playerAmds->gArmeds[i].rank;
 		}
 	}
