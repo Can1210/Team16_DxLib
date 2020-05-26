@@ -21,12 +21,7 @@ void BomBullet::setBulletType()
 	case PLAYER:
 		b_mType = Type::PLAYER_BULLET;
 		break;
-	case SUB_PLAYER1:
-		b_mType = Type::PLAYER_BULLET;
-		break;
 	case ENEMY:
-		b_mType = Type::ENEMY_BULLET;
-		break;
 	case BOSS:
 		b_mType = Type::ENEMY_BULLET;
 		break;
@@ -61,28 +56,21 @@ void BomBullet::update(float deltaTime)
 	if (b_mType == Type::PLAYER_BULLET)
 	{
 		b_mVelocity.y -= 6.0f;
-		b_mPosittion += b_mVelocity;
+		b_mPosittion -= b_mVelocity;
 	}
 	if (b_mType == Type::ENEMY_BULLET)
 	{
 		//b_mVelocity.y += 6.0f;
 		b_mVelocity = RotationZ(bulletAngle);
-		b_mPosittion += b_mVelocity*5.0f;
-	}
-
-
-	if (b_mPosittion.y > WindowInfo::WindowHeight
-		|| b_mPosittion.y<0
-		|| b_mPosittion.x>WindowInfo::WindowWidth
-		|| b_mPosittion.x < 0)
-	{
-		b_mIsDeath = true;
+		b_mPosittion -= b_mVelocity*5.0f;
 	}
 }
 
 void BomBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 32), (int)b_mCircleSize, GetColor(255, 100, 0), TRUE);
+	//DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 32), (int)b_mCircleSize, GetColor(255, 100, 0), TRUE);
+
+	renderer3D->draw3DTexture("bullet_en6", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), b_mCircleSize, 0.0f);
 }
 
 void BomBullet::hit(BaseObject & other)

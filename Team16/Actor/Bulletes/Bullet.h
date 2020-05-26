@@ -1,10 +1,6 @@
 #pragma once
-#include"DxLib.h"
-#include "../../Math/Vector2.h"
 #include"../CharaManager/CharactorManager.h"
-#include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
-#include"../../Support/CWindow.h"
 
 
 class Bullet :public BaseObject
@@ -12,8 +8,6 @@ class Bullet :public BaseObject
 public:
 	Bullet(Vector2 pos, CharactorManager* c, Type t,float angle);
 	~Bullet();
-	//弾のタイプ分け
-	void setBulletType();
 	//初期化
 	virtual void initialize()override;
 	//更新
@@ -24,9 +18,10 @@ public:
 	virtual void hit(BaseObject& other) override;
 
 private:
-	
-	float angle;
-	
+	//弾のタイプ分け
+	void setBulletType();
+
+private:
 	CharactorManager* charaManager;
 	Type b_SetType;
 };

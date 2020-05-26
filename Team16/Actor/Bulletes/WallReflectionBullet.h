@@ -1,10 +1,6 @@
 #pragma once
-#include"DxLib.h"
-#include "../../Math/Vector2.h"
 #include"../CharaManager/CharactorManager.h"
-#include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
-#include"../../Support/CWindow.h"
 
 class WallReflectionBullet : public BaseObject
 {
@@ -29,14 +25,14 @@ private:
 		None,
 	};
 
-	bool Death;
+	Vector2 RotationZ(float ang);//z²‰ñ“]‚Ì¬•ª‚¾‚¯
+
+private:
 	CharactorManager* charaManager;
 	Type b_SetType;
-	Vector2 playerPos;//ƒvƒŒƒCƒ„[‚Ìpos;
 	int angle;
 	float PI = 3.141592653589793f;//‰~ü—¦
 	float bulletAngle;			  //bullet‚ÌŠp“x
-	Vector2 RotationZ(float ang);//z²‰ñ“]‚Ì¬•ª‚¾‚¯
 
 	WallType type;
 };

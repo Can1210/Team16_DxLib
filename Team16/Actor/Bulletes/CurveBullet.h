@@ -1,10 +1,6 @@
 #pragma once
-#include"DxLib.h"
-#include "../../Math/Vector2.h"
 #include"../CharaManager/CharactorManager.h"
-#include"../../Device/Renderer.h"
 #include"../CharaManager/BaseObject.h"
-#include"../../Support/CWindow.h"
 
 class CurveBullet : public BaseObject
 {
@@ -23,8 +19,6 @@ public:
 	virtual void hit(BaseObject& other) override;
 
 private:
-	float angle;
-	bool Death;
 	CharactorManager* charaManager;
 	Type b_SetType;
 
