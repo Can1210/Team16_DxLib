@@ -1,4 +1,5 @@
 #include"WallReflectionBullet.h"
+#include"../CharaManager/DeathPoint.h"
 #include<math.h>
 
 WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Type t, int angle)
@@ -7,6 +8,7 @@ WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Ty
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
+	b_mBulletDamage = 0.14f;
 
 	bulletAngle = (float)angle;
 	b_mSpeed = 250.0f;
@@ -59,13 +61,13 @@ void WallReflectionBullet::update(float deltaTime)
 {
 	if (b_mType == Type::PLAYER_BULLET)
 	{
-		if (b_mPosittion.x < 0.0f)
+		if (b_mPosittion.x < DeathPoint::getInstance().getLeft() + 150.0f)        //âE
 		{
 			bulletAngle = 90.0f - (bulletAngle - 90.0f);
 			b_mVelocity = RotationZ(bulletAngle);
 			type = R;
 		}
-		else if (b_mPosittion.x >= WindowInfo::WindowWidth)
+		else if (b_mPosittion.x >= DeathPoint::getInstance().getRight() - 150.0f)   //ç∂
 		{
 			bulletAngle = 90.0f + (90.0f - bulletAngle);
 			b_mVelocity = RotationZ(bulletAngle);
@@ -89,13 +91,13 @@ void WallReflectionBullet::update(float deltaTime)
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
-		if (b_mPosittion.x < 0.0f)
+		if (b_mPosittion.x < DeathPoint::getInstance().getLeft() + 150.0f)
 		{
 			bulletAngle = 270.0f + (270.0f - bulletAngle);
 			b_mVelocity = RotationZ(bulletAngle);
 			type = R;
 		}
-		else if (b_mPosittion.x >= WindowInfo::WindowWidth)
+		else if (b_mPosittion.x >= DeathPoint::getInstance().getRight() - 150.0f)
 		{
 			bulletAngle = 270.0f - (bulletAngle - 270.0f);
 			b_mVelocity = RotationZ(bulletAngle);

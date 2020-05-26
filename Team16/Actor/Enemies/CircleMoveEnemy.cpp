@@ -59,7 +59,7 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
-		b_mHp -= 1;
+		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }
 
@@ -81,7 +81,9 @@ void CirecleMoveEnemy::move(float deltaTime)
 
 	if (b_mHp <= 0)
 	{
-		
+		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy2"));   //アイテム生成
+ 		Score::getInstance().addScore(200);
+		b_mIsDeath = true;
 	}
 	if (m_pTimer->timerSet(2.0f)) Shot(b_mPosittion);
 

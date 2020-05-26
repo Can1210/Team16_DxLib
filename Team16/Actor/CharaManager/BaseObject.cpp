@@ -48,6 +48,10 @@ float BaseObject::getCircleSize() const
 {
 	return b_mCircleSize;
 }
+float BaseObject::getBulletDamage() const
+{
+	return b_mBulletDamage;
+}
 //Ž€–SƒGƒŠƒA
 void BaseObject::outArea()
 {

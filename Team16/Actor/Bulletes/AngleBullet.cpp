@@ -9,6 +9,7 @@ AngleBullet::AngleBullet(Vector2 pos, CharactorManager * c, Type t, float angle)
 	b_mCircleSize = 4.0f;
 	bulletAngle = angle;
 	b_mSpeed = 250.0f;
+	b_mBulletDamage = 1.0f;
 }
 
 AngleBullet::~AngleBullet()

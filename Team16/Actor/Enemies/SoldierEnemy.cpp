@@ -41,7 +41,7 @@ void SoldierEnemy::update(float deltaTime)
 	if (b_mHp <= 0)
 	{
 		Score::getInstance().addScore(100);
-		charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy"));   //アイテム生成
+		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //アイテム生成
 		b_mIsDeath = true;
 	}
 	
@@ -58,7 +58,7 @@ void SoldierEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
-		b_mHp -= 1;
+		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }
 

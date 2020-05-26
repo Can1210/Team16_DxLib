@@ -34,7 +34,7 @@ void Player::initialize()
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
 	b_mHp = 300;                                       //Hpを設定
-	hpLimit = b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
+	hpLimit = (int)b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
 	b_mSpeed = 60.0f;
 	mTimer->initialize();
 	input->init();
@@ -51,6 +51,8 @@ void Player::initialize()
 	amd = { BulletType::None,BulletType::None,ArmedRank::NoneRank };//無し
 	playerAmds = new PlayerArneds();
 	b_mNoDeathArea = true;
+	b_mBulletDamage = 1.0f;//bulletの弾ダメージ1
+	support1 = 0; support2 = 0;//援護射撃のレート
 }
 
 void Player::update(float deltaTime)
@@ -88,12 +90,18 @@ void Player::update(float deltaTime)
 	if (input->isKeyState(KEYCORD::SPACE))
 	{
 		subShotCnt++;
+		support1++; support2++;
 		PowerShot();
+		SupportShot();
 
+		b_mVelocity.y -= 1.655f * 3.0f;
 		b_mSpeed = 20.0f;
 	}
 	else
+	{
+		b_mVelocity.y -= 1.655f;
 		b_mSpeed = 60.0f;
+	}
 
 	move();
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
@@ -142,51 +150,70 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 #pragma region パワーショット何使っているか(色)
 	//パワーショット今何持ってるか表示仮　ここに書かなくてよい
-	switch (amd.rank)
-	{
-	case ArmedRank::NoneRank:
+	//switch (amd.rank)
+	//{
+	//case ArmedRank::NoneRank:
+	//	DrawCircle(30, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	break;
+	//case ArmedRank::S_Rank:
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	break;
+	//case ArmedRank::M_Rank:
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	break;
+	//case ArmedRank::B_Rank:
+	//	DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	//	DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//case ArmedRank::SS_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	break;
+	//case ArmedRank::MM_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	break;
+	//case ArmedRank::BB_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//case ArmedRank::SM_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	break;
+	//case ArmedRank::SB_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//case ArmedRank::MB_Rank:
+	//	DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
+	//	DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
+	//	break;
+	//default:
+	//	break;
+	//}
+
+	if(amd.first == BulletType::None)
 		DrawCircle(30, 780, 16, GetColor(255, 255, 255), TRUE);
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
-		break;
-	case ArmedRank::S_Rank:
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	else if(amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
 		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
-		break;
-	case ArmedRank::M_Rank:
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
-		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
-		break;
-	case ArmedRank::B_Rank:
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	else if(amd.first == BulletType::T_LaserBullet)
 		DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	case ArmedRank::SS_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+	else if(amd.first == BulletType::T_TrakingBullet)
+		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE); 
+
+	if (amd.second == BulletType::None)
+		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+	else if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
 		DrawCircle(70, 780, 16, GetColor(0, 0, 255), TRUE);
-		break;
-	case ArmedRank::MM_Rank:
-		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
-		DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
-		break;
-	case ArmedRank::BB_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
+	else if (amd.second == BulletType::T_LaserBullet)
 		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	case ArmedRank::SM_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
-		DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
-		break;
-	case ArmedRank::SB_Rank:
-		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
-		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	case ArmedRank::MB_Rank:
-		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE);
-		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
-		break;
-	default:
-		break;
-	}
+	else if (amd.second == BulletType::T_TrakingBullet)
+		 DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
+
 #pragma endregion
 }
 
@@ -245,6 +272,12 @@ void Player::hit(BaseObject & other)
 			amd.first = item->getBulletType();
 			amd.second = tAmd;
 		}
+		else if(amd.first == BulletType::None && amd.second != BulletType::None)
+		{
+			BulletType tAmd = amd.second;
+			amd.second = item->getBulletType();
+			amd.first = tAmd;
+		}
 		else if (amd.first != BulletType::None && amd.second != BulletType::None) {
 			BulletType tAmd = amd.first;
 			amd.first = item->getBulletType();
@@ -301,7 +334,6 @@ void Player::PlusHp()
 		scoreCnt = scorePlus + Score::getInstance().getScore();//scoreCnt上限を増やす
 	}
 }
-
 //サブ射撃
 void Player::SubShots(unsigned int num)
 {
@@ -338,12 +370,16 @@ void Player::SubShots(unsigned int num)
 void Player::bom1()
 {
 	//爆破するのは先頭から Noneならリターン
-	if (mSubVec[0] == BulletType::None) return;
-	if (input->isKeyDown(KEYCORD::C))
+	if (!mSubVec[0] == BulletType::None && mSubVec[1] == BulletType::None)
 	{
-		//爆弾生成処理
-		charaManager->add(new Bom(mSubPos[0], charaManager));
-		mSubVec[0] = BulletType::None;   //無しに変更する
+		if (input->isKeyDown(KEYCORD::C))
+		{
+			//爆弾生成処理
+			charaManager->add(new Bom(mSubPos[0], charaManager));
+			mSubVec[0] = BulletType::None;   //無しに変更する
+			amd.first = BulletType::None;   //無しに変更する
+			ArmedRankCheck();
+		}
 	}
 }
 
@@ -356,11 +392,14 @@ void Player::bom2()
 		//爆弾生成処理
 		charaManager->add(new Bom(mSubPos[1], charaManager));
 		mSubVec[1] = BulletType::None;   //無しに変更する
+		amd.second = BulletType::None;   //無しに変更する
+		ArmedRankCheck();
+
 	}
 }
 #pragma endregion
 
-//各バレット処理
+//各バレット処理	bulletダメージを変化
 void Player::PowerShot()
 {
 	switch (amd.rank)
@@ -426,8 +465,8 @@ void Player::PowerShot()
 		}
 		break;
 	case ArmedRank::SB_Rank://反射ビーム
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
+		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
 		break;
 	case ArmedRank::MB_Rank:
 		if (subShotCnt > 5)
@@ -453,7 +492,61 @@ void Player::ArmedRankCheck()
 		BulletType s = playerAmds->gArmeds[i].second;
 		if (tAmd.first == f && tAmd.second == s)
 		{
+			amd.first = f; amd.second = s;
 			amd.rank = playerAmds->gArmeds[i].rank;
+		}
+	}
+}
+
+void Player::SupportShot()
+{
+	if (amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
+	{
+		if (support1 > 7)
+		{
+			charaManager->add(new Bullet(Vector2(mSubPos[0].x, mSubPos[0].y + 40.0f), charaManager, b_mType, 0.0f));
+			support1 = 0;
+		}
+	}
+	else if (amd.first == BulletType::T_TrakingBullet)
+	{
+		if (support1 > 20)
+		{
+			charaManager->add(new TrakingBullet(Vector2(mSubPos[0].x, mSubPos[0].y + 40.0f), charaManager, b_mType, -90.0f));
+			support1 = 0;
+		}
+	}
+	else if (amd.first == BulletType::T_LaserBullet)
+	{
+		if (support1 > 3)
+		{
+			charaManager->add(new LaserBullet(Vector2(mSubPos[0].x, mSubPos[0].y + 40.0f), charaManager, b_mType, 90.0f));
+			support1 = 0;
+		}
+	}
+
+	if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
+	{
+		if (support2 > 7)
+		{
+			charaManager->add(new Bullet(Vector2(mSubPos[1].x, mSubPos[1].y + 40.0f), charaManager, b_mType, 0.0f));
+			support2 = 0;
+		}
+	}
+	else if (amd.second == BulletType::T_TrakingBullet)
+	{
+		if (support2 > 20)
+		{
+			charaManager->add(new TrakingBullet(Vector2(mSubPos[1].x, mSubPos[1].y + 40.0f), charaManager, b_mType, -90.0f));
+			support2 = 0;
+		}
+	}
+	else if (amd.second == BulletType::T_LaserBullet)
+	{
+		if (support2 > 3)
+		{
+			charaManager->add(new LaserBullet(Vector2(mSubPos[1].x, mSubPos[1].y + 40.0f), charaManager, b_mType, 90.0f));
+			support2 = 0;
 		}
 	}
 }

@@ -18,6 +18,7 @@ Shotgun::Shotgun(Vector2 pos, CharactorManager& c, Type t, float angle)
 	
 	m_pCharactorManager = &c;
 	mMaxTime = 0.0001f;
+	b_mBulletDamage = 1.0f;
 }
 
 Shotgun::~Shotgun()

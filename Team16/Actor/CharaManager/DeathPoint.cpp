@@ -39,6 +39,16 @@ float DeathPoint::getRight() const
 	return mRight;
 }
 
+float DeathPoint::getCenter() const
+{
+	return mCenter;
+}
+
+float DeathPoint::cameraVely() const
+{
+	return mVely;
+}
+
 void DeathPoint::setUp(float pos)
 {
 	mUp = pos;
@@ -58,4 +68,16 @@ void DeathPoint::setRight(float pos)
 {
 	mRight = pos;
 }
+
+void DeathPoint::setCenter(float pos)
+{
+	mCenter = pos;
+}
+
+void DeathPoint::cameraVely(float pos)
+{
+	mVely = pos;
+}
+
+
 

@@ -43,6 +43,8 @@ void CharactorManager::clear()
 			delete object;
 	}
 	mObjectsList.clear();
+	playerEnd = false;
+	bossEnd = false;
 }
 //リストへの追加
 void CharactorManager::add(BaseObject * addObj)
@@ -107,6 +109,12 @@ void CharactorManager::removeList_update()
 		}
 		else if ((*itr)->getIsDeath())  //オブジェクトがnullか死んでいたら削除
 		{
+			//ボスかプレイヤーなら
+			if ((*itr)->getType() == Type::BOSS)
+				bossEnd = true;
+			if ((*itr)->getType() == Type::PLAYER)
+				playerEnd = true;
+
 			BaseObject* deleteObj = (*itr);  //消す予定の物を入れる：更新されてしまう
 			itr = mObjectsList.erase(itr);   //vecor内から削除
 			delete deleteObj;                //解放
@@ -144,4 +152,24 @@ Vector2 CharactorManager::getPlayerPosition() const
 	}
 	//プレイヤーがいなければ0を返す
 	return Vector2(0,0);
+}
+
+float CharactorManager::getPlayerBulletDamage()
+{
+	for (auto object : mObjectsList)
+	{
+		if (object->getType() != Type::PLAYER_BULLET) continue;    //プレイヤーでなければスキップ
+		return object->getBulletDamage();
+	}
+	return 0.0f;
+}
+//ボスが死んだかどうか
+bool CharactorManager::getIsBossEed()
+{
+	return bossEnd;
+}
+//プレイヤーが死んだかどうか
+bool CharactorManager::getIsPlayerEed()
+{
+	return playerEnd;
 }

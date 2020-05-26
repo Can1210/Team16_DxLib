@@ -6,6 +6,7 @@ ChangeBullet::ChangeBullet(Vector2 pos, CharactorManager * c)
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
 	charaManager = c;
+	b_mBulletDamage = 1.0f;
 }
 
 ChangeBullet::~ChangeBullet()
