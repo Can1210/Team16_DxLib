@@ -20,6 +20,9 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("misaile", "Resouce/Texture/misaileR.png");
 	TextureLoad::getInstance().add("lazer", "Resouce/Texture/lezerG.png");
 	TextureLoad::getInstance().add("none", "Resouce/Texture/none.png");
+	TextureLoad::getInstance().add("sgU", "Resouce/Texture/sguepun.png");
+	TextureLoad::getInstance().add("misaileU", "Resouce/Texture/misaleUepon.png");
+	TextureLoad::getInstance().add("lazerU", "Resouce/Texture/lazeruepon.png");
 	//エフェクト
 	TextureLoad::getInstance().add("deathBurst", "Resouce/Texture/burst.png");
 	//背景
