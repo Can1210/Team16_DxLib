@@ -158,7 +158,7 @@ float CharactorManager::getPlayerBulletDamage()
 {
 	for (auto object : mObjectsList)
 	{
-		if (!object->getType() == Type::PLAYER) continue;    //プレイヤーでなければスキップ
+		if (object->getType() != Type::PLAYER_BULLET) continue;    //プレイヤーでなければスキップ
 		return object->getBulletDamage();
 	}
 	return 0.0f;

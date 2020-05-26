@@ -8,6 +8,7 @@ TrakingBullet::TrakingBullet(Vector2 pos, CharactorManager * c, Type t, float an
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
 	b_mAngle = angle;
+	b_mBulletDamage = 1.2f;
 
 	bulletAngle = angle;
 	charaManager = c;

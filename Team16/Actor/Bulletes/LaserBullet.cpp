@@ -9,6 +9,7 @@ LaserBullet::LaserBullet(Vector2 pos, CharactorManager * c, Type t, float angle)
 	b_mCircleSize = 16.0f;
 	bulletAngle = angle;
 	b_mSpeed = 600.0f;
+	b_mBulletDamage = 0.1f;
 }
 
 LaserBullet::~LaserBullet()

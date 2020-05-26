@@ -15,6 +15,8 @@ CurveBullet::CurveBullet(Vector2 pos, CharactorManager * c, Type t, float angle,
 	charaManager = c;
 	playerPos = pos;
 	rndTime = deltaTime;
+
+	b_mBulletDamage = 1.0f;
 }
 
 CurveBullet::~CurveBullet()

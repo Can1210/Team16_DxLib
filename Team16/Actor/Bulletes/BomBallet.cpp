@@ -7,6 +7,7 @@ BomBullet::BomBullet(Vector2 pos, CharactorManager * c, Type t,float angle) :mTi
 	b_SetType = t;
 	b_mCircleSize = 9.0f;
 	bulletAngle = angle;
+	b_mBulletDamage = 0.1f;
 }
 
 BomBullet::~BomBullet()

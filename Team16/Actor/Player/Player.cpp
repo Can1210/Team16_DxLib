@@ -52,6 +52,7 @@ void Player::initialize()
 	playerAmds = new PlayerArneds();
 	b_mNoDeathArea = true;
 	b_mBulletDamage = 1.0f;//bulletの弾ダメージ1
+	support1 = 0; support2 = 0;//援護射撃のレート
 }
 
 void Player::update(float deltaTime)
@@ -89,7 +90,9 @@ void Player::update(float deltaTime)
 	if (input->isKeyState(KEYCORD::SPACE))
 	{
 		subShotCnt++;
+		support1++; support2++;
 		PowerShot();
+		SupportShot();
 
 		b_mVelocity.y -= 1.655f * 3.0f;
 		b_mSpeed = 20.0f;
@@ -195,7 +198,7 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 	if(amd.first == BulletType::None)
 		DrawCircle(30, 780, 16, GetColor(255, 255, 255), TRUE);
-	else if(amd.first == BulletType::T_Bullet || mSubVec[0] == BulletType::T_AngleBullet)
+	else if(amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
 		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
 	else if(amd.first == BulletType::T_LaserBullet)
 		DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
@@ -204,7 +207,7 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 	if (amd.second == BulletType::None)
 		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
-	else if (amd.second == BulletType::T_Bullet || mSubVec[1] == BulletType::T_AngleBullet)
+	else if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
 		DrawCircle(70, 780, 16, GetColor(0, 0, 255), TRUE);
 	else if (amd.second == BulletType::T_LaserBullet)
 		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
@@ -406,7 +409,6 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -416,7 +418,6 @@ void Player::PowerShot()
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			//charaManager->add(new AngleBullet(b_mPosittion, charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -425,7 +426,6 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -434,7 +434,6 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -443,7 +442,6 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Shotgun(Vector2(b_mPosittion.x -34.0f, b_mPosittion.y + 40.0f), *charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 5.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -452,27 +450,23 @@ void Player::PowerShot()
 		{
 			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 1.5f;
 			subShotCnt = 0;
 		}
 		break;
 	case ArmedRank::BB_Rank://レーザー
 		charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
-		b_mBulletDamage = 0.1f;
 		break;
 	case ArmedRank::SM_Rank://ロックオンマシンガン
 		if (subShotCnt > 5)
 		{
 			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 0.5f;
 			subShotCnt = 0;
 		}
 		break;
 	case ArmedRank::SB_Rank://反射ビーム
 		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
 		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
-		b_mBulletDamage = 0.14f;
 		break;
 	case ArmedRank::MB_Rank:
 		if (subShotCnt > 5)
@@ -481,7 +475,6 @@ void Player::PowerShot()
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x + 5, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
-			b_mBulletDamage = 1.1f;
 			subShotCnt = 0;
 		}
 		break;
@@ -501,6 +494,59 @@ void Player::ArmedRankCheck()
 		{
 			amd.first = f; amd.second = s;
 			amd.rank = playerAmds->gArmeds[i].rank;
+		}
+	}
+}
+
+void Player::SupportShot()
+{
+	if (amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
+	{
+		if (support1 > 7)
+		{
+			charaManager->add(new Bullet(Vector2(mSubPos[0].x, mSubPos[0].y + 40.0f), charaManager, b_mType, 0.0f));
+			support1 = 0;
+		}
+	}
+	else if (amd.first == BulletType::T_TrakingBullet)
+	{
+		if (support1 > 20)
+		{
+			charaManager->add(new TrakingBullet(Vector2(mSubPos[0].x, mSubPos[0].y + 40.0f), charaManager, b_mType, -90.0f));
+			support1 = 0;
+		}
+	}
+	else if (amd.first == BulletType::T_LaserBullet)
+	{
+		if (support1 > 3)
+		{
+			charaManager->add(new LaserBullet(Vector2(mSubPos[0].x, mSubPos[0].y + 40.0f), charaManager, b_mType, 90.0f));
+			support1 = 0;
+		}
+	}
+
+	if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
+	{
+		if (support2 > 7)
+		{
+			charaManager->add(new Bullet(Vector2(mSubPos[1].x, mSubPos[1].y + 40.0f), charaManager, b_mType, 0.0f));
+			support2 = 0;
+		}
+	}
+	else if (amd.second == BulletType::T_TrakingBullet)
+	{
+		if (support2 > 20)
+		{
+			charaManager->add(new TrakingBullet(Vector2(mSubPos[1].x, mSubPos[1].y + 40.0f), charaManager, b_mType, -90.0f));
+			support2 = 0;
+		}
+	}
+	else if (amd.second == BulletType::T_LaserBullet)
+	{
+		if (support2 > 3)
+		{
+			charaManager->add(new LaserBullet(Vector2(mSubPos[1].x, mSubPos[1].y + 40.0f), charaManager, b_mType, 90.0f));
+			support2 = 0;
 		}
 	}
 }

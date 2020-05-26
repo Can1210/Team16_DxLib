@@ -50,11 +50,14 @@ public:
 	void PowerShot();
 	//武装ランクをチェック
 	void ArmedRankCheck();
+	//援護射撃
+	void SupportShot();
 private:
 	//武装
 	Armed amd;
 	//武装ランクCheck
 	PlayerArneds* playerAmds;
+	int support1, support2;
 #pragma endregion
 
 private:
