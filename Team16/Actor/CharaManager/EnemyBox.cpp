@@ -30,6 +30,7 @@ void EnemyBox::initialize()
 {
 	b_mIsDeath = false;
 	b_mNoDeathArea = true;
+	b_mType = Type::SPWAN;
 }
 //çXêV
 void EnemyBox::update(float deltaTime)
