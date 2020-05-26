@@ -29,7 +29,11 @@ void Shotgun::deathTime(float deltaTime)
 {
 	//ŽžŠÔ‚ª‚½‚Á‚½‚çŽ€‚Ê
 	if (mCurrentTime >= mMaxTime)
+	{
+		b_mType = Type::PLAYER_BULLET;
 		b_mIsDeath = true;
+	}
+	
 	mCurrentTime += deltaTime;
 
 	for (int i = 0; i < mBulletNum; i++)
