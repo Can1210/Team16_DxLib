@@ -71,7 +71,7 @@ void Player::update(float deltaTime)
 //ここからパワーショット
 
 	move();
-	if (input->isKeyState(KEYCORD::SPACE) || input->isGamePadBottonState(GAMEPAD_KEYCORD::BUTTON_A, 0))
+	if (input->isKeyState(KEYCORD::SPACE))  // || input->isGamePadBottonState(GAMEPAD_KEYCORD::BUTTON_A, 0))
 	{
 		subShotCnt++;
 		support1++; support2++;
@@ -165,23 +165,25 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 	//	break;
 	//}
 
+	
+
 	if(amd.first == BulletType::None)
-		DrawCircle(30, 780, 16, GetColor(255, 255, 255), TRUE);
+		renderer->draw2D("none", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
-		DrawCircle(30, 780, 16, GetColor(0, 0, 255), TRUE);
+		renderer->draw2D("sg", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_LaserBullet)
-		DrawCircle(30, 780, 16, GetColor(0, 255, 0), TRUE);
+		renderer->draw2D("lazer", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_TrakingBullet)
-		DrawCircle(30, 780, 16, GetColor(255, 0, 0), TRUE); 
+		renderer->draw2D("misaile", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 	if (amd.second == BulletType::None)
-		DrawCircle(70, 780, 16, GetColor(255, 255, 255), TRUE);
+		renderer->draw2D("none", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
-		DrawCircle(70, 780, 16, GetColor(0, 0, 255), TRUE);
+		renderer->draw2D("sg", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_LaserBullet)
-		DrawCircle(70, 780, 16, GetColor(0, 255, 0), TRUE);
+		renderer->draw2D("lazer", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_TrakingBullet)
-		 DrawCircle(70, 780, 16, GetColor(255, 0, 0), TRUE);
+		renderer->draw2D("misaile", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 #pragma endregion
 }
@@ -264,7 +266,7 @@ void Player::move()
 	{
 
 		//ゲームパッド入力
-		if (input->getGamePad_L_SticNum_X(0) >6)
+		/*if (input->getGamePad_L_SticNum_X(0) >6)
 		{
 			b_mVelocity.x = 6;
 		}
@@ -279,14 +281,14 @@ void Player::move()
 		else if (input->getGamePad_L_SticNum_Y(0) < 4)
 		{
 			b_mVelocity.y = -6;
-		}
+		}*/
 
 		//上下左右移動
 		if (input->isKeyState(KEYCORD::ARROW_UP))     b_mVelocity.y = -6;
 		if (input->isKeyState(KEYCORD::ARROW_DOWN))   b_mVelocity.y =  6;
 		if (input->isKeyState(KEYCORD::ARROW_RIGHT))  b_mVelocity.x =  6;
 		if (input->isKeyState(KEYCORD::ARROW_LEFT))   b_mVelocity.x = -6;
-		if (input->isKeyDown(KEYCORD::SPACE) || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		if (input->isKeyDown(KEYCORD::SPACE))// || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y+64.0f));
 		}
@@ -361,7 +363,7 @@ void Player::bom1()
 	//爆破するのは先頭から Noneならリターン
 	if (!mSubVec[0] == BulletType::None && mSubVec[1] == BulletType::None)
 	{
-		if (input->isKeyDown(KEYCORD::C) || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
+		if (input->isKeyDown(KEYCORD::C))  // || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 		{
 			//爆弾生成処理
 			charaManager->add(new Bom(mSubPos[0], charaManager));
@@ -376,7 +378,7 @@ void Player::bom2()
 {
 	//0番目がNoneなら通る
 	if (mSubVec[1] == BulletType::None) return;
-	if (input->isKeyDown(KEYCORD::C) || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
+	if (input->isKeyDown(KEYCORD::C))// || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 	{
 		//爆弾生成処理
 		charaManager->add(new Bom(mSubPos[1], charaManager));
