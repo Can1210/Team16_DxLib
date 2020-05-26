@@ -24,5 +24,8 @@ private:
 	Camera* camera;
 	float backPos;
 
+	bool mGameOver;
+	bool mGameClear;
+
 };
 

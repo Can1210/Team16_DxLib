@@ -35,9 +35,17 @@ public:
 	Vector2 getPlayerPosition()const;
 	//プレイヤーのバレットのダメージを渡す。後でまた変えるかも
 	float getPlayerBulletDamage();
+
+	bool getIsBossEed();
+	bool getIsPlayerEed();
+
 private:
 	std::vector<BaseObject*> mObjectsList;        //オブジェクトのリスト
 	std::vector<BaseObject*> mAddObjectsList;     //追加するオブジェクト
+
+	bool playerEnd;
+	bool bossEnd;
+
 };
 
 #endif // !_CHARACTORMANAGER_H_

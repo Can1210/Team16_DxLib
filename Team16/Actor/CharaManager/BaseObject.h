@@ -22,6 +22,7 @@ enum Type
 	BOM,
 	BOSS,
 	ITEM,
+	SPWAN,
 };
 
 //描画するオブジェクトの基底クラス
