@@ -50,6 +50,7 @@ void Player::initialize()
 	//パワーショット系
 	amd = { BulletType::None,BulletType::None,ArmedRank::NoneRank };//無し
 	playerAmds = new PlayerArneds();
+	b_mNoDeathArea = true;
 }
 
 void Player::update(float deltaTime)
@@ -399,7 +400,7 @@ void Player::PowerShot()
 	case ArmedRank::SS_Rank://ショットガン
 		if (subShotCnt > 5)
 		{
-			charaManager->add(new Shotgun(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), *charaManager, b_mType, 0.0f));
+			charaManager->add(new Shotgun(Vector2(b_mPosittion.x -34.0f, b_mPosittion.y + 40.0f), *charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
