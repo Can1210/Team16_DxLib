@@ -10,6 +10,7 @@ ShotgunBullet_sin::ShotgunBullet_sin(Vector2 pos, CharactorManager * c, Type t, 
 	bulletAngle = angle;
 	b_mSpeed = 300.0f;
 	mMaxTime = 0.1f;
+	b_mBulletDamage = 1.0f;
 }
 
 ShotgunBullet_sin::~ShotgunBullet_sin()
