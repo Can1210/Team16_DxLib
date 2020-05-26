@@ -60,13 +60,13 @@ void WallReflectionBullet::update(float deltaTime)
 {
 	if (b_mType == Type::PLAYER_BULLET)
 	{
-		if (b_mPosittion.x < DeathPoint::getInstance().getLeft() + 150.0f)
+		if (b_mPosittion.x < DeathPoint::getInstance().getLeft() + 150.0f)        //âE
 		{
 			bulletAngle = 90.0f - (bulletAngle - 90.0f);
 			b_mVelocity = RotationZ(bulletAngle);
 			type = R;
 		}
-		else if (b_mPosittion.x >= DeathPoint::getInstance().getRight() - 150.0f)
+		else if (b_mPosittion.x >= DeathPoint::getInstance().getRight() - 150.0f)   //ç∂
 		{
 			bulletAngle = 90.0f + (90.0f - bulletAngle);
 			b_mVelocity = RotationZ(bulletAngle);
