@@ -27,6 +27,7 @@ void UFOEnemy::initialize()
 	time = 0.0f;
 	down = false;
 	subShotcnt = 20;
+	b_animCnt = 0.0f;
 }
 
 void UFOEnemy::update(float deltaTime)
@@ -44,7 +45,7 @@ void UFOEnemy::update(float deltaTime)
 	if (b_mHp <= 0)
 	{
 		Score::getInstance().addScore(100);
-		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //�A�C�e������
+		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //ƒAƒCƒeƒ€¶¬
 		b_mIsDeath = true;
 	}
 	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
@@ -54,6 +55,17 @@ void UFOEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	//renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(2.0f, 2.0f), b_mAngle, 255);
 	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	if (b_animCnt <= 0)
+	{
+		b_animCnt += 64.0f;
+		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		if (b_animCnt >= 1022.0f)
+		{
+			Score::getInstance().addScore(100);
+			charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy"));   //ƒAƒCƒeƒ€¶¬
+			b_mIsDeath = true;
+		}
+	}
 }
 
 void UFOEnemy::hit(BaseObject & other)

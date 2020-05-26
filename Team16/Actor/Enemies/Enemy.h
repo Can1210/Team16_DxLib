@@ -24,4 +24,5 @@ public:
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	
 };
