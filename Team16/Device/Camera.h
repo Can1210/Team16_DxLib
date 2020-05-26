@@ -15,9 +15,6 @@ public:
 	//更新
 	void update(float deltaTime);
 
-	//カメラの更新
-	void cameraUpdate();
-
 #pragma region  Get/Set
 	//位置を返す
 	Vector3 getPosition() const;
