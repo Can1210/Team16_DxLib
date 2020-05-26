@@ -40,7 +40,7 @@ void AngleBullet::initialize()
 void AngleBullet::update(float deltaTime)
 {
 	b_mVelocity = RotationZ(bulletAngle);
-	b_mPosittion -= b_mVelocity * deltaTime  * b_mSpeed;
+	b_mPosittion += b_mVelocity * deltaTime  * b_mSpeed;
 }
 
 void AngleBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
@@ -74,7 +74,7 @@ Vector2 AngleBullet::RotationZ(float ang)
 	ang = ang * PI / 180.0f;
 
 	float sin = sinf(ang);
-	float cos = cosf(ang);
+	float cos = -cosf(ang);
 
 	float x = cos + sin;
 	float y = -(sin)+cos;

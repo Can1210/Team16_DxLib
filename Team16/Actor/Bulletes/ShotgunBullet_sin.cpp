@@ -78,7 +78,7 @@ void ShotgunBullet_sin::deathTime(float deltaTime)
 void ShotgunBullet_sin::move(float deltaTime)
 {
 	b_mVelocity = RotationZ(bulletAngle);
-	b_mPosittion -= b_mVelocity * deltaTime  * b_mSpeed;
+	b_mPosittion += b_mVelocity * deltaTime  * b_mSpeed;
 }
 
 Vector2 ShotgunBullet_sin::RotationZ(float ang)
@@ -92,6 +92,6 @@ Vector2 ShotgunBullet_sin::RotationZ(float ang)
 
 	float x = cos + sin;
 	float y = -(sin)+cos;
-	v = Vector2(x, y);
+	v = Vector2(x, -y);
 	return v;
 }

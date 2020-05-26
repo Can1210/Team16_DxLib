@@ -25,7 +25,7 @@ void TestScene3D::initialize()
 	camera->initialize();
 	camera->setPosition(Vector2(0.0f, -600.0f));
 	mapSpawn = new MapSpawn(*charaManager,*camera);
-	mapSpawn->loadMap("Resouce/Map/test01.csv");
+	mapSpawn->loadMap("Resouce/Map/stage01.csv");
 
 }
 //XV
