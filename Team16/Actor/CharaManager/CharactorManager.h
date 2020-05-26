@@ -33,7 +33,8 @@ public:
 	std::vector<BaseObject*> getUseList();
 	//プレイヤーの位置を取得する
 	Vector2 getPlayerPosition()const;
-
+	//プレイヤーのバレットのダメージを渡す。後でまた変えるかも
+	float getPlayerBulletDamage();
 private:
 	std::vector<BaseObject*> mObjectsList;        //オブジェクトのリスト
 	std::vector<BaseObject*> mAddObjectsList;     //追加するオブジェクト

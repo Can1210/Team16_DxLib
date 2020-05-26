@@ -34,7 +34,7 @@ void Player::initialize()
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
 	b_mHp = 300;                                       //Hpを設定
-	hpLimit = b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
+	hpLimit = (int)b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
 	b_mSpeed = 60.0f;
 	mTimer->initialize();
 	input->init();
@@ -51,6 +51,7 @@ void Player::initialize()
 	amd = { BulletType::None,BulletType::None,ArmedRank::NoneRank };//無し
 	playerAmds = new PlayerArneds();
 	b_mNoDeathArea = true;
+	b_mBulletDamage = 1.0f;//bulletの弾ダメージ1
 }
 
 void Player::update(float deltaTime)
@@ -87,7 +88,7 @@ void Player::update(float deltaTime)
 //ここからパワーショット
 	if (input->isKeyState(KEYCORD::SPACE))
 	{
-		ArmedRankCheck();//どんな球が打てるかチェック
+		//ArmedRankCheck();//どんな球が打てるかチェック
 		subShotCnt++;
 		PowerShot();
 
@@ -327,7 +328,6 @@ void Player::PlusHp()
 		scoreCnt = scorePlus + Score::getInstance().getScore();//scoreCnt上限を増やす
 	}
 }
-
 //サブ射撃
 void Player::SubShots(unsigned int num)
 {
@@ -386,7 +386,7 @@ void Player::bom2()
 }
 #pragma endregion
 
-//各バレット処理
+//各バレット処理	bulletダメージを変化
 void Player::PowerShot()
 {
 	switch (amd.rank)
@@ -396,6 +396,7 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -405,6 +406,7 @@ void Player::PowerShot()
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			//charaManager->add(new AngleBullet(b_mPosittion, charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -413,6 +415,7 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -421,6 +424,7 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 1.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -429,6 +433,7 @@ void Player::PowerShot()
 		{
 			charaManager->add(new Shotgun(Vector2(b_mPosittion.x -34.0f, b_mPosittion.y + 40.0f), *charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 5.0f;
 			subShotCnt = 0;
 		}
 		break;
@@ -437,23 +442,27 @@ void Player::PowerShot()
 		{
 			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 1.5f;
 			subShotCnt = 0;
 		}
 		break;
 	case ArmedRank::BB_Rank://レーザー
 		charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+		b_mBulletDamage = 0.1f;
 		break;
 	case ArmedRank::SM_Rank://ロックオンマシンガン
 		if (subShotCnt > 5)
 		{
 			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 0.5f;
 			subShotCnt = 0;
 		}
 		break;
 	case ArmedRank::SB_Rank://反射ビーム
 		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
 		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+		b_mBulletDamage = 0.08f;
 		break;
 	case ArmedRank::MB_Rank:
 		if (subShotCnt > 5)
@@ -462,6 +471,7 @@ void Player::PowerShot()
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			charaManager->add(new Bullet(Vector2(b_mPosittion.x + 5, b_mPosittion.y + 40.0f), charaManager, b_mType, 0.0f));
 			Sound::getInstance().playSE("shot");
+			b_mBulletDamage = 1.1f;
 			subShotCnt = 0;
 		}
 		break;

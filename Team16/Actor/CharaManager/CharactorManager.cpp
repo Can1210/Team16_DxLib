@@ -145,3 +145,13 @@ Vector2 CharactorManager::getPlayerPosition() const
 	//プレイヤーがいなければ0を返す
 	return Vector2(0,0);
 }
+
+float CharactorManager::getPlayerBulletDamage()
+{
+	for (auto object : mObjectsList)
+	{
+		if (!object->getType() == Type::PLAYER) continue;    //プレイヤーでなければスキップ
+		return object->getBulletDamage();
+	}
+	return 0.0f;
+}
