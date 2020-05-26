@@ -113,7 +113,7 @@ void CharactorManager::removeList_update()
 			if ((*itr)->getType() == Type::BOSS)
 				bossEnd = true;
 			if ((*itr)->getType() == Type::PLAYER)
-				playerEnd = true;
+ 				playerEnd = true;
 
 			BaseObject* deleteObj = (*itr);  //Á‚·—\’è‚Ì•¨‚ğ“ü‚ê‚éFXV‚³‚ê‚Ä‚µ‚Ü‚¤
 			itr = mObjectsList.erase(itr);   //vecor“à‚©‚çíœ

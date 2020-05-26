@@ -71,7 +71,7 @@ void PlatoonEnemy::update(float deltaTime)
 
 	if (mTimer->timerSet(2))
 	{
-		shot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
+		shot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
 	}
 	
 
