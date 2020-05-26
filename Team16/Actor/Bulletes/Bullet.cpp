@@ -7,7 +7,7 @@ Bullet::Bullet(Vector2 pos, CharactorManager* c, Type t,float angle)
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
 	b_mAngle = angle;
-	b_mSpeed = 7.0f;
+	b_mSpeed = 10.0f;
 }
 
 Bullet::~Bullet()
@@ -47,7 +47,7 @@ void Bullet::update(float deltaTime)
 	}
 	if (b_mType == Type::ENEMY_BULLET)
 	{
-		b_mVelocity.y += 6.0f;
+		b_mVelocity.y += 12.0f;
 		b_mPosittion -= b_mVelocity;
 	}
 
@@ -68,7 +68,7 @@ void Bullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 	
 	if (b_SetType == Type::BOSS)
 	{
-		renderer3D->draw3DTexture("bossBullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), 96.0f, b_mAngle);
+		renderer3D->draw3DTexture("bossBullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.1f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), 96.0f, b_mAngle);
 		//renderer->draw2D("bossBullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(10, 12), Vector2(5, 5), Vector2(4.0f, 4.0f), b_mAngle, 255);
 	}
 	else

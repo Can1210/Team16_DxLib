@@ -8,7 +8,6 @@ Item::Item(Vector2 pos, BulletType bulletType, std::string textureName)
 	b_mPosittion = pos;
 	mBulletType = bulletType;
 	mTextureName = textureName;
-
 }
 //デスストラクタ
 Item::~Item()
@@ -36,6 +35,32 @@ void Item::draw(Renderer * renderer, Renderer3D * renderer3D)
 	//DrawCircle((int)(b_mPosittion.x + 64 / 2), (int)(b_mPosittion.y + 64 / 2), 50, GetColor(0, 255, 0), FALSE);  //後々破棄
 	//renderer->draw2D(mTextureName, Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	/*switch (mBulletType)
+	{
+	T_AngleBullet:
+		renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		break;
+	T_Bullet:
+		renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		break;
+	T_CurveBullet:
+		renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		break;
+	T_LaserBullet:
+		renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		break;
+	T_Shotgun:
+		renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		break;
+	T_TrakingBullet:
+		renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		break;
+	T_WallRefllectionBullet:
+		renderer3D->draw3DTexture(mTextureName, Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		break;
+	default:
+		break;
+	}*/
 }
 //当たり判定
 void Item::hit(BaseObject & other)
