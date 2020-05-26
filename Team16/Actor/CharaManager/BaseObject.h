@@ -74,7 +74,7 @@ protected:
 	int b_mArpha; //画像のアルファ値
 	bool b_mEndFlag;//ゲームオーバー
 	bool b_mNoDeathArea = false;
-
+	float b_animCnt;
 	
 };
 
