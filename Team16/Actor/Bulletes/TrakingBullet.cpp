@@ -76,7 +76,7 @@ void TrakingBullet::update(float deltaTime)
 				isFound = false;
 			}
 		}
-		b_mPosittion += b_mVelocity * 200.0f *deltaTime;
+		b_mPosittion += b_mVelocity * 300.0f *deltaTime;
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
@@ -91,7 +91,7 @@ void TrakingBullet::update(float deltaTime)
 		{
 			isFound = true;
 		}
-		b_mPosittion -= b_mVelocity * 170.0f * deltaTime;
+		b_mPosittion += b_mVelocity * 170.0f * deltaTime;
 	}
 }
 

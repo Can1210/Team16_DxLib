@@ -17,7 +17,7 @@ Shotgun::Shotgun(Vector2 pos, CharactorManager& c, Type t, float angle)
 	mBulletNum = getRandom(10, 20);	  //ƒ‰ƒ“ƒ_ƒ€‚È’e‚Ì”
 	
 	m_pCharactorManager = &c;
-	mMaxTime = 0.0001f;
+	mMaxTime = 0.1f;
 	b_mBulletDamage = 1.0f;
 }
 
@@ -39,7 +39,7 @@ void Shotgun::deathTime(float deltaTime)
 	for (int i = 0; i < mBulletNum; i++)
 	{
 
-		mRange = (float)getRandom(-20, 20);       //ƒ‰ƒ“ƒ_ƒ€‚È’e‚Ì”ÍˆÍ
+		mRange = (float)getRandom(-30, 30);       //ƒ‰ƒ“ƒ_ƒ€‚È’e‚Ì”ÍˆÍ
 		//’e‚ğ’Ç‰Á‚·‚é
 		m_pCharactorManager->add(new ShotgunBullet_sin(b_mPosittion, m_pCharactorManager, b_SetType, 90.0f + mRange));
 	}
