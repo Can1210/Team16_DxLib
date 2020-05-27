@@ -65,10 +65,10 @@ void EnemyBox::spawn()
 		m_pCharactorManager->add(new CirecleMoveEnemy(b_mPosittion, m_pCharactorManager));
 		break;
 	case 4:   
-		m_pCharactorManager->add(new HomingEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 1000.0f)));
+		m_pCharactorManager->add(new HomingEnemy(b_mPosittion, m_pCharactorManager, m_pCharactorManager->getPlayerPosition()));
 		break;
 	case 5:     
-		m_pCharactorManager->add(new LaserEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 1000.0f)));
+		m_pCharactorManager->add(new LaserEnemy(b_mPosittion, m_pCharactorManager, m_pCharactorManager->getPlayerPosition()));
 		break;
 	case 6:     
 		m_pCharactorManager->add(new PlatoonEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 500.0f)));

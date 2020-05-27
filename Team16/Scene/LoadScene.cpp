@@ -48,6 +48,7 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("player", "Resouce/Texture/F4.png");
 	TextureLoad::getInstance().add("player2", "Resouce/Texture/BlueRob.png");
 	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
+	TextureLoad::getInstance().add("enemyR", "Resouce/Texture/TankATKR.png");
 	TextureLoad::getInstance().add("enemy2", "Resouce/Texture/RedBTM.png");
 	TextureLoad::getInstance().add("enemy3", "Resouce/Texture/RedATK.png");
 	//ƒtƒHƒ“ƒgŠÖŒW

@@ -32,7 +32,7 @@ void Player::initialize()
 	b_mEndFlag = false;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::PLAYER;
-	b_mHp = 5;                                       //Hpを設定
+	b_mHp = 3;                                       //Hpを設定
 	hpLimit = (int)b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
 	b_mSpeed = 60.0f;
 	mTimer->initialize();
@@ -86,6 +86,7 @@ void Player::update(float deltaTime)
 		b_mVelocity.y -= 1.655f;
 		b_mSpeed = 60.0f;
 	}
+	
 
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
@@ -502,7 +503,12 @@ void Player::PowerShot()
 		}
 		break;
 	case ArmedRank::BB_Rank://レーザー
-		charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+		if (subShotCnt > 2)
+		{
+			charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+			subShotCnt = 0;
+		}
+		
 		break;
 	case ArmedRank::SM_Rank://ロックオンマシンガン
 		if (subShotCnt > 5)
@@ -513,8 +519,13 @@ void Player::PowerShot()
 		}
 		break;
 	case ArmedRank::SB_Rank://反射ビーム
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
-		charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+		if (subShotCnt > 2)
+		{
+			charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
+			charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+			subShotCnt = 0;
+		}
+		
 		break;
 	case ArmedRank::MB_Rank:
 		if (subShotCnt > 5)

@@ -8,7 +8,7 @@ WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Ty
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
 	b_mCircleSize = 4.0f;
-	b_mBulletDamage = 0.14f;
+	b_mBulletDamage = 0.1f;
 
 	bulletAngle = (float)angle;
 	b_mSpeed = 250.0f;
