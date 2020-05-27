@@ -26,7 +26,7 @@ void Stage02::initialize()
 	m_pCamera->initialize();
 	m_pCamera->setPosition(Vector2(0.0f, -600.0f));
 	m_pMapSpawn = new MapSpawn(*m_pCharaManager, *m_pCamera);
-	m_pMapSpawn->loadMap("Resouce/Map/stage01.csv");
+	m_pMapSpawn->loadMap("Resouce/Map/stage02.csv");
 	mBackPos = -3000.0f;
 	Sound::getInstance().playBGM("bgm");
 	Score::getInstance().initialize();
