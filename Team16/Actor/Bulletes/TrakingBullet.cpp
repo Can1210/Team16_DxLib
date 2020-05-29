@@ -81,7 +81,7 @@ void TrakingBullet::update(float deltaTime)
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
 		float length = Vector2((b_mPosittion - charaManager->getPlayerPosition())).length();
-		if (length > 64.0f * 1.0f && !isFound)
+		if (length > 64.0f * 2.0f && !isFound)
 		{
 			Vector2 v;
 			v = b_mPosittion - charaManager->getPlayerPosition();
@@ -130,7 +130,7 @@ void TrakingBullet::getOtherPos()//ターゲットを定める
 	float l = 5000.0f;
 	for (int i = 0; i < size; i++)
 	{
-		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET)//自分がプレイヤーの弾だったら
+		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET|| objs[i]->getType() == Type::BOSS)//自分がプレイヤーの弾だったら
 		{
 			otherPos = objs[i]->getPpstion();
 			float length = Vector2((b_mPosittion - otherPos)).length();

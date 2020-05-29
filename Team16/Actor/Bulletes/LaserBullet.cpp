@@ -10,6 +10,19 @@ LaserBullet::LaserBullet(Vector2 pos, CharactorManager * c, Type t, float angle)
 	bulletAngle = angle;
 	b_mSpeed = 600.0f;
 	b_mBulletDamage = 0.1f;
+	hits = true;
+}
+
+LaserBullet::LaserBullet(Vector2 pos, CharactorManager * c, Type t, float angle, bool hitSound)
+{
+	b_mPosittion = Vector2(pos);
+	b_mVelocity = Vector2(0, 0);
+	b_SetType = t;
+	b_mCircleSize = 16.0f;
+	bulletAngle = angle;
+	b_mSpeed = 600.0f;
+	b_mBulletDamage = 0.1f;
+	hits = hitSound;
 }
 
 LaserBullet::~LaserBullet()
@@ -43,15 +56,11 @@ void LaserBullet::update(float deltaTime)
 	if (b_mType == Type::PLAYER_BULLET)
 	{
 		b_mVelocity = RotationZ(bulletAngle);
-		//b_mPosittion += Vector2(0, b_mVelocity.y) * deltaTime* b_mSpeed;
-		//b_mPosittion.x = v->x;
 		b_mPosittion -= b_mVelocity * deltaTime* b_mSpeed;
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
 	{
 		b_mVelocity = RotationZ(bulletAngle);
-		//b_mPosittion += Vector2(0,b_mVelocity.y) * deltaTime  * b_mSpeed;
-		//b_mPosittion.x = v->x;
 		b_mPosittion -= b_mVelocity * deltaTime* b_mSpeed;
 	}
 }
@@ -70,13 +79,15 @@ void LaserBullet::hit(BaseObject & other)
 {
 	if (b_mType == PLAYER_BULLET && (other.getType() == Type::ENEMY || other.getType() == Type::BOSS))
 	{
+		if (hits)
+			Sound::getInstance().playSE("burst02");
 		b_mIsDeath = true;
-		Sound::getInstance().playSE("burst02");
 	}
 	if (b_mType == ENEMY_BULLET && (other.getType() == Type::PLAYER || other.getType() == Type::BOM))
 	{
+		if(hits)
+			Sound::getInstance().playSE("burst02");
 		b_mIsDeath = true;
-		Sound::getInstance().playSE("burst02");
 	}
 	//DrawCircle((int)(b_mPosittion.x + 64.0f / 2), (int)(b_mPosittion.y + 64.0f / 2), (int)b_mCircleSize, GetColor(255, 255, 0), TRUE);
 }

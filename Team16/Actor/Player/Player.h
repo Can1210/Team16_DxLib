@@ -71,6 +71,7 @@ private:
 	int scoreCnt;//HP回復用にスコアを保持
 	int scorePlus;//scoreCntに++されるscore
 	int hpLimit;//HPの上限を受け取るだけ
+	int hitSound;
 	//サブウェポン関係
 	std::vector<BulletType> mSubVec;
 	std::vector<std::string> mSubName;

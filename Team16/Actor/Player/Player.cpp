@@ -52,6 +52,7 @@ void Player::initialize()
 	b_mNoDeathArea = true;
 	b_mBulletDamage = 1.0f;//bulletの弾ダメージ1
 	support1 = 0; support2 = 0;//援護射撃のレート
+	hitSound = 20;
 }
 
 void Player::update(float deltaTime)
@@ -86,7 +87,7 @@ void Player::update(float deltaTime)
 		b_mSpeed = 60.0f;
 	}
 	
-
+	hitSound++;
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
 
@@ -505,7 +506,16 @@ void Player::PowerShot()
 	case ArmedRank::BB_Rank://レーザー
 		if (subShotCnt > 2)
 		{
-			charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+			if (hitSound > 20)
+			{
+				charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+				hitSound = 0;
+			}
+			else
+			{
+				charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f,false));
+			}
+
 			subShotCnt = 0;
 		}
 		
@@ -521,8 +531,16 @@ void Player::PowerShot()
 	case ArmedRank::SB_Rank://反射ビーム
 		if (subShotCnt > 2)
 		{
-			charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
-			charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+			if (hitSound > 20)
+			{
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+				hitSound = 0;
+			}
+			else
+			{
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50,false));
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50,false));			}
 			subShotCnt = 0;
 		}
 		
