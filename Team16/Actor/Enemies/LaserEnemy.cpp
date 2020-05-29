@@ -25,10 +25,11 @@ void LaserEnemy::initialize()
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
 	b_mArpha = 255;
-	b_mSpeed = 70.0f;
+	b_mSpeed = 100.0f;
 	mTimer->initialize();
-	laserY = 0.0f;
+	laserY = 30.0f;
 	b_animCnt = 0.0f;
+	hitSoundTime = 20;
 }
 
 void LaserEnemy::update(float deltaTime)
@@ -37,15 +38,15 @@ void LaserEnemy::update(float deltaTime)
 	b_mVelocity = Vector2(0, 0);
 	
 	b_mVelocity += Traking() * 1.0f;
-	if (laserY > 60.0f * 2.0f)
+	if (laserY > 60.0f * 1.0f)
 	{
 		shot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
-		if (laserY > 60.0f * 3.0f)
+		if (laserY > 60.0f * 2.0f)
 			laserY = 0.0f;
 	}
-
+	hitSoundTime++;
 	laserY++;
-	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
+	b_mPosittion += b_mVelocity * b_mSpeed * deltaTime;
 }
 
 void LaserEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
@@ -61,7 +62,7 @@ void LaserEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 			charaManager->add(new Item(b_mPosittion, BulletType::T_LaserBullet, "enemy"));   //ƒAƒCƒeƒ€¶¬
 			b_mIsDeath = true;
 		}
-		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
 	}
 }
 
@@ -75,7 +76,15 @@ void LaserEnemy::hit(BaseObject & other)
 }
 void LaserEnemy::shot(Vector2 pos, float angle)
 {
-	charaManager->add(new LaserBullet(b_mPosittion, charaManager, b_mType, 90.0f + angle));
+	if (hitSoundTime > 20)
+	{
+		charaManager->add(new LaserBullet(b_mPosittion, charaManager, b_mType, -90.0f + angle));
+		hitSoundTime = 0;
+	}
+	else 
+	{
+		charaManager->add(new LaserBullet(b_mPosittion, charaManager, b_mType, -90.0f + angle,false));
+	}
 }
 Vector2 LaserEnemy::Traking()
 {

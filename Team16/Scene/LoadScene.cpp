@@ -15,6 +15,8 @@ void LoadScene::initialize()
 	TextureLoad::createInstance();   //テクスチャロードを作成
 
 	//ゲームシーン
+	//UI
+	TextureLoad::getInstance().add("UI", "Resouce/Texture/16Ui.png");
 	//アイテム
 	TextureLoad::getInstance().add("sg", "Resouce/Texture/SGanB.png");
 	TextureLoad::getInstance().add("misaile", "Resouce/Texture/misaileR.png");

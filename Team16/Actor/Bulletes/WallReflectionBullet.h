@@ -6,6 +6,7 @@ class WallReflectionBullet : public BaseObject
 {
 public:
 	WallReflectionBullet(Vector2 pos, CharactorManager* c, Type t, int angle);
+	WallReflectionBullet(Vector2 pos, CharactorManager* c, Type t, int angle,bool hitSound);
 	~WallReflectionBullet();
 	//’e‚Ìƒ^ƒCƒv•ª‚¯
 	void setBulletType();
@@ -33,6 +34,7 @@ private:
 	int angle;
 	float PI = 3.141592653589793f;//‰~Žü—¦
 	float bulletAngle;			  //bullet‚ÌŠp“x
+	bool hits;
 
 	WallType type;
 };

@@ -27,4 +27,5 @@ private:
 	Timer *mTimer;
 	Vector2 start, end;
 	float laserY;
+	int hitSoundTime;
 };

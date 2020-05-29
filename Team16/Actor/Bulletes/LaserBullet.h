@@ -6,6 +6,7 @@ class LaserBullet : public BaseObject
 {
 public:
 	LaserBullet(Vector2 pos, CharactorManager* c, Type t, float angle);
+	LaserBullet(Vector2 pos, CharactorManager* c, Type t, float angle,bool hitSound);
 	~LaserBullet();
 	//‰Šú‰»
 	virtual void initialize()override;
@@ -26,4 +27,6 @@ private:
 	Type b_SetType;
 	float PI = 3.141592653589793f;//‰~ü—¦
 	float bulletAngle;			  //bullet‚ÌŠp“x
+
+	bool hits;
 };

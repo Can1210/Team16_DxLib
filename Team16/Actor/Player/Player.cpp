@@ -55,6 +55,7 @@ void Player::initialize()
 	b_mNoDeathArea = true;
 	b_mBulletDamage = 1.0f;//bulletの弾ダメージ1
 	support1 = 0; support2 = 0;//援護射撃のレート
+	hitSound = 20;
 }
 
 void Player::update(float deltaTime)
@@ -95,7 +96,7 @@ void Player::update(float deltaTime)
 		}
 		b_mSpeed = 60.0f;
 	}
-
+	hitSound++;
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
 
@@ -114,7 +115,9 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 			b = 0;
 		}
 		renderer3D->draw3DTexture("player2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 140.0f, 0.0f);
-		renderer->drawNumber("hpNumber", Vector2(70.0f, 850.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
+		renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
+		renderer->drawText("Font", "x", Vector2(55.0f,-9.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->draw2D("player2", Vector2(30.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 140.0f, 0.0f);
 	}
 
 	//サブウェポン描画
@@ -234,22 +237,22 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 	
 
 	if(amd.first == BulletType::None)
-		renderer->draw2D("none", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("none", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
-		renderer->draw2D("sg", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("sg", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_LaserBullet)
-		renderer->draw2D("lazer", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("lazer", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_TrakingBullet)
-		renderer->draw2D("misaile", Vector2(0.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("misaile", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 	if (amd.second == BulletType::None)
-		renderer->draw2D("none", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("none", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
-		renderer->draw2D("sg", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("sg", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_LaserBullet)
-		renderer->draw2D("lazer", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("lazer", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_TrakingBullet)
-		renderer->draw2D("misaile", Vector2(70.0f, 780.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		renderer->draw2D("misaile", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 #pragma endregion
 }
@@ -472,16 +475,15 @@ void Player::moveClamp()
 		b_mPosittion.x = Vector2().lerp(b_mPosittion.x, (Camera::getInstance().getPosition().x - 300.0f), 0.5f);  //右
 		
 	}
-	if (b_mPosittion.y >= (Camera::getInstance().getPosition().y + 500.0f))
+	if (b_mPosittion.y >= (Camera::getInstance().getPosition().y + 400.0f))
 	{
 		b_mVelocity.y = 0;
-		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y + 500.0f), 0.5f);  //上
-		
+		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y + 400.0f), 0.5f);  //上
 	}
-	if (b_mPosittion.y <= (Camera::getInstance().getPosition().y - 350.0f))
+	if (b_mPosittion.y <= (Camera::getInstance().getPosition().y - 500.0f))
 	{
 		b_mVelocity.y = 0;
-		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y - 350.0f), 0.5f); //下
+		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y - 500.0f), 0.5f); //下
 		
 	}
 }
@@ -545,7 +547,16 @@ void Player::PowerShot()
 	case ArmedRank::BB_Rank://レーザー
 		if (subShotCnt > 2)
 		{
-			charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+			if (hitSound > 20)
+			{
+				charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+				hitSound = 0;
+			}
+			else
+			{
+				charaManager->add(new LaserBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f,false));
+			}
+
 			subShotCnt = 0;
 		}
 		
@@ -561,8 +572,16 @@ void Player::PowerShot()
 	case ArmedRank::SB_Rank://反射ビーム
 		if (subShotCnt > 2)
 		{
-			charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
-			charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+			if (hitSound > 20)
+			{
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50));
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50));
+				hitSound = 0;
+			}
+			else
+			{
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 - 50,false));
+				charaManager->add(new WallReflectionBullet(Vector2(b_mPosittion.x - 32, b_mPosittion.y + 40.0f) + Vector2(32.0f, 32.0f), charaManager, b_mType, 90 + 50,false));			}
 			subShotCnt = 0;
 		}
 		
