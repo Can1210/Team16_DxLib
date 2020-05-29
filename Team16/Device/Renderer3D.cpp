@@ -11,7 +11,7 @@ Renderer3D::~Renderer3D()
 {
 }
 
-void Renderer3D::draw3DTexture(std::string textureName, Vector3 position, Vector2 drawPos, Vector2 textureSize, float scale, float angle, int alpha, Vector2 centerPos, Vector3 decolorization = Vector3(255, 255, 255),bool isTransparency)
+void Renderer3D::draw3DTexture(std::string textureName, Vector3 position, Vector2 drawPos, Vector2 textureSize, float scale, float angle, int alpha, Vector2 centerPos, Vector3 decolorization ,bool isTransparency)
 {
 	SetDrawBright((int)decolorization.x, (int)decolorization.y, (int)decolorization.z);
 	//指定した画像を切り取って新しい画像を作成（指定した画像は切り取られてはいない）
