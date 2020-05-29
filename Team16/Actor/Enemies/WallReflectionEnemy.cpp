@@ -26,7 +26,7 @@ void WallReflectionEnemy::initialize()
 	m_pTimer->initialize();
 	rotateSpeed = 0.5;//1Žü‚É‚©‚©‚éŽžŠÔ
 	radius = 2;   //”¼Œa10
-	b_mSpeed = 30.0f;
+	b_mSpeed = 60.0f;
 	b_mArpha = 255;
 
 	startPos = Vector2(0.0f,DeathPoint::getInstance().getUp() + -300.0f);
@@ -143,7 +143,8 @@ void WallReflectionEnemy::move(float deltaTime)
 	moveTime += deltaTime * 1.0f;
 	x = radius * cos(moveTime * rotateSpeed);
 	y = radius * cos(moveTime * rotateSpeed * 2.0f);
-	b_mPosittion += Vector2(x, y + 1.75f) * 1.0f;
+	b_mPosittion += Vector2(x, y + 1.955f) * 1.0f;
+	//b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 
 	if (b_mHp <= 0)
 	{
