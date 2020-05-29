@@ -12,6 +12,20 @@ WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Ty
 
 	bulletAngle = (float)angle;
 	b_mSpeed = 400.0f;
+	hits = true;
+}
+
+WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Type t, int angle, bool hitSound)
+{
+	b_mPosittion = Vector2(pos);
+	b_mVelocity = Vector2(0, 0);
+	b_SetType = t;
+	b_mCircleSize = 4.0f;
+	b_mBulletDamage = 0.1f;
+
+	bulletAngle = (float)angle;
+	b_mSpeed = 400.0f;
+	hits = hitSound;
 }
 
 WallReflectionBullet::~WallReflectionBullet()
@@ -38,23 +52,16 @@ void WallReflectionBullet::initialize()
 {
 	setBulletType();
 	b_mVelocity = Vector2(0, 0);
+
 	if (angle < 270 && angle >= 180)//enemy—p
-	{
 		type = L;
-	}
 	else if (angle >= 270)
-	{
 		type = R;
-	}
 	
 	if (angle < 180 && angle >= 90)//player—p
-	{
 		type = L;
-	}
 	else if (angle >= 0)
-	{
 		type = R;
-	}
 }
 
 void WallReflectionBullet::update(float deltaTime)
@@ -87,6 +94,7 @@ void WallReflectionBullet::update(float deltaTime)
 		default:
 			break;
 		}
+
 		b_mPosittion -= b_mVelocity * deltaTime* b_mSpeed;
 	}
 	else if (b_mType == Type::ENEMY_BULLET)
@@ -146,8 +154,11 @@ void WallReflectionBullet::hit(BaseObject & other)
 	if (b_mType == PLAYER_BULLET && (other.getType() == Type::ENEMY || other.getType() == Type::BOSS))
 	{
 		b_mIsDeath = true;
-		Sound::getInstance().playSE("burst02");
+		if (hits)
+			Sound::getInstance().playSE("burst02");
+
 	}
+
 	if (b_mType == ENEMY_BULLET && (other.getType() == Type::PLAYER || other.getType() == Type::BOM))
 	{
 		b_mIsDeath = true;
