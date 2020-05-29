@@ -3,9 +3,8 @@
 #include "../Enemies/Enemy.h"
 #include "../../Support/CWindow.h"
 
-MapSpawn::MapSpawn(CharactorManager& charactorManager, Camera& camera):
-	m_pCharaManager(&charactorManager),
-	m_pCamera(&camera)
+MapSpawn::MapSpawn(CharactorManager& charactorManager):
+	m_pCharaManager(&charactorManager)
 {
 }
 
@@ -35,7 +34,7 @@ void MapSpawn::addObject(int lineCnt, std::vector<std::string> record)
 			continue;
 		}
 
-		m_pCharaManager->add(new EnemyBox(*m_pCharaManager, *m_pCamera, strInt, Vector2(((float)((colCount - 1) * 96) - 300.0f), (float)((lineCnt - 1) * 96))));
+		m_pCharaManager->add(new EnemyBox(*m_pCharaManager, strInt, Vector2(((float)((colCount - 1) * 96) - 300.0f), (float)((lineCnt - 1) * 96))));
 		colCount++;
 	}
 }

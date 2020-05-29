@@ -2,6 +2,7 @@
 #include "../Actor/CharaManager/DeathPoint.h"
 #include "../Actor/Player/Player.h"
 
+#include"../Device/Camera.h"
 
 
 Stage01::Stage01(Input * input)
@@ -14,7 +15,6 @@ Stage01::~Stage01()
 {
 	delete m_pCharaManager;
 	delete m_pMapSpawn;
-	delete m_pCamera;
 }
 
 void Stage01::initialize()
@@ -23,10 +23,9 @@ void Stage01::initialize()
 	m_pCharaManager->clear();
 	isSceneEnd = false;   //Å‰‚Ífalse
 	m_pCharaManager->add(new Player(Vector2(0.0f, -600.0f), m_pCharaManager));  //ƒvƒŒƒCƒ„[
-	m_pCamera = new Camera();
-	m_pCamera->initialize();
-	m_pCamera->setPosition(Vector2(0.0f, -600.0f));
-	m_pMapSpawn = new MapSpawn(*m_pCharaManager, *m_pCamera);
+	Camera::getInstance().setPosition(Vector2(0.0f, -600.0f));
+	Camera::getInstance().setStop(false);
+	m_pMapSpawn = new MapSpawn(*m_pCharaManager);
 	m_pMapSpawn->loadMap("Resouce/Map/stage01.csv");
 	mBackPos = -3000.0f;
 	Sound::getInstance().playBGM("bgm");
@@ -45,7 +44,7 @@ void Stage01::update(float deltaTime)
 	if (m_pCharaManager->getIsPlayerEed()) mGameOver = true;
 
 	m_pCharaManager->update(deltaTime);
-	m_pCamera->update(deltaTime);
+	Camera::getInstance().update(deltaTime);
 }
 
 void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)

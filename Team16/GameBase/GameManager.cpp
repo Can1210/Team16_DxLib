@@ -3,6 +3,7 @@
 #include "Score.h"
 #include "../Actor/CharaManager/DeathPoint.h"
 #include "../Device/Sound.h"
+#include "../Device/Camera.h"
 #include "../Scene/SceneManager.h"
 #include "../Scene/Title.h"
 #include "../Scene/GamePlay.h"
@@ -35,6 +36,10 @@ void GameManager::initialize(Input* input)
 	Sound::getInstance().volumeInitialize();
 	DeathPoint::createInstance();
 	DeathPoint::getInstance().initialize();
+	Camera::createInstance();
+	Camera::getInstance().initialize();
+
+
 }
 void GameManager::sceneInitialize(Input* input)
 {

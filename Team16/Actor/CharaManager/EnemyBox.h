@@ -8,7 +8,7 @@
 class EnemyBox : public BaseObject
 {
 public:
-	EnemyBox(CharactorManager& charactorMnager,Camera& camera, unsigned int enemyNumber,Vector2 position);
+	EnemyBox(CharactorManager& charactorMnager, unsigned int enemyNumber,Vector2 position);
 	~EnemyBox();
 
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
@@ -28,7 +28,6 @@ public:
 
 private:
 	CharactorManager* m_pCharactorManager;
-	Camera* m_pCamera;
 	unsigned int mEnemyNum;   //“G‚Ì”Ô†
 };
 #endif // !_ENEMY_BOX_H_

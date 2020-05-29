@@ -1,6 +1,7 @@
 #include "TestScene3D.h"
 #include "../Actor/CharaManager/DeathPoint.h"
 #include "../Actor/Player/Player.h"
+#include"../Device/Camera.h"
 
 //コンストラクタ
 TestScene3D::TestScene3D(Input * input)
@@ -14,7 +15,6 @@ TestScene3D::~TestScene3D()
 {
 	delete charaManager;
 	delete mapSpawn;
-	delete camera;
 }
 //初期化
 void TestScene3D::initialize()
@@ -23,10 +23,7 @@ void TestScene3D::initialize()
 	charaManager->clear();
 	isSceneEnd = false;   //最初はfalse
 	charaManager->add(new Player(Vector2(0.0f, -600.0f), charaManager));  //プレイヤー
-	camera = new Camera();
-	camera->initialize();
-	camera->setPosition(Vector2(0.0f, -600.0f));
-	mapSpawn = new MapSpawn(*charaManager,*camera);
+	mapSpawn = new MapSpawn(*charaManager);
 	mapSpawn->loadMap("Resouce/Map/stage01.csv");
 	backPos = -3000.0f;
 	Sound::getInstance().playBGM("bgm");
@@ -44,7 +41,6 @@ void TestScene3D::update(float deltaTime)
 	if (charaManager->getIsBossEed()) mGameClear =  true;
 	if (charaManager->getIsPlayerEed()) mGameOver = true;
 	charaManager->update(deltaTime);
-	camera->update(deltaTime);
 }
 //描画
 void TestScene3D::draw(Renderer * renderer, Renderer3D * renderer3D)
