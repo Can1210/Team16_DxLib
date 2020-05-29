@@ -15,6 +15,7 @@ void LoadScene::initialize()
 	TextureLoad::createInstance();   //テクスチャロードを作成
 
 	//ゲームシーン
+	TextureLoad::getInstance().add("Mixam", "Resouce/Texture/Mixam.png");
 	//UI
 	TextureLoad::getInstance().add("UI", "Resouce/Texture/16Ui.png");
 	//アイテム

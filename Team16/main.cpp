@@ -22,7 +22,7 @@ bool initialize()
 	ChangeWindowMode(true);
 	SetMainWindowText("game16");
 	SetGraphMode(WindowInfo::WindowWidth, WindowInfo::WindowHeight, 16);
-	SetBackgroundColor(0, 50, 50);
+	SetBackgroundColor(0, 0, 0);
 	if (DxLib_Init() == -1)	return false;
 	m_pInput = new Input();
 	m_pInput->init();
