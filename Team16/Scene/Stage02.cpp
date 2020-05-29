@@ -1,7 +1,7 @@
 #include "Stage02.h"
 #include "../Actor/CharaManager/DeathPoint.h"
 #include"../Actor/Player/Player.h"
-
+#include"../Device/Camera.h"
 
 Stage02::Stage02(Input * input)
 {
@@ -13,7 +13,6 @@ Stage02::~Stage02()
 {
 	delete m_pCharaManager;
 	delete m_pMapSpawn;
-	delete m_pCamera;
 }
 
 void Stage02::initialize()
@@ -22,14 +21,13 @@ void Stage02::initialize()
 	m_pCharaManager->clear();
 	isSceneEnd = false;   //最初はfalse
 	m_pCharaManager->add(new Player(Vector2(0.0f, -600.0f), m_pCharaManager));  //プレイヤー
-	m_pCamera = new Camera();
-	m_pCamera->initialize();
-	m_pCamera->setPosition(Vector2(0.0f, -600.0f));
-	m_pMapSpawn = new MapSpawn(*m_pCharaManager, *m_pCamera);
+	m_pMapSpawn = new MapSpawn(*m_pCharaManager);
 	m_pMapSpawn->loadMap("Resouce/Map/stage02.csv");
 	mBackPos = -3000.0f;
 	Sound::getInstance().playBGM("bgm");
 	Score::getInstance().initialize();
+	Camera::getInstance().setPosition(Vector2(0.0f, -600.0f));
+	Camera::getInstance().setStop(false);
 	mGameOver = false;              //ゲームオーバー（player死んだとき）
 	mGameClear = false;				//ゲームクリア  （boss死んだとき）
 }
@@ -44,7 +42,7 @@ void Stage02::update(float deltaTime)
 	if (m_pCharaManager->getIsPlayerEed()) mGameOver = true;
 
 	m_pCharaManager->update(deltaTime);
-	m_pCamera->update(deltaTime);
+	Camera::getInstance().update(deltaTime);
 }
 
 void Stage02::draw(Renderer * renderer, Renderer3D * renderer3D)

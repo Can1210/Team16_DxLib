@@ -188,7 +188,6 @@
     <ClCompile Include="Actor\Bulletes\ShotgunBullet_sin.cpp" />
     <ClCompile Include="Scene\Stage01.cpp" />
     <ClCompile Include="Scene\Stage02.cpp" />
-    <ClCompile Include="Actor\Enemies\SelectEnemy.cpp" />
     <ClCompile Include="Utility\Animation.cpp" />
     <ClCompile Include="Device\CSVReader.cpp" />
     <ClCompile Include="Device\Camera.cpp" />
@@ -248,7 +247,6 @@
     <ClInclude Include="Actor\Bulletes\ShotgunBullet_sin.h" />
     <ClInclude Include="Scene\Stage01.h" />
     <ClInclude Include="Scene\Stage02.h" />
-    <ClInclude Include="Actor\Enemies\SelectEnemy.h" />
     <ClInclude Include="Utility\Animation.h" />
     <ClInclude Include="Device\CSVReader.h" />
     <ClInclude Include="Device\Camera.h" />

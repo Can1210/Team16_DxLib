@@ -4,12 +4,16 @@
 
 #include "../Math/Vector3.h"
 #include "../Actor/CharaManager/CharactorManager.h"
+#include "../Support/Singleton.h"
 //カメラクラス
-class Camera
+class Camera : public Singleton<Camera>
 {
-public:
+protected:
 	Camera();
-	~Camera();
+	virtual ~Camera();
+
+public:
+	friend class Singleton<Camera>;  //Singletonでのインスタンス作成は許可
 	//初期化
 	void initialize();
 	//更新
@@ -22,6 +26,11 @@ public:
 	void setPosition(Vector2 position);
 	//速さを変える
 	void setSpeed(float speed);
+	float getSpeed()const;
+
+	//止まるフラグ
+	bool getStop() const;
+	void setStop(bool stop);
 	//向いている位置を返す
 	Vector3 getLookAtPosition() const;
 	//向きの変更
@@ -32,8 +41,6 @@ private:
 	//カメラの移動
 	void cameraMove(float deltaTime);
 
-
-
 private:
 
 	Vector3 mPosition;        //カメラ位置
@@ -41,8 +48,10 @@ private:
 	Vector3 mLookAtPosition;  //向き
 	Vector3 mAngle;           //回転
 	Vector3 mVelocity;        //移動量
-
 	float lookAtDistance;
+	bool isStop;
+
+
 };
 
 #endif // !_CAMERA_H_

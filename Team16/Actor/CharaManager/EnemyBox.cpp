@@ -15,9 +15,8 @@
 #include "../Enemies/Boss.h"
 
 //コンストラクタ
-EnemyBox::EnemyBox(CharactorManager & charactorMnager, Camera & camera, unsigned int enemyNumber, Vector2 position):
+EnemyBox::EnemyBox(CharactorManager & charactorMnager, unsigned int enemyNumber, Vector2 position):
 	m_pCharactorManager(&charactorMnager),
-	m_pCamera(&camera),
 	mEnemyNum(enemyNumber)
 {
 	b_mPosittion = position;
@@ -95,7 +94,7 @@ void EnemyBox::spawn()
 void EnemyBox::checkDistance()
 {
 	//絶対値にする
-	float distance = std::abs(Vector2((Vector2(0.0f, b_mPosittion.y) - Vector2(0, m_pCamera->getPosition().y))).length());
+	float distance = std::abs(Vector2((Vector2(0.0f, b_mPosittion.y) - Vector2(0, Camera::getInstance().getPosition().y))).length());
 
 	//カメラとの距離が描画範囲（縦）より小さくなったら生成する
 	if (distance <= 600.0f)
