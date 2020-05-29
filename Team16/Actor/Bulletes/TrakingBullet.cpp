@@ -100,8 +100,16 @@ void TrakingBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 	Vector2 a = b_mVelocity;
 	float angle = atan2(a.y, a.x)* 180.0f / DX_PI_F;
 	angle = -angle;
-
-	renderer3D->draw3DTexture("bullet1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(12.0f, 16.0f), 32.0f, angle + 270.0f);
+	if (b_mType == Type::ENEMY_BULLET)
+	{
+		renderer3D->draw3DTexture("bullet1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(12.0f, 16.0f), 32.0f, angle + 270.0f);
+		
+	}
+	else
+	{
+		renderer3D->draw3DTexture("misaill", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 64.0f, angle + 90.0f);
+	}
+		
 	//renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.5f, 1.5f), angle + 90, 255);
 }
 
