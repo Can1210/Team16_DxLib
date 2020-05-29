@@ -40,7 +40,7 @@ void TrakingBullet::initialize()
 {
 	setBulletType();
 	b_mVelocity = RotationZ(bulletAngle);
-	isFound = false;//“G‚ğŒ©‚Â‚¯‚Ä‚¢‚È‚¢
+	isFound = false;//æ•µã‚’è¦‹ã¤ã‘ã¦ã„ãªã„
 	getOtherPos();
 }
 
@@ -48,7 +48,7 @@ void TrakingBullet::update(float deltaTime)
 {
 	if (b_mType == Type::PLAYER_BULLET)
 	{
-		if (!isFound)//Œ©‚Â‚¯‚Ä‚È‚¢
+		if (!isFound)//è¦‹ã¤ã‘ã¦ãªã„
 		{
 			//b_mVelocity = RotationZ(bulletAngle);
 			//getOtherPos();
@@ -72,7 +72,7 @@ void TrakingBullet::update(float deltaTime)
 				b_mVelocity = traking();
 			}
 			else if (obj->getIsDeath())
-			{//“G‚ª‚¢‚È‚¢‚Ì‚É©•ª‚ª¶¬‚³‚ê‚Ä‚¢‚éê‡€‚Ê
+			{//æ•µãŒã„ãªã„ã®ã«è‡ªåˆ†ãŒç”Ÿæˆã•ã‚Œã¦ã„ã‚‹å ´åˆæ­»ã¬
 				isFound = false;
 			}
 		}
@@ -100,8 +100,16 @@ void TrakingBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 	Vector2 a = b_mVelocity;
 	float angle = atan2(a.y, a.x)* 180.0f / DX_PI_F;
 	angle = -angle;
-
-	renderer3D->draw3DTexture("bullet1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(12.0f, 16.0f), 32.0f, angle + 270.0f);
+	if (b_mType == Type::ENEMY_BULLET)
+	{
+		renderer3D->draw3DTexture("bullet1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(12.0f, 16.0f), 32.0f, angle + 270.0f);
+		
+	}
+	else
+	{
+		renderer3D->draw3DTexture("misaill", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 64.0f, angle + 90.0f);
+	}
+		
 	//renderer->draw2D("bullet", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.5f, 1.5f), angle + 90, 255);
 }
 
@@ -121,24 +129,24 @@ void TrakingBullet::hit(BaseObject & other)
 }
 
 
-void TrakingBullet::getOtherPos()//ƒ^[ƒQƒbƒg‚ğ’è‚ß‚é
+void TrakingBullet::getOtherPos()//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’å®šã‚ã‚‹
 {
 	std::vector<BaseObject*> objs = charaManager->getUseList();
-	std::size_t size = objs.size();//ƒŠƒXƒg‚Ì‘å‚«‚³Å‘å’l
-	Vector2 otherPos;//ƒ^[ƒQƒbƒg‚Ìƒ|ƒWƒVƒ‡ƒ“
+	std::size_t size = objs.size();//ãƒªã‚¹ãƒˆã®å¤§ãã•æœ€å¤§å€¤
+	Vector2 otherPos;//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒã‚¸ã‚·ãƒ§ãƒ³
 	Vector2 v;
 	float l = 5000.0f;
 	for (int i = 0; i < size; i++)
 	{
-		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET|| objs[i]->getType() == Type::BOSS)//©•ª‚ªƒvƒŒƒCƒ„[‚Ì’e‚¾‚Á‚½‚ç
+		if (objs[i]->getType() == Type::ENEMY ||objs[i]->getType()== Type::BOSS&& b_mType == Type::PLAYER_BULLET)//è‡ªåˆ†ãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã ã£ãŸã‚‰
 		{
 			otherPos = objs[i]->getPpstion();
 			float length = Vector2((b_mPosittion - otherPos)).length();
 			if (length < abs(l))
 			{
 				l = length;
-				obj = objs[i];//‚»‚Ì‹ß‚©‚Á‚½ƒ^[ƒQƒbƒg‚ÌƒIƒuƒWƒF‚ğ“ü‚ê‚é
-				isFound = true;//“G‚ğŒ©‚Â‚¯‚½
+				obj = objs[i];//ãã®æ™‚è¿‘ã‹ã£ãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚ªãƒ–ã‚¸ã‚§ã‚’å…¥ã‚Œã‚‹
+				isFound = true;//æ•µã‚’è¦‹ã¤ã‘ãŸ
 			}
 		}
 	}

@@ -44,6 +44,11 @@ public:
 
 #pragma endregion
 
+
+
+private:
+	void moveClamp();
+
 #pragma region パワーショット
 public:
 	//パワーショット

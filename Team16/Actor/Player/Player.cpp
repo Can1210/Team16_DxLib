@@ -11,6 +11,9 @@
 #include "../Bulletes/Shotgun.h"
 #include "../Bulletes/Bom.h"
 #include <typeinfo.h>
+#include "../../Device/Camera.h"
+
+
 
 Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
@@ -30,7 +33,7 @@ Player::~Player()
 void Player::initialize()
 {
 	b_mEndFlag = false;
-	b_mCircleSize = 16.0f;
+	b_mCircleSize = 12.0f;
 	b_mType = Type::PLAYER;
 	b_mHp = 3;                                       //Hpを設定
 	hpLimit = (int)b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
@@ -64,13 +67,14 @@ void Player::update(float deltaTime)
 	b_mVelocity = Vector2(0, 0);   //毎回移動量を0にする
 	input->update();
 	mTimer->update(deltaTime);
-	
+
 	bom1();						   //ここ処理順変えないように
 	bom2();                        //ここ処理順変えないように
 	//無敵時間
 	if (DamgeFlag&&mTimer->timerSet(2))DamgeFlag = FALSE;
 //ここからパワーショット
 
+	moveClamp();
 	move();
 	if (input->isKeyState(KEYCORD::SPACE))  // || input->isGamePadBottonState(GAMEPAD_KEYCORD::BUTTON_A, 0))
 	{
@@ -78,15 +82,20 @@ void Player::update(float deltaTime)
 		support1++; support2++;
 		PowerShot();
 
-		b_mVelocity.y -= 1.655f * 3.0f;
+		if (!Camera::getInstance().getStop())
+		{
+			b_mVelocity.y -= 1.655f * 3.0f;
+		}
 		b_mSpeed = 20.0f;
 	}
 	else
 	{
-		b_mVelocity.y -= 1.655f;
+		if (!Camera::getInstance().getStop())
+		{
+			b_mVelocity.y -= 1.655f;
+		}
 		b_mSpeed = 60.0f;
 	}
-	
 	hitSound++;
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
@@ -449,6 +458,35 @@ void Player::bom2()
 }
 #pragma endregion
 
+//移動制限
+void Player::moveClamp()
+{
+	
+	if (b_mPosittion.x >= (Camera::getInstance().getPosition().x + 300.0f))
+	{
+		b_mVelocity.x = 0;
+		b_mPosittion.x = Vector2().lerp(b_mPosittion.x, (Camera::getInstance().getPosition().x + 300.0f), 0.5f);  //左
+	}
+	if (b_mPosittion.x <= (Camera::getInstance().getPosition().x - 300.0f))
+	{
+		b_mVelocity.x = 0;
+		b_mPosittion.x = Vector2().lerp(b_mPosittion.x, (Camera::getInstance().getPosition().x - 300.0f), 0.5f);  //右
+		
+	}
+	if (b_mPosittion.y >= (Camera::getInstance().getPosition().y + 500.0f))
+	{
+		b_mVelocity.y = 0;
+		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y + 500.0f), 0.5f);  //上
+		
+	}
+	if (b_mPosittion.y <= (Camera::getInstance().getPosition().y - 350.0f))
+	{
+		b_mVelocity.y = 0;
+		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y - 350.0f), 0.5f); //下
+		
+	}
+}
+
 //各バレット処理	bulletダメージを変化
 void Player::PowerShot()
 {
@@ -498,7 +536,9 @@ void Player::PowerShot()
 	case ArmedRank::MM_Rank://ホーミングミサイル
 		if (subShotCnt > 20)
 		{
+			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x+30, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x-30, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
