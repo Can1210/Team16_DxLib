@@ -4,12 +4,14 @@
 #include "../Bulletes/Bom.h"
 #include "../Bulletes/BomBallet.h"
 #include "../Bulletes/Bullet.h"
+#include "../../Device/Camera.h"
 
 
 Boss::Boss(Vector2 pos, CharactorManager * c) :
 	mTimer(new Timer()),
 	m_pCirecleTimer(new Timer()),
-	m_pCirecleEndTimer(new Timer())
+	m_pCirecleEndTimer(new Timer()),
+	m_pCamreraTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -40,6 +42,12 @@ void Boss::update(float deltaTime)
 {
 	mTimer->update(deltaTime);
 	m_pCirecleTimer->update(deltaTime);
+	m_pCamreraTimer->update(deltaTime);
+	if (m_pCamreraTimer->timerSet_Self(3.0f))
+	{
+		Camera::getInstance().setStop(true);
+	}
+
 	b_mVelocity = Vector2(0, 0);
 	//無敵時間
 	if (DamgeFlag&&mTimer->timerSet(2))DamgeFlag = false;

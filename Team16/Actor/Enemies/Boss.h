@@ -31,6 +31,7 @@ private:
 	Timer *mTimer;
 	Timer* m_pCirecleTimer;
 	Timer* m_pCirecleEndTimer;
+	Timer* m_pCamreraTimer;
 
 	float shotAngle;
 	float bomshotAngle;

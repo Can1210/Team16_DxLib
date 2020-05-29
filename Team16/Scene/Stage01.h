@@ -6,7 +6,6 @@
 #include"../Actor/CharaManager/EnemySpawn.h"
 #include"../Actor/CharaManager/CharactorManager.h"
 #include "../Actor/CharaManager/MapSpawn.h"
-#include"../Device/Camera.h"
 
 //ステージ1
 class Stage01 : public BaseScene
@@ -24,7 +23,6 @@ public:
 private:
 	CharactorManager* m_pCharaManager;
 	MapSpawn* m_pMapSpawn;
-	Camera* m_pCamera;
 	float mBackPos;
 	bool mGameOver;
 	bool mGameClear;

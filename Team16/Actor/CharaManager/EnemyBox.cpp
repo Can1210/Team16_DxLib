@@ -15,9 +15,8 @@
 #include "../Enemies/Boss.h"
 
 //コンストラクタ
-EnemyBox::EnemyBox(CharactorManager & charactorMnager, Camera & camera, unsigned int enemyNumber, Vector2 position):
+EnemyBox::EnemyBox(CharactorManager & charactorMnager, unsigned int enemyNumber, Vector2 position):
 	m_pCharactorManager(&charactorMnager),
-	m_pCamera(&camera),
 	mEnemyNum(enemyNumber)
 {
 	b_mPosittion = position;
@@ -65,10 +64,10 @@ void EnemyBox::spawn()
 		m_pCharactorManager->add(new CirecleMoveEnemy(b_mPosittion, m_pCharactorManager));
 		break;
 	case 4:   
-		m_pCharactorManager->add(new HomingEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 1000.0f)));
+		m_pCharactorManager->add(new HomingEnemy(b_mPosittion, m_pCharactorManager, m_pCharactorManager->getPlayerPosition()));
 		break;
 	case 5:     
-		m_pCharactorManager->add(new LaserEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 1000.0f)));
+		m_pCharactorManager->add(new LaserEnemy(b_mPosittion, m_pCharactorManager, m_pCharactorManager->getPlayerPosition()));
 		break;
 	case 6:     
 		m_pCharactorManager->add(new PlatoonEnemy(b_mPosittion, m_pCharactorManager, Vector2(0.0f, 500.0f)));
@@ -84,6 +83,7 @@ void EnemyBox::spawn()
 		break;
 	case 10:     
 		m_pCharactorManager->add(new WallReflectionEnemy(b_mPosittion, m_pCharactorManager));
+		break;
 	case 11:
 		m_pCharactorManager->add(new Boss(b_mPosittion, m_pCharactorManager));
 		break;
@@ -95,7 +95,7 @@ void EnemyBox::spawn()
 void EnemyBox::checkDistance()
 {
 	//絶対値にする
-	float distance = std::abs(Vector2((Vector2(0.0f, b_mPosittion.y) - Vector2(0, m_pCamera->getPosition().y))).length());
+	float distance = std::abs(Vector2((Vector2(0.0f, b_mPosittion.y) - Vector2(0, Camera::getInstance().getPosition().y))).length());
 
 	//カメラとの距離が描画範囲（縦）より小さくなったら生成する
 	if (distance <= 600.0f)
