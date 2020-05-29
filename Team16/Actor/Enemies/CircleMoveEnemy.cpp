@@ -42,11 +42,11 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 	renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 	if (b_mHp <= 0)
 	{
-		b_animCnt += 64.0f;
-		if (b_animCnt >= 1022)
+		b_animCnt += 32.0f;
+		if (b_animCnt >= 1022.0f)
 		{
-			charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy2"));   //アイテム生成
 			Score::getInstance().addScore(200);
+			charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy2"));   //アイテム生成
 			b_mIsDeath = true;
 		}
 		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
@@ -79,12 +79,7 @@ void CirecleMoveEnemy::move(float deltaTime)
 	y = radius * sin(moveTime* rotateSpeed);
 	b_mPosittion +=  Vector2(x,y);
 
-	if (b_mHp <= 0)
-	{
-		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy2"));   //アイテム生成
- 		Score::getInstance().addScore(200);
-		b_mIsDeath = true;
-	}
+
 	if (m_pTimer->timerSet(2.0f)) Shot(b_mPosittion);
 
 }
