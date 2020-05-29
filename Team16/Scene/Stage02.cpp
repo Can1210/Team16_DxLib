@@ -47,7 +47,7 @@ void Stage02::update(float deltaTime)
 
 void Stage02::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	renderer->draw2D("back", Vector2(0, mBackPos), Vector2(0, 0), Vector2(600, 4110));
+	renderer->draw2D("back2", Vector2(0, mBackPos), Vector2(0, 0), Vector2(600, 4110));
 	m_pCharaManager->draw(renderer, renderer3D);
 	//renderer->drawText("Font", "SCORE", Vector2(0.0f, 0.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	renderer->drawNumber("hpNumber", Vector2(550.0f, 0.0f), Score::getInstance().getScore(), 8, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);

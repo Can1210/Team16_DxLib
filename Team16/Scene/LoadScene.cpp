@@ -26,7 +26,8 @@ void LoadScene::initialize()
 	//ÉGÉtÉFÉNÉg
 	TextureLoad::getInstance().add("deathBurst", "Resouce/Texture/burst.png");
 	//îwåi
-	TextureLoad::getInstance().add("back", "Resouce/Texture/backgraund.png");
+	TextureLoad::getInstance().add("back", "Resouce/Texture/backgraund_01.png");
+	TextureLoad::getInstance().add("back2", "Resouce/Texture/backgraund_02.png");
 	//íeä÷åW
 	TextureLoad::getInstance().add("bullet", "Resouce/Texture/Bullet.png");
 	TextureLoad::getInstance().add("bullet1", "Resouce/Texture/Bullet01.png");

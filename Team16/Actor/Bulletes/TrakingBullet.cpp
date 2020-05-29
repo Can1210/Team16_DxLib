@@ -138,7 +138,7 @@ void TrakingBullet::getOtherPos()//ターゲットを定める
 	float l = 5000.0f;
 	for (int i = 0; i < size; i++)
 	{
-		if (objs[i]->getType() == Type::ENEMY && b_mType == Type::PLAYER_BULLET)//自分がプレイヤーの弾だったら
+		if (objs[i]->getType() == Type::ENEMY ||objs[i]->getType()== Type::BOSS&& b_mType == Type::PLAYER_BULLET)//自分がプレイヤーの弾だったら
 		{
 			otherPos = objs[i]->getPpstion();
 			float length = Vector2((b_mPosittion - otherPos)).length();
