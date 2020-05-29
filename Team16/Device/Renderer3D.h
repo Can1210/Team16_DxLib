@@ -21,6 +21,7 @@ public:
 		float angle,
 		int alpha = 255,
 		Vector2 centerPos = Vector2(0.5f, 0.5f),
+		Vector3 decolorization = Vector3(255, 255, 255),
 		bool isTransparency = true);
 
 

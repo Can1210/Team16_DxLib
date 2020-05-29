@@ -16,9 +16,6 @@ public:
 	virtual void shutdown() override;
 	virtual bool isEnd() override;
 	virtual std::string nextScene() override;
-private:
-	//ステージセレクトを行う
-	void stageSelect(float deltaTime);
 
 private:
 	std::string mSelectName;
