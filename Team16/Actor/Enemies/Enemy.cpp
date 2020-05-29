@@ -51,7 +51,14 @@ void Enemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		if (b_animCnt >= 1022.0f)
 		{
 			Score::getInstance().addScore(100);
-			charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //�A�C�e������
+			
+			
+			if (GetRand(2) == 2)
+			{
+				charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //�A�C�e������
+				b_mIsDeath = true;
+			}
+		
 			b_mIsDeath = true;
 		}
  		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
