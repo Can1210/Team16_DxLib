@@ -40,6 +40,7 @@ void Boss2::initialize()
 
 void Boss2::update(float deltaTime)
 {
+	b_mVelocity = Vector2(0, 0);
 	mTimer->update(deltaTime);
 	m_pCirecleTimer->update(deltaTime);
 	m_pCamreraTimer->update(deltaTime);
@@ -47,15 +48,16 @@ void Boss2::update(float deltaTime)
 	{
 		Camera::getInstance().setStop(true);
 	}
-
-	b_mVelocity = Vector2(0, 0);
+	else
+		b_mVelocity.y = 2;
 	//ñ≥ìGéûä‘
 	if (DamgeFlag&&mTimer->timerSet(2))DamgeFlag = false;
+
 	switch (shotTime)
 	{
 	case 60:
 		shot(b_mPosittion);
-			break;
+		break;
 
 	case 60 * 2:
 		shotTime = 0;
@@ -72,7 +74,9 @@ void Boss2::update(float deltaTime)
 		Score::getInstance().addScore(66666);
 		GamePlay::BossEnd = true;
 	}
+
 	shotTime++;
+	//ç°ÇæÇØ
 	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
 }
 
