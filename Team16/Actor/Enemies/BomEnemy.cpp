@@ -49,7 +49,12 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 			
 			if (b_animCnt >= 1022.0f)
 			{
-				charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //
+				if (GetRand(2) == 2)
+				{
+					charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //
+					b_mIsDeath = true;
+				}
+				
 				Score::getInstance().addScore(300);
 				b_mIsDeath = true;
 			}

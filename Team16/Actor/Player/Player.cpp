@@ -61,8 +61,8 @@ void Player::initialize()
 void Player::update(float deltaTime)
 {
 	//サブ機の位置
-	mSubPos[0] = b_mPosittion + Vector2(42.0f, -50.0f);
-	mSubPos[1] = b_mPosittion + Vector2(-42.0f, -50.0f);
+	mSubPos[0] = b_mPosittion + Vector2(48.0f, 30.0f);
+	mSubPos[1] = b_mPosittion + Vector2(-48.0f, 30.0f);
 
 	b_mVelocity = Vector2(0, 0);   //毎回移動量を0にする
 	input->update();
@@ -238,20 +238,20 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 	if(amd.first == BulletType::None)
 		renderer->draw2D("none", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	else if(amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
+	else if(amd.first == BulletType::T_Bullet )
 		renderer->draw2D("sg", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_LaserBullet)
 		renderer->draw2D("lazer", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	else if(amd.first == BulletType::T_TrakingBullet)
+	else if(amd.first == BulletType::T_TrakingBullet || amd.first == BulletType::T_AngleBullet)
 		renderer->draw2D("misaile", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 	if (amd.second == BulletType::None)
 		renderer->draw2D("none", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	else if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
+	else if (amd.second == BulletType::T_Bullet )
 		renderer->draw2D("sg", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_LaserBullet)
 		renderer->draw2D("lazer", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	else if (amd.second == BulletType::T_TrakingBullet)
+	else if (amd.second == BulletType::T_TrakingBullet || amd.second == BulletType::T_AngleBullet)
 		renderer->draw2D("misaile", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 #pragma endregion
@@ -618,7 +618,7 @@ void Player::ArmedRankCheck()
 
 void Player::SupportShot()
 {
-	if (amd.first == BulletType::T_Bullet || amd.first == BulletType::T_AngleBullet)
+	if (amd.first == BulletType::T_Bullet )
 	{
 		if (support1 > 7)
 		{
@@ -626,7 +626,7 @@ void Player::SupportShot()
 			support1 = 0;
 		}
 	}
-	else if (amd.first == BulletType::T_TrakingBullet)
+	else if (amd.first == BulletType::T_TrakingBullet || amd.first == BulletType::T_AngleBullet)
 	{
 		if (support1 > 20)
 		{
@@ -643,7 +643,7 @@ void Player::SupportShot()
 		}
 	}
 
-	if (amd.second == BulletType::T_Bullet || amd.second == BulletType::T_AngleBullet)
+	if (amd.second == BulletType::T_Bullet )
 	{
 		if (support2 > 7)
 		{
@@ -651,7 +651,7 @@ void Player::SupportShot()
 			support2 = 0;
 		}
 	}
-	else if (amd.second == BulletType::T_TrakingBullet)
+	else if (amd.second == BulletType::T_TrakingBullet || amd.second == BulletType::T_AngleBullet)
 	{
 		if (support2 > 20)
 		{

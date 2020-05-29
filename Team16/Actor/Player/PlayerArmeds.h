@@ -54,18 +54,18 @@ public:
 	{BulletType::T_TrakingBullet,BulletType::T_LaserBullet,ArmedRank::MB_Rank},
 	{BulletType::T_LaserBullet,BulletType::T_TrakingBullet,ArmedRank::MB_Rank},// 16ŒÂ
 
-	{BulletType::T_AngleBullet,BulletType::None,ArmedRank::M_Rank},
-	{BulletType::None,BulletType::T_AngleBullet,ArmedRank::M_Rank},//18
-	{BulletType::T_AngleBullet,BulletType::T_AngleBullet,ArmedRank::SS_Rank},//19
+	 {BulletType::T_AngleBullet,BulletType::None,ArmedRank::M_Rank},
+     {BulletType::None,BulletType::T_AngleBullet,ArmedRank::M_Rank},//18
+     {BulletType::T_AngleBullet,BulletType::T_AngleBullet,ArmedRank::MM_Rank},//19
 
-	{BulletType::T_AngleBullet,BulletType::T_TrakingBullet,ArmedRank::SM_Rank},
-	{BulletType::T_TrakingBullet,BulletType::T_AngleBullet,ArmedRank::SM_Rank},//21
+     {BulletType::T_AngleBullet,BulletType::T_TrakingBullet,ArmedRank::MM_Rank},
+     {BulletType::T_TrakingBullet,BulletType::T_AngleBullet,ArmedRank::MM_Rank},//21
 
-	{BulletType::T_AngleBullet,BulletType::T_LaserBullet,ArmedRank::SB_Rank},
-	{BulletType::T_LaserBullet,BulletType::T_AngleBullet,ArmedRank::SB_Rank},//23
+     {BulletType::T_AngleBullet,BulletType::T_LaserBullet,ArmedRank::MB_Rank},
+     {BulletType::T_LaserBullet,BulletType::T_AngleBullet,ArmedRank::MB_Rank},//23
 
-	{BulletType::T_AngleBullet,BulletType::T_Bullet,ArmedRank::SM_Rank},
-	{BulletType::T_Bullet,BulletType::T_AngleBullet,ArmedRank::SM_Rank},//25
+     {BulletType::T_AngleBullet,BulletType::T_Bullet,ArmedRank::SM_Rank},
+     {BulletType::T_Bullet,BulletType::T_AngleBullet,ArmedRank::SM_Rank},//25
 	};
 
 private:
