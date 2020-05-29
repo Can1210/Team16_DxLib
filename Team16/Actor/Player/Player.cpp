@@ -13,6 +13,8 @@
 #include <typeinfo.h>
 #include "../../Device/Camera.h"
 
+
+
 Player::Player(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 {
 	charaManager = c;
@@ -64,13 +66,14 @@ void Player::update(float deltaTime)
 	b_mVelocity = Vector2(0, 0);   //毎回移動量を0にする
 	input->update();
 	mTimer->update(deltaTime);
-	
+
 	bom1();						   //ここ処理順変えないように
 	bom2();                        //ここ処理順変えないように
 	//無敵時間
 	if (DamgeFlag&&mTimer->timerSet(2))DamgeFlag = FALSE;
 //ここからパワーショット
 
+	moveClamp();
 	move();
 	if (input->isKeyState(KEYCORD::SPACE))  // || input->isGamePadBottonState(GAMEPAD_KEYCORD::BUTTON_A, 0))
 	{
@@ -92,7 +95,6 @@ void Player::update(float deltaTime)
 		}
 		b_mSpeed = 60.0f;
 	}
-	
 
 	b_mPosittion -= b_mVelocity * deltaTime*b_mSpeed;
 }
@@ -454,6 +456,35 @@ void Player::bom2()
 	}
 }
 #pragma endregion
+
+//移動制限
+void Player::moveClamp()
+{
+	
+	if (b_mPosittion.x >= (Camera::getInstance().getPosition().x + 300.0f))
+	{
+		b_mVelocity.x = 0;
+		b_mPosittion.x = Vector2().lerp(b_mPosittion.x, (Camera::getInstance().getPosition().x + 300.0f), 0.5f);  //左
+	}
+	if (b_mPosittion.x <= (Camera::getInstance().getPosition().x - 300.0f))
+	{
+		b_mVelocity.x = 0;
+		b_mPosittion.x = Vector2().lerp(b_mPosittion.x, (Camera::getInstance().getPosition().x - 300.0f), 0.5f);  //右
+		
+	}
+	if (b_mPosittion.y >= (Camera::getInstance().getPosition().y + 500.0f))
+	{
+		b_mVelocity.y = 0;
+		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y + 500.0f), 0.5f);  //上
+		
+	}
+	if (b_mPosittion.y <= (Camera::getInstance().getPosition().y - 350.0f))
+	{
+		b_mVelocity.y = 0;
+		b_mPosittion.y = Vector2().lerp(b_mPosittion.y, (Camera::getInstance().getPosition().y - 350.0f), 0.5f); //下
+		
+	}
+}
 
 //各バレット処理	bulletダメージを変化
 void Player::PowerShot()
