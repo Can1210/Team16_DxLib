@@ -20,7 +20,7 @@ void Item::initialize()
 	b_mVelocity = Vector2(0.0f, 1.0f);  //‰º•ûŒü‚ÉˆÚ“®
 	b_mAngle = 180.0f;
 	b_mType = Type::ITEM;
-	b_mCircleSize = 16.0f;
+	b_mCircleSize = 20.0f;
 	b_mIsDeath = false;
 }
 //XV
