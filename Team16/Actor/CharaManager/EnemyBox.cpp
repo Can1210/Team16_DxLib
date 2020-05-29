@@ -83,6 +83,7 @@ void EnemyBox::spawn()
 		break;
 	case 10:     
 		m_pCharactorManager->add(new WallReflectionEnemy(b_mPosittion, m_pCharactorManager));
+		break;
 	case 11:
 		m_pCharactorManager->add(new Boss(b_mPosittion, m_pCharactorManager));
 		break;

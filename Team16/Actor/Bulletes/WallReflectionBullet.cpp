@@ -11,7 +11,7 @@ WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Ty
 	b_mBulletDamage = 0.1f;
 
 	bulletAngle = (float)angle;
-	b_mSpeed = 250.0f;
+	b_mSpeed = 400.0f;
 }
 
 WallReflectionBullet::~WallReflectionBullet()

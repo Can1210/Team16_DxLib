@@ -77,7 +77,6 @@ void Player::update(float deltaTime)
 		subShotCnt++;
 		support1++; support2++;
 		PowerShot();
-		SupportShot();
 
 		if (!Camera::getInstance().getStop())
 		{
@@ -356,6 +355,7 @@ void Player::move()
 		if (input->isKeyDown(KEYCORD::SPACE))// || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y+64.0f));
+			SupportShot();
 		}
 		//死亡処理
 		if (b_mHp <= 0)
