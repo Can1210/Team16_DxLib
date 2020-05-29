@@ -33,7 +33,7 @@ Player::~Player()
 void Player::initialize()
 {
 	b_mEndFlag = false;
-	b_mCircleSize = 16.0f;
+	b_mCircleSize = 12.0f;
 	b_mType = Type::PLAYER;
 	b_mHp = 3;                                       //Hpを設定
 	hpLimit = (int)b_mHp;                                   //Hpの上限を受け取る(HP設定の下に記述)
@@ -535,7 +535,9 @@ void Player::PowerShot()
 	case ArmedRank::MM_Rank://ホーミングミサイル
 		if (subShotCnt > 20)
 		{
+			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x+30, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x-30, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
