@@ -34,12 +34,7 @@ void BomEnemy::update(float deltaTime)
 	{
 		shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 	}
-	if (b_mHp <= 0)
-	{
-		charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy3"));   //
-		Score::getInstance().addScore(300);
-		b_mIsDeath = true;
-	}
+	
 	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
 }
 
@@ -51,13 +46,14 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		if (b_mHp <= 0)
 		{
 			b_animCnt += 64.0f;
-			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			
 			if (b_animCnt >= 1022.0f)
 			{
 				charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy3"));   //
 				Score::getInstance().addScore(300);
 				b_mIsDeath = true;
 			}
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
 		}
 		
 	}
