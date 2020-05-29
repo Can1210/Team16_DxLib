@@ -1,6 +1,7 @@
 #include "WallReflectionEnemy.h"
 #include <random>
 #include "../Bulletes/WallReflectionBullet.h"
+#include "../CharaManager/DeathPoint.h"
 #include"../Item/Item.h"
 
 WallReflectionEnemy::WallReflectionEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer())
@@ -28,7 +29,7 @@ void WallReflectionEnemy::initialize()
 	b_mSpeed = 30.0f;
 	b_mArpha = 255;
 
-	startPos = Vector2(0.0f, -300.0f);
+	startPos = Vector2(0.0f,DeathPoint::getInstance().getUp() + -300.0f);
 	startEnd = false;
 	shottime = 0;
 	b_animCnt = 0.0f;
@@ -47,7 +48,7 @@ void WallReflectionEnemy::update(float deltaTime)
 			startEnd = true;
 		}
 		v = v.normalize();
-		b_mPosittion -= -v * deltaTime * 120.0f;
+		b_mPosittion += -v * deltaTime * 120.0f;
 		
 		return;
 	}
@@ -142,7 +143,7 @@ void WallReflectionEnemy::move(float deltaTime)
 	moveTime += deltaTime * 1.0f;
 	x = radius * cos(moveTime * rotateSpeed);
 	y = radius * cos(moveTime * rotateSpeed * 2.0f);
-	b_mPosittion -= Vector2(x, y) * 1.0f;
+	b_mPosittion += Vector2(x, y + 1.75f) * 1.0f;
 
 	if (b_mHp <= 0)
 	{

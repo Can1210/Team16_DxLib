@@ -6,7 +6,6 @@
 #include"../Actor/CharaManager/EnemySpawn.h"
 #include"../Actor/CharaManager/CharactorManager.h"
 #include "../Actor/CharaManager/MapSpawn.h"
-#include"../Device/Camera.h"
 
 class TestScene3D : public BaseScene
 {
@@ -23,7 +22,6 @@ public:
 private:
 	CharactorManager* charaManager;
 	MapSpawn* mapSpawn;
-	Camera* camera;
 	float backPos;
 
 	bool mGameOver;

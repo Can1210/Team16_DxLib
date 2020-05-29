@@ -9,7 +9,7 @@
 class MapSpawn
 {
 public:
-	MapSpawn(CharactorManager& charactorManager,Camera& camera);
+	MapSpawn(CharactorManager& charactorManager);
 	~MapSpawn();
 
 	void addObject(int lineCnt, std::vector<std::string> record);
@@ -20,7 +20,6 @@ public:
 
 private:
 	CharactorManager* m_pCharaManager;				   //キャラマネを保存
-	Camera* m_pCamera;                                 //カメラを保存
 	CSVReader* m_pCsvReader;
 };
 

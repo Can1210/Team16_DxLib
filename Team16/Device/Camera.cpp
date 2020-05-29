@@ -18,6 +18,8 @@ void Camera::initialize()
 	mPosition = Vector3(0.0f,0.0f,lookAtDistance);
 	mLookAtPosition = Vector3(0.0f, 0.0f, 0.0f);
 	mSpeed = 100.0f;
+	isStop = false;
+	
 }
 //更新
 void Camera::update(float deltaTime)
@@ -28,17 +30,13 @@ void Camera::update(float deltaTime)
 void Camera::cameraMove(float deltaTime)
 {
 
-
-
 	mVelocity.y = 1.0f;
-	mPosition.y += mVelocity.y * mSpeed * deltaTime;
 
-	if (mPosition.y >= 6050.0f)
+
+	if (!isStop)
 	{
-		mPosition.y = 6050.0f;
+		mPosition.y += mVelocity.y * mSpeed * deltaTime;
 	}
-
-
 
 	mLookAtPosition.y = mPosition.y;   //Y軸しか動かない
 	// カメラの設定に反映する
@@ -50,11 +48,9 @@ void Camera::cameraMove(float deltaTime)
 	DeathPoint::getInstance().setRight(mPosition.x + 500.0f);
 	DeathPoint::getInstance().setCenter(mPosition.y);
 	DeathPoint::getInstance().cameraVely(mVelocity.y * mSpeed);
-
-	
-
 	//CWindow::getInstance().log("ｙ座標 %f\n", mPosition.y);
 }
+
 
 #pragma region Get/Set
 
@@ -78,6 +74,18 @@ void Camera::setPosition(Vector2 position)
 void Camera::setSpeed(float speed)
 {
 	mSpeed = speed;
+}
+float Camera::getSpeed() const
+{
+	return mSpeed;
+}
+bool Camera::getStop() const
+{
+	return isStop;
+}
+void Camera::setStop(bool stop)
+{
+	isStop = stop;
 }
 //向いている位置を返す
 Vector3 Camera::getLookAtPosition() const
