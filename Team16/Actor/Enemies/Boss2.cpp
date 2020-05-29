@@ -103,6 +103,7 @@ void Boss2::shot(Vector2 pos)
 {
 	//charaManager->add(new Bullet(Vector2(pos.x + 20, pos.y), charaManager, b_mType, 0.0f));
 	charaManager->add(new TrakingBullet(Vector2(pos.x + 5 , pos.y - 100), charaManager, b_mType, 0.0f));
+
 	charaManager->add(new TrakingBullet(Vector2(pos.x + 5 + 20, pos.y - 100), charaManager, b_mType, 0.0f));
 	charaManager->add(new TrakingBullet(Vector2(pos.x + 5 + 40, pos.y - 100), charaManager, b_mType, 0.0f));
 	charaManager->add(new TrakingBullet(Vector2(pos.x + 5 + 60, pos.y - 100), charaManager, b_mType, 0.0f));
