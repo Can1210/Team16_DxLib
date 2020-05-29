@@ -46,7 +46,8 @@ void Title::update(float deltaTime)
 //描画
 void Title::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
-	if (!mIsStageSelect)
+	renderer->draw2D("Mixam", Vector2(0, 0), Vector2(0, 0), Vector2(600, 900));
+	/*if (!mIsStageSelect)
 	{
 		renderer->drawText("Font", "TITLE", Vector2(180, 250), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 300), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
@@ -55,7 +56,7 @@ void Title::draw(Renderer* renderer, Renderer3D* renderer3D)
 	else
 	{
 		renderer->drawText("Font", "STAGE SELECT", Vector2(40.0f, 0.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-	}
+	}*/
 }
 //終了処理
 void Title::shutdown()
@@ -70,27 +71,5 @@ bool Title::isEnd()
 std::string Title::nextScene()
 {
 	return  mSelectName;  //"test";  //
-}
-//セレクト時の処理
-void Title::stageSelect(float deltaTime)
-{
-	if (!mIsStageSelect) return;
-
-	/*if (mChangeScne)
-	{
-		switch (mStageNum)
-		{
-		case 1:
-			mSelectName = "stage1";
-			isSceneEnd = true;
-			break;
-		case 2:
-			mSelectName = "stage2";
-			isSceneEnd = true;
-			break;
-		default:
-			break;
-		}
-	}*/
 }
 
