@@ -23,6 +23,8 @@ public:
 	void attack(float deltaTime);
 	void shot(Vector2 pos);
 	void circleShot(float deltaTime);
+	void circleMove(float deltaTime);
+	bool charge();
 
 	Vector2 checkPlayerPos(Vector2 vec);
 private:
@@ -37,4 +39,14 @@ private:
 	float bomshotAngle;
 	Vector2 mPlayerPos;   //プレイヤーの位置
 	Vector2 angleVec;
+
+	//円運動
+	float x;
+	float y;
+	float radius;
+	float rotateSpeed;
+	float moveTime;
+
+	float mChargeScalse;
+	bool mIsCharge;
 };

@@ -2,7 +2,6 @@
 #include "../../Scene/GamePlay.h"
 #include "../Bulletes/AngleBullet.h"
 #include "../Bulletes/Bom.h"
-#include "../Bulletes/BomBallet.h"
 #include "../Bulletes/Bullet.h"
 #include "../../Device/Camera.h"
 
@@ -36,10 +35,18 @@ void Boss::initialize()
     m_pCirecleTimer->initialize();
     m_pCirecleEndTimer->initialize();
 	bomshotAngle = 180.0f;
+	//円
+	rotateSpeed = 0.5f;//1周にかかる時間
+	radius = 5.0f;   //半径10
+	//溜め
+	mIsCharge = false;
+	mChargeScalse = 400.0f;
+
 }
 
 void Boss::update(float deltaTime)
 {
+	b_mVelocity = Vector2(0, 0);
 	mTimer->update(deltaTime);
 	m_pCirecleTimer->update(deltaTime);
 	m_pCamreraTimer->update(deltaTime);
@@ -47,13 +54,10 @@ void Boss::update(float deltaTime)
 	{
 		Camera::getInstance().setStop(true);
 	}
-
-	b_mVelocity = Vector2(0, 0);
+	else
+		b_mVelocity.y = 2;
 	//無敵時間
 	if (DamgeFlag&&mTimer->timerSet(2))DamgeFlag = false;
-
-	b_mVelocity.y += 2;
-	if (b_mPosittion.y > 150) b_mVelocity = Vector2(0, 0);
 	attack(deltaTime);
 	if (b_mHp <= 0)
 	{
@@ -62,6 +66,8 @@ void Boss::update(float deltaTime)
 		Score::getInstance().addScore(66666);
 		GamePlay::BossEnd = true;
 	}
+	
+	//今だけ
 	b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime ;
 }
 
@@ -73,6 +79,11 @@ void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
 		//renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
 		renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle);
 		renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle);
+		if (mIsCharge)
+		{
+			renderer3D->draw3DTexture("bullet_en6", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), mChargeScalse, 0.0f, 125);
+		}
+
 	}
 	else if (!b_mEndFlag)
 	{
@@ -95,10 +106,24 @@ void Boss::attack(float deltaTime)
 {
 	if (mTimer->timerSet(2)) shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 	//円状の攻撃
-	if (m_pCirecleTimer->timerSet_Self(10.0f))
-		circleShot(deltaTime);
+	if (m_pCirecleTimer->timerSet_Self(6.0f) && ((b_mPosittion.x >= -10.0f && b_mPosittion.x <= 10.0f)))
+	{
+		mIsCharge = true;
+		if (mChargeScalse <= 0)
+		{
+			mIsCharge = false;
+			circleShot(deltaTime);
+		}
+		mChargeScalse -= 10.0f;
+
+	}
 	else
+	{
+		mChargeScalse = 400.0f;
+		mIsCharge = false;
+		circleMove(deltaTime);
 		shotAngle = 0.0f;
+	}
 }
 void Boss::shot(Vector2 pos)
 {
@@ -110,19 +135,38 @@ void Boss::shot(Vector2 pos)
 	angleVec = Vector2(0, 0);
 	angleVec = checkPlayerPos(angleVec);  //角度を代入
 	//角度に変換
-	bomshotAngle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
-	charaManager->add(new BomBullet(pos, charaManager, b_mType, bomshotAngle));
+	bomshotAngle = atan2(angleVec.y, -angleVec.x)* 180.0f / DX_PI_F;
+	
 }
 //円攻撃
 void Boss::circleShot(float deltaTime)
 {
+
+
 	m_pCirecleEndTimer->update(deltaTime);
 	//円攻撃時間の設定
-	if (m_pCirecleEndTimer->timerSet(2.0f))
+	if (m_pCirecleEndTimer->timerSet(3.0f))
 		m_pCirecleTimer->initialize();
 
-	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x+32, b_mPosittion.y + 64), charaManager, b_mType, shotAngle));
-	shotAngle += 10.0f;
+	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x, b_mPosittion.y ), charaManager, b_mType, shotAngle));
+	shotAngle += 93.0f;
+	charaManager->add(new AngleBullet(Vector2(b_mPosittion.x, b_mPosittion.y ), charaManager, b_mType, shotAngle));
+	shotAngle += 93.0f;
+}
+
+void Boss::circleMove(float deltaTime)
+{
+	//円運動
+	moveTime += deltaTime * 4.0f;
+	x = 2 * radius * cos(moveTime* rotateSpeed);
+	y = radius * cos(moveTime* rotateSpeed * 2);
+	b_mPosittion += Vector2(x, y);
+
+}
+//チャージ
+bool Boss::charge()
+{
+	return mIsCharge;
 }
 
 Vector2 Boss::checkPlayerPos(Vector2 vec)
