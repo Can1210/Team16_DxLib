@@ -19,14 +19,21 @@ public:
 	virtual void hit(BaseObject & other) override;
 
 	//çUåÇä÷åW
-	void shot(Vector2 pos);
+	void shot(Vector2 pos, int t);
+	void shot2(Vector2 p, int t);
+	bool playerInArea();
 private:
+	enum Boss2Move {
+		Move_1, Move_2, Move_3,Move_4,NoneMove,
+	};
+
 	bool DamgeFlag;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	Timer* m_pCirecleTimer;
 	Timer* m_pCirecleEndTimer;
 	Timer* m_pCamreraTimer;
-
+	Boss2Move boss2move;
+	float rotx;
 	int shotTime;
 };
