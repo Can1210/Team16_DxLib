@@ -16,6 +16,8 @@ void LoadScene::initialize()
 
 	//ゲームシーン
 	TextureLoad::getInstance().add("Mixam", "Resouce/Texture/Mixam.png");
+	TextureLoad::getInstance().add("title", "Resouce/Texture/title.png");
+	TextureLoad::getInstance().add("titleText", "Resouce/Texture/titleText.png");
 	//UI
 	TextureLoad::getInstance().add("UI", "Resouce/Texture/16Ui.png");
 	//アイテム
@@ -60,6 +62,8 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("enemyR2", "Resouce/Texture/16misaileE.png");
 	//フォント関係
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
+	TextureLoad::getInstance().add("Font_white"  , "Resouce/Texture/Font.png");
+	TextureLoad::getInstance().add("Font_green"  , "Resouce/Texture/Font_green.png");
 	TextureLoad::getInstance().add("hpNumber", "Resouce/Texture/denColor.png");
 	TextureLoad::getInstance().add("sousa", "Resouce/Texture/sousa.png");
 	TextureLoad::getInstance().add("sousa2", "Resouce/Texture/sousa2.png");
