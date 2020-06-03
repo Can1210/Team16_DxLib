@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Bulletes\AngleBullet.cpp" />
+    <ClCompile Include="Actor\Bulletes\CircleBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\CurveBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\LaserBullet.cpp" />
     <ClCompile Include="Actor\Bulletes\TrakingBullet.cpp" />
@@ -217,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Bulletes\AngleBullet.h" />
+    <ClInclude Include="Actor\Bulletes\CircleBullet.h" />
     <ClInclude Include="Actor\Bulletes\CurveBullet.h" />
     <ClInclude Include="Actor\Bulletes\LaserBullet.h" />
     <ClInclude Include="Actor\Bulletes\TrakingBullet.h" />

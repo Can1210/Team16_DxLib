@@ -17,7 +17,6 @@ Boss2::Boss2(Vector2 pos, CharactorManager * c) :
 {
 	charaManager = c;
 	b_mPosittion = pos;
-
 }
 
 Boss2::~Boss2()
@@ -27,7 +26,7 @@ Boss2::~Boss2()
 
 void Boss2::initialize()
 {
-	b_mHp = 500;
+	b_mHp = 200;
 	b_mCircleSize = 64.0f;
 	b_mType = Type::BOSS;
 	b_mAngle = 180.0f;

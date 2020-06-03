@@ -17,7 +17,7 @@ Enemy::~Enemy()
 void Enemy::initialize()
 {
 	b_mVelocity = checkPlayerPos(b_mVelocity);
-	b_mHp = 3;
+	b_mHp = 1;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
