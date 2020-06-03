@@ -17,7 +17,7 @@ Enemy::~Enemy()
 void Enemy::initialize()
 {
 	b_mVelocity = checkPlayerPos(b_mVelocity);
-	b_mHp = 3;
+	b_mHp = 1;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
@@ -44,7 +44,7 @@ void Enemy::update(float deltaTime)
 
 void Enemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	renderer3D->draw3DTexture("enemyB", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 	if (b_mHp<=0)
 	{
 		b_animCnt +=64.0f;
