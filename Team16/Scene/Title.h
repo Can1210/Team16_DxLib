@@ -20,6 +20,13 @@ public:
 private:
 	std::string mSelectName;
 	bool mIsStageSelect;     //ステージセレクト条件
+
+	int alpha;
+	bool isReturn;
+
+	bool isAnim;
+	int animAlpha;
+
 };
 
 #endif // !_TITLE_H
