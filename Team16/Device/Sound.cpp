@@ -3,8 +3,8 @@
 
 //コンストラクタ
 Sound::Sound():
-	mBGMVolume(50),
-	mSEVolume(7000)
+	mBGMVolume(35),
+	mSEVolume(50)
 {
 }
 
@@ -15,8 +15,8 @@ Sound::~Sound()
 //音量初期化
 void Sound::volumeInitialize()
 {
-	mBGMVolume = 50;
-	mSEVolume = 7000;
+	mBGMVolume = 35;
+	mSEVolume = 50;
 }
 #pragma region BGM関係
 
@@ -76,7 +76,8 @@ void Sound::setBGMVolume(int volume)
 //SE再生
 void Sound::playSE(std::string seName)
 {
-	
+	// 音量の設定整数％
+	ChangeVolumeSoundMem(255 * mSEVolume / 100, SoundLoad::getInstance().setSE(seName));
 	PlaySoundMem(SoundLoad::getInstance().setSE(seName), DX_PLAYTYPE_BACK);
 }
 //SE音量調節

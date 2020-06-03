@@ -56,21 +56,23 @@ void Stage02::draw(Renderer * renderer, Renderer3D * renderer3D)
 	if (mGameClear)
 	{
 		renderer->drawText("Font", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		if (m_pInput->isKeyDown(KEYCORD::SPACE))
+		renderer->drawText("Font", "PUSH Z", Vector2(100, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		if (m_pInput->isKeyDown(KEYCORD::Z))
 		{
 			Sound::getInstance().pauseBGM();
+			nextSceneName = "title";
 			isSceneEnd = true;
 		}
 	}
 	if (mGameOver)
 	{
 		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 550), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font", "PUSH Z", Vector2(100, 550), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 
-		if (m_pInput->isKeyDown(KEYCORD::SPACE))
+		if (m_pInput->isKeyDown(KEYCORD::Z))
 		{
 			Sound::getInstance().pauseBGM();
+			nextSceneName = "stage2";
 			isSceneEnd = true;
 		}
 	}
@@ -87,5 +89,29 @@ bool Stage02::isEnd()
 
 std::string Stage02::nextScene()
 {
-	return "title";
+	return nextSceneName;
+}
+
+void Stage02::choiceScene()
+{
+	switch (sceneNum)
+	{
+	case 0:
+		nextSceneName = "title";
+		break;
+	case 1:
+		nextSceneName = "stage1";
+		break;
+	case 2:
+		nextSceneName = "stage2";
+		break;
+	default:
+		break;
+	}
+
+	if (m_pInput->isKeyDown(KEYCORD::ARROW_LEFT)) sceneNum--;
+	if (m_pInput->isKeyDown(KEYCORD::ARROW_RIGHT)) sceneNum++;
+
+	if (sceneNum <= 0)sceneNum = 0;
+	if (sceneNum >= 2)sceneNum = 2;
 }

@@ -102,7 +102,7 @@ void EnemyBox::checkDistance()
 	float distance = std::abs(Vector2((Vector2(0.0f, b_mPosittion.y) - Vector2(0, Camera::getInstance().getPosition().y))).length());
 
 	//ƒJƒƒ‰‚Æ‚Ì‹——£‚ª•`‰æ”ÍˆÍicj‚æ‚è¬‚³‚­‚È‚Á‚½‚ç¶¬‚·‚é
-	if (distance <= 600.0f)
+	if (distance <= 480.0f)
 	{
 		spawn();
 		b_mIsDeath = true;      //¶¬‚µ‚½‚ç©•ª‚ğÁ‚·

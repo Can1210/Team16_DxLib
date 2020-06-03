@@ -22,12 +22,17 @@ public:
 	virtual void shutdown() override;
 	virtual bool isEnd() override;
 	virtual std::string nextScene() override;
+	void choiceScene();
 private:
 	CharactorManager* m_pCharaManager;
 	MapSpawn* m_pMapSpawn;
 	float mBackPos;
 	bool mGameOver;
 	bool mGameClear;
+
+	int sceneNumArray[3];
+	int sceneNum;
+	std::string nextSceneName;
 };
 
 
