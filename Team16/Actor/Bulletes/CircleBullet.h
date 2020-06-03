@@ -26,4 +26,10 @@ private:
 	Type b_SetType;
 
 	bool curHit;
+	bool preHit;
+
+	float y,x;
+	float radius;
+	float rotateSpeed;
+	float moveTime;
 };
