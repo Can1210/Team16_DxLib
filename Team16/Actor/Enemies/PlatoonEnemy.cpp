@@ -27,12 +27,12 @@ PlatoonEnemy::~PlatoonEnemy()
 
 void PlatoonEnemy::initialize()
 {
-	b_mHp =3;
+	b_mHp =2;
 	b_mCircleSize = 16.0f;
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
 	b_mArpha = 255;
-	b_mSpeed = 70.0f;
+	b_mSpeed = 50.0f;
 	mTimer->initialize();
 	enemyTime = 0;
 	rnd = (float)GetRandom(0,1);
@@ -86,7 +86,7 @@ void PlatoonEnemy::update(float deltaTime)
 void PlatoonEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	//renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	renderer3D->draw3DTexture("enemyG", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
