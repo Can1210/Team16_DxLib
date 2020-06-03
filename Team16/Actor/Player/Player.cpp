@@ -10,6 +10,7 @@
 #include"../Bulletes/WallReflectionBullet.h"
 #include "../Bulletes/Shotgun.h"
 #include "../Bulletes/Bom.h"
+#include "../Bulletes/CircleBullet.h"
 #include <typeinfo.h>
 #include "../../Device/Camera.h"
 
@@ -60,6 +61,7 @@ void Player::initialize()
 
 void Player::update(float deltaTime)
 {
+	amd = { BulletType::None,BulletType::None,ArmedRank::SM_Rank };//無し
 	//サブ機の位置
 	mSubPos[0] = b_mPosittion + Vector2(48.0f, 30.0f);
 	mSubPos[1] = b_mPosittion + Vector2(-48.0f, 30.0f);
@@ -561,10 +563,11 @@ void Player::PowerShot()
 		}
 		
 		break;
-	case ArmedRank::SM_Rank://ロックオンマシンガン
-		if (subShotCnt > 5)
+	case ArmedRank::SM_Rank://ロックオンマシンガン	サークル弾(貫通)に変更中
+		if (subShotCnt > 25)
 		{
-			charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
+			charaManager->add(new CircleBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType,0.0f));
+			//charaManager->add(new TrakingBullet(Vector2(b_mPosittion.x, b_mPosittion.y + 40.0f), charaManager, b_mType, 90.0f));
 			Sound::getInstance().playSE("shot");
 			subShotCnt = 0;
 		}
