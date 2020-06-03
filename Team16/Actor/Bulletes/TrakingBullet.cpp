@@ -39,7 +39,10 @@ void TrakingBullet::setBulletType()
 void TrakingBullet::initialize()
 {
 	setBulletType();
-	b_mVelocity = RotationZ(bulletAngle);
+	if(b_mType == Type::PLAYER)
+		b_mVelocity = b_mVelocity = Vector2(0, 1);
+	else
+		b_mVelocity = b_mVelocity = Vector2(0, -1);
 	isFound = false;//敵を見つけていない
 	getOtherPos();
 }
@@ -90,6 +93,8 @@ void TrakingBullet::update(float deltaTime)
 		else
 		{
 			isFound = true;
+			b_mPosittion += b_mVelocity * 170.0f * deltaTime;
+			return;
 		}
 		b_mPosittion += b_mVelocity * 170.0f * deltaTime;
 	}
