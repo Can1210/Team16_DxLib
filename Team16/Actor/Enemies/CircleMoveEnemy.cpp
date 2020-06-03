@@ -39,7 +39,7 @@ void CirecleMoveEnemy::update(float deltaTime)
 
 void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	renderer3D->draw3DTexture("enemyR2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
