@@ -43,4 +43,6 @@ private:
 	bool childs;
 	float rnd;
 	MoveType mtype;
+	//‰æ‘œ‚ÌŒü‚« 
+	float moveAngle;
 };
