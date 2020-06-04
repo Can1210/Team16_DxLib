@@ -27,6 +27,8 @@ public:
 private:
 	Timer *m_pTimer;
 	CharactorManager* charaManager;
+	//画像の向き 
+	float moveAngle;
 	//円運動
 	float x;
 	float y;
