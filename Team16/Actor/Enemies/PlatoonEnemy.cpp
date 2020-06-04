@@ -68,7 +68,7 @@ void PlatoonEnemy::update(float deltaTime)
 	}
 	vec_Array(enemyTime) = b_mPosittion;
 	b_mVelocity = Vector2(x, y);
-
+	moveAngle = x + y;
 	if (mTimer->timerSet(2))
 	{
 		shot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
@@ -86,7 +86,7 @@ void PlatoonEnemy::update(float deltaTime)
 void PlatoonEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	//renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	renderer3D->draw3DTexture("enemyG", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	renderer3D->draw3DTexture("enemyG", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, moveAngle +180.0f);
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
