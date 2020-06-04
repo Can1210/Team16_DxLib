@@ -12,17 +12,17 @@ Input::~Input(void)
 
 
 //キーが押された瞬間
-bool Input::isKeyDown(enum KEYCORD key)
+bool Input::isKeyDown(KEYCORD key)
 {
 	return (mCurrentKey[key] & inputNum) && !(mPreviousKey[key] & inputNum);
 }
 //キーが押されている間
-bool Input::isKeyState(enum KEYCORD key)
+bool Input::isKeyState(KEYCORD key)
 {
 	return (mCurrentKey[key] & inputNum) && (mPreviousKey[key] & inputNum);
 }
 //キーが離された瞬間   なぜか機能しない
-bool Input::isKeyUp(enum KEYCORD key)
+bool Input::isKeyUp(KEYCORD key)
 {
 	return !(mCurrentKey[key] & inputNum) && (mPreviousKey[key] & inputNum);
 }
@@ -33,34 +33,34 @@ bool Input::isKeyUp(enum KEYCORD key)
 
 
 //ボタンが押された瞬間
-bool Input::isGamePadBottonDown(enum GAMEPAD_KEYCORD button, int padNum)
+bool Input::isGamePadBottonDown(GAMEPAD_KEYCORD button, int padNum)
 {
 	return (((m_CurrentJoyInfoExs[padNum].dwButtons & button) != 0) && !((m_PreviousJoyInfoExs[padNum].dwButtons & button) != 0));
 }
 //ボタンが押されている間
-bool Input::isGamePadBottonState(enum GAMEPAD_KEYCORD button, int padNum)
+bool Input::isGamePadBottonState(GAMEPAD_KEYCORD button, int padNum)
 {
 	return ((m_CurrentJoyInfoExs[padNum].dwButtons & button) != 0);
 }
 //ボタンが離されて瞬間
-bool Input::isGamePadBottonUp(enum GAMEPAD_KEYCORD button, int padNum)
+bool Input::isGamePadBottonUp(GAMEPAD_KEYCORD button, int padNum)
 {
 	return (!((m_CurrentJoyInfoExs[padNum].dwButtons & button) != 0) && ((m_PreviousJoyInfoExs[padNum].dwButtons & button) != 0));
 }
 
 
 //十字キーが押された瞬間
-bool Input::isGamePadCrossPadDown(enum GAMEPAD_KEYCORD button, int padNum)
+bool Input::isGamePadCrossPadDown(GAMEPAD_KEYCORD button, int padNum)
 {
 	return ((m_CurrentJoyInfoExs[padNum].dwPOV == button) && !(m_PreviousJoyInfoExs[padNum].dwPOV == button));
 }
 //十字キーが押ている間
-bool Input::isGamePadCrossPadState(enum GAMEPAD_KEYCORD button, int padNum)
+bool Input::isGamePadCrossPadState(GAMEPAD_KEYCORD button, int padNum)
 {
 	return m_CurrentJoyInfoExs[padNum].dwPOV == button;
 }
 //十字キーが離された瞬間
-bool Input::isGamePadCrossPadUp(enum GAMEPAD_KEYCORD button, int padNum)
+bool Input::isGamePadCrossPadUp(GAMEPAD_KEYCORD button, int padNum)
 {
 	return (!(m_CurrentJoyInfoExs[padNum].dwPOV == button) && (m_PreviousJoyInfoExs[padNum].dwPOV == button));
 }

@@ -196,12 +196,12 @@ std::string CharactorManager::getSub2()
 	return mSub2;
 }
 
-void CharactorManager::setPlayerHp(int hp)
+void CharactorManager::setPlayerHp(float hp)
 {
 	mPlayerHp = hp;
 }
 
-int CharactorManager::getHp()
+float CharactorManager::getHp()
 {
 	return mPlayerHp;
 }

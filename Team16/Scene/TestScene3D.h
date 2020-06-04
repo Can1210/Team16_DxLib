@@ -10,7 +10,7 @@
 class TestScene3D : public BaseScene
 {
 public:
-	TestScene3D(Input* input);
+	TestScene3D();
 	~TestScene3D();
 
 	virtual void initialize() override;

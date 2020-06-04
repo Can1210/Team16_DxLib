@@ -46,8 +46,8 @@ public:
 	std::string getSub1();
 	std::string getSub2();
 
-	void setPlayerHp(int hp);
-	int getHp();
+	void setPlayerHp(float hp);
+	float getHp();
 
 private:
 	std::vector<BaseObject*> mObjectsList;        //オブジェクトのリスト
@@ -58,7 +58,7 @@ private:
 
 	std::string mSub1 = "none";
 	std::string mSub2 = "none";
-	int mPlayerHp = 3;
+	float mPlayerHp = 3;
 
 };
 

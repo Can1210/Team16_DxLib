@@ -5,10 +5,9 @@
 #include"../Device/Camera.h"
 
 
-Stage01::Stage01(Input * input)
+Stage01::Stage01()
 {
 	m_pCharaManager = new CharactorManager();
-	m_pInput = input;
 }
 
 Stage01::~Stage01()
@@ -66,7 +65,7 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 	{
 		renderer->drawText("Font_green", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		renderer->drawText("Font_green", "PUSH Z", Vector2(100, 650), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
-		if (m_pInput->isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			Sound::getInstance().pauseBGM();
 			nextSceneName = "stage2";
@@ -78,7 +77,7 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 		renderer->drawText("Font_green", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 
-		if (m_pInput->isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			Sound::getInstance().pauseBGM();
 			nextSceneName = "title";
@@ -119,8 +118,8 @@ void Stage01::choiceScene()
 		break;
 	}
 
-	if (m_pInput->isKeyDown(KEYCORD::ARROW_LEFT)) sceneNum--;
-	if (m_pInput->isKeyDown(KEYCORD::ARROW_RIGHT)) sceneNum++;
+	if (Input::getInstance().isKeyDown(KEYCORD::ARROW_LEFT)) sceneNum--;
+	if (Input::getInstance().isKeyDown(KEYCORD::ARROW_RIGHT)) sceneNum++;
 
 	if (sceneNum <= 0)sceneNum = 0;
 	if (sceneNum >= 2)sceneNum = 2;

@@ -4,10 +4,9 @@
 #include"../Device/Camera.h"
 
 //コンストラクタ
-TestScene3D::TestScene3D(Input * input)
+TestScene3D::TestScene3D()
 {
 	charaManager = new CharactorManager();
-	m_pInput = input;
 	
 }
 //デスストラクタ
@@ -53,7 +52,7 @@ void TestScene3D::draw(Renderer * renderer, Renderer3D * renderer3D)
 	{
 		renderer->drawText("Font_green", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 		renderer->drawText("Font_green", "PUSH SPACE", Vector2(100, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		if (m_pInput->isKeyDown(KEYCORD::SPACE))
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE))
 		{
 			Sound::getInstance().pauseBGM();
 			isSceneEnd = true;
@@ -64,7 +63,7 @@ void TestScene3D::draw(Renderer * renderer, Renderer3D * renderer3D)
 		renderer->drawText("Font_green", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 		renderer->drawText("Font_green", "PUSH SPACE", Vector2(100, 550), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 
-		if (m_pInput->isKeyDown(KEYCORD::SPACE))
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE))
 		{
 			Sound::getInstance().pauseBGM();
 			isSceneEnd = true;

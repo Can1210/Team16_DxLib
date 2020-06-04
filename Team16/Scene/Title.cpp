@@ -3,9 +3,8 @@
 
 
 //コンストラクタ
-Title::Title(Input* input)
+Title::Title()
 {
-	m_pInput = input;     //メインで使っているものをもらう
 }
 
 //デスストラクタ
@@ -27,14 +26,14 @@ void Title::initialize()
 //更新
 void Title::update(float deltaTime)
 {
-	if (m_pInput->isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
+	if (Input::getInstance().isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
 		Sound::getInstance().playSE("click01");
 		//isAnim = true;
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）
 	}
 
-	if (m_pInput->isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
+	if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
 		Sound::getInstance().playSE("click01");
 		mSelectName = "stage2";
