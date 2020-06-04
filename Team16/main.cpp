@@ -21,6 +21,7 @@ bool initialize()
 	SetGraphMode(WindowInfo::WindowWidth, WindowInfo::WindowHeight, 16);
 	SetBackgroundColor(0, 0, 0);
 	if (DxLib_Init() == -1)	return false;
+	SetSysCommandOffFlag(true);      //Dxlibの初期設定でのaltで停止を廃止今まで気が付かなかった
 	Input::createInstance();
 	Input::getInstance().init();
 	//各クラスの生成・初期化
