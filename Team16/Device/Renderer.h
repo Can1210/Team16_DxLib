@@ -66,12 +66,12 @@ private:
 	const float mNumTexture_Height = 40.0f;    //”š‰æ‘œ‚Ìc•
 
 	//ŒÅ’è’l
-	const float mFontTexture_Big_Width     = 40.0f;
-	const float mFontTexture_Big_Height    = 50.0f;
-	const float mFontTexture_Small_Width   = 40.0f;
-	const float mFontTexture_Small_Height  = 60.0f;
-	const float mFontTexture_Symbol_Width  = 25.0f;
-	const float mFontTexture_Symbol_Height = 80.0f;
+	const float mFontTexture_Big_Width     = 64.0f;
+	const float mFontTexture_Big_Height    = 64.0f;
+	const float mFontTexture_Small_Width   = 64.0f;
+	const float mFontTexture_Small_Height  = 64.0f;
+	const float mFontTexture_Symbol_Width  = 64.0f;
+	const float mFontTexture_Symbol_Height = 64.0f;
 
 };
 

@@ -31,7 +31,7 @@ void Ending::update(float deltaTime)
 
 void Ending::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
-	renderer->drawText("Font", "ENDING", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	renderer->drawText("Font_green", "ENDING", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 }
 
 void Ending::shutdown()

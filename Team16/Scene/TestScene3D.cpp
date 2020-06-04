@@ -51,8 +51,8 @@ void TestScene3D::draw(Renderer * renderer, Renderer3D * renderer3D)
 	renderer->drawNumber("hpNumber"   , Vector2(550.0f, 0.0f), Score::getInstance().getScore(), 8, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	if (mGameClear)
 	{
-		renderer->drawText("Font", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH SPACE", Vector2(100, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 		if (m_pInput->isKeyDown(KEYCORD::SPACE))
 		{
 			Sound::getInstance().pauseBGM();
@@ -61,8 +61,8 @@ void TestScene3D::draw(Renderer * renderer, Renderer3D * renderer3D)
 	}
 	if (mGameOver)
 	{
-		renderer->drawText("Font", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 550), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH SPACE", Vector2(100, 550), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 
 		if (m_pInput->isKeyDown(KEYCORD::SPACE))
 		{

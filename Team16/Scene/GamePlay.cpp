@@ -84,13 +84,13 @@ void GamePlay::draw(Renderer* renderer, Renderer3D* renderer3D)
 	
 	renderer->draw2D("back", Vector2(0, backPos), Vector2(0, 0), Vector2(600, 4110));
 	charaManager->draw(renderer,renderer3D);
-	renderer->drawText("Font", "SCORE", Vector2(160, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	renderer->drawText("Font_green", "SCORE", Vector2(160, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	renderer->drawNumber("hpNumber", Vector2(500, 10), Score::getInstance().getScore(), 0, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-	renderer->drawText("Font", "HP", Vector2(0, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	renderer->drawText("Font_green", "HP", Vector2(0, 0), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	if (BossEnd)
 	{
-		renderer->drawText("Font", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		renderer->drawText("Font", "PUSH SPACE", Vector2(100, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH SPACE", Vector2(100, 650), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 	}
 }
 

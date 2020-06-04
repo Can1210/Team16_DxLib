@@ -118,7 +118,8 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 		}
 		renderer3D->draw3DTexture("player", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 100.0f, 0.0f);
 		renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
-		renderer->drawText("Font", "x", Vector2(55.0f,-9.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "x", Vector2(55.0f,-9.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		renderer->draw2D("player2", Vector2(30.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true,false);
 		renderer->draw2D("player", Vector2(30.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true,false);
 	}
 
