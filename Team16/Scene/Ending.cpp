@@ -3,9 +3,8 @@
 #include"../Device/Sound.h"
 
 
-Ending::Ending(Input* input)
+Ending::Ending()
 {
-	m_pInput = input;
 }
 
 
@@ -22,7 +21,7 @@ void Ending::initialize()
 
 void Ending::update(float deltaTime)
 {
-	if (m_pInput->isKeyDown(KEYCORD::Z))
+	if (Input::getInstance().isKeyDown(KEYCORD::Z))
 	{
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）
 		Score::getInstance().initialize();

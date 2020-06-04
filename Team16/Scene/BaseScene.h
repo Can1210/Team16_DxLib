@@ -28,7 +28,6 @@ public:
 	virtual std::string nextScene() = 0;
 protected:
 	bool isSceneEnd;                  //シーンが終了したかどうか
-	Input* m_pInput;                  //input機能
 };
 
 #endif // !_BASESCENE_H

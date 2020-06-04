@@ -11,7 +11,7 @@
 class Stage01 : public BaseScene
 {
 public:
-	Stage01(Input* input);
+	Stage01();
 	~Stage01();
 
 	virtual void initialize() override;

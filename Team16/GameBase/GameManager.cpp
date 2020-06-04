@@ -25,11 +25,11 @@ GameManager::~GameManager()
 	delete m_pRenderer3D;
 }
 //初期化
-void GameManager::initialize(Input* input)
+void GameManager::initialize()
 {
 	m_pRenderer = new Renderer();
 	m_pRenderer3D = new Renderer3D();
-	sceneInitialize(input);             //シーン関係を初期化
+	sceneInitialize();             //シーン関係を初期化
 	Score::createInstance();            //スコアの生成
 	Score::getInstance().initialize();  //スコアの初期化
 	Sound::createInstance();
@@ -41,18 +41,18 @@ void GameManager::initialize(Input* input)
 
 
 }
-void GameManager::sceneInitialize(Input* input)
+void GameManager::sceneInitialize()
 {
 	//シーンマネージャーの初期化
 	SceneManager::createInstance();  //シーンマネージャーの生成
 	//シーンの追加
 	SceneManager::getInstance().add("load", new LoadScene());
-	SceneManager::getInstance().add("title", new Title(input));
-	SceneManager::getInstance().add("gameplay", new GamePlay(input));
-	SceneManager::getInstance().add("ending", new Ending(input));
-	SceneManager::getInstance().add("test", new TestScene3D(input));
-	SceneManager::getInstance().add("stage1", new Stage01(input));
-	SceneManager::getInstance().add("stage2", new Stage02(input));
+	SceneManager::getInstance().add("title", new Title());
+	SceneManager::getInstance().add("gameplay", new GamePlay());
+	SceneManager::getInstance().add("ending", new Ending());
+	SceneManager::getInstance().add("test", new TestScene3D());
+	SceneManager::getInstance().add("stage1", new Stage01());
+	SceneManager::getInstance().add("stage2", new Stage02());
 	SceneManager::getInstance().change("load");      //最初はタイトルに設定
 
 }

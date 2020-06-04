@@ -6,7 +6,7 @@
 class Ending : public BaseScene
 {
 public:
-	Ending(Input* input);
+	Ending();
 	~Ending();
 	virtual void initialize() override;
 	virtual void update(float deltaTime) override;

@@ -3,10 +3,9 @@
 #include"../Device/Sound.h"
 bool GamePlay::BossEnd;
 bool GamePlay::PlayerEnd;
-GamePlay::GamePlay(Input* input)
+GamePlay::GamePlay()
 {
 	charaManager = new CharactorManager();
-	m_pInput = input;
 	enemySpawn = new EnemySpawn(*charaManager);
 }
 
@@ -58,7 +57,7 @@ void GamePlay::update(float deltaTime)
 	}
 	else
 	{
-		if (m_pInput->isKeyDown(KEYCORD::SPACE))
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE))
 		{
 			//charaManager->clear();
 			Sound::getInstance().pauseBGM();

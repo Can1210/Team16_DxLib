@@ -13,7 +13,7 @@
 class GamePlay : public BaseScene
 {
 public:
-	GamePlay(Input* input);
+	GamePlay();
 	~GamePlay();
 	void  boss();
 	virtual void initialize() override;
