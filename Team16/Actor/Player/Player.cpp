@@ -65,6 +65,7 @@ void Player::update(float deltaTime)
 	//サブ機の位置
 	mSubPos[0] = b_mPosittion + Vector2(48.0f, 30.0f);
 	mSubPos[1] = b_mPosittion + Vector2(-48.0f, 30.0f);
+	charaManager->setPlayerHp(b_mHp);
 
 	b_mVelocity = Vector2(0, 0);   //毎回移動量を0にする
 	input->update();
@@ -117,10 +118,10 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 			b = 0;
 		}
 		renderer3D->draw3DTexture("player", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 100.0f, 0.0f);
-		renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
-		renderer->drawText("Font_green", "x", Vector2(55.0f,-9.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
-		renderer->draw2D("player2", Vector2(30.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true,false);
-		renderer->draw2D("player", Vector2(30.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true,false);
+		//renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), b_mHp, 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);
+		//renderer->drawText("Font_green", "x", Vector2(55.0f,-9.0f), Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+		////renderer->draw2D("player2", Vector2(30.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true,false);
+		//renderer->draw2D("player", Vector2(30.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true,false);
 	}
 
 	//サブウェポン描画
@@ -239,23 +240,23 @@ void Player::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 	
 
-	if(amd.first == BulletType::None)
-		renderer->draw2D("none", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+	if (amd.first == BulletType::None)
+		charaManager->setSub1("none"); //renderer->draw2D("none", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_Bullet )
-		renderer->draw2D("sg", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		charaManager->setSub1("sg"); //renderer->draw2D("sg", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_LaserBullet)
-		renderer->draw2D("lazer", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		charaManager->setSub1("lazer"); //renderer->draw2D("lazer", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if(amd.first == BulletType::T_TrakingBullet || amd.first == BulletType::T_AngleBullet)
-		renderer->draw2D("misaile", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		charaManager->setSub1("misaile"); //renderer->draw2D("misaile", Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 	if (amd.second == BulletType::None)
-		renderer->draw2D("none", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		charaManager->setSub2("none"); //renderer->draw2D("none", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_Bullet )
-		renderer->draw2D("sg", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		charaManager->setSub2("sg"); //renderer->draw2D("sg", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_LaserBullet)
-		renderer->draw2D("lazer", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		charaManager->setSub2("lazer"); //renderer->draw2D("lazer", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 	else if (amd.second == BulletType::T_TrakingBullet || amd.second == BulletType::T_AngleBullet)
-		renderer->draw2D("misaile", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
+		charaManager->setSub2("misaile"); //renderer->draw2D("misaile", Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), b_mAngle, 255);
 
 #pragma endregion
 }

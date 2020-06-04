@@ -45,6 +45,8 @@ void CharactorManager::clear()
 	mObjectsList.clear();
 	playerEnd = false;
 	bossEnd = false;
+
+
 }
 //ƒŠƒXƒg‚Ö‚Ì’Ç‰Á
 void CharactorManager::add(BaseObject * addObj)
@@ -172,4 +174,34 @@ bool CharactorManager::getIsBossEed()
 bool CharactorManager::getIsPlayerEed()
 {
 	return playerEnd;
+}
+
+void CharactorManager::setSub1(std::string itemName)
+{
+	mSub1 = itemName;
+}
+
+void CharactorManager::setSub2(std::string itemName)
+{
+	mSub2 = itemName;
+}
+
+std::string CharactorManager::getSub1()
+{
+	return mSub1;
+}
+
+std::string CharactorManager::getSub2()
+{
+	return mSub2;
+}
+
+void CharactorManager::setPlayerHp(int hp)
+{
+	mPlayerHp = hp;
+}
+
+int CharactorManager::getHp()
+{
+	return mPlayerHp;
 }
