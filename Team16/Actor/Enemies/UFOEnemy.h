@@ -27,4 +27,5 @@ private:
 	float time;
 	bool down;
 	int subShotcnt;
+	bool isBom;
 };

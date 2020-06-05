@@ -37,4 +37,5 @@ private:
 	float radius;
 	float rotateSpeed;
 	float moveTime;
+	bool isBom;
 };

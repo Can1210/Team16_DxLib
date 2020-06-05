@@ -36,6 +36,7 @@ void WallReflectionEnemy::initialize()
 	startEnd = false;
 	shottime = 0;
 	b_animCnt = 0.0f;
+	isBom = false;    //ボムで死んだか
 }
 //更新
 void WallReflectionEnemy::update(float deltaTime)
@@ -81,6 +82,21 @@ void WallReflectionEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
 
 	}
+	//ボムに触れたら死亡
+	if (isBom)
+	{
+
+		b_animCnt += 64.0f;
+
+		if (b_animCnt >= 1022.0f)
+		{
+			Score::getInstance().addScore(200);
+			b_mIsDeath = true;
+		}
+		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+	
+	}
+
 }
 
 void WallReflectionEnemy::hit(BaseObject & other)
@@ -91,6 +107,12 @@ void WallReflectionEnemy::hit(BaseObject & other)
 		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
+	//相手がボムなら
+	if (other.getType() == Type::BOM)
+	{
+		isBom = true;
+	}
+
 }
 
 void WallReflectionEnemy::Shot(Vector2 pos)
