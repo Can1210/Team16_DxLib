@@ -3,7 +3,6 @@
 #include "../Bulletes/AngleBullet.h"
 #include"Houdai.h"
 
-
 Boss3::Boss3(Vector2 pos, CharactorManager * c):m_pCamreraTimer(new Timer())
 {
 	charaManager = c;
@@ -19,7 +18,7 @@ void Boss3::initialize()
 {
 	b_mType = Type::BOSS;
 	setFlag = false;
-	
+	lostCnt = 0;
 }
 
 void Boss3::update(float deltaTime)
@@ -40,8 +39,15 @@ void Boss3::update(float deltaTime)
 		b_mVelocity.y = 2;
 		b_mAngle += 3.0f;
 	}
-
-	
+	if (Houdai::lostHoudai == true)
+	{
+		lostCnt++;
+		Houdai::lostHoudai = false;
+	}
+	if (lostCnt >= 4)
+	{
+		b_mIsDeath = true;
+	}
 }
 
 void Boss3::draw(Renderer * renderer, Renderer3D * renderer3D)
@@ -51,6 +57,7 @@ void Boss3::draw(Renderer * renderer, Renderer3D * renderer3D)
 
 void Boss3::hit(BaseObject & other)
 {
+
 }
 
 void Boss3::HoudaiSpow()

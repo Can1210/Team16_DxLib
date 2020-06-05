@@ -55,7 +55,7 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		if (b_mHp <= 0)
 		{
 			b_animCnt += 64.0f;
-			
+		
 			if (b_animCnt >= 1022.0f)
 			{
 				if (GetRand(2) == 2)
@@ -64,10 +64,11 @@ void BomEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 					b_mIsDeath = true;
 				}
 				
-				Score::getInstance().addScore(300);
+				Score::getInstance().addScore(2000);
 				b_mIsDeath = true;
 			}
 			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			renderer3D->draw3DTexture("2000", Vector3(b_mPosittion.x, b_mPosittion.y + 50.0f, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, 0.0f);
 		}
 		//ƒ{ƒ€‚ÉG‚ê‚½‚ç€–S
 		if (isBom)

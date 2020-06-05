@@ -22,8 +22,11 @@ public:
 	
 	//プレイヤーの位置を調べる
 	Vector2 checkPlayerPos(Vector2 vec);
+	static bool lostHoudai;
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	Timer *mTimerDamege;
 	float ShotAngle;
+	float mDamageHit;
 };

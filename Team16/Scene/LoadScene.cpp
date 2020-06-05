@@ -70,7 +70,11 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("hpNumber", "Resouce/Texture/denColor.png");
 	TextureLoad::getInstance().add("sousa", "Resouce/Texture/sousa.png");
 	TextureLoad::getInstance().add("sousa2", "Resouce/Texture/sousa2.png");
-
+	//sƒRƒA
+	TextureLoad::getInstance().add("1000", "Resouce/Texture/score_1000.png");
+	TextureLoad::getInstance().add("2000", "Resouce/Texture/score_2000.png");
+	TextureLoad::getInstance().add("5000", "Resouce/Texture/score_5000.png");
+	TextureLoad::getInstance().add("10000", "Resouce/Texture/score_10000.png");
 	//‰¹ŠÖŒW
 	//BGM
 	SoundLoad::getInstance().addBGM("bgm", "Resouce/Sound/BGM/bgm.mp3");

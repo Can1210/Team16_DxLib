@@ -62,6 +62,7 @@
     <ClCompile Include="Actor\Enemies\Boss3.cpp" />
     <ClCompile Include="Actor\Enemies\Houdai.cpp" />
     <ClCompile Include="Actor\Enemies\StayEnemy.cpp" />
+    <ClCompile Include="Scene\Stage03.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -233,8 +234,10 @@
     <ClInclude Include="Actor\Enemies\Boss3.h" />
     <ClInclude Include="Actor\Enemies\Houdai.h" />
     <ClInclude Include="Actor\Enemies\StayEnemy.h" />
+    <ClInclude Include="Scene\Stage03.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />
+    <None Include="Resouce\Map\stage03.csv" />
   </ItemGroup>
 </Project>

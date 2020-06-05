@@ -50,4 +50,5 @@ private:
 	float mChargeScalse;
 	bool mIsCharge;
 	bool setFlag;
+	int lostCnt;
 };
