@@ -22,6 +22,8 @@ public:
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 	float time;
 	bool down;
 	int subShotcnt;

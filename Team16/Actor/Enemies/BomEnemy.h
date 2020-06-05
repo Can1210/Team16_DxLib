@@ -27,6 +27,8 @@ private:
 	bool DamgeFlag;
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 	Vector2 mPlayerPos;   //プレイヤーの位置
 
 };

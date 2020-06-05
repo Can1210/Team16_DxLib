@@ -26,13 +26,14 @@ private:
 	enum Boss2Move {
 		Move_1, Move_2, Move_3,Move_4,NoneMove,
 	};
-
 	bool DamgeFlag;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	Timer* m_pCirecleTimer;
 	Timer* m_pCirecleEndTimer;
 	Timer* m_pCamreraTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 	Boss2Move boss2move;
 	float rotx;
 	int shotTime;

@@ -13,6 +13,7 @@ WallReflectionEnemy::WallReflectionEnemy(Vector2 pos, CharactorManager * c) :m_p
 WallReflectionEnemy::~WallReflectionEnemy()
 {
 	delete m_pTimer;
+	delete mTimerDamege;
 }
 
 //‰Šú‰»
@@ -24,6 +25,8 @@ void WallReflectionEnemy::initialize()
 	b_mType = Type::ENEMY;
 	b_mAngle = 180.0f;
 	m_pTimer->initialize();
+	mTimerDamege->initialize();
+	mDamageHit = 255;
 	rotateSpeed = 0.5;//1Žü‚É‚©‚©‚éŽžŠÔ
 	radius = 2;   //”¼Œa10
 	b_mSpeed = 60.0f;
@@ -38,7 +41,11 @@ void WallReflectionEnemy::initialize()
 void WallReflectionEnemy::update(float deltaTime)
 {
 	m_pTimer->update(deltaTime);
-
+	mTimerDamege->update(deltaTime);
+	if (mTimerDamege->timerSet_Self(0.2f))
+	{
+		mDamageHit = 255;
+	}
 	if (!startEnd)
 	{
 		Vector2 v = (b_mPosittion - startPos);
@@ -60,7 +67,7 @@ void WallReflectionEnemy::update(float deltaTime)
 void WallReflectionEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	//renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
-	renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, mDamageHit, mDamageHit));
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
@@ -80,6 +87,8 @@ void WallReflectionEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }

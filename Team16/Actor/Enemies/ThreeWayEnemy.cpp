@@ -6,7 +6,7 @@
 #include "../Bulletes/Bullet.h"
 #include "../Item/Item.h"
 
-ThreeWayEnemy::ThreeWayEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3,Vector2 end) : mTimer(new Timer())
+ThreeWayEnemy::ThreeWayEnemy(Vector2 pos, CharactorManager *c, float angle1, float angle2, float angle3,Vector2 end) : mTimer(new Timer()), mTimerDamege(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -20,6 +20,7 @@ ThreeWayEnemy::ThreeWayEnemy(Vector2 pos, CharactorManager *c, float angle1, flo
 ThreeWayEnemy::~ThreeWayEnemy()
 {
 	delete mTimer;
+	delete mTimerDamege;
 }
 void ThreeWayEnemy::initialize()
 {
@@ -30,12 +31,19 @@ void ThreeWayEnemy::initialize()
 	b_mArpha = 255;
 	b_mSpeed = 70.0f;
 	mTimer->initialize();
+	mTimerDamege->initialize();
+	mDamageHit = 255;
 	b_animCnt = 0.0f;
 }
 
 void ThreeWayEnemy::update(float deltaTime)
 {
 	mTimer->update(deltaTime);
+	mTimerDamege->update(deltaTime);
+	if (mTimerDamege->timerSet_Self(0.2f))
+	{
+		mDamageHit = 255;
+	}
 	b_mVelocity = Vector2(0, 0);
 	b_mVelocity += Traking() * 2.0f;
 	if (mTimer->timerSet(2))
@@ -55,7 +63,7 @@ void ThreeWayEnemy::update(float deltaTime)
 void ThreeWayEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	//renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.0f, 1.0f), b_mAngle, 255);
-	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, mDamageHit, mDamageHit));
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
@@ -75,6 +83,8 @@ void ThreeWayEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }

@@ -4,7 +4,7 @@
 #include "../Bulletes/AngleBullet.h"
 #include "../Item/Item.h"
 
-Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
+Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer()), mTimerDamege(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -13,6 +13,7 @@ Enemy::Enemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 Enemy::~Enemy()
 {
 	delete mTimer;
+	delete mTimerDamege;
 }
 void Enemy::initialize()
 {
@@ -24,13 +25,23 @@ void Enemy::initialize()
 	b_mSpeed = 70.0f;
 	b_mArpha = 255;
 	mTimer->initialize();
+	mTimerDamege->initialize();
+	mDamageHit = 255;
 	b_animCnt = 0.0f;
+	
 }
 
 void Enemy::update(float deltaTime)
 {
 	mTimer->update(deltaTime);
+	mTimerDamege->update(deltaTime);
+	if (mTimerDamege->timerSet_Self(0.2f))
+	{
+		mDamageHit = 255;
+	}
 	b_mVelocity = Vector2(0, 0);
+	
+	
 
 	b_mVelocity.y += 2;
 	
@@ -44,7 +55,7 @@ void Enemy::update(float deltaTime)
 
 void Enemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	renderer3D->draw3DTexture("enemyB", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle);
+	renderer3D->draw3DTexture("enemyB", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, mDamageHit, mDamageHit));
 	if (b_mHp<=0)
 	{
 		b_animCnt +=64.0f;
@@ -55,7 +66,7 @@ void Enemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 			
 			if (GetRand(2) == 2)
 			{
-				charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));   //�A�C�e������
+				charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy"));
 				b_mIsDeath = true;
 			}
 		
@@ -71,6 +82,8 @@ void Enemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET&&b_mType == Type::ENEMY)
 	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }
