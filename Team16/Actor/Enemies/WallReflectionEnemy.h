@@ -26,6 +26,7 @@ private:
 	Timer *mTimerDamege;
 	int mDamageHit;
 	CharactorManager* charaManager;
+	bool isBom;
 
 	Vector2 startPos;
 	bool startEnd;

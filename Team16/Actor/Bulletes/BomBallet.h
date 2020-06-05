@@ -26,6 +26,8 @@ private:
 	Type b_SetType;
 	Timer *mTimer;
 	int BomFlag;
+	float mMaxSize;
 	float PI = 3.141592653589793f;//‰~Žü—¦
 	float bulletAngle;			  //bullet‚ÌŠp“x
+	float mAnimCount;
 };

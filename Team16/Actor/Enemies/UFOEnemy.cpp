@@ -31,6 +31,7 @@ void UFOEnemy::initialize()
 	down = false;
 	subShotcnt = 20;
 	b_animCnt = 0.0f;
+	isBom = false;    //ボムで死んだか
 }
 
 void UFOEnemy::update(float deltaTime)
@@ -70,7 +71,19 @@ void UFOEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		if (b_animCnt >= 1022.0f)
 		{
 			Score::getInstance().addScore(1000);
-			charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy"));   //ƒAƒCƒeƒ€¶¬
+			charaManager->add(new Item(b_mPosittion, BulletType::T_AngleBullet, "enemy"));
+			b_mIsDeath = true;
+		}
+		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+	}
+	//ボムに触れたら死亡
+	if (isBom)
+	{
+		b_animCnt += 64.0f;
+    renderer3D->draw3DTexture("1000", Vector3(b_mPosittion.x, b_mPosittion.y + 50.0f, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, 0.0f);
+		if (b_animCnt >= 1022.0f)
+		{
+			Score::getInstance().addScore(1000);
 			b_mIsDeath = true;
 		}
 		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
@@ -84,6 +97,11 @@ void UFOEnemy::hit(BaseObject & other)
 		mDamageHit = 0;
 		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
+	}
+	//相手がボムなら
+	if (other.getType() == Type::BOM)
+	{
+		isBom = true;
 	}
 }
 

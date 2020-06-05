@@ -46,4 +46,5 @@ private:
 	MoveType mtype;
 	//‰æ‘œ‚ÌŒü‚« 
 	float moveAngle;
+	bool isBom;
 };

@@ -31,6 +31,7 @@ void CirecleMoveEnemy::initialize()
 	radius = 2.0f;   //半径10
 	b_animCnt = 0.0f;
 	mDamageHit = 255;
+	isBom = false;    //ボムで死んだか
 }
 //更新
 void CirecleMoveEnemy::update(float deltaTime)
@@ -66,8 +67,18 @@ void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
 		renderer3D->draw3DTexture("5000", Vector3(b_mPosittion.x, b_mPosittion.y + 50.0f, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, 0.0f);
 	}
-	//renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(1.3f, 1.3f), b_mAngle, 255);
-	
+	//ボムに触れたら死亡
+	if (isBom)
+	{
+
+		b_animCnt += 64.0f;
+		if (b_animCnt >= 1022.0f)
+		{
+			Score::getInstance().addScore(200);
+			b_mIsDeath = true;
+		}
+		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+	}
 }
 
 void CirecleMoveEnemy::hit(BaseObject & other)
@@ -77,6 +88,11 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 		mDamageHit = 0;
 		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
+	}
+	//相手がボムなら
+	if (other.getType() == Type::BOM)
+	{
+		isBom = true;
 	}
 }
 

@@ -28,4 +28,5 @@ private:
 	int mDamageHit;
 	float angle1, angle2, angle3;
 	Vector2 start, end;
+	bool isBom;
 };

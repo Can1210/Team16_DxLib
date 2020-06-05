@@ -10,6 +10,7 @@
 #include"../Bulletes/WallReflectionBullet.h"
 #include "../Bulletes/Shotgun.h"
 #include "../Bulletes/Bom.h"
+#include "../Bulletes/BomBallet.h"
 #include "../Bulletes/CircleBullet.h"
 #include <typeinfo.h>
 #include "../../Device/Camera.h"
@@ -436,7 +437,7 @@ void Player::bom1()
 		if (Input::getInstance().isKeyDown(KEYCORD::C))  // || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 		{
 			//爆弾生成処理
-			charaManager->add(new Bom(mSubPos[0], charaManager));
+			charaManager->add(new BomBullet(mSubPos[0], charaManager,b_mType,0.0f));
 			mSubVec[0] = BulletType::None;   //無しに変更する
 			amd.first = BulletType::None;   //無しに変更する
 			ArmedRankCheck();
@@ -451,7 +452,7 @@ void Player::bom2()
 	if (Input::getInstance().isKeyDown(KEYCORD::C))// || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 	{
 		//爆弾生成処理
-		charaManager->add(new Bom(mSubPos[1], charaManager));
+		charaManager->add(new BomBullet(mSubPos[1], charaManager, b_mType, 0.0f));
 		mSubVec[1] = BulletType::None;   //無しに変更する
 		amd.second = BulletType::None;   //無しに変更する
 		ArmedRankCheck();
