@@ -18,6 +18,7 @@ TrakingBullet::TrakingBullet(Vector2 pos, CharactorManager * c, Type t, float an
 
 TrakingBullet::~TrakingBullet()
 {
+	
 }
 
 void TrakingBullet::setBulletType()

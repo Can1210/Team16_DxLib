@@ -1,27 +1,27 @@
-#include "Stage02.h"
+#include "Stage03.h"
 #include "../Actor/CharaManager/DeathPoint.h"
 #include"../Actor/Player/Player.h"
 #include"../Device/Camera.h"
 
-Stage02::Stage02()
+Stage03::Stage03()
 {
 	m_pCharaManager = new CharactorManager();
 }
 
-Stage02::~Stage02()
+Stage03::~Stage03()
 {
 	delete m_pCharaManager;
 	delete m_pMapSpawn;
 }
 
-void Stage02::initialize()
+void Stage03::initialize()
 {
 	DeathPoint::getInstance().initialize();
 	m_pCharaManager->clear();
 	isSceneEnd = false;   //最初はfalse
 	m_pCharaManager->add(new Player(Vector2(0.0f, -600.0f), m_pCharaManager));  //プレイヤー
 	m_pMapSpawn = new MapSpawn(*m_pCharaManager);
-	m_pMapSpawn->loadMap("Resouce/Map/stage02.csv");
+	m_pMapSpawn->loadMap("Resouce/Map/stage03.csv");
 	mBackPos = -3000.0f;
 	Sound::getInstance().playBGM("bgm");
 	Score::getInstance().initialize();
@@ -31,7 +31,7 @@ void Stage02::initialize()
 	mGameClear = false;				//ゲームクリア  （boss死んだとき）
 }
 
-void Stage02::update(float deltaTime)
+void Stage03::update(float deltaTime)
 {
 	//背景エンドレス
 	if (mBackPos >= 0.0f)mBackPos = -3000.0f;
@@ -44,7 +44,7 @@ void Stage02::update(float deltaTime)
 	Camera::getInstance().update(deltaTime);
 }
 
-void Stage02::draw(Renderer * renderer, Renderer3D * renderer3D)
+void Stage03::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
 	renderer->draw2D("back2", Vector2(0, mBackPos), Vector2(0, 0), Vector2(600, 4110));
 	m_pCharaManager->draw(renderer, renderer3D);
@@ -64,7 +64,7 @@ void Stage02::draw(Renderer * renderer, Renderer3D * renderer3D)
 		if (Input::getInstance().isKeyDown(KEYCORD::Z))
 		{
 			Sound::getInstance().pauseBGM();
-			nextSceneName = "stage3";
+			nextSceneName = "title";
 			isSceneEnd = true;
 		}
 	}
@@ -76,27 +76,27 @@ void Stage02::draw(Renderer * renderer, Renderer3D * renderer3D)
 		if (Input::getInstance().isKeyDown(KEYCORD::Z))
 		{
 			Sound::getInstance().pauseBGM();
-			nextSceneName = "stage2";
+			nextSceneName = "stage3";
 			isSceneEnd = true;
 		}
 	}
 }
 
-void Stage02::shutdown()
+void Stage03::shutdown()
 {
 }
 
-bool Stage02::isEnd()
+bool Stage03::isEnd()
 {
-	return isSceneEnd;
+	return false;
 }
 
-std::string Stage02::nextScene()
+std::string Stage03::nextScene()
 {
 	return nextSceneName;
 }
 
-void Stage02::choiceScene()
+void Stage03::choiceScene()
 {
 	switch (sceneNum)
 	{

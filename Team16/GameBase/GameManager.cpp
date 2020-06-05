@@ -12,6 +12,7 @@
 #include "../Scene/TestScene3D.h"
 #include "../Scene/Stage01.h"
 #include "../Scene/Stage02.h"
+#include"../Scene/Stage03.h"
 
 //コンストラクタ
 GameManager::GameManager()
@@ -53,6 +54,7 @@ void GameManager::sceneInitialize()
 	SceneManager::getInstance().add("test", new TestScene3D());
 	SceneManager::getInstance().add("stage1", new Stage01());
 	SceneManager::getInstance().add("stage2", new Stage02());
+	SceneManager::getInstance().add("stage3", new Stage03());
 	SceneManager::getInstance().change("load");      //最初はタイトルに設定
 
 }

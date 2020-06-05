@@ -189,6 +189,7 @@
     <ClCompile Include="Actor\Item\Item.cpp" />
     <ClCompile Include="Actor\Player\PlayerArmeds.cpp" />
     <ClCompile Include="Actor\CharaManager\DeathPoint.cpp" />
+    <ClCompile Include="Scene\Stage03.cpp" />
     <ClCompile Include="Scene\TestScene3D.cpp" />
     <ClCompile Include="Actor\Bulletes\ShotgunBullet_sin.cpp" />
     <ClCompile Include="Scene\Stage01.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="Actor\Item\Item.h" />
     <ClInclude Include="Actor\Player\PlayerArmeds.h" />
     <ClInclude Include="Actor\CharaManager\DeathPoint.h" />
+    <ClInclude Include="Scene\Stage03.h" />
     <ClInclude Include="Scene\TestScene3D.h" />
     <ClInclude Include="Actor\Bulletes\ShotgunBullet_sin.h" />
     <ClInclude Include="Scene\Stage01.h" />
@@ -287,6 +289,7 @@
     <ClInclude Include="Math\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resouce\Map\stage03.csv" />
     <None Include="Resouce\Map\test01.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

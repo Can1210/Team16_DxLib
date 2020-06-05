@@ -3,8 +3,8 @@
 #include "../Bulletes/Bullet.h"
 #include "../Bulletes/AngleBullet.h"
 #include "../Item/Item.h"
-
-Houdai::Houdai(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
+bool Houdai::lostHoudai;
+Houdai::Houdai(Vector2 pos, CharactorManager *c) :mTimer(new Timer()), mTimerDamege(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -13,6 +13,7 @@ Houdai::Houdai(Vector2 pos, CharactorManager *c) :mTimer(new Timer())
 Houdai::~Houdai()
 {
 	delete mTimer;
+	delete mTimerDamege;
 }
 void Houdai::initialize()
 {
@@ -25,6 +26,8 @@ void Houdai::initialize()
 	b_mArpha = 255;
 	mTimer->initialize();
 	b_animCnt = 0.0f;
+	mDamageHit = 255;
+	lostHoudai = false;
 }
 
 void Houdai::update(float deltaTime)
@@ -39,13 +42,17 @@ void Houdai::update(float deltaTime)
 	{
 		Shot(Vector2(b_mPosittion.x, b_mPosittion.y));
 	}
-
+	mTimerDamege->update(deltaTime);
+	if (mTimerDamege->timerSet_Self(0.2f))
+	{
+		mDamageHit = 255;
+	}
 	//b_mPosittion -= b_mVelocity * b_mSpeed * deltaTime;
 }
 
 void Houdai::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	renderer3D->draw3DTexture("houdai", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f*2, ShotAngle+90.0f);
+	renderer3D->draw3DTexture("houdai", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f*2, ShotAngle+90.0f,255,Vector2(0.5f,0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
@@ -57,9 +64,11 @@ void Houdai::draw(Renderer * renderer, Renderer3D* renderer3D)
 			{
 				charaManager->add(new Item(b_mPosittion, BulletType::T_Bullet, "enemy")); 
 				b_mIsDeath = true;
+				lostHoudai = true;
 			}
 
 			b_mIsDeath = true;
+			lostHoudai = true;
 		}
 		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
 	}
@@ -71,6 +80,8 @@ void Houdai::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET&&b_mType == Type::ENEMY)
 	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }
