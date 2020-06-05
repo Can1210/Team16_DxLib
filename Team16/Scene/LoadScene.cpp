@@ -60,6 +60,8 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("enemy2", "Resouce/Texture/RedBTM.png");
 	TextureLoad::getInstance().add("enemy3", "Resouce/Texture/RedATK.png");
 	TextureLoad::getInstance().add("enemyR2", "Resouce/Texture/16misaileE.png");
+	TextureLoad::getInstance().add("boss", "Resouce/Texture/16Boss.png");
+	TextureLoad::getInstance().add("houdai", "Resouce/Texture/TankATK16.png");
 	//ƒtƒHƒ“ƒgŠÖŒW
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("Font_white"  , "Resouce/Texture/Font.png");
