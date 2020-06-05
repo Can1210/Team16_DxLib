@@ -63,6 +63,7 @@ private:
 	//武装ランクCheck
 	PlayerArneds* playerAmds;
 	int support1, support2;
+	float laserAngle;
 #pragma endregion
 
 private:
