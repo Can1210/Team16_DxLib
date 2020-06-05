@@ -58,7 +58,7 @@ void Player::initialize()
 
 void Player::update(float deltaTime)
 {
-	amd = { BulletType::None,BulletType::None,ArmedRank::SM_Rank };//無し
+
 	//サブ機の位置
 	mSubPos[0] = b_mPosittion + Vector2(48.0f, 30.0f);
 	mSubPos[1] = b_mPosittion + Vector2(-48.0f, 30.0f);
