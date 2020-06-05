@@ -25,6 +25,8 @@ private:
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 	Vector2 start, end;
 
 };

@@ -23,6 +23,8 @@ public:
 	void move(float deltaTime);
 private:
 	Timer *m_pTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 	CharactorManager* charaManager;
 
 	Vector2 startPos;
