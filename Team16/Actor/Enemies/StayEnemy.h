@@ -3,12 +3,13 @@
 #include"../CharaManager/CharactorManager.h"
 
 
-class Enemy :public BaseObject
+class StayEnemy :public BaseObject
 {
 public:
-	Enemy(Vector2 pos, CharactorManager *c);
-	~Enemy();
+	StayEnemy(Vector2 pos, CharactorManager *c);
+	~StayEnemy();
 
+	// BaseObject 
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;
@@ -18,12 +19,15 @@ public:
 	virtual void hit(BaseObject & other) override;
 
 	void Shot(Vector2 pos);
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’èª¿ã¹ã‚‹
+
+
+	//ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğ’²‚×‚é
 	Vector2 checkPlayerPos(Vector2 vec);
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
-	Timer *mTimerDamege;
-	int mDamageHit;
-	
+	Timer *m_inTimer;
+	float ShotAngle;
+	bool modeChange;
+
 };

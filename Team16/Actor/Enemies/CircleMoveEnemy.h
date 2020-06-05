@@ -26,6 +26,8 @@ public:
 
 private:
 	Timer *m_pTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 	CharactorManager* charaManager;
 	//画像の向き 
 	float moveAngle;

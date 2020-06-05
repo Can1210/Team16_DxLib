@@ -14,6 +14,8 @@
 #include "../Enemies/WallReflectionEnemy.h"
 #include "../Enemies/Boss.h"
 #include "../Enemies/Boss2.h"
+#include "../Enemies/Boss3.h"
+#include"../Enemies/StayEnemy.h"
 
 //コンストラクタ
 EnemyBox::EnemyBox(CharactorManager & charactorMnager, unsigned int enemyNumber, Vector2 position):
@@ -90,6 +92,12 @@ void EnemyBox::spawn()
 		break;
 	case 12:
 		m_pCharactorManager->add(new Boss2(b_mPosittion, m_pCharactorManager));
+		break;
+	case 13:
+		m_pCharactorManager->add(new Boss3(b_mPosittion, m_pCharactorManager));
+		break;
+	case 14:
+		m_pCharactorManager->add(new StayEnemy(b_mPosittion, m_pCharactorManager));
 		break;
 	default:
 		break;

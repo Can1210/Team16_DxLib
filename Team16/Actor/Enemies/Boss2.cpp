@@ -13,7 +13,8 @@ Boss2::Boss2(Vector2 pos, CharactorManager * c) :
 	mTimer(new Timer()),
 	m_pCirecleTimer(new Timer()),
 	m_pCirecleEndTimer(new Timer()),
-	m_pCamreraTimer(new Timer())
+	m_pCamreraTimer(new Timer()),
+	mTimerDamege(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -22,6 +23,7 @@ Boss2::Boss2(Vector2 pos, CharactorManager * c) :
 Boss2::~Boss2()
 {
 	delete mTimer;
+	delete mTimerDamege;
 }
 
 void Boss2::initialize()
@@ -32,6 +34,8 @@ void Boss2::initialize()
 	b_mAngle = 180.0f;
 	b_mSpeed = 20.0f;
 	mTimer->initialize();
+	mTimerDamege->initialize();
+	mDamageHit = 255;
 	m_pCirecleTimer->initialize();
 	m_pCirecleEndTimer->initialize();
 	boss2move = Boss2Move::NoneMove;
@@ -42,6 +46,11 @@ void Boss2::update(float deltaTime)
 {
 	b_mVelocity = Vector2(0, 0);
 	mTimer->update(deltaTime);
+	mTimerDamege->update(deltaTime);
+	if (mTimerDamege->timerSet_Self(0.2f))
+	{
+		mDamageHit = 255;
+	}
 	m_pCirecleTimer->update(deltaTime);
 	m_pCamreraTimer->update(deltaTime);
 	if (m_pCamreraTimer->timerSet_Self(3.0f))
@@ -152,14 +161,14 @@ void Boss2::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
 	if (b_mType == Type::BOSS)
 	{
-		renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle);
-		renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle);
+		renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
+		renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
 	}
 	else if (!b_mEndFlag)
 	{
 		b_mAngle = 0.0f;
-		renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle);
-		renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle);
+		renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
+		renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
 	}
 }
 
@@ -167,6 +176,8 @@ void Boss2::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }

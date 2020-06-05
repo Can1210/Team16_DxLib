@@ -54,12 +54,15 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("player", "Resouce/Texture/16Player.png");
 	TextureLoad::getInstance().add("player2", "Resouce/Texture/BlueRob.png");
 	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
+	TextureLoad::getInstance().add("enemyT", "Resouce/Texture/TankBTM_Re.png");
 	TextureLoad::getInstance().add("enemyR", "Resouce/Texture/16enemyRR.png");
 	TextureLoad::getInstance().add("enemyG", "Resouce/Texture/16enemyGG.png");
 	TextureLoad::getInstance().add("enemyB", "Resouce/Texture/16enemyBB.png");
 	TextureLoad::getInstance().add("enemy2", "Resouce/Texture/RedBTM.png");
 	TextureLoad::getInstance().add("enemy3", "Resouce/Texture/RedATK.png");
 	TextureLoad::getInstance().add("enemyR2", "Resouce/Texture/16misaileE.png");
+	TextureLoad::getInstance().add("boss", "Resouce/Texture/16Boss.png");
+	TextureLoad::getInstance().add("houdai", "Resouce/Texture/TankATK16.png");
 	//ƒtƒHƒ“ƒgŠÖŒW
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("Font_white"  , "Resouce/Texture/Font.png");

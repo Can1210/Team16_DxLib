@@ -4,11 +4,11 @@
 
 
 
-class Boss :public BaseObject
+class Boss3 :public BaseObject
 {
 public:
-	Boss(Vector2 pos, CharactorManager *c);
-	~Boss();
+	Boss3(Vector2 pos, CharactorManager *c);
+	~Boss3();
 	// BaseObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	virtual void initialize() override;
 
@@ -18,7 +18,7 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-
+	void HoudaiSpow();
 	//UŒ‚ŠÖŒW
 	void attack(float deltaTime);
 	void shot(Vector2 pos);
@@ -34,8 +34,7 @@ private:
 	Timer* m_pCirecleTimer;
 	Timer* m_pCirecleEndTimer;
 	Timer* m_pCamreraTimer;
-	Timer *mTimerDamege;
-	int mDamageHit;
+
 	float shotAngle;
 	float bomshotAngle;
 	Vector2 mPlayerPos;   //ƒvƒŒƒCƒ„[‚ÌˆÊ’u
@@ -50,4 +49,5 @@ private:
 
 	float mChargeScalse;
 	bool mIsCharge;
+	bool setFlag;
 };

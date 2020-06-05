@@ -59,7 +59,8 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 	renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), m_pCharaManager->getHp(), 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);   //プレイヤーのHP
 	renderer->draw2D(m_pCharaManager->getSub1(), Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), 0, 255);	 //プレイヤーのアイテム1
 	renderer->draw2D(m_pCharaManager->getSub2(), Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), 0, 255);	 //プレイヤーのアイテム2
-	renderer->drawNumber("hpNumber", Vector2(550.0f, 10.0f), Score::getInstance().getScore(), 8, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
+	renderer->drawText("Font_green", "Score", Vector2(355.0f, -15.0f), Vector2(0, 0), Vector2(0.4f, 0.5f), 0.0f, 255);    //スコア表示文字
+	renderer->drawNumber("hpNumber", Vector2(570.0f, 30.0f), Score::getInstance().getScore(), 8, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 
 	if (mGameClear)
 	{

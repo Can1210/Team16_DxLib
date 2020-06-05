@@ -4,7 +4,7 @@
 #include "../Bulletes/AngleBullet.h"
 #include "../Item/Item.h"
 
-CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer())
+CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(new Timer()), mTimerDamege(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -13,6 +13,7 @@ CirecleMoveEnemy::CirecleMoveEnemy(Vector2 pos, CharactorManager * c) :m_pTimer(
 CirecleMoveEnemy::~CirecleMoveEnemy()
 {
 	delete m_pTimer;
+	delete mTimerDamege;
 }
 //初期化
 void CirecleMoveEnemy::initialize()
@@ -25,21 +26,27 @@ void CirecleMoveEnemy::initialize()
 	b_mSpeed = 30.0f;
 	b_mArpha = 255;
 	m_pTimer->initialize();
+	mTimerDamege->initialize();
 	rotateSpeed = 0.5;//1周にかかる時間
 	radius = 2.0f;   //半径10
 	b_animCnt = 0.0f;
+	mDamageHit = 255;
 }
 //更新
 void CirecleMoveEnemy::update(float deltaTime)
 {
 	m_pTimer->update(deltaTime);
+	if (mTimerDamege->timerSet_Self(0.2f))
+	{
+		mDamageHit = 255;
+	}
 	move(deltaTime);
 	b_mPosittion += b_mVelocity * b_mSpeed * deltaTime;
 }
 
 void CirecleMoveEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	renderer3D->draw3DTexture("enemyR2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, moveAngle+180.0f);
+	renderer3D->draw3DTexture("enemyR2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, moveAngle+180.0f, 255, Vector2(0.5f, 0.5f), Vector3(255, mDamageHit, mDamageHit));
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
@@ -64,6 +71,8 @@ void CirecleMoveEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET)
 	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }

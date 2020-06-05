@@ -32,7 +32,8 @@ private:
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
-
+	Timer *mTimerDamege;
+	int mDamageHit;
 	Vector2 start, end;
 	Array<Vector2> vec_Array;
 	SoldierEnemy* s1;	SoldierEnemy* s2;	SoldierEnemy* s3;	SoldierEnemy* s4;	SoldierEnemy* s5;
