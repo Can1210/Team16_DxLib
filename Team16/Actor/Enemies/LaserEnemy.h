@@ -30,4 +30,5 @@ private:
 	Vector2 start, end;
 	float laserY;
 	int hitSoundTime;
+	bool isBom;
 };

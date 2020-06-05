@@ -30,5 +30,5 @@ private:
 	Timer *mTimerDamege;
 	int mDamageHit;
 	Vector2 mPlayerPos;   //プレイヤーの位置
-
+	bool isBom;
 };

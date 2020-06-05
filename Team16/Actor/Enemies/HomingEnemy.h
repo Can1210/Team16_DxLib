@@ -28,5 +28,5 @@ private:
 	Timer *mTimerDamege;
 	int mDamageHit;
 	Vector2 start, end;
-
+	bool isBom;
 };

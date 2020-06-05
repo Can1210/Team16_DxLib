@@ -25,5 +25,5 @@ private:
 	Timer *mTimer;
 	Timer *mTimerDamege;
 	int mDamageHit;
-	
+	bool isBom;
 };

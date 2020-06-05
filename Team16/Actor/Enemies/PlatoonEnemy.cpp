@@ -51,6 +51,7 @@ void PlatoonEnemy::initialize()
 	childCount = 0;
 	childs = false;
 	b_animCnt = 0.0f;
+	isBom = false;    //ƒ{ƒ€‚ÅŽ€‚ñ‚¾‚©
 }
 
 void PlatoonEnemy::update(float deltaTime)
@@ -112,6 +113,19 @@ void PlatoonEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 		}
 		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
 	}
+	//ƒ{ƒ€‚ÉG‚ê‚½‚çŽ€–S
+	if (isBom)
+	{
+
+		b_animCnt += 64.0f;
+
+		if (b_animCnt >= 1022.0f)
+		{
+			Score::getInstance().addScore(100);
+			b_mIsDeath = true;
+		}
+		renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+	}
 }
 
 void PlatoonEnemy::hit(BaseObject & other)
@@ -121,6 +135,11 @@ void PlatoonEnemy::hit(BaseObject & other)
 		mDamageHit = 0;
 		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
+	}
+	//‘ŠŽè‚ªƒ{ƒ€‚È‚ç
+	if (other.getType() == Type::BOM)
+	{
+		isBom = true;
 	}
 }
 
