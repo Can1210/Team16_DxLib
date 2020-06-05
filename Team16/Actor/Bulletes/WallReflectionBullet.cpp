@@ -7,8 +7,8 @@ WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Ty
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
-	b_mCircleSize = 4.0f;
-	b_mBulletDamage = 0.2f;
+	b_mCircleSize = 6.0f;
+	b_mBulletDamage = 0.3f;
 
 	bulletAngle = (float)angle;
 	b_mSpeed = 400.0f;
@@ -20,8 +20,8 @@ WallReflectionBullet::WallReflectionBullet(Vector2 pos, CharactorManager * c, Ty
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
-	b_mCircleSize = 4.0f;
-	b_mBulletDamage = 0.1f;
+	b_mCircleSize = 5.0f;
+	b_mBulletDamage = 0.3f;
 
 	bulletAngle = (float)angle;
 	b_mSpeed = 400.0f;
@@ -71,12 +71,14 @@ void WallReflectionBullet::update(float deltaTime)
 		if (b_mPosittion.x < DeathPoint::getInstance().getLeft() + 150.0f)        //âE
 		{
 			bulletAngle = 90.0f - (bulletAngle - 90.0f);
+			b_mPosittion.x = DeathPoint::getInstance().getLeft() + 150.0f;
 			b_mVelocity = RotationZ(bulletAngle);
 			type = R;
 		}
-		else if (b_mPosittion.x >= DeathPoint::getInstance().getRight() - 150.0f)   //ç∂
+		else if (b_mPosittion.x > DeathPoint::getInstance().getRight() - 150.0f)   //ç∂
 		{
 			bulletAngle = 90.0f + (90.0f - bulletAngle);
+			b_mPosittion.x = DeathPoint::getInstance().getRight() - 150.0f;
 			b_mVelocity = RotationZ(bulletAngle);
 			type = L;
 		}

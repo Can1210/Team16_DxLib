@@ -7,6 +7,7 @@
 #include "../Bulletes/Bullet.h"
 #include "../Bulletes/AngleBullet.h"
 #include "../Item/Item.h"
+#include "../CharaManager/DeathPoint.h"
 
 
 PlatoonEnemy::PlatoonEnemy(Vector2 pos, CharactorManager *c, Vector2 end) : mTimer(new Timer()), mTimerDamege(new Timer())
@@ -40,7 +41,7 @@ void PlatoonEnemy::initialize()
 	enemyTime = 0;
 	rnd = (float)GetRandom(0,1);
 	if (rnd == 0.0f){rnd = -1.0f;}
-	rnd = -1.0f;//‰¼
+	//rnd = -1.0f;//‰¼
 	mtype = MoveType::Move1;
 	arraySize = 800;
 	vec_Array.setSize(arraySize);//00ƒtƒŒ[ƒ€‘O‚Ìî•ñ‚ğæ‚Á‚Ä‚¨‚­
@@ -67,8 +68,17 @@ void PlatoonEnemy::update(float deltaTime)
 	float y;
 	if (mtype == MoveType::Move1)
 	{
-		x = sin(enemyTime / 30.0f) * 2.0f;
-		y = cos(enemyTime / 30.0f) * 2.0f;
+		if (-b_mPosittion.x < DeathPoint::getInstance().getLeft() + 150.0f)
+		{
+			rnd += 0.1f;
+		}
+		else if (abs(b_mPosittion.x) > DeathPoint::getInstance().getRight() - 150.0f)
+		{
+			rnd += -0.1f;
+		}
+
+		x = sin(enemyTime / 60.0f) * 3.0f;
+		y = cos(enemyTime / 60.0f) * 1.0f;
 		x = abs(x) * rnd; y = abs(y);
 		if (rnd > 0) { if (x < 0)x = 0; }
 		else { if (x > 0)x = 0; }
@@ -82,7 +92,6 @@ void PlatoonEnemy::update(float deltaTime)
 		shot(Vector2(b_mPosittion.x, b_mPosittion.y), 180.0f);
 	}
 	
-
 	enemyTime++;
 
 	if (enemyTime > arraySize)

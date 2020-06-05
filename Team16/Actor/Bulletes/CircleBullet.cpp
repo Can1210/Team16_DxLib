@@ -5,10 +5,10 @@ CircleBullet::CircleBullet(Vector2 pos, CharactorManager* c, Type t, float angle
 	b_mPosittion = Vector2(pos);
 	b_mVelocity = Vector2(0, 0);
 	b_SetType = t;
-	b_mCircleSize = 20.0f;
+	b_mCircleSize = 30.0f;
 	b_mAngle = angle;
-	b_mSpeed = 10.0f;
-	b_mBulletDamage = 0.2f;
+	b_mSpeed = 700.0f;
+	b_mBulletDamage = 0.22f;
 	rotateSpeed = 2.0f;//1周にかかる時間
 	radius = 3.0f;   //半径10
 }
@@ -47,13 +47,16 @@ void CircleBullet::update(float deltaTime)
 
 	if (b_mType == Type::PLAYER_BULLET)
 	{
-		moveTime += deltaTime * 4.0f;
-		x = 2 * radius* cos(moveTime* rotateSpeed);
-		y = radius * sin(moveTime* rotateSpeed);
-  		b_mVelocity = Vector2(x, y);
-		b_mVelocity.y += 7.0f;
-		b_mPosittion += b_mVelocity;
-		//b_mPosittion -= b_mVelocity;
+		//moveTime += deltaTime * 4.0f;//回転用
+		//x = 2.0f * radius* cos(moveTime* rotateSpeed);
+		//y = 3.0f * radius * sin(moveTime* rotateSpeed);
+		// 	b_mVelocity = Vector2(x, y);
+		//b_mVelocity.y += 4.0f;
+		//
+		//b_mPosittion += b_mVelocity;//回転用
+
+		b_mVelocity = Vector2(0.0f, 1.0f);//真っ直ぐ用
+		b_mPosittion += b_mVelocity * deltaTime * b_mSpeed;//真っ直ぐ用
 	}
 	if (b_mType == Type::ENEMY_BULLET)
 	{
