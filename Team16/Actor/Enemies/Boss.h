@@ -34,7 +34,8 @@ private:
 	Timer* m_pCirecleTimer;
 	Timer* m_pCirecleEndTimer;
 	Timer* m_pCamreraTimer;
-
+	Timer *mTimerDamege;
+	int mDamageHit;
 	float shotAngle;
 	float bomshotAngle;
 	Vector2 mPlayerPos;   //プレイヤーの位置

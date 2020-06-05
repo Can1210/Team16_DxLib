@@ -25,4 +25,6 @@ public:
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 };

@@ -9,7 +9,6 @@ public:
 	Enemy(Vector2 pos, CharactorManager *c);
 	~Enemy();
 
-	// BaseObject ����Čp�������܂���
 	virtual void initialize() override;
 
 	virtual void update(float deltaTime) override;
@@ -24,5 +23,7 @@ public:
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	Timer *mTimerDamege;
+	int mDamageHit;
 	
 };
