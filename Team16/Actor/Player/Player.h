@@ -67,7 +67,6 @@ private:
 
 private:
 	bool DamgeFlag;
-	Input* input;
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	int shotcnt;

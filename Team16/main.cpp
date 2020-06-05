@@ -12,9 +12,6 @@ bool initialize();  //初期化
 void gameUpdate();	//ループ処理
 void release();		//解放
 
-//グローバル変数
-Input* m_pInput;
-
 //初期化
 bool initialize()
 {
@@ -24,13 +21,14 @@ bool initialize()
 	SetGraphMode(WindowInfo::WindowWidth, WindowInfo::WindowHeight, 16);
 	SetBackgroundColor(0, 0, 0);
 	if (DxLib_Init() == -1)	return false;
-	m_pInput = new Input();
-	m_pInput->init();
+	SetSysCommandOffFlag(true);      //Dxlibの初期設定でのaltで停止を廃止今まで気が付かなかった
+	Input::createInstance();
+	Input::getInstance().init();
 	//各クラスの生成・初期化
 	CWindow::createInstance();
 	CWindow::getInstance().showConsole();
 	GameManager::createInstance();
-	GameManager::getInstance().initialize(m_pInput);
+	GameManager::getInstance().initialize();
 	GameTime::createInstance();
 	
 	return true;
@@ -43,9 +41,9 @@ void gameUpdate()
 	while (ProcessMessage() == 0)
 	{
 		
-		if (m_pInput->isKeyDown(KEYCORD::ESCAPE))
+		if (Input::getInstance().isKeyDown(KEYCORD::ESCAPE))
 			return;
-		m_pInput->update();
+		Input::getInstance().update();
 		//背景をクリアに
 		ClearDrawScreen();
 		GameTime::getInstance().update();
@@ -57,7 +55,6 @@ void gameUpdate()
 //解放
 void release()
 {
-	delete m_pInput;
 }
 
 //WinMain

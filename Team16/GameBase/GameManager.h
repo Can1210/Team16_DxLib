@@ -4,7 +4,6 @@
 #include "../Support/Singleton.h"
 #include "../Device/Renderer.h"
 #include "../Device/Renderer3D.h"
-#include "../Device/Input.h"
 
 //ゲーム全体管理  シングルトン
 class GameManager :public Singleton<GameManager>
@@ -16,8 +15,8 @@ public:
 	friend class Singleton<GameManager>;        //Singletonでのインスタンス作成は許可
 
 	//初期化
-	void initialize(Input* input);
-	void sceneInitialize(Input* input);     //シーンの初期化
+	void initialize();
+	void sceneInitialize();     //シーンの初期化
 
 	//更新
 	void update();

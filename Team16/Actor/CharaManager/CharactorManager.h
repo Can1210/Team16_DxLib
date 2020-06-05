@@ -39,12 +39,26 @@ public:
 	bool getIsBossEed();
 	bool getIsPlayerEed();
 
+
+	//プレイヤーに必要なUI関係ー間に合わせで申し訳ございません
+	void setSub1(std::string itemName);
+	void setSub2(std::string itemName);
+	std::string getSub1();
+	std::string getSub2();
+
+	void setPlayerHp(float hp);
+	float getHp();
+
 private:
 	std::vector<BaseObject*> mObjectsList;        //オブジェクトのリスト
 	std::vector<BaseObject*> mAddObjectsList;     //追加するオブジェクト
 
 	bool playerEnd;
 	bool bossEnd;
+
+	std::string mSub1 = "none";
+	std::string mSub2 = "none";
+	float mPlayerHp = 3;
 
 };
 
