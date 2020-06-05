@@ -61,6 +61,7 @@
     <ClCompile Include="Actor\Bulletes\CircleBullet.cpp" />
     <ClCompile Include="Actor\Enemies\Boss3.cpp" />
     <ClCompile Include="Actor\Enemies\Houdai.cpp" />
+    <ClCompile Include="Actor\Enemies\StayEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -231,6 +232,7 @@
     <ClInclude Include="Actor\Bulletes\CircleBullet.h" />
     <ClInclude Include="Actor\Enemies\Boss3.h" />
     <ClInclude Include="Actor\Enemies\Houdai.h" />
+    <ClInclude Include="Actor\Enemies\StayEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resouce\Map\test01.csv" />

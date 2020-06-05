@@ -18,7 +18,7 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
-
+	void HoudaiSpow();
 	//çUåÇä÷åW
 	void attack(float deltaTime);
 	void shot(Vector2 pos);
@@ -49,4 +49,5 @@ private:
 
 	float mChargeScalse;
 	bool mIsCharge;
+	bool setFlag;
 };

@@ -3,11 +3,11 @@
 #include"../CharaManager/CharactorManager.h"
 
 
-class Houdai :public BaseObject
+class StayEnemy :public BaseObject
 {
 public:
-	Houdai(Vector2 pos, CharactorManager *c);
-	~Houdai();
+	StayEnemy(Vector2 pos, CharactorManager *c);
+	~StayEnemy();
 
 	// BaseObject 
 	virtual void initialize() override;
@@ -19,11 +19,15 @@ public:
 	virtual void hit(BaseObject & other) override;
 
 	void Shot(Vector2 pos);
-	
+
+
 	//プレイヤーの位置を調べる
 	Vector2 checkPlayerPos(Vector2 vec);
 private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
+	Timer *m_inTimer;
 	float ShotAngle;
+	bool modeChange;
+
 };
