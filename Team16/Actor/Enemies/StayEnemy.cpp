@@ -4,7 +4,7 @@
 #include "../Bulletes/AngleBullet.h"
 #include "../Item/Item.h"
 
-StayEnemy::StayEnemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer()),m_inTimer(new Timer())
+StayEnemy::StayEnemy(Vector2 pos, CharactorManager *c) :mTimer(new Timer()),m_inTimer(new Timer()), mTimerDamege(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -14,6 +14,7 @@ StayEnemy::~StayEnemy()
 {
 	delete mTimer;
 	delete m_inTimer;
+	delete mTimerDamege;
 }
 void StayEnemy::initialize()
 {
@@ -27,6 +28,7 @@ void StayEnemy::initialize()
 	ShotAngle = 180.0;
 	mTimer->initialize();
 	m_inTimer->initialize();
+	mTimerDamege->initialize();
 	b_animCnt = 0.0f;
 	modeChange = false;
 }
@@ -38,8 +40,13 @@ void StayEnemy::update(float deltaTime)
 	b_mVelocity = Vector2(0, 0);
 	Vector2 angleVec = Vector2(0, 0);
 	angleVec = checkPlayerPos(angleVec);  //Šp“x‚ð‘ã“ü
+	
+	mTimerDamege->update(deltaTime);
+	if (mTimerDamege->timerSet_Self(0.2f))
+	{
+		mDamageHit = 255;
+	}
 	//Šp“x‚É•ÏŠ·
-
 	float angle = atan2(-angleVec.y, angleVec.x)* 180.0f / DX_PI_F;
 	ShotAngle = angle;
 	if (m_inTimer->timerSet(2))
@@ -69,8 +76,8 @@ void StayEnemy::update(float deltaTime)
 
 void StayEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	renderer3D->draw3DTexture("enemyT", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f*2, b_mAngle);
-	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f*2, ShotAngle+90.0f);
+	renderer3D->draw3DTexture("enemyT", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f*2, b_mAngle ,255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
+	renderer3D->draw3DTexture("enemy", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f*2, ShotAngle+90.0f, 255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
 	if (b_mHp <= 0)
 	{
 		b_animCnt += 64.0f;
@@ -99,6 +106,8 @@ void StayEnemy::hit(BaseObject & other)
 {
 	if (other.getType() == Type::PLAYER_BULLET&&b_mType == Type::ENEMY)
 	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
 }

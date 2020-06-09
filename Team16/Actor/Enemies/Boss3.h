@@ -19,12 +19,19 @@ public:
 	virtual void hit(BaseObject & other) override;
 
 	void HoudaiSpow();
+	void modeChange(float deltaTime);
+	void modeChange2(float deltaTime);
 	//çUåÇä÷åW
-	void attack(float deltaTime);
+	
 	void shot(Vector2 pos);
-	void circleShot(float deltaTime);
-	void circleMove(float deltaTime);
-	bool charge();
+	void shotM(Vector2 pos, int t);
+	void shotL(Vector2 pos, int t);
+	void shotB(Vector2 pos, int t);
+	void shotX(Vector2 pos, int t);
+	void shotLazer(Vector2 pos);
+	enum BossShotType
+	{L,M,B,X,None};
+	BossShotType b_shotT;
 
 	Vector2 checkPlayerPos(Vector2 vec);
 private:
@@ -34,11 +41,13 @@ private:
 	Timer* m_pCirecleTimer;
 	Timer* m_pCirecleEndTimer;
 	Timer* m_pCamreraTimer;
-
+	Timer *mTimerDamege;
+	Timer *mShotTimer;
 	float shotAngle;
 	float bomshotAngle;
 	Vector2 mPlayerPos;   //ÉvÉåÉCÉÑÅ[ÇÃà íu
 	Vector2 angleVec;
+	int mDamageHit;
 
 	//â~â^ìÆ
 	float x;
@@ -51,4 +60,16 @@ private:
 	bool mIsCharge;
 	bool setFlag;
 	int lostCnt;
+	//ÉÇÅ[ÉhïœçXå„
+	bool modeChangeFlag;
+	Timer *mTimerM;
+	Timer *mTimerL;
+	bool UltFlagM;
+	bool UltFlagL;
+	
+	bool shotFlag;
+	float ShotRing;//ó\íõ
+
+	int shotTime;
+
 };

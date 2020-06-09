@@ -18,7 +18,9 @@ public:
 
 	virtual void hit(BaseObject & other) override;
 
+	void ultAtak(float deltaTime);
 	void Shot(Vector2 pos);
+	void BomShot(Vector2 pos);
 	
 	//プレイヤーの位置を調べる
 	Vector2 checkPlayerPos(Vector2 vec);
@@ -27,6 +29,11 @@ private:
 	CharactorManager* charaManager;
 	Timer *mTimer;
 	Timer *mTimerDamege;
+	Timer *mTimerBom;
+	
 	float ShotAngle;
 	float mDamageHit;
+	float ShotRing;//予兆用
+	bool shotFlag;
+	bool UltFlag;
 };

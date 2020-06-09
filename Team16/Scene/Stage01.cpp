@@ -64,8 +64,8 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 
 	if (mGameClear)
 	{
-		renderer->drawText("Font_green", "GAMECLEAR", Vector2(110, 500), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
-		renderer->drawText("Font_green", "PUSH Z", Vector2(100, 650), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "GAMECLEAR", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			Sound::getInstance().pauseBGM();
@@ -75,7 +75,7 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 	}
 	if (mGameOver)
 	{
-		renderer->drawText("Font_green", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "GAMEOVER", Vector2(100,450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 
 		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))

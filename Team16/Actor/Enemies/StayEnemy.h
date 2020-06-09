@@ -29,5 +29,6 @@ private:
 	Timer *m_inTimer;
 	float ShotAngle;
 	bool modeChange;
-
+	Timer *mTimerDamege;
+	int mDamageHit;
 };
