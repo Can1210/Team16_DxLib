@@ -26,17 +26,12 @@ void Title::initialize()
 //更新
 void Title::update(float deltaTime)
 {
-	if (Input::getInstance().isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
-	{
-		Sound::getInstance().playSE("click01");
-		//isAnim = true;
-		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）
-	}
+	
 
 	if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
 		Sound::getInstance().playSE("click01");
-		mSelectName = "stage2";
+		mSelectName = "stage1";
 		//isAnim = true;
 		isSceneEnd = true;    //Z押されたらシーン終了（今だけ）
 	}

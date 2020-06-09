@@ -81,8 +81,16 @@ void BomBullet::update(float deltaTime)
 //•`‰æ
 void BomBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
-	DrawCircle(100, 100, b_mCircleSize,1,1);
-	renderer3D->draw3DTexture("bullet_en3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(10.0f, 12.0f), b_mCircleSize*5.0f, b_mAngle);
+	//DrawCircle(100, 100, b_mCircleSize,1,1);
+	
+	if (b_mType == Type::ENEMY_BULLET)
+	{
+		renderer3D->draw3DTexture("bossBullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(10.0f, 12.0f), b_mCircleSize*5.0f, b_mAngle);
+	}
+	else
+	{
+		renderer3D->draw3DTexture("bullet_en3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(10.0f, 12.0f), b_mCircleSize*5.0f, b_mAngle);
+	}
 }
 
 void BomBullet::hit(BaseObject & other)

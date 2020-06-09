@@ -28,7 +28,7 @@ Boss::~Boss()
 
 void Boss::initialize()
 {
-	b_mHp = 30;
+	b_mHp = 150;
 	b_mCircleSize = 64.0f;
 	b_mType = Type::BOSS;
 	b_mAngle = 180.0f;
