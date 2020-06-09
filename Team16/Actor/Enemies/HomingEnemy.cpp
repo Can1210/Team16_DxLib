@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "../Bulletes/TrakingBullet.h"
+#include"../Bulletes/AngleBullet.h"
 #include "../Item/Item.h"
 
 
@@ -45,7 +46,7 @@ void HomingEnemy::update(float deltaTime)
 	}
 	b_mVelocity = Vector2(0, 0);
 	b_mVelocity += Traking() * 2.0f;
-	if (mTimer->timerSet(2)) shot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
+	if (mTimer->timerSet(2)) shot(Vector2(b_mPosittion.x, b_mPosittion.y),90.0f+b_mAngle);
 
 	b_mPosittion += b_mVelocity * b_mSpeed * deltaTime;
 }
@@ -104,7 +105,7 @@ void HomingEnemy::hit(BaseObject & other)
 
 void HomingEnemy::shot(Vector2 pos, float angle)
 {
-	charaManager->add(new TrakingBullet(pos, charaManager, b_mType, 90 + angle));
+	charaManager->add(new AngleBullet(pos, charaManager, b_mType,180.0f+angle));
 }
 
 Vector2 HomingEnemy::Traking()
