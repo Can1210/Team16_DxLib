@@ -112,6 +112,15 @@ void Boss::hit(BaseObject & other)
 		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
+	//ボムに触れたら
+	if (other.getType() == Type::BOM)
+	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
+		b_mHp -= charaManager->getPlayerBulletDamage() / 10.0f;
+	}
+
+
 }
 void Boss::attack(float deltaTime)
 {

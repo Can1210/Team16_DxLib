@@ -180,6 +180,13 @@ void Boss2::hit(BaseObject & other)
 		mTimerDamege->initialize();
 		b_mHp -= charaManager->getPlayerBulletDamage();
 	}
+	//ƒ{ƒ€‚ÉG‚ê‚½‚ç
+	if (other.getType() == Type::BOM)
+	{
+		mDamageHit = 0;
+		mTimerDamege->initialize();
+		b_mHp -= charaManager->getPlayerBulletDamage() / 10.0f;
+	}
 }
 
 void Boss2::shot(Vector2 pos, int t)
