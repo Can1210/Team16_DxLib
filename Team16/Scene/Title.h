@@ -4,7 +4,6 @@
 
 #include "BaseScene.h"
 
-
 class Title : public BaseScene
 {
 public:
@@ -27,6 +26,9 @@ private:
 	bool isAnim;
 	int animAlpha;
 
+	FadeType fadetype;
+	float fadeCount;
+	const float fadeEndTime = 2.0f;
 };
 
 #endif // !_TITLE_H
