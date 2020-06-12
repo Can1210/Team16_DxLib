@@ -17,6 +17,7 @@ void LoadScene::initialize()
 	//ÉQÅ[ÉÄÉVÅ[Éì
 	TextureLoad::getInstance().add("Mixam", "Resouce/Texture/Mixam.png");
 	TextureLoad::getInstance().add("title", "Resouce/Texture/title.png");
+	TextureLoad::getInstance().add("title2", "Resouce/Texture/BatlleFry.png");
 	TextureLoad::getInstance().add("titleText", "Resouce/Texture/titleText.png");
 	//UI
 	TextureLoad::getInstance().add("UI", "Resouce/Texture/16Ui.png");
@@ -33,6 +34,7 @@ void LoadScene::initialize()
 	//îwåi
 	TextureLoad::getInstance().add("back", "Resouce/Texture/backgraund_01.png");
 	TextureLoad::getInstance().add("back2", "Resouce/Texture/backgraund_02.png");
+	TextureLoad::getInstance().add("back3", "Resouce/Texture/Background.png");
 	//íeä÷åW
 	TextureLoad::getInstance().add("bullet", "Resouce/Texture/16Bullet.png");
 	TextureLoad::getInstance().add("bulletAge", "Resouce/Texture/16Ballet_ageage.png");
@@ -80,6 +82,10 @@ void LoadScene::initialize()
 	//âπä÷åW
 	//BGM
 	SoundLoad::getInstance().addBGM("bgm", "Resouce/Sound/BGM/bgm.mp3");
+	SoundLoad::getInstance().addBGM("chikoku", "Resouce/Sound/BGM/chikoku.mp3");
+	SoundLoad::getInstance().addBGM("mahou", "Resouce/Sound/BGM/mahounote.mp3");
+	SoundLoad::getInstance().addBGM("piko", "Resouce/Sound/BGM/Picopico.mp3");
+	SoundLoad::getInstance().addBGM("retro", "Resouce/Sound/BGM/retropark.mp3");
 
 	//SE
 	SoundLoad::getInstance().addSE("burst01", "Resouce/Sound/SE/burst01.mp3");
