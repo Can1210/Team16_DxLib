@@ -26,6 +26,12 @@ public:
 	virtual bool isEnd() = 0;
 	//次のシーン
 	virtual std::string nextScene() = 0;
+
+	enum FadeType
+	{
+		FadeStart, FadeStop, FadeEnd
+	};
+
 protected:
 	bool isSceneEnd;                  //シーンが終了したかどうか
 };

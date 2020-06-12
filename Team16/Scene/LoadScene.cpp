@@ -25,9 +25,9 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("misaile", "Resouce/Texture/misaileR.png");
 	TextureLoad::getInstance().add("lazer", "Resouce/Texture/lezerG.png");
 	TextureLoad::getInstance().add("none", "Resouce/Texture/none.png");
-	TextureLoad::getInstance().add("sgU", "Resouce/Texture/sguepun.png");
-	TextureLoad::getInstance().add("misaileU", "Resouce/Texture/misaleUepon.png");
-	TextureLoad::getInstance().add("lazerU", "Resouce/Texture/lazeruepon.png");
+	TextureLoad::getInstance().add("sgU", "Resouce/Texture/16Poteto.png");
+	TextureLoad::getInstance().add("misaileU", "Resouce/Texture/16Ebi_MU.png");
+	TextureLoad::getInstance().add("lazerU", "Resouce/Texture/16Tikuwa.png");
 	//ƒGƒtƒFƒNƒg
 	TextureLoad::getInstance().add("deathBurst", "Resouce/Texture/burst.png");
 	//”wŒi
@@ -35,6 +35,7 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("back2", "Resouce/Texture/backgraund_02.png");
 	//’eŠÖŒW
 	TextureLoad::getInstance().add("bullet", "Resouce/Texture/16Bullet.png");
+	TextureLoad::getInstance().add("bulletAge", "Resouce/Texture/16Ballet_ageage.png");
 	TextureLoad::getInstance().add("bullet1", "Resouce/Texture/Bullet01.png");
 	TextureLoad::getInstance().add("bullet2", "Resouce/Texture/Bullet02.png");
 	TextureLoad::getInstance().add("bullet3", "Resouce/Texture/Bullet03.png");
@@ -42,7 +43,7 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("bullet5", "Resouce/Texture/Bullet05.png");
 	TextureLoad::getInstance().add("bullet6", "Resouce/Texture/Bullet06.png"); 
 	TextureLoad::getInstance().add("bossBullet", "Resouce/Texture/Bullet_S05.png");
-	TextureLoad::getInstance().add("misaill", "Resouce/Texture/misaille.png");
+	TextureLoad::getInstance().add("misaill", "Resouce/Texture/16Ebi_M.png");
 	TextureLoad::getInstance().add("bullet_en2", "Resouce/Texture/Bullet_S02.png");
 	TextureLoad::getInstance().add("bullet_en3", "Resouce/Texture/Bullet_S03.png");
 	TextureLoad::getInstance().add("bullet_en4", "Resouce/Texture/Bullet_S04.png");
@@ -51,16 +52,17 @@ void LoadScene::initialize()
 
 	TextureLoad::getInstance().add("WallReflectionBullet", "Resouce/Texture/Bullet_S01.png");
 	//ŽÀ‹@ŠÖŒW
-	TextureLoad::getInstance().add("player", "Resouce/Texture/16Player.png");
+	TextureLoad::getInstance().add("player", "Resouce/Texture/16Ebi.png");
 	TextureLoad::getInstance().add("player2", "Resouce/Texture/BlueRob.png");
 	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
 	TextureLoad::getInstance().add("enemyT", "Resouce/Texture/TankBTM_Re.png");
 	TextureLoad::getInstance().add("enemyR", "Resouce/Texture/16enemyRR.png");
 	TextureLoad::getInstance().add("enemyG", "Resouce/Texture/16enemyGG.png");
-	TextureLoad::getInstance().add("enemyB", "Resouce/Texture/16enemyBB.png");
+	TextureLoad::getInstance().add("enemyB", "Resouce/Texture/16Enemy_AGES.png");
 	TextureLoad::getInstance().add("enemy2", "Resouce/Texture/RedBTM.png");
 	TextureLoad::getInstance().add("enemy3", "Resouce/Texture/RedATK.png");
 	TextureLoad::getInstance().add("enemyR2", "Resouce/Texture/16misaileE.png");
+	TextureLoad::getInstance().add("enemyG2", "Resouce/Texture/16lazerE.png");
 	TextureLoad::getInstance().add("boss", "Resouce/Texture/16Boss.png");
 	TextureLoad::getInstance().add("houdai", "Resouce/Texture/TankATK16.png");
 	//ƒtƒHƒ“ƒgŠÖŒW

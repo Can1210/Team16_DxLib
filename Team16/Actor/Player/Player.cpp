@@ -379,7 +379,7 @@ void Player::move()
 //普通の射撃
 void Player::Shot(Vector2 pos)
 {
-	charaManager->add(new Bullet(Vector2(pos.x, pos.y - 35), charaManager, b_mType, 0.0f));
+	charaManager->add(new Bullet(Vector2(pos.x, pos.y - 5), charaManager, b_mType, 0.0f));
 	Sound::getInstance().playSE("shot");
 }
 

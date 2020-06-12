@@ -29,16 +29,56 @@ void Stage03::initialize()
 	Camera::getInstance().setStop(false);
 	mGameOver = false;              //ゲームオーバー（player死んだとき）
 	mGameClear = false;				//ゲームクリア  （boss死んだとき）
+	fadetype = FadeType::FadeStart;
+	fadeCount = 0.0f;
 }
 
 void Stage03::update(float deltaTime)
 {
+	switch (fadetype)
+	{
+	case FadeStart:
+		if (fadeCount > fadeEndTime) {
+			fadetype = FadeStop;
+			fadeCount = 0.0f;
+		}
+		else {
+			fadeCount += deltaTime;
+		}
+		break;
+	case FadeEnd:
+		if (fadeCount > fadeEndTime) {
+			Sound::getInstance().pauseBGM();
+			isSceneEnd = true;
+		}
+		else {
+			fadeCount += deltaTime;
+		}
+		break;
+	}
+
 	//背景エンドレス
 	if (mBackPos >= 0.0f)mBackPos = -3000.0f;
 	mBackPos += 0.9f;
 
-	if (m_pCharaManager->getIsBossEed()) mGameClear = true;
-	if (m_pCharaManager->getIsPlayerEed()) mGameOver = true;
+	if (m_pCharaManager->getIsBossEed()) {
+		mGameClear = true;
+		nextSceneName = "title";
+		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		{
+			fadetype = FadeEnd;
+		}
+
+	};
+	if (m_pCharaManager->getIsPlayerEed()) {
+		mGameOver = true;
+		nextSceneName = "stage3";
+
+		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		{
+			fadetype = FadeEnd;
+		}
+	};
 
 	m_pCharaManager->update(deltaTime);
 	Camera::getInstance().update(deltaTime);
@@ -61,24 +101,24 @@ void Stage03::draw(Renderer * renderer, Renderer3D * renderer3D)
 	{
 		renderer->drawText("Font_green", "GAMECLEAR", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
-		if (Input::getInstance().isKeyDown(KEYCORD::Z))
-		{
-			Sound::getInstance().pauseBGM();
-			nextSceneName = "title";
-			isSceneEnd = true;
-		}
+		//if (Input::getInstance().isKeyDown(KEYCORD::Z))
+		//{
+		//	Sound::getInstance().pauseBGM();
+		//	nextSceneName = "title";
+		//	isSceneEnd = true;
+		//}
 	}
 	if (mGameOver)
 	{
 		renderer->drawText("Font_green", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 
-		if (Input::getInstance().isKeyDown(KEYCORD::Z))
-		{
-			Sound::getInstance().pauseBGM();
-			nextSceneName = "stage3";
-			isSceneEnd = true;
-		}
+		//if (Input::getInstance().isKeyDown(KEYCORD::Z))
+		//{
+		//	Sound::getInstance().pauseBGM();
+		//	nextSceneName = "stage3";
+		//	isSceneEnd = true;
+		//}
 	}
 }
 
@@ -88,7 +128,7 @@ void Stage03::shutdown()
 
 bool Stage03::isEnd()
 {
-	return false;
+	return isSceneEnd;
 }
 
 std::string Stage03::nextScene()
