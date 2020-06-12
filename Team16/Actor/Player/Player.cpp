@@ -344,7 +344,7 @@ void Player::move()
 		if (GetJoypadNum() >= 1)
 		{
 			if (Input::getInstance().getGamePad_L_SticNum_Y(0) < -1)  b_mVelocity.y = -6;
-			if (Input::getInstance().getGamePad_L_SticNum_Y(0) > -1)  b_mVelocity.y = 6;
+			if (Input::getInstance().getGamePad_L_SticNum_Y(0) >  1)  b_mVelocity.y = 6;
 			if (Input::getInstance().getGamePad_L_SticNum_X(0) >  1)  b_mVelocity.x = 6;
 			if (Input::getInstance().getGamePad_L_SticNum_X(0) < -1)  b_mVelocity.x = -6;
 
