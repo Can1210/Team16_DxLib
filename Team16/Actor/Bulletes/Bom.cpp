@@ -35,6 +35,7 @@ void Bom::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 void Bom::hit(BaseObject & other)
 {
+	
 }
 
 Type Bom::getType() const

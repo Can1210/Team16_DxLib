@@ -128,7 +128,7 @@ void Stage03::shutdown()
 
 bool Stage03::isEnd()
 {
-	return false;
+	return isSceneEnd;
 }
 
 std::string Stage03::nextScene()

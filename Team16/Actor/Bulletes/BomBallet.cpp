@@ -95,7 +95,7 @@ void BomBullet::draw(Renderer * renderer, Renderer3D* renderer3D)
 
 void BomBullet::hit(BaseObject & other)
 {
-
+	Sound::getInstance().playSE("burst02");
 }
 
 Vector2 BomBullet::RotationZ(float ang)
