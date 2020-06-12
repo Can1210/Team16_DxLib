@@ -3,22 +3,22 @@
 #include "../GameBase/WindowInfo.h"
 
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Title::Title()
 {
 }
 
-//ƒfƒXƒXƒgƒ‰ƒNƒ^
+//ãƒ‡ã‚¹ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Title::~Title()
 {
 }
-//‰Šú‰»
+//åˆæœŸåŒ–
 void Title::initialize()
 {
-	isSceneEnd = false;       //Å‰‚Ífalse
-	mIsStageSelect = false;   //ƒXƒe[ƒW‘I‘ğ‚ğ‚·‚é‚©‚Ç‚¤‚©
-	mSelectName = "stage1";   //‰¼’u‚«
-	CWindow::getInstance().log("¡ƒ^ƒCƒgƒ‹‚ÉØ‚è‘Ö‚í‚Á‚½\n");
+	isSceneEnd = false;       //æœ€åˆã¯false
+	mIsStageSelect = false;   //ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠã‚’ã™ã‚‹ã‹ã©ã†ã‹
+	mSelectName = "stage1";   //ä»®ç½®ã
+	CWindow::getInstance().log("ä»Šã‚¿ã‚¤ãƒˆãƒ«ã«åˆ‡ã‚Šæ›¿ã‚ã£ãŸ\n");
 	isReturn = false;
 	alpha = 255;
 	isAnim = false;
@@ -26,7 +26,7 @@ void Title::initialize()
 	fadetype = FadeType::FadeStop;
 	fadeCount = 0.0f;
 }
-//XV
+//æ›´æ–°
 void Title::update(float deltaTime)
 {
 	switch (fadetype)
@@ -43,7 +43,7 @@ void Title::update(float deltaTime)
 		break;
 	case FadeEnd:
 		if (fadeCount > fadeEndTime) {
-			isSceneEnd = true;    //Z‰Ÿ‚³‚ê‚½‚çƒV[ƒ“I—¹i¡‚¾‚¯j
+			isSceneEnd = true;    //ZæŠ¼ã•ã‚ŒãŸã‚‰ã‚·ãƒ¼ãƒ³çµ‚äº†ï¼ˆä»Šã ã‘ï¼‰
 			fadeCount = 0.0f;
 		}
 		else {
@@ -53,13 +53,13 @@ void Title::update(float deltaTime)
 		break;
 	}
 
-	if (Input::getInstance().isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
+	if (Input::getInstance().isKeyDown(KEYCORD::SPACE) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
 		Sound::getInstance().playSE("click01");
 		mSelectName = "stage1";
 		isAnim = true;
 		fadetype = FadeEnd;
-		//isSceneEnd = true;    //Z‰Ÿ‚³‚ê‚½‚çƒV[ƒ“I—¹i¡‚¾‚¯j
+		//isSceneEnd = true;    //ZæŠ¼ã•ã‚ŒãŸã‚‰ã‚·ãƒ¼ãƒ³çµ‚äº†ï¼ˆä»Šã ã‘ï¼‰
 	}
 
 	if (isReturn)
@@ -90,7 +90,7 @@ void Title::update(float deltaTime)
 		}
 	}
 }
-//•`‰æ
+//æç”»
 void Title::draw(Renderer* renderer, Renderer3D* renderer3D)
 {
 	if (isAnim)
@@ -113,16 +113,16 @@ void Title::draw(Renderer* renderer, Renderer3D* renderer3D)
 		break;
 	}
 }
-//I—¹ˆ—
+//çµ‚äº†å‡¦ç†
 void Title::shutdown()
 {
 }
-//ƒV[ƒ“‚ªI‚í‚Á‚½‚©‚Ç‚¤‚©
+//ã‚·ãƒ¼ãƒ³ãŒçµ‚ã‚ã£ãŸã‹ã©ã†ã‹
 bool Title::isEnd()
 {
 	return isSceneEnd;
 }
-//Ÿ‚ÌƒV[ƒ“
+//æ¬¡ã®ã‚·ãƒ¼ãƒ³
 std::string Title::nextScene()
 {
 	return  mSelectName;  //"test";  //
