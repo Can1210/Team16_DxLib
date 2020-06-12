@@ -68,7 +68,7 @@ void Stage01::update(float deltaTime)
 	if (m_pCharaManager->getIsBossEed()) {
 		mGameClear = true;
 		nextSceneName = "stage2";
-		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			fadetype = FadeEnd;
 		}
@@ -78,7 +78,7 @@ void Stage01::update(float deltaTime)
 		mGameOver = true;
 		nextSceneName = "title";
 
-		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			fadetype = FadeEnd;
 		}
@@ -105,7 +105,7 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 	if (mGameClear)
 	{
 		renderer->drawText("Font_green", "GAMECLEAR", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
-		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH SPACE", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		//if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		//{
 		//	Sound::getInstance().pauseBGM();
@@ -116,7 +116,7 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 	if (mGameOver)
 	{
 		renderer->drawText("Font_green", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
-		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH SPACE", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 
 		//if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		//{
@@ -129,10 +129,10 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 	switch (fadetype)
 	{
 	case FadeStart:
-		renderer->draw2D("player", Vector2(300.0f, 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
+		renderer->draw2D("fade", Vector2(300.0f, 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(600, 1000), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
 		break;
 	case FadeEnd:
-		renderer->draw2D("player", Vector2(300.0f, 1000.0f - 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
+		renderer->draw2D("fade", Vector2(300.0f, 1000.0f - 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
 		break;
 	}
 }

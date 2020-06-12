@@ -16,8 +16,9 @@ void LoadScene::initialize()
 
 	//ゲームシーン
 	TextureLoad::getInstance().add("Mixam", "Resouce/Texture/Mixam.png");
+	TextureLoad::getInstance().add("fade", "Resouce/Texture/16Fade.png");
 	TextureLoad::getInstance().add("title", "Resouce/Texture/title.png");
-	TextureLoad::getInstance().add("titleText", "Resouce/Texture/titleText.png");
+	TextureLoad::getInstance().add("titleText", "Resouce/Texture/StartText.png");
 	//UI
 	TextureLoad::getInstance().add("UI", "Resouce/Texture/16Ui.png");
 	//アイテム

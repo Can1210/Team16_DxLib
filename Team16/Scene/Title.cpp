@@ -53,7 +53,7 @@ void Title::update(float deltaTime)
 		break;
 	}
 
-	if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
+	if (Input::getInstance().isKeyDown(KEYCORD::SPACE))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
 		Sound::getInstance().playSE("click01");
 		mSelectName = "stage1";
@@ -106,10 +106,10 @@ void Title::draw(Renderer* renderer, Renderer3D* renderer3D)
 	switch (fadetype)
 	{
 	case FadeStart:
-		renderer->draw2D("player", Vector2(300.0f, 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
+		renderer->draw2D("fade", Vector2(0.0f, 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(600, 1000), Vector2(300, 500), Vector2(1.0f, 1.0f), 0, 255);
 		break;
 	case FadeEnd:
-		renderer->draw2D("player", Vector2(300.0f, 1000.0f - 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
+		renderer->draw2D("fade", Vector2(0.0f, 900.0f - 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(600, 1000), Vector2(300, 500), Vector2(1.0f, 1.0f), 0, 255);
 		break;
 	}
 }
