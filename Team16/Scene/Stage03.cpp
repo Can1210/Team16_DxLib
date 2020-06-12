@@ -120,6 +120,16 @@ void Stage03::draw(Renderer * renderer, Renderer3D * renderer3D)
 		//	isSceneEnd = true;
 		//}
 	}
+
+	switch (fadetype)
+	{
+	case FadeStart:
+		renderer->draw2D("player", Vector2(300.0f, 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
+		break;
+	case FadeEnd:
+		renderer->draw2D("player", Vector2(300.0f, 1000.0f - 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), 0, 255);
+		break;
+	}
 }
 
 void Stage03::shutdown()
