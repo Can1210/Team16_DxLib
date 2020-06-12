@@ -49,7 +49,7 @@ void UFOEnemy::update(float deltaTime)
 	b_mVelocity = Vector2(x, 0.7f);
 	if (mTimer->timerSet(1))
 	{
-		Shot(Vector2(b_mPosittion.x, b_mPosittion.y), 0.0f);
+		Shot(Vector2(b_mPosittion.x, b_mPosittion.y-64.0f), -90.0f+b_mAngle);
 	}
 	if (b_mHp <= 0)
 	{
@@ -63,7 +63,7 @@ void UFOEnemy::update(float deltaTime)
 void UFOEnemy::draw(Renderer * renderer, Renderer3D* renderer3D)
 {
 	//renderer->draw2D("enemy", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(2.0f, 2.0f), b_mAngle, 255);
-	renderer3D->draw3DTexture("enemyB", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
+	renderer3D->draw3DTexture("enemyG2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
 	if (b_animCnt <= 0)
 	{
 		b_animCnt += 64.0f;
@@ -109,7 +109,7 @@ void UFOEnemy::Shot(Vector2 pos, float angle)
 {	
 	Vector2 vv = Vector2(pos.x + 25.0f,pos.y + 55.0f);
 	Vector2 v = Vector2(pos.x + 25.0f - 20.0f, pos.y + 55.0f); Vector2 v1 = Vector2(pos.x + 25.0f + 20.0f, pos.y + 55.0f);
-	charaManager->add(new AngleBullet(v, charaManager, b_mType, 270.0f + angle));
-	charaManager->add(new AngleBullet(vv, charaManager, b_mType, 270.0f + angle));
-	charaManager->add(new AngleBullet(v1, charaManager, b_mType, 270.0f + angle));
+	charaManager->add(new AngleBullet(v, charaManager, b_mType,  angle));
+	charaManager->add(new AngleBullet(vv, charaManager, b_mType,  angle));
+	charaManager->add(new AngleBullet(v1, charaManager, b_mType,  angle));
 }
