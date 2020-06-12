@@ -292,6 +292,12 @@
     <None Include="Resouce\Map\stage03.csv" />
     <None Include="Resouce\Map\test01.csv" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resouce\Sound\BGM\chikoku.mp3" />
+    <Media Include="Resouce\Sound\BGM\mahounote.mp3" />
+    <Media Include="Resouce\Sound\BGM\Picopico.mp3" />
+    <Media Include="Resouce\Sound\BGM\retropark.mp3" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
