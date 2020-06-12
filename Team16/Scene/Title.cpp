@@ -53,7 +53,7 @@ void Title::update(float deltaTime)
 		break;
 	}
 
-	if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
+	if (Input::getInstance().isKeyDown(KEYCORD::SPACE) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
 		Sound::getInstance().playSE("click01");
 		mSelectName = "stage1";

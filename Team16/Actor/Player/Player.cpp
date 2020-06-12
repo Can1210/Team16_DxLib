@@ -77,7 +77,7 @@ void Player::update(float deltaTime)
 
 	moveClamp();
 	move();
-	if (Input::getInstance().isKeyState(KEYCORD::SPACE))  // || input->isGamePadBottonState(GAMEPAD_KEYCORD::BUTTON_A, 0))
+	if (Input::getInstance().isKeyState(KEYCORD::SPACE) || Input::getInstance().isGamePadBottonState(GAMEPAD_KEYCORD::BUTTON_A, 0))
 	{
 		subShotCnt++;
 		support1++; support2++;
@@ -335,31 +335,22 @@ void Player::move()
 {
 	if (b_mType == Type::PLAYER && !b_mEndFlag)
 	{
-
-		//ゲームパッド入力
-		/*if (input->getGamePad_L_SticNum_X(0) >6)
-		{
-			b_mVelocity.x = 6;
-		}
-		else if(input->getGamePad_L_SticNum_X(0) < 4)
-		{
-			b_mVelocity.x = -6;
-		}
-		if (input->getGamePad_L_SticNum_Y(0) > 6)
-		{
-			b_mVelocity.y = 6;
-		}
-		else if (input->getGamePad_L_SticNum_Y(0) < 4)
-		{
-			b_mVelocity.y = -6;
-		}*/
-
 		//上下左右移動
 		if (Input::getInstance().isKeyState(KEYCORD::ARROW_UP))     b_mVelocity.y = -6;
 		if (Input::getInstance().isKeyState(KEYCORD::ARROW_DOWN))   b_mVelocity.y = 6;
 		if (Input::getInstance().isKeyState(KEYCORD::ARROW_RIGHT))  b_mVelocity.x = 6;
 		if (Input::getInstance().isKeyState(KEYCORD::ARROW_LEFT))   b_mVelocity.x = -6;
-		if (Input::getInstance().isKeyDown(KEYCORD::SPACE))// || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		//パッドが1つ以上つながっているなら
+		if (GetJoypadNum() >= 1)
+		{
+			if (Input::getInstance().getGamePad_L_SticNum_Y(0) < -1)  b_mVelocity.y = -6;
+			if (Input::getInstance().getGamePad_L_SticNum_Y(0) > -1)  b_mVelocity.y = 6;
+			if (Input::getInstance().getGamePad_L_SticNum_X(0) >  1)  b_mVelocity.x = 6;
+			if (Input::getInstance().getGamePad_L_SticNum_X(0) < -1)  b_mVelocity.x = -6;
+
+		}
+
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			Shot(Vector2(b_mPosittion.x, b_mPosittion.y + 64.0f));
 			SupportShot();
@@ -435,7 +426,7 @@ void Player::bom1()
 	//爆破するのは先頭から Noneならリターン
 	if (!mSubVec[0] == BulletType::None && mSubVec[1] == BulletType::None)
 	{
-		if (Input::getInstance().isKeyDown(KEYCORD::C))  // || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
+		if (Input::getInstance().isKeyDown(KEYCORD::C) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 		{
 			//爆弾生成処理
 			charaManager->add(new BomBullet(mSubPos[0], charaManager,b_mType,0.0f));
@@ -450,7 +441,7 @@ void Player::bom2()
 {
 	//0番目がNoneなら通る
 	if (mSubVec[1] == BulletType::None) return;
-	if (Input::getInstance().isKeyDown(KEYCORD::C))// || input->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
+	if (Input::getInstance().isKeyDown(KEYCORD::C) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_X, 0))
 	{
 		//爆弾生成処理
 		charaManager->add(new BomBullet(mSubPos[1], charaManager, b_mType, 0.0f));

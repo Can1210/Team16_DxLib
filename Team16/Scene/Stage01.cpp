@@ -68,7 +68,7 @@ void Stage01::update(float deltaTime)
 	if (m_pCharaManager->getIsBossEed()) {
 		mGameClear = true;
 		nextSceneName = "stage2";
-		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			fadetype = FadeEnd;
 		}
@@ -78,7 +78,7 @@ void Stage01::update(float deltaTime)
 		mGameOver = true;
 		nextSceneName = "title";
 
-		if (Input::getInstance().isKeyDown(KEYCORD::Z))// || m_pInput->isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
+		if (Input::getInstance().isKeyDown(KEYCORD::SPACE) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A, 0))
 		{
 			fadetype = FadeEnd;
 		}
