@@ -33,6 +33,9 @@ private:
 	int sceneNum;
 	std::string nextSceneName;
 
+	FadeType fadetype;
+	float fadeCount;
+	const float fadeEndTime = 2.0f;
 };
 
 
