@@ -12,16 +12,17 @@ LoadScene::~LoadScene()
 
 void LoadScene::initialize()
 {
-	TextureLoad::createInstance();   //ƒeƒNƒXƒ`ƒƒƒ[ƒh‚ğì¬
+	TextureLoad::createInstance();   //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ­ãƒ¼ãƒ‰ã‚’ä½œæˆ
 
-	//ƒQ[ƒ€ƒV[ƒ“
+	//ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
 	TextureLoad::getInstance().add("Mixam", "Resouce/Texture/Mixam.png");
+	TextureLoad::getInstance().add("fade", "Resouce/Texture/16Fade.png");
 	TextureLoad::getInstance().add("title", "Resouce/Texture/title.png");
+	TextureLoad::getInstance().add("titleText", "Resouce/Texture/StartText.png");
 	TextureLoad::getInstance().add("title2", "Resouce/Texture/BatlleFry.png");
-	TextureLoad::getInstance().add("titleText", "Resouce/Texture/titleText.png");
 	//UI
 	TextureLoad::getInstance().add("UI", "Resouce/Texture/16Ui.png");
-	//ƒAƒCƒeƒ€
+	//ã‚¢ã‚¤ãƒ†ãƒ 
 	TextureLoad::getInstance().add("sg", "Resouce/Texture/SGanB.png");
 	TextureLoad::getInstance().add("misaile", "Resouce/Texture/misaileR.png");
 	TextureLoad::getInstance().add("lazer", "Resouce/Texture/lezerG.png");
@@ -29,13 +30,13 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("sgU", "Resouce/Texture/16Poteto.png");
 	TextureLoad::getInstance().add("misaileU", "Resouce/Texture/16Ebi_MU.png");
 	TextureLoad::getInstance().add("lazerU", "Resouce/Texture/16Tikuwa.png");
-	//ƒGƒtƒFƒNƒg
+	//ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	TextureLoad::getInstance().add("deathBurst", "Resouce/Texture/burst.png");
-	//”wŒi
+	//èƒŒæ™¯
 	TextureLoad::getInstance().add("back", "Resouce/Texture/backgraund_01.png");
 	TextureLoad::getInstance().add("back2", "Resouce/Texture/backgraund_02.png");
 	TextureLoad::getInstance().add("back3", "Resouce/Texture/Background.png");
-	//’eŠÖŒW
+	//å¼¾é–¢ä¿‚
 	TextureLoad::getInstance().add("bullet", "Resouce/Texture/16Bullet.png");
 	TextureLoad::getInstance().add("bulletAge", "Resouce/Texture/16Ballet_ageage.png");
 	TextureLoad::getInstance().add("bullet1", "Resouce/Texture/Bullet01.png");
@@ -53,7 +54,7 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("Beme", "Resouce/Texture/Bemepng.png");
 
 	TextureLoad::getInstance().add("WallReflectionBullet", "Resouce/Texture/Bullet_S01.png");
-	//À‹@ŠÖŒW
+	//å®Ÿæ©Ÿé–¢ä¿‚
 	TextureLoad::getInstance().add("player", "Resouce/Texture/16Ebi.png");
 	TextureLoad::getInstance().add("player2", "Resouce/Texture/BlueRob.png");
 	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
@@ -67,19 +68,19 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("enemyG2", "Resouce/Texture/16lazerE.png");
 	TextureLoad::getInstance().add("boss", "Resouce/Texture/16Boss.png");
 	TextureLoad::getInstance().add("houdai", "Resouce/Texture/TankATK16.png");
-	//ƒtƒHƒ“ƒgŠÖŒW
+	//ãƒ•ã‚©ãƒ³ãƒˆé–¢ä¿‚
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("Font_white"  , "Resouce/Texture/Font.png");
 	TextureLoad::getInstance().add("Font_green"  , "Resouce/Texture/Font_green.png");
 	TextureLoad::getInstance().add("hpNumber", "Resouce/Texture/denColor.png");
 	TextureLoad::getInstance().add("sousa", "Resouce/Texture/sousa.png");
 	TextureLoad::getInstance().add("sousa2", "Resouce/Texture/sousa2.png");
-	//sƒRƒA
+	//sã‚³ã‚¢
 	TextureLoad::getInstance().add("1000", "Resouce/Texture/score_1000.png");
 	TextureLoad::getInstance().add("2000", "Resouce/Texture/score_2000.png");
 	TextureLoad::getInstance().add("5000", "Resouce/Texture/score_5000.png");
 	TextureLoad::getInstance().add("10000", "Resouce/Texture/score_10000.png");
-	//‰¹ŠÖŒW
+	//éŸ³é–¢ä¿‚
 	//BGM
 	SoundLoad::getInstance().addBGM("bgm", "Resouce/Sound/BGM/bgm.mp3");
 	SoundLoad::getInstance().addBGM("chikoku", "Resouce/Sound/BGM/chikoku.mp3");
@@ -95,8 +96,8 @@ void LoadScene::initialize()
 	SoundLoad::getInstance().addSE("shot", "Resouce/Sound/SE/shot.mp3");
 
 
-	CWindow::getInstance().log("“Ç‚İ‚İ‚ªI‚í‚Á‚½‚Ì‚ÅI—¹‚µ‚Ü‚·\n");
-	isSceneEnd = true;       //‚±‚±‚Ü‚ÅƒGƒ‰[‚ª‚È‚©‚Á‚½‚çI—¹ó‘Ô‚É‚·‚é
+	CWindow::getInstance().log("èª­ã¿è¾¼ã¿ãŒçµ‚ã‚ã£ãŸã®ã§çµ‚äº†ã—ã¾ã™\n");
+	isSceneEnd = true;       //ã“ã“ã¾ã§ã‚¨ãƒ©ãƒ¼ãŒãªã‹ã£ãŸã‚‰çµ‚äº†çŠ¶æ…‹ã«ã™ã‚‹
 }
 
 void LoadScene::update(float deltaTime)
@@ -118,5 +119,5 @@ bool LoadScene::isEnd()
 
 std::string LoadScene::nextScene()
 {
-	return "title";       //I—¹‚µ‚½‚çtitle‚És‚­
+	return "title";       //çµ‚äº†ã—ãŸã‚‰titleã«è¡Œã
 }

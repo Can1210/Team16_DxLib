@@ -18,8 +18,8 @@ void Stage03::initialize()
 {
 	DeathPoint::getInstance().initialize();
 	m_pCharaManager->clear();
-	isSceneEnd = false;   //Å‰‚Ífalse
-	m_pCharaManager->add(new Player(Vector2(0.0f, -600.0f), m_pCharaManager));  //ƒvƒŒƒCƒ„[
+	isSceneEnd = false;   //æœ€åˆã¯false
+	m_pCharaManager->add(new Player(Vector2(0.0f, -600.0f), m_pCharaManager));  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	m_pMapSpawn = new MapSpawn(*m_pCharaManager);
 	m_pMapSpawn->loadMap("Resouce/Map/stage03.csv");
 	mBackPos = -3000.0f;
@@ -27,8 +27,8 @@ void Stage03::initialize()
 	Score::getInstance().initialize();
 	Camera::getInstance().setPosition(Vector2(0.0f, -600.0f));
 	Camera::getInstance().setStop(false);
-	mGameOver = false;              //ƒQ[ƒ€ƒI[ƒo[iplayerŽ€‚ñ‚¾‚Æ‚«j
-	mGameClear = false;				//ƒQ[ƒ€ƒNƒŠƒA  ibossŽ€‚ñ‚¾‚Æ‚«j
+	mGameOver = false;              //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ï¼ˆplayeræ­»ã‚“ã ã¨ãï¼‰
+	mGameClear = false;				//ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢  ï¼ˆbossæ­»ã‚“ã ã¨ãï¼‰
 	fadetype = FadeType::FadeStart;
 	fadeCount = 0.0f;
 }
@@ -57,7 +57,7 @@ void Stage03::update(float deltaTime)
 		break;
 	}
 
-	//”wŒiƒGƒ“ƒhƒŒƒX
+	//èƒŒæ™¯ã‚¨ãƒ³ãƒ‰ãƒ¬ã‚¹
 	if (mBackPos >= 0.0f)mBackPos = -3000.0f;
 	mBackPos += 0.9f;
 
@@ -88,19 +88,19 @@ void Stage03::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
 	renderer->draw2D("back2", Vector2(0, mBackPos), Vector2(0, 0), Vector2(600, 4110));
 	m_pCharaManager->draw(renderer, renderer3D);
-	renderer->draw2D("UI", Vector2(0, -50), Vector2(0, 0), Vector2(600, 200), Vector2(300, 100), Vector2(1.0f, 0.5f));	 //UI”Â
-	//ƒvƒŒƒCƒ„[‚É‚ ‚Á‚½UIŠÖ˜A
-	renderer->draw2D("player", Vector2(10.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true, false);          //ƒvƒŒƒCƒ„[‚ÌŽÀ‹@ŠG
+	renderer->draw2D("UI", Vector2(0, -50), Vector2(0, 0), Vector2(600, 200), Vector2(300, 100), Vector2(1.0f, 0.5f));	 //UIæ¿
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚ã£ãŸUIé–¢é€£
+	renderer->draw2D("player", Vector2(10.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true, false);          //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å®Ÿæ©Ÿçµµ
 	renderer->drawText("Font_green", "x", Vector2(40.0f, -15.0f), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);            //X
-	renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), m_pCharaManager->getHp(), 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);   //ƒvƒŒƒCƒ„[‚ÌHP
-	renderer->draw2D(m_pCharaManager->getSub1(), Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), 0, 255);	 //ƒvƒŒƒCƒ„[‚ÌƒAƒCƒeƒ€1
-	renderer->draw2D(m_pCharaManager->getSub2(), Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), 0, 255);	 //ƒvƒŒƒCƒ„[‚ÌƒAƒCƒeƒ€2
+	renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), m_pCharaManager->getHp(), 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);   //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®HP
+	renderer->draw2D(m_pCharaManager->getSub1(), Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), 0, 255);	 //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¢ã‚¤ãƒ†ãƒ 1
+	renderer->draw2D(m_pCharaManager->getSub2(), Vector2(290.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), 0, 255);	 //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¢ã‚¤ãƒ†ãƒ 2
 	renderer->drawNumber("hpNumber", Vector2(550.0f, 10.0f), Score::getInstance().getScore(), 8, Vector2(0, 0), Vector2(1, 1), 0.0f, 255);
 
 	if (mGameClear)
 	{
 		renderer->drawText("Font_green", "GAMECLEAR", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
-		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH SPACE", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 		//if (Input::getInstance().isKeyDown(KEYCORD::Z))
 		//{
 		//	Sound::getInstance().pauseBGM();
@@ -111,7 +111,7 @@ void Stage03::draw(Renderer * renderer, Renderer3D * renderer3D)
 	if (mGameOver)
 	{
 		renderer->drawText("Font_green", "GAMEOVER", Vector2(100, 450), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
-		renderer->drawText("Font_green", "PUSH Z", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
+		renderer->drawText("Font_green", "PUSH SPACE", Vector2(120, 550), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);
 
 		//if (Input::getInstance().isKeyDown(KEYCORD::Z))
 		//{
