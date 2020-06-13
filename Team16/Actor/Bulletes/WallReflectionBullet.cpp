@@ -142,13 +142,15 @@ void WallReflectionBullet::draw(Renderer * renderer, Renderer3D * renderer3D)
 	if (b_mType == Type::ENEMY_BULLET)
 	{
 		b_mAngle = 180.0f;
+		renderer3D->draw3DTexture("WallReflectionBullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), 32.0f, b_mAngle);
 	}
 	else
 	{
 		b_mAngle = 0.0f;
+		renderer3D->draw3DTexture("bulletAge", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 64.0f * 1.0f, b_mAngle);
 	}
-
-	renderer3D->draw3DTexture("WallReflectionBullet", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), 32.0f, b_mAngle);
+	
+	
 }
 
 void WallReflectionBullet::hit(BaseObject & other)
