@@ -41,9 +41,9 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("bulletAge", "Resouce/Texture/16Ballet_ageage.png");
 	TextureLoad::getInstance().add("bullet1", "Resouce/Texture/Bullet01.png");
 	TextureLoad::getInstance().add("bullet2", "Resouce/Texture/Bullet02.png");
-	TextureLoad::getInstance().add("bullet3", "Resouce/Texture/Bullet03.png");
+	TextureLoad::getInstance().add("bullet3", "Resouce/Texture/16Bullet_L.png");
 	TextureLoad::getInstance().add("bullet4", "Resouce/Texture/Bullet04.png");
-	TextureLoad::getInstance().add("bullet5", "Resouce/Texture/Bullet05.png");
+	TextureLoad::getInstance().add("bullet5", "Resouce/Texture/16Bullet_S.png");
 	TextureLoad::getInstance().add("bullet6", "Resouce/Texture/Bullet06.png"); 
 	TextureLoad::getInstance().add("bossBullet", "Resouce/Texture/Bullet_S05.png");
 	TextureLoad::getInstance().add("misaill", "Resouce/Texture/16Ebi_M.png");
@@ -68,6 +68,8 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("enemyG2", "Resouce/Texture/16lazerE.png");
 	TextureLoad::getInstance().add("boss", "Resouce/Texture/16Boss.png");
 	TextureLoad::getInstance().add("houdai", "Resouce/Texture/TankATK16.png");
+	TextureLoad::getInstance().add("boss1", "Resouce/Texture/16Boss_1.png");
+	TextureLoad::getInstance().add("boss1A", "Resouce/Texture/16Boss_1A.png");
 	//フォント関係
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("Font_white"  , "Resouce/Texture/Font.png");
