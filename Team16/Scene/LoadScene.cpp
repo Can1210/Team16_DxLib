@@ -15,27 +15,27 @@ void LoadScene::initialize()
 	TextureLoad::createInstance();   //テクスチャロードを作成
 
 	//ゲームシーン
-	TextureLoad::getInstance().add("Mixam", "Resouce/Texture/Mixam.png");
+	//TextureLoad::getInstance().add("Mixam", "Resouce/Texture/BatlleFry.png");
 	TextureLoad::getInstance().add("fade", "Resouce/Texture/16Fade.png");
-	TextureLoad::getInstance().add("title", "Resouce/Texture/title.png");
+	TextureLoad::getInstance().add("title", "Resouce/Texture/BatlleFry.png");
 	TextureLoad::getInstance().add("titleText", "Resouce/Texture/StartText.png");
 	TextureLoad::getInstance().add("title2", "Resouce/Texture/BatlleFry.png");
 	//UI
 	TextureLoad::getInstance().add("UI", "Resouce/Texture/16Ui.png");
 	//アイテム
-	TextureLoad::getInstance().add("sg", "Resouce/Texture/SGanB.png");
-	TextureLoad::getInstance().add("misaile", "Resouce/Texture/misaileR.png");
-	TextureLoad::getInstance().add("lazer", "Resouce/Texture/lezerG.png");
-	TextureLoad::getInstance().add("none", "Resouce/Texture/none.png");
+	TextureLoad::getInstance().add("sg", "Resouce/Texture/16Poteto_A.png");
+	TextureLoad::getInstance().add("misaile", "Resouce/Texture/16Ebi_A.png");
+	TextureLoad::getInstance().add("lazer", "Resouce/Texture/16Tikuwa_A.png");
+	TextureLoad::getInstance().add("none", "Resouce/Texture/16None.png");
 	TextureLoad::getInstance().add("sgU", "Resouce/Texture/16Poteto.png");
 	TextureLoad::getInstance().add("misaileU", "Resouce/Texture/16Ebi_MU.png");
 	TextureLoad::getInstance().add("lazerU", "Resouce/Texture/16Tikuwa.png");
 	//エフェクト
 	TextureLoad::getInstance().add("deathBurst", "Resouce/Texture/burst.png");
 	//背景
-	TextureLoad::getInstance().add("back", "Resouce/Texture/backgraund_01.png");
-	TextureLoad::getInstance().add("back2", "Resouce/Texture/backgraund_02.png");
-	TextureLoad::getInstance().add("back3", "Resouce/Texture/Background.png");
+	TextureLoad::getInstance().add("back", "Resouce/Texture/16Back.png");
+	//TextureLoad::getInstance().add("back2", "Resouce/Texture/16Back.png");
+	//TextureLoad::getInstance().add("back3", "Resouce/Texture/16Back.png");
 	//弾関係
 	TextureLoad::getInstance().add("bullet", "Resouce/Texture/16Bullet.png");
 	TextureLoad::getInstance().add("bulletAge", "Resouce/Texture/16Ballet_ageage.png");
@@ -60,11 +60,11 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
 	TextureLoad::getInstance().add("enemyT", "Resouce/Texture/TankBTM_Re.png");
 	TextureLoad::getInstance().add("enemyR", "Resouce/Texture/16enemyRR.png");
-	TextureLoad::getInstance().add("enemyG", "Resouce/Texture/16enemyGG.png");
+	TextureLoad::getInstance().add("enemyG", "Resouce/Texture/16Enemy_AGEL.png");
 	TextureLoad::getInstance().add("enemyB", "Resouce/Texture/16Enemy_AGES.png");
 	TextureLoad::getInstance().add("enemy2", "Resouce/Texture/RedBTM.png");
 	TextureLoad::getInstance().add("enemy3", "Resouce/Texture/RedATK.png");
-	TextureLoad::getInstance().add("enemyR2", "Resouce/Texture/16misaileE.png");
+	TextureLoad::getInstance().add("enemyR2", "Resouce/Texture/16Enemy_AGEMR.png");
 	TextureLoad::getInstance().add("enemyG2", "Resouce/Texture/16lazerE.png");
 	TextureLoad::getInstance().add("boss", "Resouce/Texture/16Boss.png");
 	TextureLoad::getInstance().add("houdai", "Resouce/Texture/TankATK16.png");
