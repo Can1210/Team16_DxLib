@@ -62,8 +62,10 @@ void Stage01::update(float deltaTime)
 	}
 
 	//背景エンドレス
-	if (mBackPos >= 0.0f)mBackPos = -3000.0f;
+	if (mBackPos >= -2020.0f)mBackPos = -3000.0f;//if (mBackPos >= 0.0f)mBackPos = -3000.0f;
 	mBackPos += 0.9f;
+
+	//CWindow::getInstance().log("mBackPos== %f : \n",mBackPos);
 
 	if (m_pCharaManager->getIsBossEed()) {
 		mGameClear = true;
@@ -90,7 +92,7 @@ void Stage01::update(float deltaTime)
 
 void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	renderer->draw2D("back", Vector2(0, mBackPos), Vector2(0, 0), Vector2(600, 4110));                                   //背景
+	renderer->draw2D("back", Vector2(-300, mBackPos), Vector2(0, 0), Vector2(600, 4110),Vector2(1.0f,1.0f));                                   //背景
 	m_pCharaManager->draw(renderer, renderer3D);
 	renderer->draw2D("UI", Vector2(0, -50), Vector2(0, 0), Vector2(600, 200), Vector2(300, 100), Vector2(1.0f, 0.5f));	 //UI板
 	//プレイヤーにあったUI関連
@@ -129,7 +131,7 @@ void Stage01::draw(Renderer * renderer, Renderer3D * renderer3D)
 	switch (fadetype)
 	{
 	case FadeStart:
-		renderer->draw2D("fade", Vector2(-600.0f * fadeCount, 0.0f), Vector2(0, 0), Vector2(2400, 1000), Vector2(1200, 500), Vector2(1.0f, 1.0f), 0, (int)(255 - 255 / fadeEndTime * fadeCount));
+		renderer->draw2D("fade", Vector2(-600.0f * fadeCount,0.0f), Vector2(0, 0), Vector2(2400, 1000), Vector2(1200, 500), Vector2(1.0f, 1.0f), 0, (int)(255 - 255 / fadeEndTime * fadeCount));
 		break;
 	case FadeEnd:
 		renderer->draw2D("fade", Vector2(-1200.0f + -600.0f * fadeCount, 0.0f), Vector2(0, 0), Vector2(2400, 1000), Vector2(300, 500), Vector2(1.0f, 1.0f), 0, (int)(255 / fadeEndTime * fadeCount));
