@@ -58,7 +58,7 @@ void Stage03::update(float deltaTime)
 	}
 
 	//背景エンドレス
-	if (mBackPos >= 0.0f)mBackPos = -3000.0f;
+	if (mBackPos >= -2020.0f)mBackPos = -3000.0f;//if (mBackPos >= 0.0f)mBackPos = -3000.0f;
 	mBackPos += 0.9f;
 
 	if (m_pCharaManager->getIsBossEed()) {
@@ -86,7 +86,7 @@ void Stage03::update(float deltaTime)
 
 void Stage03::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	renderer->draw2D("back", Vector2(0, mBackPos), Vector2(0, 0), Vector2(600, 4110));
+	renderer->draw2D("back", Vector2(-300, mBackPos), Vector2(0, 0), Vector2(600, 4110), Vector2(1.0f, 1.0f));
 	m_pCharaManager->draw(renderer, renderer3D);
 	renderer->draw2D("UI", Vector2(0, -50), Vector2(0, 0), Vector2(600, 200), Vector2(300, 100), Vector2(1.0f, 0.5f));	 //UI板
 	//プレイヤーにあったUI関連
