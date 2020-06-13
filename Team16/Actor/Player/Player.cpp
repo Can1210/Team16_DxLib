@@ -382,6 +382,7 @@ void Player::PlusHp()
 	{
 		scoreCnt = scorePlus + Score::getInstance().getScore();//scoreCnt上限を増やす
 		b_mHp++;
+		Sound::getInstance().playSE("1up");
 	}
 	else if (Score::getInstance().getScore() >= scoreCnt && b_mHp == hpLimit)
 	{
