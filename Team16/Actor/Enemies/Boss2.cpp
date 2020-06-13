@@ -14,7 +14,9 @@ Boss2::Boss2(Vector2 pos, CharactorManager * c) :
 	m_pCirecleTimer(new Timer()),
 	m_pCirecleEndTimer(new Timer()),
 	m_pCamreraTimer(new Timer()),
-	mTimerDamege(new Timer())
+	mTimerDamege(new Timer()),
+	mAnimTimer(new Timer()),
+	mEndTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -24,6 +26,8 @@ Boss2::~Boss2()
 {
 	delete mTimer;
 	delete mTimerDamege;
+	delete mAnimTimer;
+	delete mEndTimer;
 }
 
 void Boss2::initialize()
@@ -40,10 +44,34 @@ void Boss2::initialize()
 	m_pCirecleEndTimer->initialize();
 	boss2move = Boss2Move::NoneMove;
 	shotTime = 0;
+	mAnimTimer->initialize();
+	mEndTimer->initialize();
+	isAnim = false;    //‰æ‘œØ‚è‘Ö‚¦‚ðŠJŽn‚·‚é
+	isChange = false;
 }
 
 void Boss2::update(float deltaTime)
 {
+
+	if (isChange)
+	{
+		mEndTimer->update(deltaTime);
+		if (mEndTimer->timerSet(3.0f))
+		{
+			b_mIsDeath = true;  //Ž€–S
+		}
+	}
+	if (isAnim)
+	{
+		mDamageHit = 255;
+		mAnimTimer->update(deltaTime);
+		if (mAnimTimer->timerSet_Self(2.0f))
+		{
+			isChange = true;
+		}
+	}
+	if (isAnim) return;
+
 	b_mVelocity = Vector2(0, 0);
 	mTimer->update(deltaTime);
 	mTimerDamege->update(deltaTime);
@@ -146,7 +174,7 @@ void Boss2::update(float deltaTime)
 	if (b_mHp <= 0)
 	{
 		Sound::getInstance().playSE("burst01");
-		b_mIsDeath = true;
+		isAnim = true;
 		Score::getInstance().addScore(66666);
 		GamePlay::BossEnd = true;
 	}
@@ -159,17 +187,35 @@ void Boss2::update(float deltaTime)
 
 void Boss2::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	if (b_mType == Type::BOSS)
+	if (isAnim)
 	{
-		renderer3D->draw3DTexture("player2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 4.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
-		//renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3((float)255, (float)mDamageHit, (float)mDamageHit));
+		if (!isChange)
+		{
+			b_animCnt += 64.0f;
+
+			if (b_animCnt >= 1022.0f)
+			{
+				b_animCnt = 0;
+			}
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x + 0.0f, b_mPosittion.y + 0.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x + 100.0f, b_mPosittion.y + 100.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x + 100.0f, b_mPosittion.y + 25.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x - 20.0f, b_mPosittion.y - 100.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+		}
+
 	}
-	else if (!b_mEndFlag)
+	//‰æ‘œØ‚è‘Ö‚¦
+	if (isChange)
 	{
-		b_mAngle = 0.0f;
-		renderer3D->draw3DTexture("player2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 4.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
-		//renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
+		renderer3D->draw3DTexture("player2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, 255, 255));
 	}
+	else
+	{
+		//’Êí
+		renderer3D->draw3DTexture("player2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
+
+	}
+
 }
 
 void Boss2::hit(BaseObject & other)

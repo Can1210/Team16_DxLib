@@ -72,4 +72,10 @@ private:
 
 	int shotTime;
 
+
+	bool isAnim;
+	bool isChange;
+	Timer* mAnimTimer;
+	Timer* mEndTimer;
+
 };
