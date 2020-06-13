@@ -11,7 +11,9 @@ Boss::Boss(Vector2 pos, CharactorManager * c) :
 	m_pCirecleTimer(new Timer()),
 	m_pCirecleEndTimer(new Timer()),
 	m_pCamreraTimer(new Timer()),
-	mTimerDamege(new Timer())
+	mTimerDamege(new Timer()),
+	mAnimTimer(new Timer()),
+	mEndTimer(new Timer())
 {
 	charaManager = c;
 	b_mPosittion = pos;
@@ -24,11 +26,13 @@ Boss::~Boss()
 	delete m_pCirecleTimer;
 	delete m_pCirecleEndTimer;
 	delete mTimerDamege;
+	delete mAnimTimer;
+	delete mEndTimer;
 }
 
 void Boss::initialize()
 {
-	b_mHp = 150;
+	b_mHp =  150;
 	b_mCircleSize = 64.0f;
 	b_mType = Type::BOSS;
 	b_mAngle = 0.0f;
@@ -38,6 +42,8 @@ void Boss::initialize()
 	mDamageHit = 255;
     m_pCirecleTimer->initialize();
     m_pCirecleEndTimer->initialize();
+	mAnimTimer->initialize();
+	mEndTimer->initialize();
 	bomshotAngle = 180.0f;
 	//円
 	rotateSpeed = 0.5f;//1周にかかる時間
@@ -46,10 +52,31 @@ void Boss::initialize()
 	mIsCharge = false;
 	mChargeScalse = 400.0f;
 	mDamageHit = 255;
+	isAnim = false;    //画像切り替えを開始する
+	isChange = false;
 }
 
 void Boss::update(float deltaTime)
 {
+	if (isChange)
+	{
+		mEndTimer->update(deltaTime);
+		if (mEndTimer->timerSet(3.0f))
+		{
+			b_mIsDeath = true;  //死亡
+		}
+	}
+	if (isAnim)
+	{
+		mDamageHit = 255;
+		mAnimTimer->update(deltaTime);
+		if (mAnimTimer->timerSet_Self(2.0f))
+		{
+			isChange = true;
+		}
+	}
+	if (isAnim) return;
+
 	b_mVelocity = Vector2(0, 0);
 	mTimer->update(deltaTime);
 	mTimerDamege->update(deltaTime);
@@ -71,7 +98,8 @@ void Boss::update(float deltaTime)
 	if (b_mHp <= 0)
 	{
 		Sound::getInstance().playSE("burst01");
-		b_mIsDeath = true;
+		isAnim = true;
+		//b_mIsDeath = true;
 		Score::getInstance().addScore(66666);
 		GamePlay::BossEnd = true;
 	}
@@ -82,25 +110,38 @@ void Boss::update(float deltaTime)
 
 void Boss::draw(Renderer * renderer, Renderer3D * renderer3D)
 {
-	if (b_mType == Type::BOSS)
+	if (isAnim)
 	{
-		//renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
-		//renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
-		//renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
-		renderer3D->draw3DTexture("boss1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
-		if (mIsCharge)
+		if (!isChange)
 		{
-			renderer3D->draw3DTexture("bullet_en6", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), mChargeScalse, 0.0f, 125);
+			b_animCnt += 64.0f;
+
+			if (b_animCnt >= 1022.0f)
+			{
+				b_animCnt = 0;
+			}
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x + 0.0f, b_mPosittion.y + 0.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x + 100.0f, b_mPosittion.y + 100.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x + 100.0f, b_mPosittion.y + 25.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
+			renderer3D->draw3DTexture("deathBurst", Vector3(b_mPosittion.x - 20.0f, b_mPosittion.y - 100.0f, 0.0f), Vector2(b_animCnt, 0.0f), Vector2(64.0f, 64.0f), 140.0f, b_mAngle);
 		}
+		
+	}
+	//画像切り替え
+	if (isChange)
+	{
+		renderer3D->draw3DTexture("boss1A", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, 255, 255));
+	}
+	else
+	{
+		//通常
+		renderer3D->draw3DTexture("boss1", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
 
 	}
-	else if (!b_mEndFlag)
+	//チャージ攻撃
+	if (mIsCharge)
 	{
-		b_mAngle = 0.0f;
-		//renderer->draw2D("enemy2", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
-		//renderer->draw2D("enemy3", Vector2(b_mPosittion.x, b_mPosittion.y), Vector2(0, 0), Vector2(64, 64), Vector2(32, 32), Vector2(3.0f, 3.0f), b_mAngle, 255);
-		renderer3D->draw3DTexture("enemy2", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit,(float) mDamageHit));
-		renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit,(float) mDamageHit));
+		renderer3D->draw3DTexture("bullet_en6", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(10.0f, 12.0f), mChargeScalse, 0.0f, 125);
 	}
 }
 

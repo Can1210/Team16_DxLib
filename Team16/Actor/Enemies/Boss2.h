@@ -37,4 +37,10 @@ private:
 	Boss2Move boss2move;
 	float rotx;
 	int shotTime;
+
+	bool isAnim;
+	bool isChange;
+	Timer* mAnimTimer;
+	Timer* mEndTimer;
+
 };
