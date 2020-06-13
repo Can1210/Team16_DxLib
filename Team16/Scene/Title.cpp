@@ -23,7 +23,7 @@ void Title::initialize()
 	alpha = 255;
 	isAnim = false;
 	animAlpha = 255;
-	fadetype = FadeType::FadeStop;
+	fadetype = FadeType::FadeStart;
 	fadeCount = 0.0f;
 }
 //更新
@@ -106,10 +106,10 @@ void Title::draw(Renderer* renderer, Renderer3D* renderer3D)
 	switch (fadetype)
 	{
 	case FadeStart:
-		renderer->draw2D("fade", Vector2(0.0f, 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(600, 1000), Vector2(300, 500), Vector2(1.0f, 1.0f), 0, 255);
+		renderer->draw2D("fade", Vector2(-600.0f * fadeCount , 0.0f), Vector2(0, 0), Vector2(2400, 1000), Vector2(1200, 500), Vector2(1.0f, 1.0f), 0, (int)(255 - 255 / fadeEndTime * fadeCount));
 		break;
 	case FadeEnd:
-		renderer->draw2D("fade", Vector2(0.0f, 900.0f - 1000.0f / fadeEndTime * fadeCount), Vector2(0, 0), Vector2(600, 1000), Vector2(300, 500), Vector2(1.0f, 1.0f), 0, 255);
+		renderer->draw2D("fade", Vector2(-1200.0f + -600.0f * fadeCount, 0.0f), Vector2(0, 0), Vector2(2400, 1000), Vector2(300, 500), Vector2(1.0f, 1.0f), 0, (int)(255 / fadeEndTime * fadeCount));
 		break;
 	}
 }

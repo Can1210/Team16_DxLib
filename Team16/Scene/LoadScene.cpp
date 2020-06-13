@@ -16,7 +16,7 @@ void LoadScene::initialize()
 
 	//ゲームシーン
 	//TextureLoad::getInstance().add("Mixam", "Resouce/Texture/BatlleFry.png");
-	TextureLoad::getInstance().add("fade", "Resouce/Texture/16Fade.png");
+	TextureLoad::getInstance().add("fade", "Resouce/Texture/16Load.png");
 	TextureLoad::getInstance().add("title", "Resouce/Texture/BatlleFry.png");
 	TextureLoad::getInstance().add("titleText", "Resouce/Texture/StartText.png");
 	TextureLoad::getInstance().add("title2", "Resouce/Texture/BatlleFry.png");
