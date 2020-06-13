@@ -41,6 +41,11 @@ private:
 	Vector2 mPlayerPos;   //プレイヤーの位置
 	Vector2 angleVec;
 
+	bool isAnim;
+	bool isChange;
+	Timer* mAnimTimer;
+	Timer* mEndTimer;
+
 	//円運動
 	float x;
 	float y;
