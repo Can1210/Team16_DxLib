@@ -22,6 +22,10 @@ public:
 	virtual std::string nextScene() override;
 
 	void choiceScene();
+
+private:
+	void fadeFont();
+
 private:
 	CharactorManager* m_pCharaManager;
 	MapSpawn* m_pMapSpawn;
@@ -36,6 +40,10 @@ private:
 	FadeType fadetype;
 	float fadeCount;
 	const float fadeEndTime = 2.0f;
+	bool mStageStart;
+	int mFontAlpha;
+
+
 };
 
 

@@ -31,6 +31,8 @@ void Stage03::initialize()
 	mGameClear = false;				//ゲームクリア  （boss死んだとき）
 	fadetype = FadeType::FadeStart;
 	fadeCount = 0.0f;
+	mStageStart = false;
+	mFontAlpha = 255;
 }
 
 void Stage03::update(float deltaTime)
@@ -79,7 +81,7 @@ void Stage03::update(float deltaTime)
 			fadetype = FadeEnd;
 		}
 	};
-
+	fadeFont();
 	m_pCharaManager->update(deltaTime);
 	Camera::getInstance().update(deltaTime);
 }
@@ -91,6 +93,12 @@ void Stage03::draw(Renderer * renderer, Renderer3D * renderer3D)
 	renderer->draw2D("UI", Vector2(0, -50), Vector2(0, 0), Vector2(600, 200), Vector2(300, 100), Vector2(1.0f, 0.5f));	 //UI板
 	//プレイヤーにあったUI関連
 	renderer->draw2D("player", Vector2(10.0f, 28.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), true, false);          //プレイヤーの実機絵
+
+	if (mStageStart)
+	{
+		renderer->drawText("Font_green", "STAGE 1", Vector2(120, 100), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, mFontAlpha);
+
+	}
 	renderer->drawText("Font_green", "x", Vector2(40.0f, -15.0f), Vector2(0, 0), Vector2(0.5f, 1), 0.0f, 255);            //X
 	renderer->drawNumber("hpNumber", Vector2(130.0f, 10.0f), m_pCharaManager->getHp(), 0, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), 0.0f, 255);   //プレイヤーのHP
 	renderer->draw2D(m_pCharaManager->getSub1(), Vector2(220.0f, 20.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2(1.0f, 1.0f), 0, 255);	 //プレイヤーのアイテム1
@@ -168,4 +176,22 @@ void Stage03::choiceScene()
 
 	if (sceneNum <= 0)sceneNum = 0;
 	if (sceneNum >= 2)sceneNum = 2;
+}
+
+
+//フォントのフェード
+void Stage03::fadeFont()
+{
+	if (fadetype == FadeType::FadeStop)
+	{
+		mStageStart = true;
+	}
+	if (mStageStart)
+	{
+		mFontAlpha--;
+		if (mFontAlpha <= 0)
+		{
+			mFontAlpha = 0;
+		}
+	}
 }
