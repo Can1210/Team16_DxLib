@@ -25,6 +25,8 @@ void Title::initialize()
 	animAlpha = 255;
 	fadetype = FadeType::FadeStart;
 	fadeCount = 0.0f;
+	Sound::getInstance().playBGM("piko");
+	Score::getInstance().initialize();
 }
 //更新
 void Title::update(float deltaTime)
@@ -55,6 +57,7 @@ void Title::update(float deltaTime)
 
 	if (Input::getInstance().isKeyDown(KEYCORD::SPACE) || Input::getInstance().isGamePadBottonDown(GAMEPAD_KEYCORD::BUTTON_A,0))
 	{
+		Sound::getInstance().pauseBGM();
 		Sound::getInstance().playSE("click01");
 		mSelectName = "stage1";
 		isAnim = true;

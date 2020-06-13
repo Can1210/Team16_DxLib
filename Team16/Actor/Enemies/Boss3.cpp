@@ -144,15 +144,15 @@ void Boss3::draw(Renderer * renderer, Renderer3D * renderer3D)
 	//‰æ‘œØ‚è‘Ö‚¦
 	if (isChange)
 	{
-		renderer3D->draw3DTexture("boss1A", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, b_mAngle, 255, Vector2(0.5f, 0.5f), Vector3(255, 255, 255));
+		renderer3D->draw3DTexture("boss3A", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, 0.0f, 255, Vector2(0.5f, 0.5f), Vector3(255, 255, 255));
 	}
 	else
 	{
 		//’Êí
-		renderer3D->draw3DTexture("boss", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 7.0f, b_mAngle);
+		renderer3D->draw3DTexture("boss3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 8.0f, b_mAngle);
 		if (modeChangeFlag == true)
 		{
-			renderer3D->draw3DTexture("enemy3", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, shotAngle + 90.0f, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
+			renderer3D->draw3DTexture("boss3ATK", Vector3(b_mPosittion.x, b_mPosittion.y, 0.0f), Vector2(0.0f, 0.0f), Vector2(64.0f, 64.0f), 96.0f * 3.0f, shotAngle + 90.0f, 255, Vector2(0.5f, 0.5f), Vector3(255, (float)mDamageHit, (float)mDamageHit));
 		}
 	}
 

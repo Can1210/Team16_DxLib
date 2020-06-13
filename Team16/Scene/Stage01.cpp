@@ -27,7 +27,7 @@ void Stage01::initialize()
 	m_pMapSpawn = new MapSpawn(*m_pCharaManager);
 	m_pMapSpawn->loadMap("Resouce/Map/stage01.csv");
 	mBackPos = -3000.0f;
-	Sound::getInstance().playBGM("bgm");
+	Sound::getInstance().playBGM("chikoku");
 	Score::getInstance().initialize();
 	mGameOver = false;              //ゲームオーバー（player死んだとき）
 	mGameClear = false;				//ゲームクリア  （boss死んだとき）

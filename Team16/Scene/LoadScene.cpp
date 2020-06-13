@@ -57,8 +57,8 @@ void LoadScene::initialize()
 	//実機関係
 	TextureLoad::getInstance().add("player", "Resouce/Texture/16Ebi.png");
 	TextureLoad::getInstance().add("player2", "Resouce/Texture/BlueRob.png");
-	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/TankATK.png");
-	TextureLoad::getInstance().add("enemyT", "Resouce/Texture/TankBTM_Re.png");
+	TextureLoad::getInstance().add("enemy" , "Resouce/Texture/16TankA.png");
+	TextureLoad::getInstance().add("enemyT", "Resouce/Texture/16TankB.png");
 	TextureLoad::getInstance().add("enemyR", "Resouce/Texture/16enemyRR.png");
 	TextureLoad::getInstance().add("enemyG", "Resouce/Texture/16Enemy_AGEL.png");
 	TextureLoad::getInstance().add("enemyB", "Resouce/Texture/16Enemy_AGES.png");
@@ -70,6 +70,13 @@ void LoadScene::initialize()
 	TextureLoad::getInstance().add("houdai", "Resouce/Texture/TankATK16.png");
 	TextureLoad::getInstance().add("boss1", "Resouce/Texture/16Boss_1.png");
 	TextureLoad::getInstance().add("boss1A", "Resouce/Texture/16Boss_1A.png");
+
+	TextureLoad::getInstance().add("boss2", "Resouce/Texture/16Boss_2.png");
+	TextureLoad::getInstance().add("boss2A", "Resouce/Texture/16Boss_2A.png");
+
+	TextureLoad::getInstance().add("boss3", "Resouce/Texture/16BossEbi.png");
+	TextureLoad::getInstance().add("boss3ATK", "Resouce/Texture/16BossEbi_A.png");
+	TextureLoad::getInstance().add("boss3A", "Resouce/Texture/ebiflay.png");
 	//フォント関係
 	TextureLoad::getInstance().add("Font"  , "Resouce/Texture/font_just.png");
 	TextureLoad::getInstance().add("Font_white"  , "Resouce/Texture/Font.png");
@@ -96,6 +103,7 @@ void LoadScene::initialize()
 	SoundLoad::getInstance().addSE("click01", "Resouce/Sound/SE/click01.mp3");
 	SoundLoad::getInstance().addSE("hit", "Resouce/Sound/SE/hit.mp3");
 	SoundLoad::getInstance().addSE("shot", "Resouce/Sound/SE/shot.mp3");
+	SoundLoad::getInstance().addSE("1up", "Resouce/Sound/SE/1up.mp3");
 
 
 	CWindow::getInstance().log("読み込みが終わったので終了します\n");

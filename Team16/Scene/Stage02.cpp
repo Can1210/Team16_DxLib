@@ -23,7 +23,7 @@ void Stage02::initialize()
 	m_pMapSpawn = new MapSpawn(*m_pCharaManager);
 	m_pMapSpawn->loadMap("Resouce/Map/stage02.csv");
 	mBackPos = -3000.0f;
-	Sound::getInstance().playBGM("bgm");
+	Sound::getInstance().playBGM("chikoku");
 	Score::getInstance().initialize();
 	Camera::getInstance().setPosition(Vector2(0.0f, -600.0f));
 	Camera::getInstance().setStop(false);
