@@ -17,7 +17,7 @@ bool initialize()
 {
 	
 	ChangeWindowMode(true);
-	SetMainWindowText("game16");
+	SetMainWindowText("Battle Fry");
 	SetGraphMode(WindowInfo::WindowWidth, WindowInfo::WindowHeight, 16);
 	SetBackgroundColor(0, 0, 0);
 	if (DxLib_Init() == -1)	return false;
